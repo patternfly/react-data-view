@@ -54,6 +54,9 @@ web_modules/
 # Optional eslint cache
 .eslintcache
 
+# Cypress cache
+.cypress-cache
+
 # Optional stylelint cache
 .stylelintcache
 
