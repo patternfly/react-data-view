@@ -8,11 +8,8 @@ export interface DataViewProps {
 
 export const DataView: React.FunctionComponent<DataViewProps> = ({
   text = 'This is Data view'
-}: DataViewProps) => {
-
-  return (
-    <Text>{text}</Text>
-  );
-};
+}: DataViewProps) => (
+  <Text>{text}</Text>
+);
 
 export default DataView;
