@@ -118,9 +118,10 @@ The aim is to enable the user of our "complex" component to use either complete 
 ### Testing:
 When adding/making changes to a component, always make sure your code is tested:
 - use React Testing Library for unit testing 
-- add tests to a `[ComponentName].test.tsx` file to your component's directory
-- add component tests to the `cypress` folder, consider adding E2E tests accordingly
-- make sure all the core logic is covered
+- add unit tests to a `[ComponentName].test.tsx` file to your component's directory
+- make sure all the core functionality is covered using Cypress component or E2E tests
+- add component tests to `cypress/component/[ComponentName].cy.tsx` file and E2E tests to `cypress/e2e/[ComponentName].spec.cy.ts`
+- add `ouiaId` to component props definition with a default value of the component name (for subcomponents, let's use `ComponentName-element-specification` naming convention e.g. `ouiaId="DataView-actions-button"`)
 
 ### Styling:
 - for styling always use JSS
