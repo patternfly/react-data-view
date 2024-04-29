@@ -1,9 +1,9 @@
 # PatternFly Data view
 
-This repo contains React Data view implementation. 
+This repo contains React Data view implementation.
 
 ---
-## Contribution guide  
+## Contribution guide
 
 ### To add a data view sub-component:
 1. create a folder in `src/` matching its name (for example `src/MyComponent`)
@@ -11,7 +11,7 @@ This repo contains React Data view implementation.
 3. to the same folder include an `index.ts` which will export the component as a default and then all necessary interfaces
 4. if this file structure is not met, your component won't be exposed correctly
 
-#### Example component:
+#### Example component:   
 ```
 import * as React from 'react';
 import { Text } from '@patternfly/react-core';
