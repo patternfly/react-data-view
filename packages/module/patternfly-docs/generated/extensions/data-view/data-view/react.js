@@ -6,6 +6,7 @@ const pageData = {
   "section": "extensions",
   "subsection": "Data view",
   "deprecated": false,
+  "template": false,
   "beta": false,
   "demo": false,
   "newImplementationLink": false,
@@ -34,9 +35,6 @@ const pageData = {
 };
 pageData.liveContext = {
   DataView
-};
-pageData.relativeImports = {
-  
 };
 pageData.examples = {
   'Basic example': props => 
