@@ -6,6 +6,7 @@ const pageData = {
   "section": "extensions",
   "subsection": "Data view",
   "deprecated": false,
+  "template": false,
   "beta": false,
   "demo": false,
   "newImplementationLink": false,
@@ -15,9 +16,6 @@ const pageData = {
   "sourceLink": "https://github.com/patternfly/patternfly-org/blob/main/packages/module/patternfly-docs/content/extensions/data-view/about-data-view.md",
   "relPath": "packages/module/patternfly-docs/content/extensions/data-view/about-data-view.md",
   "sortValue": 1
-};
-pageData.relativeImports = {
-  
 };
 pageData.examples = {
   
