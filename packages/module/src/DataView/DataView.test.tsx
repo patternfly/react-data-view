@@ -6,8 +6,8 @@ import DataView from './DataView';
 describe('DataView', () => {
 
   it('should render data view', () => {
-    render(<DataView />);
-    expect(screen.getByText('This is Data view')).toBeInTheDocument();
+    render(<DataView><>Data view content</></DataView>);
+    expect(screen.getByText('Data view content')).toBeInTheDocument();
   });
 
 });
