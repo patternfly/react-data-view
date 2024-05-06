@@ -20,7 +20,8 @@ async function generateIndex(files) {
 
     files.forEach(file => {
       const name = file.replace('/index.ts', '').split('/').pop();
-      stream.write(`\nexport { default as ${name} } from './${name}';\n`);
+      // do not generate default exports for Hooks/
+      name !== 'Hooks' && stream.write(`\nexport { default as ${name} } from './${name}';\n`);
       stream.write(`export * from './${name}';\n`);
     });
     stream.end();
