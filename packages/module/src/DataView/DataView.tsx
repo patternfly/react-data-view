@@ -10,13 +10,13 @@ export interface DataViewProps extends DataViewPaginationProps {
 }
 
 export const DataView: React.FC<DataViewProps> = ({
-  children, ouiaId = 'DataView', ...props
+  children, ouiaId = 'DataView'
 }: DataViewProps) => (
   <Stack data-ouia-component-id={`${ouiaId}-stack}`}>
     {React.Children.map(children, (child, index) => (
       React.isValidElement(child) ? (
         <StackItem data-ouia-component-id={`${ouiaId}-stack-item-${index}`}>
-          {React.cloneElement(child, props)}
+          {child}
         </StackItem>
       ) : null
     ))} 
