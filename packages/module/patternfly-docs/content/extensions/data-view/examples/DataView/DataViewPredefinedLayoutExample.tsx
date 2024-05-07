@@ -9,13 +9,15 @@ const layoutItemStyling = {
   border: 'var(--pf-t--global--border--width--box--default) dashed var(--pf-t--global--border--color--default)'
 };
 
-const PAGE = 1;
-const PER_PAGE = 10;
+const PAGINATION = {
+  page: 1,
+  perPage: 1
+}
 
 export const BasicExample: React.FunctionComponent = () => (
   <DataView>
-    <DataViewToolbar page={PAGE} perPage={PER_PAGE} />
+    <DataViewToolbar pagination={PAGINATION} />
     <div style={layoutItemStyling}>Data representation</div>
-    <DataViewToolbar page={PAGE} perPage={PER_PAGE} isBottom />
+    <DataViewToolbar pagination={PAGINATION} isBottom />
   </DataView>
 )

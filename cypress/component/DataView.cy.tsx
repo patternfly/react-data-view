@@ -11,9 +11,9 @@ describe('DataView', () => {
   it('renders the data view with toolbar, data section and footer', () => {
     cy.mount(
       <DataView>
-        <DataViewToolbar page={1} perPage={10} />
+        <DataViewToolbar pagination={{ page: 1, perPage: 10 }} />
         <>Data section</>
-        <DataViewToolbar page={1} perPage={10} isBottom />
+        <DataViewToolbar pagination={{ page: 1, perPage: 10 }} isBottom />
       </DataView>
     );
     cy.get('[data-ouia-component-id="DataViewToolbar-pagination"]').should('exist');

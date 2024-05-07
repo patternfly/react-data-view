@@ -1,4 +1,4 @@
 export interface DataViewPaginationProps {
-    page?: number;
-    perPage?: number;
+    page: number;
+    perPage: number;
 }
