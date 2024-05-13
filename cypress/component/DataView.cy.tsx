@@ -1,6 +1,12 @@
 import React from 'react';
+import { Pagination } from '@patternfly/react-core';
 import DataView from '../../packages/module/dist/dynamic/DataView';
 import DataViewToolbar from '../../packages/module/dist/esm/DataViewToolbar';
+
+const PAGINATION = {
+  page: 1,
+  perPage: 1
+}
 
 describe('DataView', () => {
   it('renders the data view layout', () => {
@@ -11,13 +17,13 @@ describe('DataView', () => {
   it('renders the data view with toolbar, data section and footer', () => {
     cy.mount(
       <DataView>
-        <DataViewToolbar pagination={{ page: 1, perPage: 10 }} />
+        <DataViewToolbar pagination={<Pagination {...PAGINATION} ouiaId="DataViewToolbar-pagination" />} />
         <>Data section</>
-        <DataViewToolbar pagination={{ page: 1, perPage: 10 }} isBottom />
+        <DataViewToolbar pagination={<Pagination isCompact {...PAGINATION} ouiaId="DataViewFooter-pagination" />} ouiaId="DataViewFooter" />
       </DataView>
     );
     cy.get('[data-ouia-component-id="DataViewToolbar-pagination"]').should('exist');
     cy.get('[data-ouia-component-id="DataView-stack-item-1"]').contains('Data section');
-    cy.get('[data-ouia-component-id="DataViewToolbar-pagination-bottom"]').should('exist');
+    cy.get('[data-ouia-component-id="DataViewFooter-pagination"]').should('exist');
   });
 });

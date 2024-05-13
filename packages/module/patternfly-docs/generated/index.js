@@ -23,8 +23,8 @@ module.exports = {
   '/extensions/data-view/data-view-toolbar/react': {
     id: "Data view toolbar",
     title: "Data view toolbar",
-    toc: [[{"text":"Basic example"},{"text":"Bottom variant example"}]],
-    examples: ["Basic example","Bottom variant example"],
+    toc: [[{"text":"Basic example"}]],
+    examples: ["Basic example"],
     section: "extensions",
     subsection: "Data view",
     source: "react",

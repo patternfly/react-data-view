@@ -8,9 +8,9 @@ export interface DataViewProps {
 }
 
 export const DataView: React.FC<DataViewProps> = ({
-  children, ouiaId = 'DataView'
+  children, ouiaId = 'DataView', ...props
 }: DataViewProps) => (
-  <Stack data-ouia-component-id={`${ouiaId}-stack}`}>
+  <Stack data-ouia-component-id={`${ouiaId}-stack}`} {...props}>
     {React.Children.map(children, (child, index) => (
       <StackItem data-ouia-component-id={`${ouiaId}-stack-item-${index}`}>
         {child}

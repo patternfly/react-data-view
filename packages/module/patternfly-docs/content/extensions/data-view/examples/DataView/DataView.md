@@ -13,6 +13,7 @@ source: react
 propComponents: ['DataView']
 sourceLink: https://github.com/patternfly/react-data-view/blob/main/packages/module/patternfly-docs/content/extensions/data-view/examples/DataView/DataView.md
 ---
+import { Pagination } from '@patternfly/react-core';
 import DataView from '@patternfly/react-data-view/dist/dynamic/DataView';
 import DataViewToolbar from '@patternfly/react-data-view/dist/dynamic/DataViewToolbar';
 

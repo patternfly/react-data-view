@@ -1,4 +1,5 @@
 import React from 'react';
+import { Pagination } from '@patternfly/react-core';
 import DataView from '@patternfly/react-data-view/dist/dynamic/DataView';
 import DataViewToolbar from '@patternfly/react-data-view/dist/dynamic/DataViewToolbar';
 
@@ -16,8 +17,8 @@ const PAGINATION = {
 
 export const BasicExample: React.FunctionComponent = () => (
   <DataView>
-    <DataViewToolbar pagination={PAGINATION} />
+    <DataViewToolbar pagination={<Pagination {...PAGINATION} />} />
     <div style={layoutItemStyling}>Data representation</div>
-    <DataViewToolbar pagination={PAGINATION} isBottom />
+    <DataViewToolbar pagination={<Pagination isCompact {...PAGINATION} ouiaId="DataViewFooter" />} />
   </DataView>
 )

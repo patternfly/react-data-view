@@ -19,16 +19,9 @@ The **data view toolbar** component renders a default opinionated data view tool
 
 ### Basic example
 
-Data view toolbar can display a pagination. The pagination is displayed if both `page` and `perPage` properties are set.
+Data view toolbar can display a pagination using the `pagination` property accepting a React node. You can also pass a custom `ouiaId` for testing purposes.
 
 ```js file="./DataViewToolbarExample.tsx"
 
 ```
 
-### Bottom variant example
-
-You can make use of the `isBottom` flag which turns the toolbar into a footer layout under the data section. The pagination will be rendered in a compact variant.
-
-```js file="./DataViewToolbarBottomExample.tsx"
-
-```
