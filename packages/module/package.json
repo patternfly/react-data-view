@@ -31,8 +31,9 @@
     "tag": "prerelease"
   },
   "dependencies": {
-    "@patternfly/react-core": "^6.0.0-alpha.50",
+    "@patternfly/react-core": "^6.0.0-alpha.55",
     "@patternfly/react-icons": "^6.0.0-alpha.20",
+    "@patternfly/react-table": "^6.0.0-alpha.55",
     "react-jss": "^10.10.0",
     "clsx": "^2.1.1"
   },

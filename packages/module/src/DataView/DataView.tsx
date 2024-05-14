@@ -1,15 +1,22 @@
 import React from 'react';
-import { Text } from '@patternfly/react-core';
-
+import { Stack, StackItem } from '@patternfly/react-core';
 export interface DataViewProps {
-  /** Example prop */
-  text?: string;
+  /** Content rendered inside the data view */
+  children: React.ReactNode;
+  /** Custom OUIA ID */
+  ouiaId?: string;
 }
 
-export const DataView: React.FunctionComponent<DataViewProps> = ({
-  text = 'This is Data view'
+export const DataView: React.FC<DataViewProps> = ({
+  children, ouiaId = 'DataView', ...props
 }: DataViewProps) => (
-  <Text>{text}</Text>
-);
+  <Stack data-ouia-component-id={`${ouiaId}-stack}`} {...props}>
+    {React.Children.map(children, (child, index) => (
+      <StackItem data-ouia-component-id={`${ouiaId}-stack-item-${index}`}>
+        {child}
+      </StackItem>
+    ))} 
+  </Stack>
+)
 
 export default DataView;
