@@ -17,7 +17,4 @@ Data view hooks provide a predefined solution to manage state of the data view. 
 
 ### useDataViewPagination()
 
-The `useDataViewPagination` hook manages the pagination state of the data view. It retrieves the current `page` and `perPage` values together with functions to set them (`setPage`, `setPerPage`)
-
-Coming soon...
-
+The `useDataViewPagination` hook manages the pagination state of the data view. It retrieves the current `page` and `perPage` values together with functions to set them (`onSetPage`, `onPerPageSelect`). You can easily spread the retrieved values to the PatternFly [pagination](/components/pagination) component and make it live.
