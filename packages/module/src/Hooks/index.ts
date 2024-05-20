@@ -1,1 +1,1 @@
-export * from './useDataViewPagination';
+export * from './pagination';
