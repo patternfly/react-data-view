@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { Toolbar, ToolbarContent, ToolbarItem, ToolbarItemVariant } from '@patternfly/react-core';
 
-export interface DataViewToolbarProps {
+export interface DataViewToolbarProps extends PropsWithChildren {
   /** Toolbar className */
   className?: string;
   /** Custom OUIA ID */
@@ -10,7 +10,7 @@ export interface DataViewToolbarProps {
   pagination?: React.ReactNode;
 }
 
-export const DataViewToolbar: React.FC<React.PropsWithChildren<DataViewToolbarProps>> = ({ className, ouiaId = 'DataViewToolbar', pagination, children, ...props }: React.PropsWithChildren<DataViewToolbarProps>) => (
+export const DataViewToolbar: React.FC<DataViewToolbarProps> = ({ className, ouiaId = 'DataViewToolbar', pagination, children, ...props }: DataViewToolbarProps) => (
   <Toolbar ouiaId={ouiaId} className={className} {...props}>
     <ToolbarContent>
       {pagination && (
