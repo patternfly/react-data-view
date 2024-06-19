@@ -1,0 +1,134 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataView component should render correctly 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="pf-v6-l-stack"
+        data-ouia-component-id="DataView-stack}"
+      >
+        <div
+          class="pf-v6-l-stack__item"
+          data-ouia-component-id="DataView-stack-item-0"
+        >
+          <div
+            style="width: 100%; height: 5rem;"
+          >
+            Header
+          </div>
+        </div>
+        <div
+          class="pf-v6-l-stack__item"
+          data-ouia-component-id="DataView-stack-item-1"
+        >
+          <div
+            style="width: 100%; height: 5rem;"
+          >
+            Data representation
+          </div>
+        </div>
+        <div
+          class="pf-v6-l-stack__item"
+          data-ouia-component-id="DataView-stack-item-2"
+        >
+          <div
+            style="width: 100%; height: 5rem;"
+          >
+            Footer
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="pf-v6-l-stack"
+      data-ouia-component-id="DataView-stack}"
+    >
+      <div
+        class="pf-v6-l-stack__item"
+        data-ouia-component-id="DataView-stack-item-0"
+      >
+        <div
+          style="width: 100%; height: 5rem;"
+        >
+          Header
+        </div>
+      </div>
+      <div
+        class="pf-v6-l-stack__item"
+        data-ouia-component-id="DataView-stack-item-1"
+      >
+        <div
+          style="width: 100%; height: 5rem;"
+        >
+          Data representation
+        </div>
+      </div>
+      <div
+        class="pf-v6-l-stack__item"
+        data-ouia-component-id="DataView-stack-item-2"
+      >
+        <div
+          style="width: 100%; height: 5rem;"
+        >
+          Footer
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

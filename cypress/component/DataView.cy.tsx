@@ -1,8 +1,9 @@
 import React from 'react';
 import { Pagination } from '@patternfly/react-core';
 import { Table, Tbody, Th, Thead, Tr, Td } from '@patternfly/react-table';
+import { BulkSelect } from '@patternfly/react-component-groups/dist/dynamic/BulkSelect';
 import DataView from '../../packages/module/dist/dynamic/DataView';
-import DataViewToolbar from '../../packages/module/dist/esm/DataViewToolbar';
+import DataViewToolbar from '../../packages/module/dist/dynamic/DataViewToolbar';
 
 interface Repository {
   name: string;
@@ -45,7 +46,21 @@ describe('DataView', () => {
 
     cy.mount(
       <DataView>
-        <DataViewToolbar pagination={<Pagination {...PAGINATION} ouiaId="DataViewToolbar-pagination" />} />
+        <DataViewToolbar 
+          ouiaId="DataViewToolbar" 
+          pagination={<Pagination {...PAGINATION} />} 
+          bulkSelect={
+            <BulkSelect
+              canSelectAll
+              pageCount={5}
+              totalCount={10}
+              selectedCount={2}
+              pageSelected={false}
+              pagePartiallySelected={true}
+              onSelect={() => null}
+            />
+          } 
+        />
         <Table aria-label="Repositories table" ouiaId={ouiaId}>
           <Thead data-ouia-component-id={`${ouiaId}-thead`}>
             <Tr ouiaId={`${ouiaId}-tr-head`}>
@@ -64,10 +79,11 @@ describe('DataView', () => {
             ))}
           </Tbody>
         </Table>
-        <DataViewToolbar pagination={<Pagination isCompact {...PAGINATION} ouiaId="DataViewFooter-pagination" />} ouiaId="DataViewFooter" />
+        <DataViewToolbar ouiaId="DataViewFooter" pagination={<Pagination isCompact {...PAGINATION} />} />
       </DataView>
     );
     cy.get('[data-ouia-component-id="DataViewToolbar-pagination"]').should('exist');
+    cy.get('[data-ouia-component-id="DataViewToolbar-bulk-select"]').should('exist');
     
     cy.get('[data-ouia-component-id="data-th-0"]').contains('Repositories');
     cy.get('[data-ouia-component-id="data-th-1"]').contains('Branches');
