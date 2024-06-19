@@ -45,7 +45,7 @@ export const BasicExample: React.FunctionComponent = () => {
 
   return (
     <DataView>
-      <DataViewToolbar pagination={<Pagination ouiaId={`${ouiaId}Header-pagination`} perPageOptions={perPageOptions} itemCount={repositories.length} {...pagination} />} />
+      <DataViewToolbar ouiaId='DataViewHeader' pagination={<Pagination perPageOptions={perPageOptions} itemCount={repositories.length} {...pagination} />} />
       <Table aria-label="Repositories table" ouiaId={ouiaId}>
         <Thead data-ouia-component-id={`${ouiaId}-thead`}>
           <Tr ouiaId={`${ouiaId}-tr-head`}>
@@ -60,6 +60,6 @@ export const BasicExample: React.FunctionComponent = () => {
           ))}
         </Tbody>
       </Table>
-      <DataViewToolbar pagination={<Pagination isCompact ouiaId={`${ouiaId}Footer-pagination`} perPageOptions={perPageOptions} itemCount={repositories.length} {...pagination} />} />
+      <DataViewToolbar ouiaId='DataViewFooter' pagination={<Pagination isCompact perPageOptions={perPageOptions} itemCount={repositories.length} {...pagination} />} />
     </DataView>
   )}
