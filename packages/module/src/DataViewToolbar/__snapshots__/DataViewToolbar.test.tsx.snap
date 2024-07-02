@@ -6,32 +6,32 @@ exports[`DataViewToolbar component should render correctly 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="pf-v6-c-toolbar"
+        class="pf-v5-c-toolbar"
         data-ouia-component-id="DataViewToolbar"
-        data-ouia-component-type="PF6/Toolbar"
+        data-ouia-component-type="PF5/Toolbar"
         data-ouia-safe="true"
         id="pf-random-id-0"
       >
         <div
-          class="pf-v6-c-toolbar__content"
+          class="pf-v5-c-toolbar__content"
         >
           <div
-            class="pf-v6-c-toolbar__content-section"
+            class="pf-v5-c-toolbar__content-section"
           >
             <div
-              class="pf-v6-c-toolbar__item pf-m-pagination"
+              class="pf-v5-c-toolbar__item pf-m-pagination"
               data-ouia-component-id="DataViewToolbar-pagination"
             >
               <div
-                class="pf-v6-c-pagination"
+                class="pf-v5-c-pagination"
                 data-ouia-component-id="OUIA-Generated-Pagination-top-1"
-                data-ouia-component-type="PF6/Pagination"
+                data-ouia-component-type="PF5/Pagination"
                 data-ouia-safe="true"
                 id="options-menu-top-pagination"
-                style="--pf-v6-c-pagination__nav-page-select--c-form-control--width-chars: 2;"
+                style="--pf-v5-c-pagination__nav-page-select--c-form-control--width-chars: 2;"
               >
                 <div
-                  class="pf-v6-c-pagination__total-items"
+                  class="pf-v5-c-pagination__total-items"
                 >
                   <b>
                     1
@@ -46,21 +46,16 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                   </b>
                    
                 </div>
-                <div
-                  class="pf-v6-c-pagination__page-menu"
-                >
+                <div>
                   <button
                     aria-expanded="false"
                     aria-haspopup="listbox"
-                    class="pf-v6-c-menu-toggle pf-m-plain pf-m-text"
-                    data-ouia-component-id="OUIA-Generated-MenuToggle-plainText-1"
-                    data-ouia-component-type="PF6/MenuToggle"
-                    data-ouia-safe="true"
+                    class="pf-v5-c-menu-toggle pf-m-plain pf-m-text"
                     id="options-menu-top-toggle"
                     type="button"
                   >
                     <span
-                      class="pf-v6-c-menu-toggle__text"
+                      class="pf-v5-c-menu-toggle__text"
                     >
                       <b>
                         1
@@ -76,14 +71,14 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                        
                     </span>
                     <span
-                      class="pf-v6-c-menu-toggle__controls"
+                      class="pf-v5-c-menu-toggle__controls"
                     >
                       <span
-                        class="pf-v6-c-menu-toggle__toggle-icon"
+                        class="pf-v5-c-menu-toggle__toggle-icon"
                       >
                         <svg
                           aria-hidden="true"
-                          class="pf-v6-svg"
+                          class="pf-v5-svg"
                           fill="currentColor"
                           height="1em"
                           role="img"
@@ -100,24 +95,30 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                 </div>
                 <nav
                   aria-label="Pagination"
-                  class="pf-v6-c-pagination__nav"
+                  class="pf-v5-c-pagination__nav"
                 >
                   <div
-                    class="pf-v6-c-pagination__nav-control pf-m-first"
+                    class="pf-v5-c-pagination__nav-control pf-m-first"
                   >
                     <button
-                      aria-disabled="false"
+                      aria-disabled="true"
                       aria-label="Go to first page"
-                      class="pf-v6-c-button pf-m-plain"
+                      class="pf-v5-c-button pf-m-plain pf-m-disabled"
                       data-action="first"
                       data-ouia-component-id="OUIA-Generated-Button-plain-1"
-                      data-ouia-component-type="PF6/Button"
+                      data-ouia-component-type="PF5/Button"
                       data-ouia-safe="true"
                       disabled=""
                       type="button"
                     >
-                      <span
-                        class="pf-v6-c-button__icon pf-m-start"
+                      <svg
+                        aria-hidden="true"
+                        class="pf-v5-svg"
+                        fill="currentColor"
+                        height="1em"
+                        role="img"
+                        viewBox="0 0 448 512"
+                        width="1em"
                       >
                         <svg
                           aria-hidden="true"
@@ -136,21 +137,27 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                     </button>
                   </div>
                   <div
-                    class="pf-v6-c-pagination__nav-control"
+                    class="pf-v5-c-pagination__nav-control"
                   >
                     <button
-                      aria-disabled="false"
+                      aria-disabled="true"
                       aria-label="Go to previous page"
-                      class="pf-v6-c-button pf-m-plain"
+                      class="pf-v5-c-button pf-m-plain pf-m-disabled"
                       data-action="previous"
                       data-ouia-component-id="OUIA-Generated-Button-plain-2"
-                      data-ouia-component-type="PF6/Button"
+                      data-ouia-component-type="PF5/Button"
                       data-ouia-safe="true"
                       disabled=""
                       type="button"
                     >
-                      <span
-                        class="pf-v6-c-button__icon pf-m-start"
+                      <svg
+                        aria-hidden="true"
+                        class="pf-v5-svg"
+                        fill="currentColor"
+                        height="1em"
+                        role="img"
+                        viewBox="0 0 256 512"
+                        width="1em"
                       >
                         <svg
                           aria-hidden="true"
@@ -169,16 +176,16 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                     </button>
                   </div>
                   <div
-                    class="pf-v6-c-pagination__nav-page-select"
+                    class="pf-v5-c-pagination__nav-page-select"
                   >
                     <span
-                      class="pf-v6-c-form-control"
+                      class="pf-v5-c-form-control"
                     >
                       <input
                         aria-invalid="false"
                         aria-label="Current page"
                         data-ouia-component-id="OUIA-Generated-TextInputBase-1"
-                        data-ouia-component-type="PF6/TextInput"
+                        data-ouia-component-type="PF5/TextInput"
                         data-ouia-safe="true"
                         max="2"
                         min="1"
@@ -188,20 +195,26 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                     </span>
                   </div>
                   <div
-                    class="pf-v6-c-pagination__nav-control"
+                    class="pf-v5-c-pagination__nav-control"
                   >
                     <button
                       aria-disabled="false"
                       aria-label="Go to next page"
-                      class="pf-v6-c-button pf-m-plain"
+                      class="pf-v5-c-button pf-m-plain"
                       data-action="next"
                       data-ouia-component-id="OUIA-Generated-Button-plain-3"
-                      data-ouia-component-type="PF6/Button"
+                      data-ouia-component-type="PF5/Button"
                       data-ouia-safe="true"
                       type="button"
                     >
-                      <span
-                        class="pf-v6-c-button__icon pf-m-start"
+                      <svg
+                        aria-hidden="true"
+                        class="pf-v5-svg"
+                        fill="currentColor"
+                        height="1em"
+                        role="img"
+                        viewBox="0 0 256 512"
+                        width="1em"
                       >
                         <svg
                           aria-hidden="true"
@@ -220,20 +233,26 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                     </button>
                   </div>
                   <div
-                    class="pf-v6-c-pagination__nav-control pf-m-last"
+                    class="pf-v5-c-pagination__nav-control pf-m-last"
                   >
                     <button
                       aria-disabled="false"
                       aria-label="Go to last page"
-                      class="pf-v6-c-button pf-m-plain"
+                      class="pf-v5-c-button pf-m-plain"
                       data-action="last"
                       data-ouia-component-id="OUIA-Generated-Button-plain-4"
-                      data-ouia-component-type="PF6/Button"
+                      data-ouia-component-type="PF5/Button"
                       data-ouia-safe="true"
                       type="button"
                     >
-                      <span
-                        class="pf-v6-c-button__icon pf-m-start"
+                      <svg
+                        aria-hidden="true"
+                        class="pf-v5-svg"
+                        fill="currentColor"
+                        height="1em"
+                        role="img"
+                        viewBox="0 0 448 512"
+                        width="1em"
                       >
                         <svg
                           aria-hidden="true"
@@ -257,11 +276,11 @@ exports[`DataViewToolbar component should render correctly 1`] = `
           </div>
         </div>
         <div
-          class="pf-v6-c-toolbar__content pf-m-hidden"
+          class="pf-v5-c-toolbar__content pf-m-hidden"
           hidden=""
         >
           <div
-            class="pf-v6-c-toolbar__group"
+            class="pf-v5-c-toolbar__group"
           />
         </div>
       </div>
@@ -269,32 +288,32 @@ exports[`DataViewToolbar component should render correctly 1`] = `
   </body>,
   "container": <div>
     <div
-      class="pf-v6-c-toolbar"
+      class="pf-v5-c-toolbar"
       data-ouia-component-id="DataViewToolbar"
-      data-ouia-component-type="PF6/Toolbar"
+      data-ouia-component-type="PF5/Toolbar"
       data-ouia-safe="true"
       id="pf-random-id-0"
     >
       <div
-        class="pf-v6-c-toolbar__content"
+        class="pf-v5-c-toolbar__content"
       >
         <div
-          class="pf-v6-c-toolbar__content-section"
+          class="pf-v5-c-toolbar__content-section"
         >
           <div
-            class="pf-v6-c-toolbar__item pf-m-pagination"
+            class="pf-v5-c-toolbar__item pf-m-pagination"
             data-ouia-component-id="DataViewToolbar-pagination"
           >
             <div
-              class="pf-v6-c-pagination"
+              class="pf-v5-c-pagination"
               data-ouia-component-id="OUIA-Generated-Pagination-top-1"
-              data-ouia-component-type="PF6/Pagination"
+              data-ouia-component-type="PF5/Pagination"
               data-ouia-safe="true"
               id="options-menu-top-pagination"
-              style="--pf-v6-c-pagination__nav-page-select--c-form-control--width-chars: 2;"
+              style="--pf-v5-c-pagination__nav-page-select--c-form-control--width-chars: 2;"
             >
               <div
-                class="pf-v6-c-pagination__total-items"
+                class="pf-v5-c-pagination__total-items"
               >
                 <b>
                   1
@@ -309,21 +328,16 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                 </b>
                  
               </div>
-              <div
-                class="pf-v6-c-pagination__page-menu"
-              >
+              <div>
                 <button
                   aria-expanded="false"
                   aria-haspopup="listbox"
-                  class="pf-v6-c-menu-toggle pf-m-plain pf-m-text"
-                  data-ouia-component-id="OUIA-Generated-MenuToggle-plainText-1"
-                  data-ouia-component-type="PF6/MenuToggle"
-                  data-ouia-safe="true"
+                  class="pf-v5-c-menu-toggle pf-m-plain pf-m-text"
                   id="options-menu-top-toggle"
                   type="button"
                 >
                   <span
-                    class="pf-v6-c-menu-toggle__text"
+                    class="pf-v5-c-menu-toggle__text"
                   >
                     <b>
                       1
@@ -339,14 +353,14 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                      
                   </span>
                   <span
-                    class="pf-v6-c-menu-toggle__controls"
+                    class="pf-v5-c-menu-toggle__controls"
                   >
                     <span
-                      class="pf-v6-c-menu-toggle__toggle-icon"
+                      class="pf-v5-c-menu-toggle__toggle-icon"
                     >
                       <svg
                         aria-hidden="true"
-                        class="pf-v6-svg"
+                        class="pf-v5-svg"
                         fill="currentColor"
                         height="1em"
                         role="img"
@@ -363,24 +377,30 @@ exports[`DataViewToolbar component should render correctly 1`] = `
               </div>
               <nav
                 aria-label="Pagination"
-                class="pf-v6-c-pagination__nav"
+                class="pf-v5-c-pagination__nav"
               >
                 <div
-                  class="pf-v6-c-pagination__nav-control pf-m-first"
+                  class="pf-v5-c-pagination__nav-control pf-m-first"
                 >
                   <button
-                    aria-disabled="false"
+                    aria-disabled="true"
                     aria-label="Go to first page"
-                    class="pf-v6-c-button pf-m-plain"
+                    class="pf-v5-c-button pf-m-plain pf-m-disabled"
                     data-action="first"
                     data-ouia-component-id="OUIA-Generated-Button-plain-1"
-                    data-ouia-component-type="PF6/Button"
+                    data-ouia-component-type="PF5/Button"
                     data-ouia-safe="true"
                     disabled=""
                     type="button"
                   >
-                    <span
-                      class="pf-v6-c-button__icon pf-m-start"
+                    <svg
+                      aria-hidden="true"
+                      class="pf-v5-svg"
+                      fill="currentColor"
+                      height="1em"
+                      role="img"
+                      viewBox="0 0 448 512"
+                      width="1em"
                     >
                       <svg
                         aria-hidden="true"
@@ -399,21 +419,27 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                   </button>
                 </div>
                 <div
-                  class="pf-v6-c-pagination__nav-control"
+                  class="pf-v5-c-pagination__nav-control"
                 >
                   <button
-                    aria-disabled="false"
+                    aria-disabled="true"
                     aria-label="Go to previous page"
-                    class="pf-v6-c-button pf-m-plain"
+                    class="pf-v5-c-button pf-m-plain pf-m-disabled"
                     data-action="previous"
                     data-ouia-component-id="OUIA-Generated-Button-plain-2"
-                    data-ouia-component-type="PF6/Button"
+                    data-ouia-component-type="PF5/Button"
                     data-ouia-safe="true"
                     disabled=""
                     type="button"
                   >
-                    <span
-                      class="pf-v6-c-button__icon pf-m-start"
+                    <svg
+                      aria-hidden="true"
+                      class="pf-v5-svg"
+                      fill="currentColor"
+                      height="1em"
+                      role="img"
+                      viewBox="0 0 256 512"
+                      width="1em"
                     >
                       <svg
                         aria-hidden="true"
@@ -432,16 +458,16 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                   </button>
                 </div>
                 <div
-                  class="pf-v6-c-pagination__nav-page-select"
+                  class="pf-v5-c-pagination__nav-page-select"
                 >
                   <span
-                    class="pf-v6-c-form-control"
+                    class="pf-v5-c-form-control"
                   >
                     <input
                       aria-invalid="false"
                       aria-label="Current page"
                       data-ouia-component-id="OUIA-Generated-TextInputBase-1"
-                      data-ouia-component-type="PF6/TextInput"
+                      data-ouia-component-type="PF5/TextInput"
                       data-ouia-safe="true"
                       max="2"
                       min="1"
@@ -451,20 +477,26 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                   </span>
                 </div>
                 <div
-                  class="pf-v6-c-pagination__nav-control"
+                  class="pf-v5-c-pagination__nav-control"
                 >
                   <button
                     aria-disabled="false"
                     aria-label="Go to next page"
-                    class="pf-v6-c-button pf-m-plain"
+                    class="pf-v5-c-button pf-m-plain"
                     data-action="next"
                     data-ouia-component-id="OUIA-Generated-Button-plain-3"
-                    data-ouia-component-type="PF6/Button"
+                    data-ouia-component-type="PF5/Button"
                     data-ouia-safe="true"
                     type="button"
                   >
-                    <span
-                      class="pf-v6-c-button__icon pf-m-start"
+                    <svg
+                      aria-hidden="true"
+                      class="pf-v5-svg"
+                      fill="currentColor"
+                      height="1em"
+                      role="img"
+                      viewBox="0 0 256 512"
+                      width="1em"
                     >
                       <svg
                         aria-hidden="true"
@@ -483,20 +515,26 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                   </button>
                 </div>
                 <div
-                  class="pf-v6-c-pagination__nav-control pf-m-last"
+                  class="pf-v5-c-pagination__nav-control pf-m-last"
                 >
                   <button
                     aria-disabled="false"
                     aria-label="Go to last page"
-                    class="pf-v6-c-button pf-m-plain"
+                    class="pf-v5-c-button pf-m-plain"
                     data-action="last"
                     data-ouia-component-id="OUIA-Generated-Button-plain-4"
-                    data-ouia-component-type="PF6/Button"
+                    data-ouia-component-type="PF5/Button"
                     data-ouia-safe="true"
                     type="button"
                   >
-                    <span
-                      class="pf-v6-c-button__icon pf-m-start"
+                    <svg
+                      aria-hidden="true"
+                      class="pf-v5-svg"
+                      fill="currentColor"
+                      height="1em"
+                      role="img"
+                      viewBox="0 0 448 512"
+                      width="1em"
                     >
                       <svg
                         aria-hidden="true"
@@ -520,11 +558,11 @@ exports[`DataViewToolbar component should render correctly 1`] = `
         </div>
       </div>
       <div
-        class="pf-v6-c-toolbar__content pf-m-hidden"
+        class="pf-v5-c-toolbar__content pf-m-hidden"
         hidden=""
       >
         <div
-          class="pf-v6-c-toolbar__group"
+          class="pf-v5-c-toolbar__group"
         />
       </div>
     </div>
