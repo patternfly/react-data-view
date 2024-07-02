@@ -46,21 +46,16 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                   </b>
                    
                 </div>
-                <div
-                  class="pf-v6-c-pagination__page-menu"
-                >
+                <div>
                   <button
                     aria-expanded="false"
                     aria-haspopup="listbox"
-                    class="pf-v6-c-menu-toggle pf-m-plain pf-m-text"
-                    data-ouia-component-id="OUIA-Generated-MenuToggle-plainText-1"
-                    data-ouia-component-type="PF6/MenuToggle"
-                    data-ouia-safe="true"
+                    class="pf-v5-c-menu-toggle pf-m-plain pf-m-text"
                     id="options-menu-top-toggle"
                     type="button"
                   >
                     <span
-                      class="pf-v6-c-menu-toggle__text"
+                      class="pf-v5-c-menu-toggle__text"
                     >
                       <b>
                         1
@@ -76,14 +71,14 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                        
                     </span>
                     <span
-                      class="pf-v6-c-menu-toggle__controls"
+                      class="pf-v5-c-menu-toggle__controls"
                     >
                       <span
-                        class="pf-v6-c-menu-toggle__toggle-icon"
+                        class="pf-v5-c-menu-toggle__toggle-icon"
                       >
                         <svg
                           aria-hidden="true"
-                          class="pf-v6-svg"
+                          class="pf-v5-svg"
                           fill="currentColor"
                           height="1em"
                           role="img"
@@ -137,8 +132,14 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                       disabled=""
                       type="button"
                     >
-                      <span
-                        class="pf-v6-c-button__icon pf-m-start"
+                      <svg
+                        aria-hidden="true"
+                        class="pf-v5-svg"
+                        fill="currentColor"
+                        height="1em"
+                        role="img"
+                        viewBox="0 0 448 512"
+                        width="1em"
                       >
                         <svg
                           aria-hidden="true"
@@ -170,8 +171,14 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                       disabled=""
                       type="button"
                     >
-                      <span
-                        class="pf-v6-c-button__icon pf-m-start"
+                      <svg
+                        aria-hidden="true"
+                        class="pf-v5-svg"
+                        fill="currentColor"
+                        height="1em"
+                        role="img"
+                        viewBox="0 0 256 512"
+                        width="1em"
                       >
                         <svg
                           aria-hidden="true"
@@ -221,8 +228,14 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                       data-ouia-safe="true"
                       type="button"
                     >
-                      <span
-                        class="pf-v6-c-button__icon pf-m-start"
+                      <svg
+                        aria-hidden="true"
+                        class="pf-v5-svg"
+                        fill="currentColor"
+                        height="1em"
+                        role="img"
+                        viewBox="0 0 256 512"
+                        width="1em"
                       >
                         <svg
                           aria-hidden="true"
@@ -253,8 +266,14 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                       data-ouia-safe="true"
                       type="button"
                     >
-                      <span
-                        class="pf-v6-c-button__icon pf-m-start"
+                      <svg
+                        aria-hidden="true"
+                        class="pf-v5-svg"
+                        fill="currentColor"
+                        height="1em"
+                        role="img"
+                        viewBox="0 0 448 512"
+                        width="1em"
                       >
                         <svg
                           aria-hidden="true"
@@ -330,21 +349,16 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                 </b>
                  
               </div>
-              <div
-                class="pf-v6-c-pagination__page-menu"
-              >
+              <div>
                 <button
                   aria-expanded="false"
                   aria-haspopup="listbox"
-                  class="pf-v6-c-menu-toggle pf-m-plain pf-m-text"
-                  data-ouia-component-id="OUIA-Generated-MenuToggle-plainText-1"
-                  data-ouia-component-type="PF6/MenuToggle"
-                  data-ouia-safe="true"
+                  class="pf-v5-c-menu-toggle pf-m-plain pf-m-text"
                   id="options-menu-top-toggle"
                   type="button"
                 >
                   <span
-                    class="pf-v6-c-menu-toggle__text"
+                    class="pf-v5-c-menu-toggle__text"
                   >
                     <b>
                       1
@@ -360,14 +374,14 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                      
                   </span>
                   <span
-                    class="pf-v6-c-menu-toggle__controls"
+                    class="pf-v5-c-menu-toggle__controls"
                   >
                     <span
-                      class="pf-v6-c-menu-toggle__toggle-icon"
+                      class="pf-v5-c-menu-toggle__toggle-icon"
                     >
                       <svg
                         aria-hidden="true"
-                        class="pf-v6-svg"
+                        class="pf-v5-svg"
                         fill="currentColor"
                         height="1em"
                         role="img"
@@ -421,8 +435,14 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                     disabled=""
                     type="button"
                   >
-                    <span
-                      class="pf-v6-c-button__icon pf-m-start"
+                    <svg
+                      aria-hidden="true"
+                      class="pf-v5-svg"
+                      fill="currentColor"
+                      height="1em"
+                      role="img"
+                      viewBox="0 0 448 512"
+                      width="1em"
                     >
                       <svg
                         aria-hidden="true"
@@ -454,8 +474,14 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                     disabled=""
                     type="button"
                   >
-                    <span
-                      class="pf-v6-c-button__icon pf-m-start"
+                    <svg
+                      aria-hidden="true"
+                      class="pf-v5-svg"
+                      fill="currentColor"
+                      height="1em"
+                      role="img"
+                      viewBox="0 0 256 512"
+                      width="1em"
                     >
                       <svg
                         aria-hidden="true"
@@ -505,8 +531,14 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                     data-ouia-safe="true"
                     type="button"
                   >
-                    <span
-                      class="pf-v6-c-button__icon pf-m-start"
+                    <svg
+                      aria-hidden="true"
+                      class="pf-v5-svg"
+                      fill="currentColor"
+                      height="1em"
+                      role="img"
+                      viewBox="0 0 256 512"
+                      width="1em"
                     >
                       <svg
                         aria-hidden="true"
@@ -537,8 +569,14 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                     data-ouia-safe="true"
                     type="button"
                   >
-                    <span
-                      class="pf-v6-c-button__icon pf-m-start"
+                    <svg
+                      aria-hidden="true"
+                      class="pf-v5-svg"
+                      fill="currentColor"
+                      height="1em"
+                      role="img"
+                      viewBox="0 0 448 512"
+                      width="1em"
                     >
                       <svg
                         aria-hidden="true"
