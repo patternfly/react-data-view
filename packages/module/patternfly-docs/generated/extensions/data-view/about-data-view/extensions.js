@@ -23,23 +23,23 @@ pageData.examples = {
 
 const Component = () => (
   <React.Fragment>
-    <p {...{"className":"pf-v6-c-content--p ws-p "}}>
+    <p {...{"className":"ws-p"}}>
       {`Data view lives in its own package `}
-      <PatternflyThemeLink {...{"to":"https://www.npmjs.com/package/@patternfly/react-data-view","className":""}}>
-        <code {...{"className":"ws-code "}}>
+      <PatternflyThemeLink {...{"to":"https://www.npmjs.com/package/@patternfly/react-data-view"}}>
+        <code {...{"className":"ws-code"}}>
           {`@patternfly/react-data-view`}
         </code>
       </PatternflyThemeLink>
     </p>
-    <AutoLinkHeader {...{"id":"data-view","headingLevel":"h1","className":"ws-title ws-h1"}}>
+    <AutoLinkHeader {...{"id":"data-view","size":"h1","className":"ws-title ws-h1"}}>
       {`Data view`}
     </AutoLinkHeader>
-    <p {...{"className":"pf-v6-c-content--p ws-p "}}>
+    <p {...{"className":"ws-p"}}>
       {`The data view extension contains implementation of the data view component allowing to display record data in a configured layout.`}
     </p>
-    <p {...{"className":"pf-v6-c-content--p ws-p "}}>
+    <p {...{"className":"ws-p"}}>
       {`If you notice a bug or have a suggestion for the data view, feel free to file an issue in our `}
-      <PatternflyThemeLink {...{"to":"https://github.com/patternfly/react-data-view/issues","className":""}}>
+      <PatternflyThemeLink {...{"to":"https://github.com/patternfly/react-data-view/issues"}}>
         {`GitHub repository`}
       </PatternflyThemeLink>
       {`! Please make sure to check if there is already a pre-existing issue before creating a new issue.`}
