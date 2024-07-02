@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@patternfly/react-core": "^5.3.3",
-    "@patternfly/react-icons": "^5.3.1",
+    "@patternfly/react-icons": "^5.3.2",
     "@patternfly/react-table": "^5.3.3",
     "@patternfly/react-component-groups": "^5.3.0-prerelease.2",
     "react-jss": "^10.10.0",
@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@patternfly/patternfly-a11y": "^4.3.1",
-    "@patternfly/documentation-framework": "5.16.9",
+    "@patternfly/documentation-framework": "^5.16.9",
     "@patternfly/patternfly": "^5.3.1",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.0",
