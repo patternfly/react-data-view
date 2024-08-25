@@ -33,7 +33,7 @@ const cols = {
 const ouiaId = 'LayoutExample';
 
 export const BasicExample: React.FunctionComponent = () => { 
-  const selection = useDataViewSelection({});
+  const selection = useDataViewSelection();
   const { selected, onSelect, isSelected } = selection;
 
   const handleBulkSelect = (value: BulkSelectValue) => {
