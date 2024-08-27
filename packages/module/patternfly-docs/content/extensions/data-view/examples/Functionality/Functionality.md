@@ -40,6 +40,8 @@ The `useDataViewPagination` hook manages the pagination state of the data view.
 
 While the hook works seamlessly with React Router library, you do not need to use it to take advantage of URL persistence. The `searchParams` and `setSearchParams` props can be managed using native browser APIs (`URLSearchParams` and `window.history.pushState`) or any other routing library of your choice. If you don't pass these two props, the pagination state will be stored internally without the URL usage.
 
+You can also pass custom `pageParam` or `perPageParam` names, renaming the pagination parameters in the URL.
+
 The retrieved values are named to match the PatternFly [pagination](/components/pagination) component props, so you can easily spread them to the component.
 
 **Return values:**

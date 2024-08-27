@@ -14,6 +14,10 @@ export interface UseDataViewPaginationProps {
   searchParams?: URLSearchParams;
   /** Function to set search parameters */
   setSearchParams?: (params: URLSearchParams) => void;
+  /** Custom URL parameter name for page */
+  pageParam?: string;
+  /** Custom URL parameter name for per page */
+  perPageParam?: string;
 }
 
 export interface DataViewPaginationProps extends UseDataViewPaginationProps {
@@ -26,17 +30,19 @@ export const useDataViewPagination = ({
   perPage,
   searchParams,
   setSearchParams,
+  pageParam = PaginationParams.PAGE,
+  perPageParam = PaginationParams.PER_PAGE,
 }: UseDataViewPaginationProps) => {
   const [ state, setState ] = useState({
-    page: parseInt(searchParams?.get(PaginationParams.PAGE) || `${page}`),
-    perPage: parseInt(searchParams?.get(PaginationParams.PER_PAGE) || `${perPage}`),
+    page: parseInt(searchParams?.get(pageParam) || `${page}`),
+    perPage: parseInt(searchParams?.get(perPageParam) || `${perPage}`),
   });
 
   const updateSearchParams = (page: number, perPage: number) => {
     if (searchParams && setSearchParams) {
       const params = new URLSearchParams(searchParams);
-      params.set(PaginationParams.PAGE, `${page}`);
-      params.set(PaginationParams.PER_PAGE, `${perPage}`);
+      params.set(pageParam, `${page}`);
+      params.set(perPageParam, `${perPage}`);
       setSearchParams(params);
     }
   };
@@ -49,8 +55,8 @@ export const useDataViewPagination = ({
 
   useEffect(() => {
     // Listen on URL params changes
-    const currentPage = parseInt(searchParams?.get(PaginationParams.PAGE) || `${state.page}`);
-    const currentPerPage = parseInt(searchParams?.get(PaginationParams.PER_PAGE) || `${state.perPage}`);
+    const currentPage = parseInt(searchParams?.get(pageParam) || `${state.page}`);
+    const currentPerPage = parseInt(searchParams?.get(perPageParam) || `${state.perPage}`);
     if (currentPage !== state.page || currentPerPage !== state.perPage) {
       setState({ page: currentPage, perPage: currentPerPage });
     }
