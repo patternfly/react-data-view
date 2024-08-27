@@ -6,35 +6,35 @@ exports[`DataView component should render correctly 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="pf-v5-l-stack"
-        data-ouia-component-id="DataView-stack"
+        class="pf-v6-l-stack"
+        data-ouia-component-id="DataView-stack}"
       >
         <div
-          class="pf-v5-l-stack__item"
+          class="pf-v6-l-stack__item"
           data-ouia-component-id="DataView-stack-item-0"
         >
           <div
-            style="width: 100%; height: 5rem; border-style: dashed; border-width: 2px;"
+            style="width: 100%; height: 5rem;"
           >
             Header
           </div>
         </div>
         <div
-          class="pf-v5-l-stack__item"
+          class="pf-v6-l-stack__item"
           data-ouia-component-id="DataView-stack-item-1"
         >
           <div
-            style="width: 100%; height: 5rem; border-style: dashed; border-width: 2px; border-top-width: 0; border-bottom-width: 0;"
+            style="width: 100%; height: 5rem;"
           >
             Data representation
           </div>
         </div>
         <div
-          class="pf-v5-l-stack__item"
+          class="pf-v6-l-stack__item"
           data-ouia-component-id="DataView-stack-item-2"
         >
           <div
-            style="width: 100%; height: 5rem; border-style: dashed; border-width: 2px;"
+            style="width: 100%; height: 5rem;"
           >
             Footer
           </div>
@@ -44,35 +44,35 @@ exports[`DataView component should render correctly 1`] = `
   </body>,
   "container": <div>
     <div
-      class="pf-v5-l-stack"
-      data-ouia-component-id="DataView-stack"
+      class="pf-v6-l-stack"
+      data-ouia-component-id="DataView-stack}"
     >
       <div
-        class="pf-v5-l-stack__item"
+        class="pf-v6-l-stack__item"
         data-ouia-component-id="DataView-stack-item-0"
       >
         <div
-          style="width: 100%; height: 5rem; border-style: dashed; border-width: 2px;"
+          style="width: 100%; height: 5rem;"
         >
           Header
         </div>
       </div>
       <div
-        class="pf-v5-l-stack__item"
+        class="pf-v6-l-stack__item"
         data-ouia-component-id="DataView-stack-item-1"
       >
         <div
-          style="width: 100%; height: 5rem; border-style: dashed; border-width: 2px; border-top-width: 0; border-bottom-width: 0;"
+          style="width: 100%; height: 5rem;"
         >
           Data representation
         </div>
       </div>
       <div
-        class="pf-v5-l-stack__item"
+        class="pf-v6-l-stack__item"
         data-ouia-component-id="DataView-stack-item-2"
       >
         <div
-          style="width: 100%; height: 5rem; border-style: dashed; border-width: 2px;"
+          style="width: 100%; height: 5rem;"
         >
           Footer
         </div>

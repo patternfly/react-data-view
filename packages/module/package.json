@@ -27,7 +27,8 @@
   },
   "homepage": "https://github.com/patternfly/react-data-view#readme",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "tag": "prerelease"
   },
   "dependencies": {
     "@patternfly/react-core": "6.0.0-alpha.94",

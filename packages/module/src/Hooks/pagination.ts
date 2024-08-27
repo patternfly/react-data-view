@@ -1,9 +1,4 @@
-import { useState, useEffect } from "react";
-
-export enum PaginationParams {
-  PAGE = 'page',
-  PER_PAGE = 'perPage'
-}
+import { useEffect, useState } from "react";
 
 export interface UseDataViewPaginationProps {
   /** Initial page */
@@ -22,7 +17,12 @@ export interface UseDataViewPaginationProps {
 
 export interface DataViewPaginationProps extends UseDataViewPaginationProps {
   /** Current page number */
-  page: number;
+    page: number;
+}
+
+export enum PaginationParams {
+  PAGE = 'page',
+  PER_PAGE = 'perPage'
 }
 
 export const useDataViewPagination = ({
@@ -77,8 +77,8 @@ export const useDataViewPagination = ({
   ) => {
     updateSearchParams(newPage, state.perPage);
     setState(prev => ({ ...prev, page: newPage }));
-  };
-
+  }
+  
   return {
     ...state,
     onPerPageSelect,

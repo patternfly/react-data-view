@@ -19,7 +19,7 @@ import { DataView } from '@patternfly/react-data-view/dist/dynamic/DataView';
 import { BulkSelect, BulkSelectValue } from '@patternfly/react-component-groups/dist/dynamic/BulkSelect';
 import { DataViewToolbar } from '@patternfly/react-data-view/dist/dynamic/DataViewToolbar';
 import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
-import { BrowserRouter, useSearchParams } from 'react-router-dom';
+
 
 This is a list of functionality you can use to manage data displayed in the **data view**.
 
