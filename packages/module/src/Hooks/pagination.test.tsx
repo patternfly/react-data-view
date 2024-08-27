@@ -84,11 +84,19 @@ describe('useDataViewPagination', () => {
       })
     );
 
+    expect(mockSetSearchParams).toHaveBeenNthCalledWith(
+      1, 
+      new URLSearchParams('page=1&perPage=5')
+    );
+
     act(() => {
       result.current.onSetPage(undefined, 4);
     });
 
-    expect(mockSetSearchParams).toHaveBeenCalledTimes(2);
+    expect(mockSetSearchParams).toHaveBeenNthCalledWith(
+      2,
+      new URLSearchParams('page=4')
+    );
   });
 
   it('should set pagination state in URL when perPage changes', () => {
