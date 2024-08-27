@@ -55,7 +55,7 @@ export const useDataViewPagination = ({
       setState({ page: currentPage, perPage: currentPerPage });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ searchParams ]);
+  }, [ searchParams?.toString() ]);
 
   const onPerPageSelect = (
     _event: React.MouseEvent | React.KeyboardEvent | MouseEvent | undefined,
