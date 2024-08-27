@@ -18,6 +18,7 @@ import { useDataViewPagination, useDataViewSelection } from '@patternfly/react-d
 import { DataView } from '@patternfly/react-data-view/dist/dynamic/DataView';
 import { BulkSelect, BulkSelectValue } from '@patternfly/react-component-groups/dist/dynamic/BulkSelect';
 import { DataViewToolbar } from '@patternfly/react-data-view/dist/dynamic/DataViewToolbar';
+import { BrowserRouter, useSearchParams } from 'react-router-dom';
 
 This is a list of functionality you can use to manage data displayed in the **data view**.
 
@@ -25,7 +26,7 @@ This is a list of functionality you can use to manage data displayed in the **da
 Allows to display data records on multiple pages and display the pagination state.
 
 ### Toolbar usage
-Data view toolbar can display a pagination using the `pagination` property accepting a React node. You can also pass a custom `ouiaId` for testing purposes.
+Data view toolbar can display a pagination using the `pagination` property accepting a React node. You can also pass a custom `ouiaId` for testing purposes. Additionally, it offers an option to persist pagination values in the URL, which makes it easier to share or bookmark specific pages of your data.
 
 ### Pagination state
 
@@ -34,8 +35,14 @@ The `useDataViewPagination` hook manages the pagination state of the data view.
 **Initial values:**
 - `perPage` initial value
 - (optional) `page` initial value
+- (optional) `searchParams` object
+- (optional) `seSearchParams` function
 
-The retrieved values are named to match the PatternFly [pagination](/components/pagination) component props, so you can easily spread them.
+While the hook works seamlessly with React Router library, you do not need to use it to take advantage of URL persistence. The `searchParams` and `setSearchParams` props can be managed using native browser APIs (`URLSearchParams` and `window.history.pushState`) or any other routing library of your choice. If you don't pass these two props, the pagination state will be stored internally without the URL usage.
+
+You can also pass custom `pageParam` or `perPageParam` names, renaming the pagination parameters in the URL.
+
+The retrieved values are named to match the PatternFly [pagination](/components/pagination) component props, so you can easily spread them to the component.
 
 **Return values:**
 - current `page` number
@@ -44,6 +51,8 @@ The retrieved values are named to match the PatternFly [pagination](/components/
 - `onPerPageSelect` to modify per page value
 
 ### Pagination example
+This example uses the URL for persisting the pagination state.
+
 ```js file="./PaginationExample.tsx"
 
 ```
