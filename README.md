@@ -41,7 +41,6 @@ const MyComponent: React.FunctionComponent<MyComponentProps> = () => {
   );
 };
 
-
 export default MyComponent;
 ``` 
 
