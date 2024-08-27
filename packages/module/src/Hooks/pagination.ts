@@ -23,44 +23,40 @@ export const useDataViewPagination = ({
   setSearchParams,
 }: UseDataViewPaginationProps) => {
   const [ state, setState ] = useState({
-    page: searchParams?.get('page') !== null
-      ? parseInt(searchParams?.get('page') || `${page}`)
-      : page,
-    perPage: searchParams?.get('perPage') !== null
-      ? parseInt(searchParams?.get('perPage') || `${perPage}`)
-      : perPage,
+    page: parseInt(searchParams?.get('page') || `${page}`),
+    perPage: parseInt(searchParams?.get('perPage') || `${perPage}`),
   });
 
-  useEffect(() => {
+  const updateSearchParams = (page: number, perPage: number) => {
     if (searchParams && setSearchParams) {
       const params = new URLSearchParams(searchParams);
-      let updated = false;
-
-      if (!params.has('page')) {
-        params.set('page', `${page}`);
-        updated = true;
-      }
-
-      if (!params.has('perPage')) {
-        params.set('perPage', `${perPage}`);
-        updated = true;
-      }
-
-      updated && setSearchParams(params);
+      params.set('page', `${page}`);
+      params.set('perPage', `${perPage}`);
+      setSearchParams(params);
     }
+  };
+
+  useEffect(() => {
+    // make sure search params are loaded or set if not present on mount
+    updateSearchParams(state.page, state.perPage);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    // listen on URL params changes
+    const currentPage = parseInt(searchParams?.get('page') || `${state.page}`);
+    const currentPerPage = parseInt(searchParams?.get('perPage') || `${state.perPage}`);
+    if (currentPage !== state.page || currentPerPage !== state.perPage) {
+      setState({ page: currentPage, perPage: currentPerPage });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ searchParams ]);
 
   const onPerPageSelect = (
     _event: React.MouseEvent | React.KeyboardEvent | MouseEvent | undefined,
     newPerPage: number
   ) => {
-    if (searchParams && setSearchParams) {
-      const params = new URLSearchParams(searchParams);
-      params.set('perPage', newPerPage.toString());
-      params.set('page', '1');
-      setSearchParams(params);
-    }
+    updateSearchParams(1, newPerPage);
     setState({ perPage: newPerPage, page: 1 });
   };
 
@@ -68,17 +64,13 @@ export const useDataViewPagination = ({
     _event: React.MouseEvent | React.KeyboardEvent | MouseEvent | undefined,
     newPage: number
   ) => {
-    if (searchParams && setSearchParams) {
-      const params = new URLSearchParams(searchParams);
-      params.set('page', newPage.toString());
-      setSearchParams(params);
-    }
+    updateSearchParams(newPage, state.perPage);
     setState(prev => ({ ...prev, page: newPage }));
   };
 
   return {
     ...state,
     onPerPageSelect,
-    onSetPage
+    onSetPage,
   };
 };
