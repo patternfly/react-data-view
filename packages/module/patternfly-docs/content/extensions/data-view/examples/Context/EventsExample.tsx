@@ -51,7 +51,7 @@ const RepositoryDetail: React.FunctionComponent<RepositoryDetailProps> = ({ sele
   return (
     <DrawerPanelContent>
       <DrawerHead>
-        <Title className="pf-v5-u-mb-md" headingLevel="h2">
+        <Title className="pf-v5-u-mb-md" headingLevel="h2" ouiaId="detail-drawer-title">
           Detail of repository {selectedRepo?.name}
         </Title>
         <Text>Branches: {selectedRepo?.branches}</Text>
@@ -59,7 +59,7 @@ const RepositoryDetail: React.FunctionComponent<RepositoryDetailProps> = ({ sele
         <Text>Workspaces: {selectedRepo?.workspaces}</Text>
         <Text>Last commit: {selectedRepo?.lastCommit}</Text>
         <DrawerActions>
-          <DrawerCloseButton onClick={() => setSelectedRepo(undefined)} />
+          <DrawerCloseButton onClick={() => setSelectedRepo(undefined)} data-ouia-component-id="detail-drawer-close-btn"/>
         </DrawerActions>
       </DrawerHead>
     </DrawerPanelContent>
@@ -117,7 +117,7 @@ export const BasicExample: React.FunctionComponent = () => {
 
   return (
     <DataViewProvider>
-      <Drawer isExpanded={Boolean(selectedRepo)} onExpand={() => drawerRef.current?.focus()}>
+      <Drawer isExpanded={Boolean(selectedRepo)} onExpand={() => drawerRef.current?.focus()} data-ouia-component-id="detail-drawer" >
         <DrawerContent
           panelContent={<RepositoryDetail selectedRepo={selectedRepo} setSelectedRepo={setSelectedRepo} />}
         >
