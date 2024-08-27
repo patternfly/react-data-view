@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
 
+export enum PaginationParams {
+  PAGE = 'page',
+  PER_PAGE = 'perPage'
+}
+
 export interface UseDataViewPaginationProps {
   /** Initial page */
   page?: number;
@@ -23,33 +28,33 @@ export const useDataViewPagination = ({
   setSearchParams,
 }: UseDataViewPaginationProps) => {
   const [ state, setState ] = useState({
-    page: parseInt(searchParams?.get('page') || `${page}`),
-    perPage: parseInt(searchParams?.get('perPage') || `${perPage}`),
+    page: parseInt(searchParams?.get(PaginationParams.PAGE) || `${page}`),
+    perPage: parseInt(searchParams?.get(PaginationParams.PER_PAGE) || `${perPage}`),
   });
 
   const updateSearchParams = (page: number, perPage: number) => {
     if (searchParams && setSearchParams) {
       const params = new URLSearchParams(searchParams);
-      params.set('page', `${page}`);
-      params.set('perPage', `${perPage}`);
+      params.set(PaginationParams.PAGE, `${page}`);
+      params.set(PaginationParams.PER_PAGE, `${perPage}`);
       setSearchParams(params);
     }
   };
 
   useEffect(() => {
-    // make sure search params are loaded or set if not present on mount
+    // Make sure search params are loaded or set if not present on mount
     updateSearchParams(state.page, state.perPage);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    // listen on URL params changes
-    const currentPage = parseInt(searchParams?.get('page') || `${state.page}`);
-    const currentPerPage = parseInt(searchParams?.get('perPage') || `${state.perPage}`);
+    // Listen on URL params changes
+    const currentPage = parseInt(searchParams?.get(PaginationParams.PAGE) || `${state.page}`);
+    const currentPerPage = parseInt(searchParams?.get(PaginationParams.PER_PAGE) || `${state.perPage}`);
     if (currentPage !== state.page || currentPerPage !== state.perPage) {
       setState({ page: currentPage, perPage: currentPerPage });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ searchParams ]);
 
   const onPerPageSelect = (
