@@ -4,7 +4,6 @@ import { Table, Tbody, Th, Thead, Tr, Td } from '@patternfly/react-table';
 import { useDataViewPagination } from '@patternfly/react-data-view/dist/dynamic/Hooks';
 import DataView from '@patternfly/react-data-view/dist/dynamic/DataView';
 import DataViewToolbar from '@patternfly/react-data-view/dist/dynamic/DataViewToolbar';
-import { BrowserRouter, useSearchParams } from 'react-router-dom';
 
 const perPageOptions = [
   { title: '5', value: 5 },
@@ -38,12 +37,12 @@ const cols = {
 
 const ouiaId = 'LayoutExample';
 
-const MyTable: React.FunctionComponent = () => {
-  const [ searchParams, setSearchParams ] = useSearchParams()
-  const pagination = useDataViewPagination({ perPage: 5, searchParams, setSearchParams });
+export const BasicExample: React.FunctionComponent = () => { 
+  const pagination = useDataViewPagination({ perPage: 5 });
   const { page, perPage } = pagination;
 
   const data = useMemo(() => repositories.slice((page - 1) * perPage, ((page - 1) * perPage) + perPage), [ page, perPage ]);
+
   return (
     <DataView>
       <DataViewToolbar ouiaId='DataViewHeader' pagination={<Pagination perPageOptions={perPageOptions} itemCount={repositories.length} {...pagination} />} />
@@ -63,11 +62,4 @@ const MyTable: React.FunctionComponent = () => {
       </Table>
       <DataViewToolbar ouiaId='DataViewFooter' pagination={<Pagination isCompact perPageOptions={perPageOptions} itemCount={repositories.length} {...pagination} />} />
     </DataView>
-  )
-}
-
-export const BasicExample: React.FunctionComponent = () => (
-  <BrowserRouter>
-    <MyTable/>
-  </BrowserRouter>
-)
+  )}
