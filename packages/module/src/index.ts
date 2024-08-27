@@ -4,5 +4,8 @@ export * from './Hooks';
 export { default as DataViewToolbar } from './DataViewToolbar';
 export * from './DataViewToolbar';
 
+export { default as DataViewContext } from './DataViewContext';
+export * from './DataViewContext';
+
 export { default as DataView } from './DataView';
 export * from './DataView';
