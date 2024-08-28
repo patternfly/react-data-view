@@ -36,10 +36,10 @@ describe('DataViewTable', () => {
     cy.get('[data-ouia-component-id="data-th-3"]').contains('Workspaces');
     cy.get('[data-ouia-component-id="data-th-4"]').contains('Last commit');
 
-    cy.get('[data-ouia-component-id="data-td-0-name"]').contains('one');
-    cy.get('[data-ouia-component-id="data-td-2-branches"]').contains('two - 3');
-    cy.get('[data-ouia-component-id="data-td-3-prs"]').contains('null');
-    cy.get('[data-ouia-component-id="data-td-4-workspaces"]').contains('four - 5');
-    cy.get('[data-ouia-component-id="data-td-5-last-commit"]').contains('five - 6');
+    cy.get('[data-ouia-component-id="data-td-0-0"]').contains('one');
+    cy.get('[data-ouia-component-id="data-td-2-1"]').contains('two - 3');
+    cy.get('[data-ouia-component-id="data-td-3-2"]').contains('null');
+    cy.get('[data-ouia-component-id="data-td-4-3"]').contains('four - 5');
+    cy.get('[data-ouia-component-id="data-td-5-4"]').contains('five - 6');
   });
 });
