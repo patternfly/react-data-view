@@ -12,23 +12,24 @@ export const EventTypes = {
 
 export type DataViewEvent = typeof EventTypes[keyof typeof EventTypes];
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Callback = (...args: any[]) => void;
+type Callback = (...args: any[]) => void;    // eslint-disable-line @typescript-eslint/no-explicit-any
 interface Subscriptions { [id: string]: Callback }
-type ContextType = { [event in DataViewEvent]: Subscriptions };
+type EventSubscriptions = { [event in DataViewEvent]: Subscriptions };
 type Subscribe = (event: DataViewEvent, callback: Callback) => () => void;
+type Trigger = (event: DataViewEvent, ...payload: any[]) => void;    // eslint-disable-line @typescript-eslint/no-explicit-any
 
-export const DataViewEventsContext = createContext<{
+export interface DataViewEventsContextValue {
   subscribe: Subscribe;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  trigger: (event: DataViewEvent, ...payload: any[]) => void;
-    }>({
-      subscribe: () => () => null,
-      trigger: () => null
-    });
+  trigger: Trigger;
+}
+
+export const DataViewEventsContext = createContext<DataViewEventsContextValue>({
+  subscribe: () => () => null,
+  trigger: () => null
+});
 
 export const DataViewEventsProvider = ({ children }: PropsWithChildren) => {
-  const [ subscriptions, setSubscriptions ] = useState<ContextType>({
+  const [ subscriptions, setSubscriptions ] = useState<EventSubscriptions>({
     [EventTypes.rowClick]: {}
   });
 
@@ -36,14 +37,14 @@ export const DataViewEventsProvider = ({ children }: PropsWithChildren) => {
     const id = crypto.randomUUID();
 
     // set new subscription
-    setSubscriptions((prevSubscriptions) => ({
+    setSubscriptions(prevSubscriptions => ({
       ...prevSubscriptions,
       [event]: { ...prevSubscriptions[event], [id]: callback }
     }));
 
     // return unsubscribe function
     return () => {
-      setSubscriptions((prevSubscriptions) => {
+      setSubscriptions(prevSubscriptions => {
         const updatedSubscriptions = { ...prevSubscriptions };
         delete updatedSubscriptions[event][id];
         return updatedSubscriptions;
@@ -51,14 +52,11 @@ export const DataViewEventsProvider = ({ children }: PropsWithChildren) => {
     };
   };
 
-  const trigger = useCallback(
-    (event: DataViewEvent, ...payload: unknown[]) => {
-      Object.values(subscriptions[event]).forEach((callback) => {
-        callback(...payload);
-      });
-    },
-    [ subscriptions ]
-  );
+  const trigger = useCallback((event: DataViewEvent, ...payload: unknown[]) => {
+    Object.values(subscriptions[event]).forEach(callback => {
+      callback(...payload);
+    });
+  }, [ subscriptions ]);
 
   return (
     <DataViewEventsContext.Provider value={{ subscribe, trigger }}>
