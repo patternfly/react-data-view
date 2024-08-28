@@ -18,6 +18,8 @@ import { useDataViewPagination, useDataViewSelection } from '@patternfly/react-d
 import { DataView } from '@patternfly/react-data-view/dist/dynamic/DataView';
 import { BulkSelect, BulkSelectValue } from '@patternfly/react-component-groups/dist/dynamic/BulkSelect';
 import { DataViewToolbar } from '@patternfly/react-data-view/dist/dynamic/DataViewToolbar';
+import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
+import { BrowserRouter, useSearchParams } from 'react-router-dom';
 
 This is a list of functionality you can use to manage data displayed in the **data view**.
 
@@ -33,7 +35,9 @@ The `useDataViewPagination` hook manages the pagination state of the data view.
 
 **Initial values:**
 - `perPage` initial value
-- (optional) `page` initial value
+- optional `page` initial value
+- optional `searchParams` object
+- optional `setSearchParams` function
 
 While the hook works seamlessly with React Router library, you do not need to use it to take advantage of URL persistence. The `searchParams` and `setSearchParams` props can be managed using native browser APIs (`URLSearchParams` and `window.history.pushState`) or any other routing library of your choice. If you don't pass these two props, the pagination state will be stored internally without the URL usage.
 
@@ -63,8 +67,8 @@ Data view toolbar can display a bulk selection component using the `bulkSelect` 
 The `useDataViewSelection` hook manages the selection state of the data view. 
 
 **Initial values:**
-- (optional) `initialSelected` array of record's identifiers selected by default 
-- (optional) `matchOption` function to check if given record is selected
+- optional `initialSelected` array of record's identifiers selected by default 
+- `matchOption` function to check if given record is selected
 
 *When no `matchOption` is passed, the `Array.prototype.includes()` operation is performed on the `selected` array.*
 

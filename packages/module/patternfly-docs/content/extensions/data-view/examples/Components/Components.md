@@ -11,11 +11,12 @@ source: react
 # If you use typescript, the name of the interface to display props for
 # These are found through the sourceProps function provided in patternfly-docs.source.js
 sortValue: 4
-propComponents: ['DataViewToolbar']
+propComponents: ['DataViewToolbar', 'DataViewTable']
 sourceLink: https://github.com/patternfly/react-data-view/blob/main/packages/module/patternfly-docs/content/extensions/data-view/examples/Components/Components.md
 ---
 import { BulkSelect } from '@patternfly/react-component-groups';
-import DataViewToolbar from '@patternfly/react-data-view/dist/dynamic/DataViewToolbar';
+import { DataViewToolbar } from '@patternfly/react-data-view/dist/dynamic/DataViewToolbar';
+import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 
 ## Data view toolbar
 
@@ -28,4 +29,30 @@ Data view toolbar can contain a `pagination`, `bulkSelect` or any other children
 ```js file="./DataViewToolbarExample.tsx"
 
 ```
+
+## Data view table
+
+The **data view table** component renders your columns and rows definition into a [table](/components/table) component. 
+
+### Basic example
+
+```js file="./DataViewTableExample.tsx"
+
+```
+
+The `DataViewTable` component accepts the following props:
+
+- `columns` defining the column headers of the table. Each item in the array can be a `ReactNode` (for simple headers) or an object with the following properties:
+  - `cell` (`ReactNode`) content to display in the column header.
+  - optional `props` (`ThProps`) to pass to the `<Th>` component, such as `width`, `sort`, and other table header cell properties.
+
+- `rows` defining the rows to be displayed in the table. Each item in the array can be either an array of `DataViewTd` (for simple rows) or an object with the following properties:
+  - `row` (`DataViewTd[]`) defining the content for each cell in the row.
+  - optional `id` (`string`) for the row.
+  - optional `props` (`TrProps`) to pass to the `<Tr>` component, such as `isHoverable`, `isRowSelected`, and other table row properties.
+
+- optional `ouiaId`
+
+- optional `props` (`TableProps`) that are passed down to the `<Table>` component, except for `onSelect`, which is managed internally.
+
 
