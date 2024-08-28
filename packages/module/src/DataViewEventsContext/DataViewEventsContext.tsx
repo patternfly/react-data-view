@@ -2,6 +2,7 @@ import React, {
   PropsWithChildren,
   createContext,
   useCallback,
+  useContext,
   useState
 } from "react";
 
@@ -17,7 +18,7 @@ interface Subscriptions { [id: string]: Callback }
 type ContextType = { [event in DataViewEvent]: Subscriptions };
 type Subscribe = (event: DataViewEvent, callback: Callback) => () => void;
 
-export const DataViewContext = createContext<{
+export const DataViewEventsContext = createContext<{
   subscribe: Subscribe;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   trigger: (event: DataViewEvent, ...payload: any[]) => void;
@@ -26,7 +27,7 @@ export const DataViewContext = createContext<{
       trigger: () => null
     });
 
-export const DataViewProvider = ({ children }: PropsWithChildren) => {
+export const DataViewEventsProvider = ({ children }: PropsWithChildren) => {
   const [ subscriptions, setSubscriptions ] = useState<ContextType>({
     [EventTypes.rowClick]: {}
   });
@@ -60,10 +61,12 @@ export const DataViewProvider = ({ children }: PropsWithChildren) => {
   );
 
   return (
-    <DataViewContext.Provider value={{ subscribe, trigger }}>
+    <DataViewEventsContext.Provider value={{ subscribe, trigger }}>
       {children}
-    </DataViewContext.Provider>
+    </DataViewEventsContext.Provider>
   );
 };
 
-export default DataViewContext;
+export const useDataViewEventsContext = () => useContext(DataViewEventsContext);
+
+export default DataViewEventsContext;
