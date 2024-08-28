@@ -1,9 +1,9 @@
 import React from 'react';
-import { Table, Tbody, Th, Thead, Tr, Td } from '@patternfly/react-table';
 import { useDataViewSelection } from '@patternfly/react-data-view/dist/dynamic/Hooks';
 import { BulkSelect, BulkSelectValue } from '@patternfly/react-component-groups/dist/dynamic/BulkSelect';
 import { DataView } from '@patternfly/react-data-view/dist/dynamic/DataView';
 import { DataViewToolbar } from '@patternfly/react-data-view/dist/dynamic/DataViewToolbar';
+import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 
 interface Repository {
   name: string;
@@ -22,27 +22,23 @@ const repositories: Repository[] = [
   { name: 'one - 6', branches: 'two - 6', prs: 'three - 6', workspaces: 'four - 6', lastCommit: 'five - 6' }
 ];
 
-const cols = {
-  name: 'Repositories',
-  branches: 'Branches',
-  prs: 'Pull requests',
-  workspaces: 'Workspaces',
-  lastCommit: 'Last commit'
-};
+const rows = repositories.map(item => Object.values(item));
+
+const columns = [ 'Repositories', 'Branches', 'Pull requests', 'Workspaces', 'Last commit' ];
 
 const ouiaId = 'LayoutExample';
 
 export const BasicExample: React.FunctionComponent = () => { 
-  const selection = useDataViewSelection({});
-  const { selected, onSelect, isSelected } = selection;
+  const selection = useDataViewSelection({ matchOption: (a, b) => a[0] === b[0] });
+  const { selected, onSelect } = selection;
 
   const handleBulkSelect = (value: BulkSelectValue) => {
     value === BulkSelectValue.none && onSelect(false);
-    value === BulkSelectValue.all && onSelect(true, repositories);
+    value === BulkSelectValue.all && onSelect(true, rows);
   };
 
   return (
-    <DataView>
+    <DataView selection={selection}>
       <DataViewToolbar 
         ouiaId='DataViewHeader'
         bulkSelect={
@@ -55,34 +51,7 @@ export const BasicExample: React.FunctionComponent = () => {
           />
         } 
       />
-      <Table aria-label="Repositories table" ouiaId={ouiaId}>
-        <Thead data-ouia-component-id={`${ouiaId}-thead`}>
-          <Tr ouiaId={`${ouiaId}-tr-head`}>
-            <Th key="row-select"/>
-            {Object.values(cols).map((column, index) => (
-              <Th key={index} data-ouia-component-id={`${ouiaId}-th-${index}`}>{column}</Th>
-            ))}
-          </Tr>
-        </Thead>
-        <Tbody>
-          {repositories.map((repo, rowIndex) => (
-            <Tr key={repo.name} ouiaId={`${ouiaId}-tr-${rowIndex}`}>
-              <Td
-                key={`select-${rowIndex}`}
-                select={{
-                  rowIndex,
-                  onSelect: (_event, isSelecting) => onSelect(isSelecting, repo),
-                  isSelected: isSelected(repo),
-                  isDisabled: false
-                }}
-              />
-              {Object.keys(cols).map((column, colIndex) => (
-                <Td key={colIndex} data-ouia-component-id={`${ouiaId}-td-${rowIndex}-${colIndex}`}>{repo[column]}</Td>
-              ))}
-            </Tr>
-          ))}
-        </Tbody>
-      </Table>
+      <DataViewTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={rows} />
     </DataView>
   );
 }
