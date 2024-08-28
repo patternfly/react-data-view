@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Drawer, DrawerActions, DrawerCloseButton, DrawerContent, DrawerContentBody, DrawerHead, DrawerPanelContent, Title, Text } from '@patternfly/react-core';
 import { Table, Tbody, Th, Thead, Tr, Td } from '@patternfly/react-table';
 import { DataView } from '@patternfly/react-data-view/dist/dynamic/DataView';
-import DataViewContext, { DataViewProvider, EventTypes } from '@patternfly/react-data-view/dist/dynamic/DataViewContext';
+import { DataViewEventsProvider, EventTypes, useDataViewEventsContext } from '@patternfly/react-data-view/dist/dynamic/DataViewEventsContext';
 
 interface Repository {
   name: string;
@@ -37,7 +37,7 @@ interface RepositoryDetailProps {
 }
 
 const RepositoryDetail: React.FunctionComponent<RepositoryDetailProps> = ({ selectedRepo, setSelectedRepo }) => {
-  const context = useContext(DataViewContext);
+  const context = useDataViewEventsContext();
 
   useEffect(() => {
     const unsubscribe = context.subscribe(EventTypes.rowClick, (repo: Repository) => {
@@ -71,7 +71,7 @@ interface RepositoriesTableProps {
 }
 
 const RepositoriesTable: React.FunctionComponent<RepositoriesTableProps> = ({ selectedRepo = undefined }) => {
-  const { trigger } = useContext(DataViewContext);
+  const { trigger } = useDataViewEventsContext();
 
   const handleRowClick = (repo: Repository | undefined) => {
     trigger(EventTypes.rowClick, repo);
@@ -116,7 +116,7 @@ export const BasicExample: React.FunctionComponent = () => {
   const drawerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <DataViewProvider>
+    <DataViewEventsProvider>
       <Drawer isExpanded={Boolean(selectedRepo)} onExpand={() => drawerRef.current?.focus()} data-ouia-component-id="detail-drawer" >
         <DrawerContent
           panelContent={<RepositoryDetail selectedRepo={selectedRepo} setSelectedRepo={setSelectedRepo} />}
@@ -126,6 +126,6 @@ export const BasicExample: React.FunctionComponent = () => {
           </DrawerContentBody>
         </DrawerContent>
       </Drawer>
-    </DataViewProvider>
+    </DataViewEventsProvider>
   );
 };

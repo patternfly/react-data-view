@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import { DataViewContext, DataViewProvider, EventTypes } from './DataViewContext';
+import { useDataViewEventsContext, DataViewEventsProvider, EventTypes } from './DataViewEventsContext';
 
 let id = 0;
 
@@ -12,12 +12,12 @@ beforeAll(() => {
   });
 });
 
-describe('DataViewContext', () => {
+describe('DataViewEventsContext', () => {
   test('should provide context value and allow subscriptions', () => {
     const callback = jest.fn();
 
     const TestComponent = () => {
-      const { subscribe, trigger } = React.useContext(DataViewContext);
+      const { subscribe, trigger } = useDataViewEventsContext();
 
       React.useEffect(() => {
         const unsubscribe = subscribe(EventTypes.rowClick, callback);
@@ -31,9 +31,9 @@ describe('DataViewContext', () => {
     };
 
     const { getByText } = render(
-      <DataViewProvider>
+      <DataViewEventsProvider>
         <TestComponent />
-      </DataViewProvider>
+      </DataViewEventsProvider>
     );
 
     fireEvent.click(getByText('Trigger'));
@@ -44,7 +44,7 @@ describe('DataViewContext', () => {
     const callback = jest.fn();
 
     const TestComponent = () => {
-      const { subscribe, trigger } = React.useContext(DataViewContext);
+      const { subscribe, trigger } = useDataViewEventsContext();
 
       React.useEffect(() => {
         const unsubscribe = subscribe(EventTypes.rowClick, callback);
@@ -58,9 +58,9 @@ describe('DataViewContext', () => {
     };
 
     const { getByText } = render(
-      <DataViewProvider>
+      <DataViewEventsProvider>
         <TestComponent />
-      </DataViewProvider>
+      </DataViewEventsProvider>
     );
 
     fireEvent.click(getByText('Trigger'));
@@ -73,7 +73,7 @@ describe('DataViewContext', () => {
     const callback2 = jest.fn();
 
     const TestComponent = () => {
-      const { subscribe, trigger } = React.useContext(DataViewContext);
+      const { subscribe, trigger } = useDataViewEventsContext();
 
       React.useEffect(() => {
         const unsubscribe1 = subscribe(EventTypes.rowClick, callback1);
@@ -92,9 +92,9 @@ describe('DataViewContext', () => {
     };
 
     const { getByText } = render(
-      <DataViewProvider>
+      <DataViewEventsProvider>
         <TestComponent />
-      </DataViewProvider>
+      </DataViewEventsProvider>
     );
 
     fireEvent.click(getByText('Trigger'));
