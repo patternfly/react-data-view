@@ -66,13 +66,20 @@ interface RepositoriesTableProps {
 
 const RepositoriesTable: React.FunctionComponent<RepositoriesTableProps> = ({ selectedRepo = undefined }) => {
   const { trigger } = useDataViewEventsContext();
+  const rows = useMemo(() => {
+    const handleRowClick = (repo: Repository | undefined) => {
+      trigger(EventTypes.rowClick, repo);
+    };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const rows = useMemo(() => repositories.map(repo => ({ row: Object.values(repo), props: { isClickable: true, onRowClick: () => handleRowClick(selectedRepo?.name === repo.name ? undefined : repo), isRowSelected: selectedRepo?.name === repo.name } } )), [ selectedRepo?.name ]);
-
-  const handleRowClick = (repo: Repository | undefined) => {
-    trigger(EventTypes.rowClick, repo);
-  };
+    return repositories.map(repo => ({
+      row: Object.values(repo),
+      props: {
+        isClickable: true,
+        onRowClick: () => handleRowClick(selectedRepo?.name === repo.name ? undefined : repo),
+        isRowSelected: selectedRepo?.name === repo.name
+      }
+    }));
+  }, [ selectedRepo?.name, trigger ]);
 
   return (
     <DataView>
