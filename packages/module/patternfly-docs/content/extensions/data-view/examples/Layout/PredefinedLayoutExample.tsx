@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 import { Pagination } from '@patternfly/react-core';
-import { Table, Tbody, Th, Thead, Tr, Td } from '@patternfly/react-table';
 import { useDataViewPagination, useDataViewSelection } from '@patternfly/react-data-view/dist/dynamic/Hooks';
 import { BulkSelect, BulkSelectValue } from '@patternfly/react-component-groups/dist/dynamic/BulkSelect';
 import { DataView } from '@patternfly/react-data-view/dist/dynamic/DataView';
+import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 import { DataViewToolbar } from '@patternfly/react-data-view/dist/dynamic/DataViewToolbar';
 
 const perPageOptions = [
@@ -28,43 +28,39 @@ const repositories: Repository[] = [
   { name: 'one - 6', branches: 'two - 6', prs: 'three - 6', workspaces: 'four - 6', lastCommit: 'five - 6' }
 ];
 
-const cols = {
-  name: 'Repositories',
-  branches: 'Branches',
-  prs: 'Pull requests',
-  workspaces: 'Workspaces',
-  lastCommit: 'Last commit'
-};
+const rows = repositories.map(item => Object.values(item));
+
+const columns = [ 'Repositories', 'Branches', 'Pull requests', 'Workspaces', 'Last commit' ];
 
 const ouiaId = 'LayoutExample';
 
 export const BasicExample: React.FunctionComponent = () => { 
   const pagination = useDataViewPagination({ perPage: 5 });
   const { page, perPage } = pagination;
-  const selection = useDataViewSelection({});
+  const selection = useDataViewSelection({ matchOption: (a, b) => a[0] === b[0] });
   const { selected, onSelect, isSelected } = selection;
 
-  const pageData = useMemo(() => repositories.slice((page - 1) * perPage, ((page - 1) * perPage) + perPage), [ page, perPage ]);
+  const pageRows = useMemo(() => rows.slice((page - 1) * perPage, ((page - 1) * perPage) + perPage), [ page, perPage ]);
 
   const handleBulkSelect = (value: BulkSelectValue) => {
     value === BulkSelectValue.none && onSelect(false);
-    value === BulkSelectValue.all && onSelect(true, repositories);
-    value === BulkSelectValue.nonePage && onSelect(false, pageData);
-    value === BulkSelectValue.page && onSelect(true, pageData);
+    value === BulkSelectValue.all && onSelect(true, rows);
+    value === BulkSelectValue.nonePage && onSelect(false, pageRows);
+    value === BulkSelectValue.page && onSelect(true, pageRows);
   };
 
   return (
-    <DataView>
+    <DataView selection={selection}>
       <DataViewToolbar 
         ouiaId='LayoutExampleHeader' 
         bulkSelect={
           <BulkSelect
             canSelectAll
-            pageCount={pageData.length}
+            pageCount={pageRows.length}
             totalCount={repositories.length}
             selectedCount={selected.length}
-            pageSelected={pageData.every(item => isSelected(item))}
-            pagePartiallySelected={pageData.some(item => isSelected(item)) && !pageData.every(item => isSelected(item))}
+            pageSelected={pageRows.every(item => isSelected(item))}
+            pagePartiallySelected={pageRows.some(item => isSelected(item)) && !pageRows.every(item => isSelected(item))}
             onSelect={handleBulkSelect}
           />
         } 
@@ -76,34 +72,7 @@ export const BasicExample: React.FunctionComponent = () => {
           />
         } 
       />
-      <Table aria-label="Repositories table" ouiaId={ouiaId}>
-        <Thead data-ouia-component-id={`${ouiaId}-thead`}>
-          <Tr ouiaId={`${ouiaId}-tr-head`}>
-            <Th key="row-select"/>
-            {Object.values(cols).map((column, index) => (
-              <Th key={index} data-ouia-component-id={`${ouiaId}-th-${index}`}>{column}</Th>
-            ))}
-          </Tr>
-        </Thead>
-        <Tbody>
-          {pageData.map((repo, rowIndex) => (
-            <Tr key={repo.name} ouiaId={`${ouiaId}-tr-${rowIndex}`}>
-              <Td
-                key={`select-${rowIndex}`}
-                select={{
-                  rowIndex,
-                  onSelect: (_event, isSelecting) => onSelect(isSelecting, repo),
-                  isSelected: isSelected(repo),
-                  isDisabled: false
-                }}
-              />
-              {Object.keys(cols).map((column, colIndex) => (
-                <Td key={colIndex} data-ouia-component-id={`${ouiaId}-td-${rowIndex}-${colIndex}`}>{repo[column]}</Td>
-              ))}
-            </Tr>
-          ))}
-        </Tbody>
-      </Table>
+      <DataViewTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={pageRows} />
       <DataViewToolbar
         ouiaId='LayoutExampleFooter'
         pagination={

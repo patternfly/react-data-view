@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 import { Drawer, DrawerActions, DrawerCloseButton, DrawerContent, DrawerContentBody, DrawerHead, DrawerPanelContent, Title, Text } from '@patternfly/react-core';
-import { Table, Tbody, Th, Thead, Tr, Td } from '@patternfly/react-table';
 import { DataView } from '@patternfly/react-data-view/dist/dynamic/DataView';
-import DataViewContext, { DataViewProvider, EventTypes } from '@patternfly/react-data-view/dist/dynamic/DataViewContext';
+import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
+import { DataViewEventsProvider, EventTypes, useDataViewEventsContext } from '@patternfly/react-data-view/dist/dynamic/DataViewEventsContext';
 
 interface Repository {
   name: string;
@@ -21,13 +21,7 @@ const repositories: Repository[] = [
   { name: 'one - 6', branches: 'two - 6', prs: 'three - 6', workspaces: 'four - 6', lastCommit: 'five - 6' }
 ];
 
-const cols: Record<keyof Repository, string> = {
-  name: 'Repositories',
-  branches: 'Branches',
-  prs: 'Pull requests',
-  workspaces: 'Workspaces',
-  lastCommit: 'Last commit'
-};
+const columns = [ 'Repositories', 'Branches', 'Pull requests', 'Workspaces', 'Last commit' ];
 
 const ouiaId = 'ContextExample';
 
@@ -37,7 +31,7 @@ interface RepositoryDetailProps {
 }
 
 const RepositoryDetail: React.FunctionComponent<RepositoryDetailProps> = ({ selectedRepo, setSelectedRepo }) => {
-  const context = useContext(DataViewContext);
+  const context = useDataViewEventsContext();
 
   useEffect(() => {
     const unsubscribe = context.subscribe(EventTypes.rowClick, (repo: Repository) => {
@@ -71,42 +65,25 @@ interface RepositoriesTableProps {
 }
 
 const RepositoriesTable: React.FunctionComponent<RepositoriesTableProps> = ({ selectedRepo = undefined }) => {
-  const { trigger } = useContext(DataViewContext);
+  const { trigger } = useDataViewEventsContext();
+  const rows = useMemo(() => {
+    const handleRowClick = (repo: Repository | undefined) => {
+      trigger(EventTypes.rowClick, repo);
+    };
 
-  const handleRowClick = (repo: Repository | undefined) => {
-    trigger(EventTypes.rowClick, repo);
-  };
+    return repositories.map(repo => ({
+      row: Object.values(repo),
+      props: {
+        isClickable: true,
+        onRowClick: () => handleRowClick(selectedRepo?.name === repo.name ? undefined : repo),
+        isRowSelected: selectedRepo?.name === repo.name
+      }
+    }));
+  }, [ selectedRepo?.name, trigger ]);
 
   return (
     <DataView>
-      <Table aria-label="Repositories table" ouiaId={ouiaId}>
-        <Thead data-ouia-component-id={`${ouiaId}-thead`}>
-          <Tr ouiaId={`${ouiaId}-tr-head`}>
-            {Object.values(cols).map((column, index) => (
-              <Th key={index} data-ouia-component-id={`${ouiaId}-th-${index}`}>
-                {column}
-              </Th>
-            ))}
-          </Tr>
-        </Thead>
-        <Tbody>
-          {repositories.map((repo, rowIndex) => (
-            <Tr
-              isClickable
-              key={repo.name}
-              ouiaId={`${ouiaId}-tr-${rowIndex}`}
-              onRowClick={() => handleRowClick(selectedRepo?.name === repo.name ? undefined : repo)}
-              isRowSelected={selectedRepo?.name === repo.name}
-            >
-              {Object.keys(cols).map((column, colIndex) => (
-                <Td key={colIndex} data-ouia-component-id={`${ouiaId}-td-${rowIndex}-${colIndex}`}>
-                  {repo[column as keyof Repository]}
-                </Td>
-              ))}
-            </Tr>
-          ))}
-        </Tbody>
-      </Table>
+      <DataViewTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={rows} />
     </DataView>
   );
 };
@@ -116,7 +93,7 @@ export const BasicExample: React.FunctionComponent = () => {
   const drawerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <DataViewProvider>
+    <DataViewEventsProvider>
       <Drawer isExpanded={Boolean(selectedRepo)} onExpand={() => drawerRef.current?.focus()} data-ouia-component-id="detail-drawer" >
         <DrawerContent
           panelContent={<RepositoryDetail selectedRepo={selectedRepo} setSelectedRepo={setSelectedRepo} />}
@@ -126,6 +103,6 @@ export const BasicExample: React.FunctionComponent = () => {
           </DrawerContentBody>
         </DrawerContent>
       </Drawer>
-    </DataViewProvider>
+    </DataViewEventsProvider>
   );
 };

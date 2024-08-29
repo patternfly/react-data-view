@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
 import { Pagination } from '@patternfly/react-core';
-import { Table, Tbody, Th, Thead, Tr, Td } from '@patternfly/react-table';
-import { useDataViewPagination } from '@patternfly/react-data-view/dist/dynamic/Hooks';
-import DataView from '@patternfly/react-data-view/dist/dynamic/DataView';
-import DataViewToolbar from '@patternfly/react-data-view/dist/dynamic/DataViewToolbar';
 import { BrowserRouter, useSearchParams } from 'react-router-dom';
+import { useDataViewPagination } from '@patternfly/react-data-view/dist/dynamic/Hooks';
+import { DataView } from '@patternfly/react-data-view/dist/dynamic/DataView';
+import { DataViewToolbar } from '@patternfly/react-data-view/dist/dynamic/DataViewToolbar';
+import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 
 const perPageOptions = [
   { title: '5', value: 5 },
@@ -28,13 +28,9 @@ const repositories: Repository[] = [
   { name: 'one - 6', branches: 'two - 6', prs: 'three - 6', workspaces: 'four - 6', lastCommit: 'five - 6' }
 ];
 
-const cols = {
-  name: 'Repositories',
-  branches: 'Branches',
-  prs: 'Pull requests',
-  workspaces: 'Workspaces',
-  lastCommit: 'Last commit'
-};
+const rows = repositories.map(item => Object.values(item));
+
+const columns = [ 'Repositories', 'Branches', 'Pull requests', 'Workspaces', 'Last commit' ];
 
 const ouiaId = 'LayoutExample';
 
@@ -43,24 +39,11 @@ const MyTable: React.FunctionComponent = () => {
   const pagination = useDataViewPagination({ perPage: 5, searchParams, setSearchParams });
   const { page, perPage } = pagination;
 
-  const data = useMemo(() => repositories.slice((page - 1) * perPage, ((page - 1) * perPage) + perPage), [ page, perPage ]);
+  const pageRows = useMemo(() => rows.slice((page - 1) * perPage, ((page - 1) * perPage) + perPage), [ page, perPage ]);
   return (
     <DataView>
       <DataViewToolbar ouiaId='DataViewHeader' pagination={<Pagination perPageOptions={perPageOptions} itemCount={repositories.length} {...pagination} />} />
-      <Table aria-label="Repositories table" ouiaId={ouiaId}>
-        <Thead data-ouia-component-id={`${ouiaId}-thead`}>
-          <Tr ouiaId={`${ouiaId}-tr-head`}>
-            {Object.values(cols).map((column, index) => <Th key={index} data-ouia-component-id={`${ouiaId}-th-${index}`}>{column}</Th>)}
-          </Tr>
-        </Thead>
-        <Tbody>
-          {data.map((repo, rowIndex) => (
-            <Tr key={repo.name} ouiaId={`${ouiaId}-tr-${rowIndex}`}>
-              {Object.keys(cols).map((column, colIndex) => <Td key={colIndex} data-ouia-component-id={`${ouiaId}-td-${rowIndex}-${colIndex}`}>{repo[column]}</Td>)}
-            </Tr>
-          ))}
-        </Tbody>
-      </Table>
+      <DataViewTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={pageRows} />
       <DataViewToolbar ouiaId='DataViewFooter' pagination={<Pagination isCompact perPageOptions={perPageOptions} itemCount={repositories.length} {...pagination} />} />
     </DataView>
   )
