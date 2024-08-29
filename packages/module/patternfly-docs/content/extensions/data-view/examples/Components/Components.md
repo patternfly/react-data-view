@@ -15,6 +15,7 @@ propComponents: ['DataViewToolbar', 'DataViewTable']
 sourceLink: https://github.com/patternfly/react-data-view/blob/main/packages/module/patternfly-docs/content/extensions/data-view/examples/Components/Components.md
 ---
 import { BulkSelect } from '@patternfly/react-component-groups';
+import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { DataViewToolbar } from '@patternfly/react-data-view/dist/dynamic/DataViewToolbar';
 import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 
@@ -24,7 +25,7 @@ The **data view toolbar** component renders a default opinionated data view tool
 
 Data view toolbar can contain a `pagination`, `bulkSelect` or any other children content passed. The preffered way of passing children toolbar items is using the [toolbar item](/components/toolbar#toolbar-items) component.
 
-### Basic example
+### Basic toolbar example
 
 ```js file="./DataViewToolbarExample.tsx"
 
@@ -34,7 +35,9 @@ Data view toolbar can contain a `pagination`, `bulkSelect` or any other children
 
 The **data view table** component renders your columns and rows definition into a [table](/components/table) component. 
 
-### Basic example
+### Rows and columns customization
+
+This example shows possible formats of `rows` and `columns` passed to the `DataViewTable` which allow you various customizations of the table header and body. 
 
 ```js file="./DataViewTableExample.tsx"
 
