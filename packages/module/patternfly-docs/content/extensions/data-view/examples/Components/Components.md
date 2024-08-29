@@ -48,7 +48,7 @@ The `DataViewTable` component accepts the following props:
 
 - `rows` defining the rows to be displayed in the table. Each item in the array can be either an array of `DataViewTd` (for simple rows) or an object with the following properties:
   - `row` (`DataViewTd[]`) defining the content for each cell in the row.
-  - optional `id` (`string`) for the row.
+  - optional `id` (`string`) for the row (can be used to match items in selection).
   - optional `props` (`TrProps`) to pass to the `<Tr>` component, such as `isHoverable`, `isRowSelected`, and other table row properties.
 
 - optional `ouiaId`
