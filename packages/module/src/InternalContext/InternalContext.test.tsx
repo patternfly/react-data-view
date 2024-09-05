@@ -1,7 +1,8 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom'; 
-import { InternalContextProvider, useInternalContext, DataViewSelection } from './InternalContext';
+import { useInternalContext, DataViewSelection } from './InternalContext';
+import { DataView } from '../DataView';
 
 describe('InternalContext', () => {
   const mockSelection: DataViewSelection = {
@@ -23,9 +24,9 @@ describe('InternalContext', () => {
     };
 
     const { getByText } = render(
-      <InternalContextProvider selection={mockSelection}>
+      <DataView selection={mockSelection}>
         <TestComponent />
-      </InternalContextProvider>
+      </DataView>
     );
 
     fireEvent.click(getByText('Select item'));
@@ -50,9 +51,9 @@ describe('InternalContext', () => {
     };
 
     const { getByText } = render(
-      <InternalContextProvider selection={mockSelectionState}>
+      <DataView selection={mockSelectionState}>
         <TestComponent />
-      </InternalContextProvider>
+      </DataView>
     );
 
     expect(getByText('Item 1 is selected')).toBeInTheDocument();
@@ -77,9 +78,9 @@ describe('InternalContext', () => {
     };
 
     const { getByText } = render(
-      <InternalContextProvider selection={mockSelectionWithDisabled}>
+      <DataView selection={mockSelectionWithDisabled}>
         <TestComponent />
-      </InternalContextProvider>
+      </DataView>
     );
 
     expect(getByText('Item 3 is disabled')).toBeInTheDocument();
