@@ -7,6 +7,15 @@ export * from './Hooks';
 export { default as DataViewToolbar } from './DataViewToolbar';
 export * from './DataViewToolbar';
 
+export { default as DataViewTableTree } from './DataViewTableTree';
+export * from './DataViewTableTree';
+
+export { default as DataViewTableHeader } from './DataViewTableHeader';
+export * from './DataViewTableHeader';
+
+export { default as DataViewTableBasic } from './DataViewTableBasic';
+export * from './DataViewTableBasic';
+
 export { default as DataViewTable } from './DataViewTable';
 export * from './DataViewTable';
 
