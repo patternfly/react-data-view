@@ -14,17 +14,17 @@ describe('Test the Data view docs page', () => {
     cy.get(`[data-ouia-component-id="${ouiaId}-th-0"]`).contains('Repositories');
     cy.get(`[data-ouia-component-id="${ouiaId}-th-4"]`).contains('Last commit');
 
-    cy.get(`[data-ouia-component-id="${ouiaId}-td-0-0"]`).contains('one');
-    cy.get(`[data-ouia-component-id="${ouiaId}-td-4-4"]`).contains('five - 5');
+    cy.get(`[data-ouia-component-id="${ouiaId}-td-0-0"]`).contains('Repository one');
+    cy.get(`[data-ouia-component-id="${ouiaId}-td-4-4"]`).contains('Timestamp five');
     cy.get(`[data-ouia-component-id="${ouiaId}-td-5-4"]`).should('not.exist');
 
     // move to the next page
     cy.get(`[data-action="next"`).first().click({ force: true });
-    cy.get(`[data-ouia-component-id="${ouiaId}-td-0-4"]`).contains('five - 6');
+    cy.get(`[data-ouia-component-id="${ouiaId}-td-0-4"]`).contains('Timestamp six');
 
     // move to previous page
     cy.get(`[data-action="previous"`).eq(1).click({ force: true });
-    cy.get(`[data-ouia-component-id="${ouiaId}-td-0-4"]`).contains('five');
+    cy.get(`[data-ouia-component-id="${ouiaId}-td-0-4"]`).contains('Timestamp one');
 
     // test bulk select
     cy.get(`input[type="checkbox"`).each(($checkbox) => {cy.wrap($checkbox).should('not.be.checked')});
