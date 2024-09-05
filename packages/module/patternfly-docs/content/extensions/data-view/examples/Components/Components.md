@@ -11,13 +11,15 @@ source: react
 # If you use typescript, the name of the interface to display props for
 # These are found through the sourceProps function provided in patternfly-docs.source.js
 sortValue: 4
-propComponents: ['DataViewToolbar', 'DataViewTable']
+propComponents: ['DataViewToolbar', 'DataViewTableBasic', 'DataViewTableTree']
 sourceLink: https://github.com/patternfly/react-data-view/blob/main/packages/module/patternfly-docs/content/extensions/data-view/examples/Components/Components.md
 ---
+import { FolderIcon, FolderOpenIcon, LeafIcon, ExclamationCircleIcon } from '@patternfly/react-icons';
 import { BulkSelect } from '@patternfly/react-component-groups';
-import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { DataViewToolbar } from '@patternfly/react-data-view/dist/dynamic/DataViewToolbar';
 import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
+import { useDataViewSelection } from '@patternfly/react-data-view/dist/dynamic/Hooks';
+import { DataView } from '@patternfly/react-data-view/dist/dynamic/DataView';
 
 ## Data view toolbar
 
@@ -58,4 +60,14 @@ The `DataViewTable` component accepts the following props:
 
 - optional `props` (`TableProps`) that are passed down to the `<Table>` component, except for `onSelect`, which is managed internally.
 
+### Tree table example
+This example shows the tree table variant with expandable rows, custom icons for leaf and parent nodes. Tree table is turned on by passing `isTreeTable` flag to the `DataViewTable` component. You can pass `collapsedIcon`, `expandedIcon` or `leafIcon` to be displayen rows with given status. The tree table rows have to be defined in a format of object with following keys:
+  - `row` (`DataViewTd[]`) defining the content for each cell in the row.
+  - `id` (`string`) for the row (used to match items in selection end expand the rows).
+  - optional `children` (`DataViewTrTree[]`) defining the children rows.
 
+It is also possible to disable row selection using the `isSelectDisabled` function passed to the wrapping data view component.
+
+```js file="./DataViewTableTreeExample.tsx"
+
+```
