@@ -13,12 +13,12 @@ interface Repository {
 }
 
 const repositories: Repository[] = [
-  { name: 'one', branches: 'two', prs: 'three', workspaces: 'four', lastCommit: 'five' },
-  { name: 'one - 2', branches: null, prs: null, workspaces: 'four - 2', lastCommit: 'five - 2' },
-  { name: 'one - 3', branches: 'two - 3', prs: 'three - 3', workspaces: 'four - 3', lastCommit: 'five - 3' },
-  { name: 'one - 4', branches: 'two - 4', prs: 'null', workspaces: 'four - 4', lastCommit: 'five - 4' },
-  { name: 'one - 5', branches: 'two - 5', prs: 'three - 5', workspaces: 'four - 5', lastCommit: 'five - 5' },
-  { name: 'one - 6', branches: 'two - 6', prs: 'three - 6', workspaces: 'four - 6', lastCommit: 'five - 6' }
+  { name: 'Repository one', branches: 'Branch one', prs: 'Pull request one', workspaces: 'Workspace one', lastCommit: 'Timestamp one' },
+  { name: 'Repository two', branches: 'Branch two', prs: 'Pull request two', workspaces: 'Workspace two', lastCommit: 'Timestamp two' },
+  { name: 'Repository three', branches: 'Branch three', prs: 'Pull request three', workspaces: 'Workspace three', lastCommit: 'Timestamp three' },
+  { name: 'Repository four', branches: 'Branch four', prs: 'Pull request four', workspaces: 'Workspace four', lastCommit: 'Timestamp four' },
+  { name: 'Repository five', branches: 'Branch five', prs: 'Pull request five', workspaces: 'Workspace five', lastCommit: 'Timestamp five' },
+  { name: 'Repository six', branches: 'Branch six', prs: 'Pull request six', workspaces: 'Workspace six', lastCommit: 'Timestamp six' }
 ];
 
 const columns = [ 'Repositories', 'Branches', 'Pull requests', 'Workspaces', 'Last commit' ];
@@ -46,7 +46,7 @@ const RepositoryDetail: React.FunctionComponent<RepositoryDetailProps> = ({ sele
     <DrawerPanelContent>
       <DrawerHead>
         <Title className="pf-v5-u-mb-md" headingLevel="h2" ouiaId="detail-drawer-title">
-          Detail of repository {selectedRepo?.name}
+          Detail of {selectedRepo?.name}
         </Title>
         <Text>Branches: {selectedRepo?.branches}</Text>
         <Text>Pull requests: {selectedRepo?.prs}</Text>
