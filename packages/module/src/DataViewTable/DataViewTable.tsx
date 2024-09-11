@@ -22,10 +22,16 @@ export const isDataViewTrObject = (value: DataViewTr): value is { row: DataViewT
 // Tree table typings
 export interface DataViewTrTree extends DataViewTrObject { id: string, children?: DataViewTrTree[] }
 
-export type DataViewTableProps = DataViewTableBasicProps | DataViewTableTreeProps;
+export type DataViewTableProps =
+  | ({
+      isTreeTable: true;
+    } & DataViewTableTreeProps)
+  | ({
+      isTreeTable?: false;
+    } & DataViewTableBasicProps);
 
-export const DataViewTable: React.FC<DataViewTableProps> = ({ isTreeTable, ...props }: DataViewTableProps) => (
-  isTreeTable ? (<DataViewTableTree {...(props as DataViewTableTreeProps)} />) : (<DataViewTableBasic {...(props as DataViewTableBasicProps)}/>)
+export const DataViewTable: React.FC<DataViewTableProps> = (props) => (
+  props.isTreeTable ? <DataViewTableTree {...props} /> : <DataViewTableBasic {...props} />
 );
 
 export default DataViewTable;
