@@ -8,9 +8,9 @@ export interface UseDataViewSelectionProps {
   matchOption?: (item: any, another: any) => boolean;
 }
 
-export const useDataViewSelection = (props: UseDataViewSelectionProps) => {
-  const [ selected, setSelected ] = useState<any[]>(props.initialSelected ?? []);
-  const matchOption = props.matchOption ? props.matchOption : (option, another) => (option === another);
+export const useDataViewSelection = (props?: UseDataViewSelectionProps) => {
+  const [ selected, setSelected ] = useState<any[]>(props?.initialSelected ?? []);
+  const matchOption = props?.matchOption ? props.matchOption : (option, another) => (option === another);
 
   const onSelect = (isSelecting: boolean, items?: any[] | any) => {
     isSelecting ?

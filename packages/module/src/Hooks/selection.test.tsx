@@ -4,7 +4,7 @@ import { useDataViewSelection } from './selection';
 
 describe('useDataViewSelection', () => {
   it('should get initial state correctly - no initialSelected', () => {
-    const { result } = renderHook(() => useDataViewSelection({}))
+    const { result } = renderHook(() => useDataViewSelection())
     expect(result.current).toEqual({ 
       selected: [],
       onSelect: expect.any(Function),

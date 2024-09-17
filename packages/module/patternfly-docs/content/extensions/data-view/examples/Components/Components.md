@@ -21,7 +21,7 @@ import DataViewToolbar from '@patternfly/react-data-view/dist/dynamic/DataViewTo
 
 The **data view toolbar** component renders a default opinionated data view toolbar above or below the data section. 
 
-Data view toolbar can contain a `pagination`, `bulkSelect` or any other children content passed. The preffered way of passing children toolbar items is using the [toolbar item](/components/toolbar#toolbar-items) component.
+Data view toolbar can contain a `pagination`, `bulkSelect` or any other child content passed. The preffered way of passing child toolbar items is using the [toolbar item](/components/toolbar#toolbar-items) component. The data view toolbar component accepts all props of the [toolbar component](/components/toolbar).
 
 ### Basic example
 

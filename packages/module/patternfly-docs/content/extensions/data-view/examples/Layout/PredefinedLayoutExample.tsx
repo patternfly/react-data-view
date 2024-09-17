@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
-import { Pagination } from '@patternfly/react-core';
+import { Button, Pagination, SearchInput, ToolbarFilter, ToolbarItem } from '@patternfly/react-core';
 import { Table, Tbody, Th, Thead, Tr, Td } from '@patternfly/react-table';
-import { useDataViewPagination, useDataViewSelection } from '@patternfly/react-data-view/dist/dynamic/Hooks';
+import { useDataViewFilters, useDataViewPagination, useDataViewSelection } from '@patternfly/react-data-view/dist/dynamic/Hooks';
 import { BulkSelect, BulkSelectValue } from '@patternfly/react-component-groups/dist/dynamic/BulkSelect';
 import { DataView } from '@patternfly/react-data-view/dist/dynamic/DataView';
 import { DataViewToolbar } from '@patternfly/react-data-view/dist/dynamic/DataViewToolbar';
@@ -17,6 +17,11 @@ interface Repository {
   prs: string | null;
   workspaces: string;
   lastCommit: string;
+}
+
+interface RepositoryFilters {
+  name: string,
+  value: string
 }
 
 const repositories: Repository[] = [
@@ -41,10 +46,13 @@ const ouiaId = 'LayoutExample';
 export const BasicExample: React.FunctionComponent = () => { 
   const pagination = useDataViewPagination({ perPage: 5 });
   const { page, perPage } = pagination;
-  const selection = useDataViewSelection({});
+  const selection = useDataViewSelection();
   const { selected, onSelect, isSelected } = selection;
+  const { filters, onSetFilters, onClearFilters } = useDataViewFilters<RepositoryFilters>({ initialFilters: { name: '', value: '' } });
 
-  const pageData = useMemo(() => repositories.slice((page - 1) * perPage, ((page - 1) * perPage) + perPage), [ page, perPage ]);
+  const pageData = useMemo(() => repositories
+    .filter(item => !filters.name || item.name.toLocaleLowerCase().includes(filters.name.toLocaleLowerCase()))
+    .slice((page - 1) * perPage, ((page - 1) * perPage) + perPage), [ page, perPage, filters ]);
 
   const handleBulkSelect = (value: BulkSelectValue) => {
     value === BulkSelectValue.none && onSelect(false);
@@ -55,8 +63,9 @@ export const BasicExample: React.FunctionComponent = () => {
 
   return (
     <DataView>
-      <DataViewToolbar 
-        ouiaId='LayoutExampleHeader' 
+      <DataViewToolbar
+        ouiaId='LayoutExampleHeader'
+        clearAllFilters={onClearFilters}
         bulkSelect={
           <BulkSelect
             canSelectAll
@@ -74,7 +83,25 @@ export const BasicExample: React.FunctionComponent = () => {
             itemCount={repositories.length} 
             {...pagination} 
           />
-        } 
+        }
+        // https://www.patternfly.org/components/search-input/#advanced
+        search={ // perhaps make just one filters prop - the toolbar item can modify the layout
+          // make this whole thing DataViewSearch with a single key param?
+          // does not support plain chips!
+          <ToolbarFilter
+            chips={filters.name?.length > 0 ? [ { key: 'name', node: filters.name } ] : []}
+            deleteChip={() => onSetFilters({ name: '' })}
+            categoryName="Name"
+          >
+            <SearchInput
+              placeholder="Find by name"
+              aria-label="Name filter"
+              onChange={(e, value) => onSetFilters({ name: value })}
+              value={filters.name}
+              onClear={() => onSetFilters({ name: '' })}
+            />
+          </ToolbarFilter>
+        }
       />
       <Table aria-label="Repositories table" ouiaId={ouiaId}>
         <Thead data-ouia-component-id={`${ouiaId}-thead`}>

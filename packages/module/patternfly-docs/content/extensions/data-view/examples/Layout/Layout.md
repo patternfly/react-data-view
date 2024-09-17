@@ -15,10 +15,11 @@ propComponents: ['DataView']
 sourceLink: https://github.com/patternfly/react-data-view/blob/main/packages/module/patternfly-docs/content/extensions/data-view/examples/Layout/Layout.md
 ---
 import { useMemo } from 'react';
-import { useDataViewPagination, useDataViewSelection } from '@patternfly/react-data-view/dist/dynamic/Hooks';
+import { useDataViewPagination, useDataViewSelection, useDataViewFilters } from '@patternfly/react-data-view/dist/dynamic/Hooks';
 import { BulkSelect, BulkSelectValue } from '@patternfly/react-component-groups/dist/dynamic/BulkSelect';
 import DataView from '@patternfly/react-data-view/dist/dynamic/DataView';
 import DataViewToolbar from '@patternfly/react-data-view/dist/dynamic/DataViewToolbar';
+import { FilterLabels } from '@patternfly/react-data-view/dist/dynamic/FilterLabels';
 
 The **data view** component renders record data in a configured layout.
 
