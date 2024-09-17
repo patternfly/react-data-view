@@ -2,6 +2,7 @@ import React from 'react';
 import { DataViewTable, DataViewTr, DataViewTh } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { Button } from '@patternfly/react-core';
+import { ActionsColumn } from '@patternfly/react-table';
 
 interface Repository {
   id: number;
@@ -21,6 +22,24 @@ const repositories: Repository[] = [
   { id: 6, name: 'Repository six', branches: 'Branch six', prs: 'Pull request six', workspaces: 'Workspace six', lastCommit: 'Timestamp six' }
 ];
 
+const rowActions = [
+  {
+    title: 'Some action',
+    onClick: () => console.log('clicked on Some action')  // eslint-disable-line no-console
+  },
+  {
+    title: <div>Another action</div>,
+    onClick: () => console.log('clicked on Another action')  // eslint-disable-line no-console
+  },
+  {
+    isSeparator: true
+  },
+  {
+    title: 'Third action',
+    onClick: () => console.log('clicked on Third action')  // eslint-disable-line no-console
+  }
+];
+
 // you can also pass props to Tr by returning { row: DataViewTd[], props: TrProps } }
 const rows: DataViewTr[] = repositories.map(({ id, name, branches, prs, workspaces, lastCommit }) => [
   { id, cell: workspaces, props: { favorites: { isFavorited: true } } },
@@ -28,7 +47,8 @@ const rows: DataViewTr[] = repositories.map(({ id, name, branches, prs, workspac
   branches,
   prs,
   workspaces,
-  lastCommit 
+  lastCommit,
+  { cell: <ActionsColumn items={rowActions}/>, props: { isActionCell: true } },
 ]);
 
 const columns: DataViewTh[] = [
@@ -37,7 +57,7 @@ const columns: DataViewTh[] = [
   { cell: <>Branches<ExclamationCircleIcon className='pf-v5-u-ml-sm' color='var(--pf-v5-global--danger-color--100)'/></> }, 
   'Pull requests', 
   { cell: 'Workspaces', props: { info: { tooltip: 'More information' } } }, 
-  { cell: 'Last commit', props: { sort: { sortBy: {}, columnIndex: 4 } } }
+  { cell: 'Last commit', props: { sort: { sortBy: {}, columnIndex: 4 } } },
 ];
 
 const ouiaId = 'TableExample';
