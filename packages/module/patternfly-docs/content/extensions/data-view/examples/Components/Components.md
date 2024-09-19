@@ -14,7 +14,8 @@ sortValue: 4
 propComponents: ['DataViewToolbar', 'DataViewTableBasic', 'DataViewTableTree']
 sourceLink: https://github.com/patternfly/react-data-view/blob/main/packages/module/patternfly-docs/content/extensions/data-view/examples/Components/Components.md
 ---
-import { FolderIcon, FolderOpenIcon, LeafIcon, ExclamationCircleIcon } from '@patternfly/react-icons';
+import { Button, EmptyState, EmptyStateActions, EmptyStateBody, EmptyStateFooter, EmptyStateHeader, EmptyStateIcon } from '@patternfly/react-core';
+import { CubesIcon, FolderIcon, FolderOpenIcon, LeafIcon, ExclamationCircleIcon } from '@patternfly/react-icons';
 import { BulkSelect } from '@patternfly/react-component-groups';
 import { DataViewToolbar } from '@patternfly/react-data-view/dist/dynamic/DataViewToolbar';
 import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
@@ -69,5 +70,12 @@ This example shows the tree table variant with expandable rows, custom icons for
 It is also possible to disable row selection using the `isSelectDisabled` function passed to the wrapping data view component.
 
 ```js file="./DataViewTableTreeExample.tsx"
+
+```
+
+### Empty state example
+The data view table also supports displaying a custom empty state. You can pass it using the `emptyState` property and it will be displayed in case there are no rows to be rendered.
+
+```js file="./DataViewTableEmptyExample.tsx"
 
 ```
