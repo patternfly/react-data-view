@@ -82,4 +82,11 @@ describe('DataViewTableTree component', () => {
     );
     expect(container).toMatchSnapshot();
   });
+
+  test('should render tree table with an empty state', () => {
+    const { container } = render(
+      <DataViewTable isTreeTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} emptyState="No data found" rows={[]} />
+    );
+    expect(container).toMatchSnapshot();
+  });
 });

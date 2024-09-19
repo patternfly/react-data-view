@@ -34,4 +34,11 @@ describe('DataViewTable component', () => {
     );
     expect(container).toMatchSnapshot();
   });
+
+  test('should render with an empty state', () => {
+    const { container } = render(
+      <DataViewTableBasic aria-label='Repositories table' ouiaId={ouiaId} columns={columns} emptyState="No data found" rows={[]} />
+    );
+    expect(container).toMatchSnapshot();
+  });
 });
