@@ -125,4 +125,21 @@ describe('DataViewTableTree', () => {
 
     cy.get('[data-ouia-component-id="tree-td-4-0"]').should('not.be.visible');
   });
+
+  it('renders a tree data view table with an empty state', () => {
+    const ouiaId = 'tree';
+
+    cy.mount(
+      <DataViewTable isTreeTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={[]} emptyState="No data found" />
+    );
+
+    cy.get('[data-ouia-component-id="tree-th-0"]').contains('Repositories');
+    cy.get('[data-ouia-component-id="tree-th-1"]').contains('Branches');
+    cy.get('[data-ouia-component-id="tree-th-2"]').contains('Pull requests');
+    cy.get('[data-ouia-component-id="tree-th-3"]').contains('Workspaces');
+    cy.get('[data-ouia-component-id="tree-th-4"]').contains('Last commit');
+
+    cy.get('[data-ouia-component-id="tree-tr-empty"]').should('be.visible');
+    cy.get('[data-ouia-component-id="tree-tr-empty"]').contains('No data found');
+  });
 });
