@@ -5,6 +5,7 @@ import {
   Tbody,
   Td,
   TdProps,
+  Tr,
   TreeRowWrapper,
 } from '@patternfly/react-table';
 import { useInternalContext } from '../InternalContext';
@@ -34,6 +35,8 @@ export interface DataViewTableTreeProps extends Omit<TableProps, 'onSelect' | 'r
   columns: DataViewTh[];
   /** Current page rows */
   rows: DataViewTrTree[];
+  /** Empty state to be displayed */
+  emptyState?: React.ReactNode;
   /** Optional icon for the leaf rows */
   leafIcon?: React.ReactNode;
   /** Optional icon for the expanded parent rows */
@@ -47,6 +50,7 @@ export interface DataViewTableTreeProps extends Omit<TableProps, 'onSelect' | 'r
 export const DataViewTableTree: React.FC<DataViewTableTreeProps> = ({
   columns,
   rows,
+  emptyState = null,
   leafIcon = null,
   expandedIcon = null,
   collapsedIcon = null,
@@ -99,7 +103,6 @@ export const DataViewTableTree: React.FC<DataViewTableTreeProps> = ({
           'aria-posinset': posinset,
           'aria-setsize': node.children?.length ?? 0,
           isChecked,
-          ouiaId: `${ouiaId}-tree-toggle-${node.id}`,
           checkboxId: `checkbox_id_${node.id?.toLowerCase().replace(/\s+/g, '_')}`,
           icon,
         },
@@ -110,7 +113,7 @@ export const DataViewTableTree: React.FC<DataViewTableTreeProps> = ({
         : [];
 
       return [
-        <TreeRowWrapper key={node.id} row={{ props: treeRow.props }}>
+        <TreeRowWrapper key={node.id} row={{ props: treeRow.props }} ouiaId={`${ouiaId}-tr-${rowIndex}`}>
           {node.row.map((cell, colIndex) => {
             const cellIsObject = isDataViewTdObject(cell);
             return (
@@ -136,7 +139,15 @@ export const DataViewTableTree: React.FC<DataViewTableTreeProps> = ({
   return (
     <Table isTreeTable aria-label="Data table" ouiaId={ouiaId} {...props}>
       <DataViewTableHeader isTreeTable columns={columns} ouiaId={ouiaId} />
-      <Tbody>{nodes}</Tbody>
+      <Tbody>
+        {nodes.length > 0 ? nodes : (
+          <Tr key="empty" ouiaId={`${ouiaId}-tr-empty`}>
+            <Td colSpan={columns.length}>
+              {emptyState}
+            </Td>
+          </Tr>
+        )}
+      </Tbody>
     </Table>
   );
 };

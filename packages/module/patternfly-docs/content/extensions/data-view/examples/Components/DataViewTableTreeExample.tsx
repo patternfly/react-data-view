@@ -42,19 +42,13 @@ const buildRows = (repositories: Repository[]): DataViewTrTree[] => repositories
   ...(repo.children
     ? { 
       children: buildRows(repo.children) // build rows for children
-    }
+    } 
     : {})
 }));
 
 const rows: DataViewTrTree[] = buildRows(repositories);
 
-const columns: DataViewTh[] = [
-  'Repositories', 
-  'Branches', 
-  'Pull requests', 
-  'Workspaces', 
-  'Last commit'
-];
+const columns: DataViewTh[] = [ 'Repositories', 'Branches', 'Pull requests', 'Workspaces', 'Last commit' ];
 
 const ouiaId = 'TreeTableExample';
 
@@ -63,7 +57,15 @@ export const BasicExample: React.FunctionComponent = () => {
 
   return (
     <DataView selection={selection}>
-      <DataViewTable isTreeTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={rows} leafIcon={<LeafIcon/>} expandedIcon={<FolderOpenIcon aria-hidden />} collapsedIcon={<FolderIcon aria-hidden />} />
+      <DataViewTable 
+        isTreeTable 
+        ouiaId={ouiaId}
+        columns={columns} 
+        rows={rows}
+        leafIcon={<LeafIcon/>}
+        expandedIcon={<FolderOpenIcon aria-hidden />}
+        collapsedIcon={<FolderIcon aria-hidden />} 
+      />
     </DataView>
   );
 }

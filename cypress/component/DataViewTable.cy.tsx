@@ -117,6 +117,6 @@ describe('DataViewTable', () => {
     cy.get('[data-ouia-component-id="tree-td-4-3"]').contains('Workspace five');
     cy.get('[data-ouia-component-id="tree-td-4-3"]').should('not.be.visible');
     cy.get('[data-ouia-component-id="tree-td-5-4"]').contains('Timestamp six');
-    cy.get('[data-ouia-component-id="tree-td-5-4"]').should('not.be.visible');
+    cy.get('[data-ouia-component-id="tree-td-5-4"]').should('be.visible');
   });
 });

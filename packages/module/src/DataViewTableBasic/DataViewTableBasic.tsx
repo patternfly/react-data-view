@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   Table,
   TableProps,
@@ -15,6 +15,8 @@ export interface DataViewTableBasicProps extends Omit<TableProps, 'onSelect' | '
   columns: DataViewTh[];
   /** Current page rows */
   rows: DataViewTr[];
+  /** Empty state to be displayed */
+  emptyState?: React.ReactNode;
   /** Custom OUIA ID */
   ouiaId?: string;
 }
@@ -23,20 +25,22 @@ export const DataViewTableBasic: React.FC<DataViewTableBasicProps> = ({
   columns,
   rows,
   ouiaId = 'DataViewTableBasic',
+  emptyState = null,
   ...props
 }: DataViewTableBasicProps) => {
   const { selection } = useInternalContext();
   const { onSelect, isSelected, isSelectDisabled } = selection ?? {};
+  const isSelectable = useMemo(() => Boolean(onSelect && isSelected), [ onSelect, isSelected ])
 
   return (
     <Table aria-label="Data table" ouiaId={ouiaId} {...props}>
       <DataViewTableHeader columns={columns} ouiaId={ouiaId} />
       <Tbody>
-        {rows.map((row, rowIndex) => { 
+        {rows?.length > 0 ? rows.map((row, rowIndex) => { 
           const rowIsObject = isDataViewTrObject(row);
           return (
             <Tr key={rowIndex} ouiaId={`${ouiaId}-tr-${rowIndex}`} {...(rowIsObject && (row?.props ?? {}))}>
-              {onSelect && isSelected && (
+              {isSelectable && (
                 <Td
                   key={`select-${rowIndex}`}
                   select={{
@@ -62,7 +66,13 @@ export const DataViewTableBasic: React.FC<DataViewTableBasicProps> = ({
                 )
               })}
             </Tr>
-          )})}
+          )}) : (
+          <Tr key="empty" ouiaId={`${ouiaId}-tr-empty`}>
+            <Td colSpan={columns.length + Number(isSelectable)}>
+              {emptyState}
+            </Td>
+          </Tr>
+        )}
       </Tbody>
     </Table>
   );

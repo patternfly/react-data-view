@@ -43,4 +43,21 @@ describe('DataViewTableBasic', () => {
     cy.get('[data-ouia-component-id="data-td-4-3"]').contains('Workspace five');
     cy.get('[data-ouia-component-id="data-td-5-4"]').contains('Timestamp six');
   });
+
+  it('renders a basic data view table with an empty state', () => {
+    const ouiaId = 'data';
+
+    cy.mount(
+      <DataViewTableBasic aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={[]} emptyState="No data found" />
+    );
+
+    cy.get('[data-ouia-component-id="data-th-0"]').contains('Repositories');
+    cy.get('[data-ouia-component-id="data-th-1"]').contains('Branches');
+    cy.get('[data-ouia-component-id="data-th-2"]').contains('Pull requests');
+    cy.get('[data-ouia-component-id="data-th-3"]').contains('Workspaces');
+    cy.get('[data-ouia-component-id="data-th-4"]').contains('Last commit');
+
+    cy.get('[data-ouia-component-id="data-tr-empty"]').should('be.visible');
+    cy.get('[data-ouia-component-id="data-tr-empty"]').contains('No data found');
+  });
 });
