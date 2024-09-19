@@ -50,6 +50,8 @@ const rows: DataViewTrTree[] = buildRows(repositories);
 
 const columns: DataViewTh[] = [ 'Repositories', 'Branches', 'Pull requests', 'Workspaces', 'Last commit' ];
 
+const ouiaId = 'TreeTableExample';
+
 export const BasicExample: React.FunctionComponent = () => {
   const selection = useDataViewSelection({ matchOption: (a, b) => a.id === b.id });
 
@@ -57,6 +59,7 @@ export const BasicExample: React.FunctionComponent = () => {
     <DataView selection={selection}>
       <DataViewTable 
         isTreeTable 
+        ouiaId={ouiaId}
         columns={columns} 
         rows={rows}
         leafIcon={<LeafIcon/>}
