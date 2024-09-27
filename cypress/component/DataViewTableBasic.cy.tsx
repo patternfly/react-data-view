@@ -1,5 +1,6 @@
 import React from 'react';
-import DataViewTableBasic from '@patternfly/react-data-view/dist/esm/DataViewTableBasic';
+import DataViewTableBasic from '@patternfly/react-data-view/dist/dynamic/DataViewTableBasic';
+import DataView from '@patternfly/react-data-view/dist/dynamic/DataView';
 
 interface Repository {
   name: string;
@@ -48,7 +49,9 @@ describe('DataViewTableBasic', () => {
     const ouiaId = 'data';
 
     cy.mount(
-      <DataViewTableBasic aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={[]} emptyState="No data found" />
+      <DataView activeState="empty">
+        <DataViewTableBasic aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={[]} states={{ empty: "No data found" }} />
+      </DataView>
     );
 
     cy.get('[data-ouia-component-id="data-th-0"]').contains('Repositories');
@@ -59,5 +62,24 @@ describe('DataViewTableBasic', () => {
 
     cy.get('[data-ouia-component-id="data-tr-empty"]').should('be.visible');
     cy.get('[data-ouia-component-id="data-tr-empty"]').contains('No data found');
+  });
+
+  it('renders a basic data view table with an error state', () => {
+    const ouiaId = 'data';
+
+    cy.mount(
+      <DataView activeState="error">
+        <DataViewTableBasic aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={[]} states={{ error: "Some error" }} />
+      </DataView>
+    );
+
+    cy.get('[data-ouia-component-id="data-th-0"]').contains('Repositories');
+    cy.get('[data-ouia-component-id="data-th-1"]').contains('Branches');
+    cy.get('[data-ouia-component-id="data-th-2"]').contains('Pull requests');
+    cy.get('[data-ouia-component-id="data-th-3"]').contains('Workspaces');
+    cy.get('[data-ouia-component-id="data-th-4"]').contains('Last commit');
+
+    cy.get('[data-ouia-component-id="data-tr-error"]').should('be.visible');
+    cy.get('[data-ouia-component-id="data-tr-error"]').contains('Some error');
   });
 });

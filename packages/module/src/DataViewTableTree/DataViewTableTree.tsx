@@ -11,6 +11,7 @@ import {
 import { useInternalContext } from '../InternalContext';
 import { DataViewTableHeader } from '../DataViewTableHeader';
 import { DataViewTh, DataViewTrTree, isDataViewTdObject } from '../DataViewTable';
+import { DataViewState } from '../DataView/DataView';
 
 const getDescendants = (node: DataViewTrTree): DataViewTrTree[] => (!node.children || !node.children.length) ? [ node ] : node.children.flatMap(getDescendants);
 
@@ -35,8 +36,8 @@ export interface DataViewTableTreeProps extends Omit<TableProps, 'onSelect' | 'r
   columns: DataViewTh[];
   /** Current page rows */
   rows: DataViewTrTree[];
-  /** Empty state to be displayed */
-  emptyState?: React.ReactNode;
+  /** States to be displayed when active */
+  states?: Partial<Record<DataViewState, React.ReactNode>>
   /** Optional icon for the leaf rows */
   leafIcon?: React.ReactNode;
   /** Optional icon for the expanded parent rows */
@@ -50,20 +51,20 @@ export interface DataViewTableTreeProps extends Omit<TableProps, 'onSelect' | 'r
 export const DataViewTableTree: React.FC<DataViewTableTreeProps> = ({
   columns,
   rows,
-  emptyState = null,
+  states = {},
   leafIcon = null,
   expandedIcon = null,
   collapsedIcon = null,
   ouiaId = 'DataViewTableTree',
   ...props
 }: DataViewTableTreeProps) => {
-  const { selection } = useInternalContext();
+  const { selection, activeState } = useInternalContext();
   const { onSelect, isSelected, isSelectDisabled } = selection ?? {};
   const [ expandedNodeIds, setExpandedNodeIds ] = React.useState<string[]>([]);
   const [ expandedDetailsNodeNames, setExpandedDetailsNodeIds ] = React.useState<string[]>([]);
 
   const nodes = useMemo(() => {
-    
+
     const renderRows = (
       [ node, ...remainingNodes ]: DataViewTrTree[],
       level = 1,
@@ -134,19 +135,31 @@ export const DataViewTableTree: React.FC<DataViewTableTreeProps> = ({
     };
 
     return renderRows(rows);
-  }, [ rows, expandedNodeIds, expandedDetailsNodeNames, leafIcon, expandedIcon, collapsedIcon, isSelected, onSelect, isSelectDisabled, ouiaId ]);
+  }, [
+    rows,
+    expandedNodeIds,
+    expandedDetailsNodeNames,
+    leafIcon,
+    expandedIcon,
+    collapsedIcon,
+    isSelected,
+    onSelect,
+    isSelectDisabled,
+    ouiaId
+  ]);
 
   return (
     <Table isTreeTable aria-label="Data table" ouiaId={ouiaId} {...props}>
       <DataViewTableHeader isTreeTable columns={columns} ouiaId={ouiaId} />
-      <Tbody>
-        {nodes.length > 0 ? nodes : (
-          <Tr key="empty" ouiaId={`${ouiaId}-tr-empty`}>
+      <Tbody>{
+        activeState && Object.keys(states).includes(activeState) ? (
+          <Tr key={activeState} ouiaId={`${ouiaId}-tr-${activeState}`}>
             <Td colSpan={columns.length}>
-              {emptyState}
+              {states[activeState]}
             </Td>
           </Tr>
-        )}
+        ) : nodes
+      }
       </Tbody>
     </Table>
   );

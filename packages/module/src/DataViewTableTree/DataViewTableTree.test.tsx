@@ -85,7 +85,19 @@ describe('DataViewTableTree component', () => {
 
   test('should render tree table with an empty state', () => {
     const { container } = render(
-      <DataViewTable isTreeTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} emptyState="No data found" rows={[]} />
+      <DataView activeState="empty">
+        <DataViewTable isTreeTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} states={{ empty: "No data found" }} rows={[]} />
+
+      </DataView> 
+    );
+    expect(container).toMatchSnapshot();
+  });
+
+  test('should render tree table with an error state', () => {
+    const { container } = render(
+      <DataView activeState="error">
+        <DataViewTable isTreeTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} states={{ error: "Some error" }} rows={[]} />
+      </DataView>
     );
     expect(container).toMatchSnapshot();
   });
