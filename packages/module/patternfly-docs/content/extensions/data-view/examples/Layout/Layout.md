@@ -11,7 +11,7 @@ source: react
 # If you use typescript, the name of the interface to display props for
 # These are found through the sourceProps function provided in patternfly-docs.source.js
 sortValue: 2
-propComponents: ['DataView']
+propComponents: ['DataView', 'DataViewState']
 sourceLink: https://github.com/patternfly/react-data-view/blob/main/packages/module/patternfly-docs/content/extensions/data-view/examples/Layout/Layout.md
 ---
 import { useMemo } from 'react';
