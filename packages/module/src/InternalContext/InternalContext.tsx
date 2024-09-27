@@ -1,4 +1,5 @@
 import React, { createContext, PropsWithChildren, useContext } from 'react';
+import { DataViewState } from '../DataView';
 
 export interface DataViewSelection {
   /** Called when the selection of items changes */
@@ -11,20 +12,23 @@ export interface DataViewSelection {
 
 export interface InternalContextValue {
   selection?: DataViewSelection;
+  activeState?: DataViewState; 
 }
 
 export const InternalContext = createContext<InternalContextValue>({
-  selection: undefined
+  selection: undefined,
+  activeState: undefined
 });
 
 export type InternalProviderProps = PropsWithChildren<InternalContextValue>
 
 export const InternalContextProvider: React.FC<InternalProviderProps> = ({
   children,
-  selection
+  selection,
+  activeState
 }) => (
   <InternalContext.Provider
-    value={{ selection }}
+    value={{ selection, activeState }}
   >
     {children}
   </InternalContext.Provider>
