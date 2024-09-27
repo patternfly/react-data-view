@@ -1,8 +1,7 @@
 import React from 'react';
 import { DataView, DataViewState } from '@patternfly/react-data-view/dist/dynamic/DataView';
 import { DataViewTable, DataViewTr, DataViewTh } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
-import { CubesIcon } from '@patternfly/react-icons';
-import { Button, EmptyState, EmptyStateActions, EmptyStateBody, EmptyStateFooter, EmptyStateHeader, EmptyStateIcon } from '@patternfly/react-core';
+import { ErrorState } from '@patternfly/react-component-groups';
 
 interface Repository {
   id: number;
@@ -20,32 +19,20 @@ const rows: DataViewTr[] = repositories.map((repository) => Object.values(reposi
 
 const columns: DataViewTh[] = [ 'Repositories', 'Branches', 'Pull requests', 'Workspaces', 'Last commit' ];
 
-const ouiaId = 'TableExample';
+const ouiaId = 'TableErrorExample';
 
-const empty = (
-  <EmptyState>
-    <EmptyStateHeader titleText="No data found" headingLevel="h4" icon={<EmptyStateIcon icon={CubesIcon} />} />
-    <EmptyStateBody>There are no matching data to be displayed.</EmptyStateBody>
-    <EmptyStateFooter>
-      <EmptyStateActions>
-        <Button variant="primary">Primary action</Button>
-      </EmptyStateActions>
-      <EmptyStateActions>
-        <Button variant="link">Multiple</Button>
-        <Button variant="link">Action Buttons</Button>
-      </EmptyStateActions>
-    </EmptyStateFooter>
-  </EmptyState>
+const error = (
+  <ErrorState errorTitle='Unable to load data' errorDescription='There was an error retrieving data. Check your connection and reload the page.' />
 );
 
 export const BasicExample: React.FunctionComponent = () => (
-  <DataView activeState={DataViewState.empty}>
+  <DataView activeState={DataViewState.error}>
     <DataViewTable 
       aria-label='Repositories table' 
       ouiaId={ouiaId}
       columns={columns}
       rows={rows}
-      states={{ empty }}
+      states={{ error }}
     />
   </DataView>
 );

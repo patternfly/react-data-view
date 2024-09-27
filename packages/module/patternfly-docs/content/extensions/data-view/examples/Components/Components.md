@@ -16,11 +16,11 @@ sourceLink: https://github.com/patternfly/react-data-view/blob/main/packages/mod
 ---
 import { Button, EmptyState, EmptyStateActions, EmptyStateBody, EmptyStateFooter, EmptyStateHeader, EmptyStateIcon } from '@patternfly/react-core';
 import { CubesIcon, FolderIcon, FolderOpenIcon, LeafIcon, ExclamationCircleIcon } from '@patternfly/react-icons';
-import { BulkSelect } from '@patternfly/react-component-groups';
+import { BulkSelect, ErrorState } from '@patternfly/react-component-groups';
 import { DataViewToolbar } from '@patternfly/react-data-view/dist/dynamic/DataViewToolbar';
 import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 import { useDataViewSelection } from '@patternfly/react-data-view/dist/dynamic/Hooks';
-import { DataView } from '@patternfly/react-data-view/dist/dynamic/DataView';
+import { DataView, DataViewState } from '@patternfly/react-data-view/dist/dynamic/DataView';
 
 ## Data view toolbar
 
@@ -74,8 +74,15 @@ It is also possible to disable row selection using the `isSelectDisabled` functi
 ```
 
 ### Empty state example
-The data view table also supports displaying a custom empty state. You can pass it using the `emptyState` property and it will be displayed in case there are no rows to be rendered.
+The data view table supports displaying a custom empty state. You can pass it using the `states` property and `empty` key. It will be automatically displayed in case there are no rows to be rendered.
 
 ```js file="./DataViewTableEmptyExample.tsx"
+
+```
+
+### Error state example
+The data view table also supports displaying an error state. You can pass it using the `states` property and `error` key. It will be displayed in case the data view recieves its `state` property set to `error`.
+
+```js file="./DataViewTableErrorExample.tsx"
 
 ```
