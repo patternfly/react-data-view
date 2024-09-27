@@ -69,7 +69,7 @@ exports[`DataViewTableHeader component should render selection column when selec
 <div>
   <div
     class="pf-v5-l-stack"
-    data-ouia-component-id="DataView-stack}"
+    data-ouia-component-id="DataView-stack"
   >
     <div
       class="pf-v5-l-stack__item"
@@ -155,7 +155,7 @@ exports[`DataViewTableHeader component should render the tree table correctly wh
 <div>
   <div
     class="pf-v5-l-stack"
-    data-ouia-component-id="DataView-stack}"
+    data-ouia-component-id="DataView-stack"
   >
     <div
       class="pf-v5-l-stack__item"

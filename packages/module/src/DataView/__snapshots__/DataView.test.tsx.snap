@@ -7,7 +7,7 @@ exports[`DataView component should render correctly 1`] = `
     <div>
       <div
         class="pf-v5-l-stack"
-        data-ouia-component-id="DataView-stack}"
+        data-ouia-component-id="DataView-stack"
       >
         <div
           class="pf-v5-l-stack__item"
@@ -45,7 +45,7 @@ exports[`DataView component should render correctly 1`] = `
   "container": <div>
     <div
       class="pf-v5-l-stack"
-      data-ouia-component-id="DataView-stack}"
+      data-ouia-component-id="DataView-stack"
     >
       <div
         class="pf-v5-l-stack__item"

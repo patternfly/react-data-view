@@ -26,7 +26,7 @@ export type DataViewImpementationProps = Omit<DataViewProps, 'onSelect' | 'isIte
 const DataViewImplementation: React.FC<DataViewImpementationProps> = ({
   children, ouiaId = 'DataView', ...props
 }: DataViewImpementationProps) => (
-  <Stack data-ouia-component-id={`${ouiaId}-stack}`} {...props}>
+  <Stack data-ouia-component-id={`${ouiaId}-stack`} {...props}>
     {React.Children.map(children, (child, index) => (
       <StackItem data-ouia-component-id={`${ouiaId}-stack-item-${index}`}>
         {child}
