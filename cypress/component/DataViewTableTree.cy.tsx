@@ -132,7 +132,7 @@ describe('DataViewTableTree', () => {
 
     cy.mount(
       <DataView activeState="empty">
-        <DataViewTable isTreeTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={[]} bodyStates={{ empty: "No data found" }} />
+        <DataViewTable isTreeTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={[]} bodyStates={{ empty: <div data-ouia-component-id="tree-tr-empty">No data found</div> }} />
       </DataView>
     );
 
@@ -151,7 +151,7 @@ describe('DataViewTableTree', () => {
 
     cy.mount(
       <DataView activeState="error">
-        <DataViewTable isTreeTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={[]} bodyStates={{ error: "Some error" }} />
+        <DataViewTable isTreeTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={[]} bodyStates={{ error: <div data-ouia-component-id="tree-tr-error">Some error</div> }} />
       </DataView>
     );
 
@@ -161,8 +161,8 @@ describe('DataViewTableTree', () => {
     cy.get('[data-ouia-component-id="data-th-3"]').contains('Workspaces');
     cy.get('[data-ouia-component-id="data-th-4"]').contains('Last commit');
 
-    cy.get('[data-ouia-component-id="data-tr-error"]').should('be.visible');
-    cy.get('[data-ouia-component-id="data-tr-error"]').contains('Some error');
+    cy.get('[data-ouia-component-id="tree-tr-error"]').should('be.visible');
+    cy.get('[data-ouia-component-id="tree-tr-error"]').contains('Some error');
   });
 
   it('renders a tree data view table with a loading state', () => {
@@ -170,7 +170,7 @@ describe('DataViewTableTree', () => {
 
     cy.mount(
       <DataView activeState="loading">
-        <DataViewTable isTreeTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={[]} bodyStates={{ loading: "Data is loading" }} />
+        <DataViewTable isTreeTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={[]} bodyStates={{ loading: <div data-ouia-component-id="tree-tr-loading">Data is loading</div> }} />
       </DataView>
     );
 

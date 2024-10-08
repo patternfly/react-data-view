@@ -50,7 +50,7 @@ describe('DataViewTableBasic', () => {
 
     cy.mount(
       <DataView activeState="empty">
-        <DataViewTableBasic aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={[]} states={{ empty: "No data found" }} />
+        <DataViewTableBasic aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={[]} bodyStates={{ empty: <div data-ouia-component-id="data-tr-empty">No data found</div> }} />
       </DataView>
     );
 
@@ -69,7 +69,7 @@ describe('DataViewTableBasic', () => {
 
     cy.mount(
       <DataView activeState="error">
-        <DataViewTableBasic aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={[]} bodyStates={{ error: "Some error" }} />
+        <DataViewTableBasic aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={[]} bodyStates={{ error: <div data-ouia-component-id="data-tr-error">Some error</div> }} />
       </DataView>
     );
 
@@ -88,7 +88,7 @@ describe('DataViewTableBasic', () => {
 
     cy.mount(
       <DataView activeState="loading">
-        <DataViewTableBasic aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={[]} bodyStates={{ loading: "Data is loading" }} />
+        <DataViewTableBasic aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={[]} bodyStates={{ loading: <div data-ouia-component-id="data-tr-loading">Data is loading</div> }} />
       </DataView>
     );
 
