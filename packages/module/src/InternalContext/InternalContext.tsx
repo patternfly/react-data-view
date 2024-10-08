@@ -1,4 +1,4 @@
-import React, { createContext, PropsWithChildren, useContext } from 'react';
+import React, { createContext, PropsWithChildren, useContext, useMemo } from 'react';
 import { DataViewState } from '../DataView';
 
 export interface DataViewSelection {
@@ -10,29 +10,41 @@ export interface DataViewSelection {
   isSelectDisabled?: (item: any) => boolean;  // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
-export interface InternalContextValue {
+export interface InternalContextProps {
+  /** Data selection props */
   selection?: DataViewSelection;
-  activeState?: DataViewState; 
+  /** Currently active state */
+  activeState?: DataViewState;
+}
+
+export interface InternalContextValue extends InternalContextProps {
+  /** Flag indicating if data view is selectable (auto-calculated) */
+  isSelectable: boolean; 
 }
 
 export const InternalContext = createContext<InternalContextValue>({
   selection: undefined,
-  activeState: undefined
+  activeState: undefined,
+  isSelectable: false,
 });
 
-export type InternalProviderProps = PropsWithChildren<InternalContextValue>
+export type InternalProviderProps = PropsWithChildren<InternalContextProps>
 
 export const InternalContextProvider: React.FC<InternalProviderProps> = ({
   children,
   selection,
   activeState
-}) => (
-  <InternalContext.Provider
-    value={{ selection, activeState }}
-  >
-    {children}
-  </InternalContext.Provider>
-);
+}) => {
+  const isSelectable = useMemo(() => Boolean(selection?.onSelect && selection?.isSelected), [ selection?.onSelect, selection?.isSelected ]);
+  
+  return (
+    <InternalContext.Provider
+      value={{ selection, activeState, isSelectable }}
+    >
+      {children}
+    </InternalContext.Provider>
+  );
+}
 
 export const useInternalContext = () => useContext(InternalContext);
 

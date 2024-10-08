@@ -7,7 +7,7 @@ import {
 import { DataViewTableTree, DataViewTableTreeProps } from '../DataViewTableTree';
 import { DataViewTableBasic, DataViewTableBasicProps } from '../DataViewTableBasic';
 
-// Table header typings
+// Table head typings
 export type DataViewTh = ReactNode | { cell: ReactNode; props?: ThProps };
 export const isDataViewThObject = (value: DataViewTh): value is { cell: ReactNode; props?: ThProps } => value != null && typeof value === 'object' && 'cell' in value;
 
