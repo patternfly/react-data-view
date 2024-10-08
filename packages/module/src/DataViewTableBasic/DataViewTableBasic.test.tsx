@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import { DataView } from '../DataView';
 import { DataViewTableBasic } from './DataViewTableBasic';
-import DataView from '../DataView/DataView';
 
 interface Repository {
   name: string;
@@ -39,7 +39,7 @@ describe('DataViewTable component', () => {
   test('should render with an empty state', () => {
     const { container } = render(
       <DataView activeState="empty">
-        <DataViewTableBasic aria-label='Repositories table' ouiaId={ouiaId} columns={columns} states={{ empty:"No data found" }} rows={[]} />
+        <DataViewTableBasic aria-label='Repositories table' ouiaId={ouiaId} columns={columns} bodyStates={{ empty: "No data found" }} rows={[]} />
       </DataView>
     );
     expect(container).toMatchSnapshot();
@@ -48,8 +48,17 @@ describe('DataViewTable component', () => {
   test('should render with an error state', () => {
     const { container } = render(
       <DataView activeState="error">
-        <DataViewTableBasic aria-label='Repositories table' ouiaId={ouiaId} columns={columns} states={{ error:"Some error" }} rows={[]} />
+        <DataViewTableBasic aria-label='Repositories table' ouiaId={ouiaId} columns={columns} bodyStates={{ error: "Some error" }} rows={[]} />
       </DataView>
+    );
+    expect(container).toMatchSnapshot();
+  });
+
+  test('should render with a loading state', () => {
+    const { container } = render(
+      <DataView activeState="loading">
+        <DataViewTableBasic aria-label='Repositories table' ouiaId={ouiaId} columns={columns} bodyStates={{ loading: "Data is loading" }} rows={[]} />
+      </DataView> 
     );
     expect(container).toMatchSnapshot();
   });

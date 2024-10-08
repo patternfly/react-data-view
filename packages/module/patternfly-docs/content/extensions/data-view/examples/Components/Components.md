@@ -16,7 +16,7 @@ sourceLink: https://github.com/patternfly/react-data-view/blob/main/packages/mod
 ---
 import { Button, EmptyState, EmptyStateActions, EmptyStateBody, EmptyStateFooter, EmptyStateHeader, EmptyStateIcon } from '@patternfly/react-core';
 import { CubesIcon, FolderIcon, FolderOpenIcon, LeafIcon, ExclamationCircleIcon } from '@patternfly/react-icons';
-import { BulkSelect, ErrorState, ResponsiveAction, ResponsiveActions } from '@patternfly/react-component-groups';
+import { BulkSelect, ErrorState, ResponsiveAction, ResponsiveActions, SkeletonTableHead, SkeletonTableBody } from '@patternfly/react-component-groups';
 import { DataViewToolbar } from '@patternfly/react-data-view/dist/dynamic/DataViewToolbar';
 import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 import { useDataViewSelection } from '@patternfly/react-data-view/dist/dynamic/Hooks';
@@ -51,7 +51,7 @@ The **data view table** component renders your columns and rows definition into 
 
 ### Rows and columns customization
 
-This example shows possible formats of `rows` and `columns` passed to the `DataViewTable` which allow you various customizations of the table header and body. 
+This example shows possible formats of `rows` and `columns` passed to the `DataViewTable` which allow you various customizations of the table head and body. 
 
 ```js file="./DataViewTableExample.tsx"
 
@@ -59,9 +59,9 @@ This example shows possible formats of `rows` and `columns` passed to the `DataV
 
 The `DataViewTable` component accepts the following props:
 
-- `columns` defining the column headers of the table. Each item in the array can be a `ReactNode` (for simple headers) or an object with the following properties:
-  - `cell` (`ReactNode`) content to display in the column header.
-  - optional `props` (`ThProps`) to pass to the `<Th>` component, such as `width`, `sort`, and other table header cell properties.
+- `columns` defining the column heads of the table. Each item in the array can be a `ReactNode` (for simple heads) or an object with the following properties:
+  - `cell` (`ReactNode`) content to display in the column head.
+  - optional `props` (`ThProps`) to pass to the `<Th>` component, such as `width`, `sort`, and other table head cell properties.
 
 - `rows` defining the rows to be displayed in the table. Each item in the array can be either an array of `DataViewTd` (for simple rows) or an object with the following properties:
   - `row` (`DataViewTd[]`) defining the content for each cell in the row.
@@ -85,15 +85,22 @@ It is also possible to disable row selection using the `isSelectDisabled` functi
 ```
 
 ### Empty state example
-The data view table supports displaying a custom empty state. You can pass it using the `states` property and `empty` key. It will be automatically displayed in case there are no rows to be rendered.
+The data view table supports displaying a custom empty state. You can pass it using the the `headStates` and `bodyStates` properties and their `empty` key. It will be automatically displayed in case there are no rows to be rendered.
 
 ```js file="./DataViewTableEmptyExample.tsx"
 
 ```
 
 ### Error state example
-The data view table also supports displaying an error state. You can pass it using the `states` property and `error` key. It will be displayed in case the data view recieves its `state` property set to `error`.
+The data view table also supports displaying an error state. You can pass it using the the `headStates` and `bodyStates` properties and their `error` key. It will be displayed in case the data view recieves its `state` property set to `error`.
 
 ```js file="./DataViewTableErrorExample.tsx"
+
+```
+
+### Loading state example
+The data view table also supports displaying a custom loading state. You can pass it using the `headStates` and `bodyStates` properties and their `loading` key. Your state will be displayed in case the data view recieves its `state` property set to `loading`.
+
+```js file="./DataViewTableLoadingExample.tsx"
 
 ```

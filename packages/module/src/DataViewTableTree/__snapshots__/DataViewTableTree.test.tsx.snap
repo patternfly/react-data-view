@@ -936,6 +936,83 @@ exports[`DataViewTableTree component should render the tree table correctly 1`] 
 </div>
 `;
 
+exports[`DataViewTableTree component should render tree table with a loading state 1`] = `
+<div>
+  <div
+    class="pf-v5-l-stack"
+    data-ouia-component-id="DataView-stack"
+  >
+    <div
+      class="pf-v5-l-stack__item"
+      data-ouia-component-id="DataView-stack-item-0"
+    >
+      <table
+        aria-label="Repositories table"
+        class="pf-v5-c-table pf-m-tree-view-grid-md pf-m-tree-view"
+        data-ouia-component-id="TreeTableExample"
+        data-ouia-component-type="PF5/Table"
+        data-ouia-safe="true"
+        role="treegrid"
+      >
+        <thead
+          class="pf-v5-c-table__thead"
+          data-ouia-component-id="TreeTableExample-thead"
+        >
+          <tr
+            class="pf-v5-c-table__tr"
+            data-ouia-component-id="TreeTableExample-tr-head"
+            data-ouia-component-type="PF5/TableRow"
+            data-ouia-safe="true"
+          >
+            <th
+              class="pf-v5-c-table__th"
+              data-ouia-component-id="TreeTableExample-th-0"
+              scope="col"
+              tabindex="-1"
+            >
+              Repositories
+            </th>
+            <th
+              class="pf-v5-c-table__th"
+              data-ouia-component-id="TreeTableExample-th-1"
+              scope="col"
+              tabindex="-1"
+            >
+              Branches
+            </th>
+            <th
+              class="pf-v5-c-table__th"
+              data-ouia-component-id="TreeTableExample-th-2"
+              scope="col"
+              tabindex="-1"
+            >
+              Pull requests
+            </th>
+            <th
+              class="pf-v5-c-table__th"
+              data-ouia-component-id="TreeTableExample-th-3"
+              scope="col"
+              tabindex="-1"
+            >
+              Workspaces
+            </th>
+            <th
+              class="pf-v5-c-table__th"
+              data-ouia-component-id="TreeTableExample-th-4"
+              scope="col"
+              tabindex="-1"
+            >
+              Last commit
+            </th>
+          </tr>
+        </thead>
+        Data is loading
+      </table>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`DataViewTableTree component should render tree table with an empty state 1`] = `
 <div>
   <div
@@ -1006,25 +1083,7 @@ exports[`DataViewTableTree component should render tree table with an empty stat
             </th>
           </tr>
         </thead>
-        <tbody
-          class="pf-v5-c-table__tbody"
-          role="rowgroup"
-        >
-          <tr
-            class="pf-v5-c-table__tr"
-            data-ouia-component-id="TreeTableExample-tr-empty"
-            data-ouia-component-type="PF5/TableRow"
-            data-ouia-safe="true"
-          >
-            <td
-              class="pf-v5-c-table__td"
-              colspan="5"
-              tabindex="-1"
-            >
-              No data found
-            </td>
-          </tr>
-        </tbody>
+        No data found
       </table>
     </div>
   </div>
@@ -1101,25 +1160,7 @@ exports[`DataViewTableTree component should render tree table with an error stat
             </th>
           </tr>
         </thead>
-        <tbody
-          class="pf-v5-c-table__tbody"
-          role="rowgroup"
-        >
-          <tr
-            class="pf-v5-c-table__tr"
-            data-ouia-component-id="TreeTableExample-tr-error"
-            data-ouia-component-type="PF5/TableRow"
-            data-ouia-safe="true"
-          >
-            <td
-              class="pf-v5-c-table__td"
-              colspan="5"
-              tabindex="-1"
-            >
-              Some error
-            </td>
-          </tr>
-        </tbody>
+        Some error
       </table>
     </div>
   </div>
