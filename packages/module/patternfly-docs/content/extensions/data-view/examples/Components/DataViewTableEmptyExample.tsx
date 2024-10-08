@@ -3,6 +3,7 @@ import { DataView, DataViewState } from '@patternfly/react-data-view/dist/dynami
 import { DataViewTable, DataViewTr, DataViewTh } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 import { CubesIcon } from '@patternfly/react-icons';
 import { Button, EmptyState, EmptyStateActions, EmptyStateBody, EmptyStateFooter, EmptyStateHeader, EmptyStateIcon } from '@patternfly/react-core';
+import { Tbody, Td, Tr } from '@patternfly/react-table';
 
 interface Repository {
   id: number;
@@ -23,19 +24,25 @@ const columns: DataViewTh[] = [ 'Repositories', 'Branches', 'Pull requests', 'Wo
 const ouiaId = 'TableExample';
 
 const empty = (
-  <EmptyState>
-    <EmptyStateHeader titleText="No data found" headingLevel="h4" icon={<EmptyStateIcon icon={CubesIcon} />} />
-    <EmptyStateBody>There are no matching data to be displayed.</EmptyStateBody>
-    <EmptyStateFooter>
-      <EmptyStateActions>
-        <Button variant="primary">Primary action</Button>
-      </EmptyStateActions>
-      <EmptyStateActions>
-        <Button variant="link">Multiple</Button>
-        <Button variant="link">Action Buttons</Button>
-      </EmptyStateActions>
-    </EmptyStateFooter>
-  </EmptyState>
+  <Tbody>
+    <Tr key="loading" ouiaId={`${ouiaId}-tr-loading`}>
+      <Td colSpan={columns.length}>
+        <EmptyState>
+          <EmptyStateHeader titleText="No data found" headingLevel="h4" icon={<EmptyStateIcon icon={CubesIcon} />} />
+          <EmptyStateBody>There are no matching data to be displayed.</EmptyStateBody>
+          <EmptyStateFooter>
+            <EmptyStateActions>
+              <Button variant="primary">Primary action</Button>
+            </EmptyStateActions>
+            <EmptyStateActions>
+              <Button variant="link">Multiple</Button>
+              <Button variant="link">Action Buttons</Button>
+            </EmptyStateActions>
+          </EmptyStateFooter>
+        </EmptyState>
+      </Td>
+    </Tr>
+  </Tbody>
 );
 
 export const BasicExample: React.FunctionComponent = () => (
@@ -45,7 +52,7 @@ export const BasicExample: React.FunctionComponent = () => (
       ouiaId={ouiaId}
       columns={columns}
       rows={rows}
-      states={{ empty }}
+      bodyStates={{ empty }}
     />
   </DataView>
 );

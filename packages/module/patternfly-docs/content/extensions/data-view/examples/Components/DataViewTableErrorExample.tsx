@@ -2,6 +2,7 @@ import React from 'react';
 import { DataView, DataViewState } from '@patternfly/react-data-view/dist/dynamic/DataView';
 import { DataViewTable, DataViewTr, DataViewTh } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 import { ErrorState } from '@patternfly/react-component-groups';
+import { Tbody, Td, Tr } from '@patternfly/react-table';
 
 interface Repository {
   id: number;
@@ -22,7 +23,13 @@ const columns: DataViewTh[] = [ 'Repositories', 'Branches', 'Pull requests', 'Wo
 const ouiaId = 'TableErrorExample';
 
 const error = (
-  <ErrorState errorTitle='Unable to load data' errorDescription='There was an error retrieving data. Check your connection and reload the page.' />
+  <Tbody>
+    <Tr key="loading" ouiaId={`${ouiaId}-tr-loading`}>
+      <Td colSpan={columns.length}>
+        <ErrorState errorTitle='Unable to load data' errorDescription='There was an error retrieving data. Check your connection and reload the page.' />
+      </Td>
+    </Tr>
+  </Tbody>
 );
 
 export const BasicExample: React.FunctionComponent = () => (
@@ -32,7 +39,7 @@ export const BasicExample: React.FunctionComponent = () => (
       ouiaId={ouiaId}
       columns={columns}
       rows={rows}
-      states={{ error }}
+      bodyStates={{ error }}
     />
   </DataView>
 );
