@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { Table } from '@patternfly/react-table';
-import { DataViewTableHeader } from './DataViewTableHeader';
+import { DataViewTableHead } from './DataViewTableHead';
 import { DataViewSelection } from '../InternalContext';
 import { DataView } from '../DataView';
 
@@ -9,7 +9,7 @@ const columns = [ 'Repositories', 'Branches', 'Pull requests', 'Workspaces', 'La
 
 const ouiaId = 'HeaderExample';
 
-describe('DataViewTableHeader component', () => {
+describe('DataViewTableHead component', () => {
   const mockSelection: DataViewSelection = {
     onSelect: jest.fn(),
     isSelected: jest.fn(),
@@ -19,7 +19,7 @@ describe('DataViewTableHeader component', () => {
   test('should render correctly', () => {
     const { container } = render(
       <Table>
-        <DataViewTableHeader columns={columns} ouiaId={ouiaId} />
+        <DataViewTableHead columns={columns} ouiaId={ouiaId} />
       </Table>
     );
     expect(container).toMatchSnapshot();
@@ -29,7 +29,7 @@ describe('DataViewTableHeader component', () => {
     const { container } = render(
       <DataView selection={mockSelection}>
         <Table>
-          <DataViewTableHeader isTreeTable columns={columns} ouiaId={ouiaId} />
+          <DataViewTableHead isTreeTable columns={columns} ouiaId={ouiaId} />
         </Table>
       </DataView>
     );
@@ -40,13 +40,11 @@ describe('DataViewTableHeader component', () => {
     const { container } = render(
       <DataView selection={mockSelection}>
         <Table>
-          <DataViewTableHeader columns={columns} ouiaId={ouiaId} />
+          <DataViewTableHead columns={columns} ouiaId={ouiaId} />
         </Table>
       </DataView>
     );
     expect(container).toMatchSnapshot();
   });
 });
-
-
 

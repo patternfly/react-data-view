@@ -8,7 +8,7 @@ import {
 import { useInternalContext } from '../InternalContext';
 import { DataViewTh, isDataViewThObject } from '../DataViewTable';
 
-export interface DataViewTableHeaderProps extends TheadProps {
+export interface DataViewTableHeadProps extends TheadProps {
   /** Indicates whether table is a tree */
   isTreeTable?: boolean;
   /** Columns definition */
@@ -17,18 +17,18 @@ export interface DataViewTableHeaderProps extends TheadProps {
   ouiaId?: string;
 }
 
-export const DataViewTableHeader: React.FC<DataViewTableHeaderProps> = ({
+export const DataViewTableHead: React.FC<DataViewTableHeadProps> = ({
   isTreeTable = false,
   columns,
-  ouiaId = 'DataViewTableHeader',
+  ouiaId = 'DataViewTableHead',
   ...props
-}: DataViewTableHeaderProps) => {
+}: DataViewTableHeadProps) => {
   const { selection } = useInternalContext();
   const { onSelect, isSelected } = selection ?? {};
 
   const cells = useMemo(() => [
     onSelect && isSelected && !isTreeTable ? (
-      <Th key="row-select" screenReaderText='Data selection table header cell' />
+      <Th key="row-select" screenReaderText='Data selection table head cell' />
     ) : null,
     ...columns.map((column, index) => (
       <Th
@@ -50,4 +50,4 @@ export const DataViewTableHeader: React.FC<DataViewTableHeaderProps> = ({
   );
 };
 
-export default DataViewTableHeader;
+export default DataViewTableHead;
