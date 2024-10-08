@@ -1,6 +1,6 @@
 import React from 'react';
+import { DataView } from '@patternfly/react-data-view/dist/dynamic/DataView';
 import { DataViewTable, DataViewTrTree } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
-import DataView from '@patternfly/react-data-view/dist/dynamic/DataView';
 
 interface Repository {
   name: string;
@@ -132,7 +132,7 @@ describe('DataViewTableTree', () => {
 
     cy.mount(
       <DataView activeState="empty">
-        <DataViewTable isTreeTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={[]} states={{ empty: "No data found" }} />
+        <DataViewTable isTreeTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={[]} bodyStates={{ empty: "No data found" }} />
       </DataView>
     );
 
@@ -151,7 +151,7 @@ describe('DataViewTableTree', () => {
 
     cy.mount(
       <DataView activeState="error">
-        <DataViewTable isTreeTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={[]} states={{ error:"Some error" }} />
+        <DataViewTable isTreeTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={[]} bodyStates={{ error: "Some error" }} />
       </DataView>
     );
 
@@ -163,5 +163,24 @@ describe('DataViewTableTree', () => {
 
     cy.get('[data-ouia-component-id="data-tr-error"]').should('be.visible');
     cy.get('[data-ouia-component-id="data-tr-error"]').contains('Some error');
+  });
+
+  it('renders a tree data view table with a loading state', () => {
+    const ouiaId = 'tree';
+
+    cy.mount(
+      <DataView activeState="loading">
+        <DataViewTable isTreeTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={[]} bodyStates={{ loading: "Data is loading" }} />
+      </DataView>
+    );
+
+    cy.get('[data-ouia-component-id="tree-th-0"]').contains('Repositories');
+    cy.get('[data-ouia-component-id="tree-th-1"]').contains('Branches');
+    cy.get('[data-ouia-component-id="tree-th-2"]').contains('Pull requests');
+    cy.get('[data-ouia-component-id="tree-th-3"]').contains('Workspaces');
+    cy.get('[data-ouia-component-id="tree-th-4"]').contains('Last commit');
+
+    cy.get('[data-ouia-component-id="tree-tr-loading"]').should('be.visible');
+    cy.get('[data-ouia-component-id="tree-tr-loading"]').contains('Data is loading');
   });
 });
