@@ -5,8 +5,8 @@ describe('Test the Data view docs page', () => {
 
     cy.visit('http://localhost:8006/extensions/data-view/layout');
 
-    cy.get(`[data-ouia-component-id="${ouiaId}Heade-pagination"]`).should('exist');
-    cy.get(`[data-ouia-component-id="${ouiaId}Heade-bulk-select"]`).should('exist');
+    cy.get(`[data-ouia-component-id="${ouiaId}Header-pagination"]`).should('exist');
+    cy.get(`[data-ouia-component-id="${ouiaId}Header-bulk-select"]`).should('exist');
 
     cy.get(`[data-ouia-component-id="${ouiaId}Footer-pagination"]`).should('exist');
     cy.get(`[data-ouia-component-id="${ouiaId}Footer-bulk-select"]`).should('not.exist');
