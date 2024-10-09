@@ -14,7 +14,7 @@ export interface InternalContextProps {
   /** Data selection props */
   selection?: DataViewSelection;
   /** Currently active state */
-  activeState?: DataViewState;
+  activeState?: DataViewState | string;
 }
 
 export interface InternalContextValue extends InternalContextProps {

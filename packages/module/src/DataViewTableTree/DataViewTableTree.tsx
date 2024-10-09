@@ -36,9 +36,9 @@ export interface DataViewTableTreeProps extends Omit<TableProps, 'onSelect' | 'r
   /** Current page rows */
   rows: DataViewTrTree[];
   /** Table head states to be displayed when active */
-  headStates?: Partial<Record<DataViewState, React.ReactNode>>
+  headStates?: Partial<Record<DataViewState | string, React.ReactNode>>
   /** Table body states to be displayed when active */
-  bodyStates?: Partial<Record<DataViewState, React.ReactNode>>
+  bodyStates?: Partial<Record<DataViewState | string, React.ReactNode>>
   /** Optional icon for the leaf rows */
   leafIcon?: React.ReactNode;
   /** Optional icon for the expanded parent rows */
@@ -52,8 +52,8 @@ export interface DataViewTableTreeProps extends Omit<TableProps, 'onSelect' | 'r
 export const DataViewTableTree: React.FC<DataViewTableTreeProps> = ({
   columns,
   rows,
-  headStates = {},
-  bodyStates = {},
+  headStates,
+  bodyStates,
   leafIcon = null,
   expandedIcon = null,
   collapsedIcon = null,
@@ -65,8 +65,8 @@ export const DataViewTableTree: React.FC<DataViewTableTreeProps> = ({
   const [ expandedNodeIds, setExpandedNodeIds ] = React.useState<string[]>([]);
   const [ expandedDetailsNodeNames, setExpandedDetailsNodeIds ] = React.useState<string[]>([]);
 
-  const activeHeadState = useMemo(() => activeState ? headStates[activeState] : undefined, [ activeState, headStates ]);
-  const activeBodyState = useMemo(() => activeState ? bodyStates[activeState] : undefined, [ activeState, bodyStates ]);
+  const activeHeadState = useMemo(() => activeState ? headStates?.[activeState] : undefined, [ activeState, headStates ]);
+  const activeBodyState = useMemo(() => activeState ? bodyStates?.[activeState] : undefined, [ activeState, bodyStates ]);
 
   const nodes = useMemo(() => {
 
