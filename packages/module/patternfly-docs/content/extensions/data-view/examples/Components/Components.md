@@ -16,7 +16,7 @@ sourceLink: https://github.com/patternfly/react-data-view/blob/main/packages/mod
 ---
 import { Button, EmptyState, EmptyStateActions, EmptyStateBody, EmptyStateFooter, EmptyStateHeader, EmptyStateIcon } from '@patternfly/react-core';
 import { CubesIcon, FolderIcon, FolderOpenIcon, LeafIcon, ExclamationCircleIcon } from '@patternfly/react-icons';
-import { BulkSelect, ErrorState } from '@patternfly/react-component-groups';
+import { BulkSelect, ErrorState, ResponsiveAction, ResponsiveActions } from '@patternfly/react-component-groups';
 import { DataViewToolbar } from '@patternfly/react-data-view/dist/dynamic/DataViewToolbar';
 import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 import { useDataViewSelection } from '@patternfly/react-data-view/dist/dynamic/Hooks';
@@ -26,11 +26,22 @@ import { DataView, DataViewState } from '@patternfly/react-data-view/dist/dynami
 
 The **data view toolbar** component renders a default opinionated data view toolbar above or below the data section. 
 
-Data view toolbar can contain a `pagination`, `bulkSelect` or any other children content passed. The preffered way of passing children toolbar items is using the [toolbar item](/components/toolbar#toolbar-items) component.
+Data view toolbar can contain a `pagination`, `bulkSelect`, `actions` or other children content passed. The preffered way of passing children toolbar items is using the [toolbar item](/components/toolbar#toolbar-items) component.
 
 ### Basic toolbar example
 
 ```js file="./DataViewToolbarExample.tsx"
+
+```
+
+# Toolbar actions
+Data view toolbar can display actions using the `actions` property accepting a React node. You can make use of a predefined [responsive actions](/extensions/component-groups/responsive-actions) component from the [component groups](/extensions/component-groups/about-component-groups) extension.
+
+### Actions configuration
+
+### Actions example
+
+```js file="./DataViewToolbarActionsExample.tsx"
 
 ```
 

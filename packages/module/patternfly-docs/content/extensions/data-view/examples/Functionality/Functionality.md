@@ -62,7 +62,7 @@ This example uses the URL for persisting the pagination state.
 Allows to select data records inside the data view and show the selection state.
 
 ### Toolbar usage
-Data view toolbar can display a bulk selection component using the `bulkSelect` property accepting a React node. You can make use of a predefined [bulk select](/extensions/component-groups/bulk-select) from the [component groups](/extensions/component-groups/about-component-groups) extension.
+Data view toolbar can display a bulk selection component using the `bulkSelect` property accepting a React node. You can make use of a predefined [bulk select](/extensions/component-groups/bulk-select) component from the [component groups](/extensions/component-groups/about-component-groups) extension.
 
 ### Selection state
 
@@ -84,4 +84,3 @@ The `useDataViewSelection` hook manages the selection state of the data view.
 ```js file="./SelectionExample.tsx"
 
 ```
-
