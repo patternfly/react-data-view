@@ -96,8 +96,8 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                         </svg>
                       </span>
                     </span>
-                  </button>
-                </div>
+                  </span>
+                </button>
                 <nav
                   aria-label="Pagination"
                   class="pf-v5-c-pagination__nav"
@@ -359,8 +359,8 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                       </svg>
                     </span>
                   </span>
-                </button>
-              </div>
+                </span>
+              </button>
               <nav
                 aria-label="Pagination"
                 class="pf-v5-c-pagination__nav"
