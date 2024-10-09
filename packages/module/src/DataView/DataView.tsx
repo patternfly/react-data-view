@@ -18,7 +18,7 @@ export interface DataViewProps {
   /** Selection context configuration */
   selection?: DataViewSelection;
   /** Currently active state */
-  activeState?: DataViewState;
+  activeState?: DataViewState | string;
 }
 
 export type DataViewImpementationProps = Omit<DataViewProps, 'onSelect' | 'isItemSelected' | 'isItemSelectDisabled'>;

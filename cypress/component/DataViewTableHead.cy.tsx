@@ -1,15 +1,15 @@
 import React from 'react';
-import { DataViewTableHeader } from '@patternfly/react-data-view/dist/dynamic/DataViewTableHeader';
+import { DataViewTableHead } from '@patternfly/react-data-view/dist/dynamic/DataViewTableHead';
 
 const columns = [ 'Repositories', 'Branches', 'Pull requests', 'Workspaces', 'Last commit' ];
 
-describe('DataViewTableHeader', () => {
+describe('DataViewTableHead', () => {
 
-  it('renders a data view table header', () => {
+  it('renders a data view table head', () => {
     const ouiaId = 'data';
 
     cy.mount(
-      <DataViewTableHeader ouiaId={ouiaId} columns={columns} />
+      <DataViewTableHead ouiaId={ouiaId} columns={columns} />
     );
 
     cy.get('[data-ouia-component-id="data-th-0"]').contains('Repositories');
