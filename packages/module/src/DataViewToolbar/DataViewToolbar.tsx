@@ -14,7 +14,7 @@ export interface DataViewToolbarProps extends PropsWithChildren {
   actions?: React.ReactNode;
 }
 
-export const DataViewToolbar: React.FC<DataViewToolbarProps> = ({ className, ouiaId = 'DataViewToolbar', bulkSelect, actions = null, pagination, children, ...props }: DataViewToolbarProps) => (
+export const DataViewToolbar: React.FC<DataViewToolbarProps> = ({ className, ouiaId = 'DataViewToolbar', bulkSelect, actions, pagination, children, ...props }: DataViewToolbarProps) => (
   <Toolbar ouiaId={ouiaId} className={className} {...props}>
     <ToolbarContent>
       {bulkSelect && (
@@ -22,7 +22,11 @@ export const DataViewToolbar: React.FC<DataViewToolbarProps> = ({ className, oui
           {bulkSelect}
         </ToolbarItem>
       )}
-      {actions}
+      {actions && (
+        <ToolbarItem variant={ToolbarItemVariant['overflow-menu']}>
+          {actions}
+        </ToolbarItem>
+      )}
       {pagination && (
         <ToolbarItem variant={ToolbarItemVariant.pagination} data-ouia-component-id={`${ouiaId}-pagination`}>
           {pagination}
@@ -31,7 +35,7 @@ export const DataViewToolbar: React.FC<DataViewToolbarProps> = ({ className, oui
       {children}
     </ToolbarContent>
   </Toolbar>
-);
+)
 
 export default DataViewToolbar;
 
