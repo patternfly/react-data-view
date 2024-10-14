@@ -1,6 +1,6 @@
 import React from 'react';
-import DataViewTableBasic from '@patternfly/react-data-view/dist/dynamic/DataViewTableBasic';
-import DataView from '@patternfly/react-data-view/dist/dynamic/DataView';
+import { DataViewTableBasic } from '@patternfly/react-data-view/dist/dynamic/DataViewTableBasic';
+import { DataView } from '@patternfly/react-data-view/dist/dynamic/DataView';
 
 interface Repository {
   name: string;
@@ -50,7 +50,7 @@ describe('DataViewTableBasic', () => {
 
     cy.mount(
       <DataView activeState="empty">
-        <DataViewTableBasic aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={[]} states={{ empty: "No data found" }} />
+        <DataViewTableBasic aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={[]} bodyStates={{ empty: <div data-ouia-component-id="data-tr-empty">No data found</div> }} />
       </DataView>
     );
 
@@ -69,7 +69,7 @@ describe('DataViewTableBasic', () => {
 
     cy.mount(
       <DataView activeState="error">
-        <DataViewTableBasic aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={[]} states={{ error: "Some error" }} />
+        <DataViewTableBasic aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={[]} bodyStates={{ error: <div data-ouia-component-id="data-tr-error">Some error</div> }} />
       </DataView>
     );
 
@@ -82,4 +82,24 @@ describe('DataViewTableBasic', () => {
     cy.get('[data-ouia-component-id="data-tr-error"]').should('be.visible');
     cy.get('[data-ouia-component-id="data-tr-error"]').contains('Some error');
   });
+
+  it('renders a basic data view table with a loading state', () => {
+    const ouiaId = 'data';
+
+    cy.mount(
+      <DataView activeState="loading">
+        <DataViewTableBasic aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={[]} bodyStates={{ loading: <div data-ouia-component-id="data-tr-loading">Data is loading</div> }} />
+      </DataView>
+    );
+
+    cy.get('[data-ouia-component-id="data-th-0"]').contains('Repositories');
+    cy.get('[data-ouia-component-id="data-th-1"]').contains('Branches');
+    cy.get('[data-ouia-component-id="data-th-2"]').contains('Pull requests');
+    cy.get('[data-ouia-component-id="data-th-3"]').contains('Workspaces');
+    cy.get('[data-ouia-component-id="data-th-4"]').contains('Last commit');
+
+    cy.get('[data-ouia-component-id="data-tr-loading"]').should('be.visible');
+    cy.get('[data-ouia-component-id="data-tr-loading"]').contains('Data is loading');
+  });
+
 });

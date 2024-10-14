@@ -10,8 +10,8 @@ export * from './DataViewToolbar';
 export { default as DataViewTableTree } from './DataViewTableTree';
 export * from './DataViewTableTree';
 
-export { default as DataViewTableHeader } from './DataViewTableHeader';
-export * from './DataViewTableHeader';
+export { default as DataViewTableHead } from './DataViewTableHead';
+export * from './DataViewTableHead';
 
 export { default as DataViewTableBasic } from './DataViewTableBasic';
 export * from './DataViewTableBasic';

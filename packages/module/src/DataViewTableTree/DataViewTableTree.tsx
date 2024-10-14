@@ -5,11 +5,10 @@ import {
   Tbody,
   Td,
   TdProps,
-  Tr,
   TreeRowWrapper,
 } from '@patternfly/react-table';
 import { useInternalContext } from '../InternalContext';
-import { DataViewTableHeader } from '../DataViewTableHeader';
+import { DataViewTableHead } from '../DataViewTableHead';
 import { DataViewTh, DataViewTrTree, isDataViewTdObject } from '../DataViewTable';
 import { DataViewState } from '../DataView/DataView';
 
@@ -36,8 +35,10 @@ export interface DataViewTableTreeProps extends Omit<TableProps, 'onSelect' | 'r
   columns: DataViewTh[];
   /** Current page rows */
   rows: DataViewTrTree[];
-  /** States to be displayed when active */
-  states?: Partial<Record<DataViewState, React.ReactNode>>
+  /** Table head states to be displayed when active */
+  headStates?: Partial<Record<DataViewState | string, React.ReactNode>>
+  /** Table body states to be displayed when active */
+  bodyStates?: Partial<Record<DataViewState | string, React.ReactNode>>
   /** Optional icon for the leaf rows */
   leafIcon?: React.ReactNode;
   /** Optional icon for the expanded parent rows */
@@ -51,7 +52,8 @@ export interface DataViewTableTreeProps extends Omit<TableProps, 'onSelect' | 'r
 export const DataViewTableTree: React.FC<DataViewTableTreeProps> = ({
   columns,
   rows,
-  states = {},
+  headStates,
+  bodyStates,
   leafIcon = null,
   expandedIcon = null,
   collapsedIcon = null,
@@ -62,6 +64,9 @@ export const DataViewTableTree: React.FC<DataViewTableTreeProps> = ({
   const { onSelect, isSelected, isSelectDisabled } = selection ?? {};
   const [ expandedNodeIds, setExpandedNodeIds ] = React.useState<string[]>([]);
   const [ expandedDetailsNodeNames, setExpandedDetailsNodeIds ] = React.useState<string[]>([]);
+
+  const activeHeadState = useMemo(() => activeState ? headStates?.[activeState] : undefined, [ activeState, headStates ]);
+  const activeBodyState = useMemo(() => activeState ? bodyStates?.[activeState] : undefined, [ activeState, bodyStates ]);
 
   const nodes = useMemo(() => {
 
@@ -150,17 +155,8 @@ export const DataViewTableTree: React.FC<DataViewTableTreeProps> = ({
 
   return (
     <Table isTreeTable aria-label="Data table" ouiaId={ouiaId} {...props}>
-      <DataViewTableHeader isTreeTable columns={columns} ouiaId={ouiaId} />
-      <Tbody>{
-        activeState && Object.keys(states).includes(activeState) ? (
-          <Tr key={activeState} ouiaId={`${ouiaId}-tr-${activeState}`}>
-            <Td colSpan={columns.length}>
-              {states[activeState]}
-            </Td>
-          </Tr>
-        ) : nodes
-      }
-      </Tbody>
+      {activeHeadState || <DataViewTableHead isTreeTable columns={columns} ouiaId={ouiaId} />}
+      {activeBodyState || <Tbody>{nodes}</Tbody>}
     </Table>
   );
 };

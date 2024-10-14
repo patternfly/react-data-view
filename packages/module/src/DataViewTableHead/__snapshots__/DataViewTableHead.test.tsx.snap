@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DataViewTableHeader component should render correctly 1`] = `
+exports[`DataViewTableHead component should render correctly 1`] = `
 <div>
   <table
     class="pf-v5-c-table pf-m-grid-md"
@@ -65,7 +65,7 @@ exports[`DataViewTableHeader component should render correctly 1`] = `
 </div>
 `;
 
-exports[`DataViewTableHeader component should render selection column when selection is provided 1`] = `
+exports[`DataViewTableHead component should render selection column when selection is provided 1`] = `
 <div>
   <div
     class="pf-v5-l-stack"
@@ -100,7 +100,7 @@ exports[`DataViewTableHeader component should render selection column when selec
               <span
                 class="pf-v5-screen-reader"
               >
-                Data selection table header cell
+                Data selection table head cell
               </span>
             </th>
             <th
@@ -151,7 +151,7 @@ exports[`DataViewTableHeader component should render selection column when selec
 </div>
 `;
 
-exports[`DataViewTableHeader component should render the tree table correctly when isTreeTable is true 1`] = `
+exports[`DataViewTableHead component should render the tree table correctly when isTreeTable is true 1`] = `
 <div>
   <div
     class="pf-v5-l-stack"
