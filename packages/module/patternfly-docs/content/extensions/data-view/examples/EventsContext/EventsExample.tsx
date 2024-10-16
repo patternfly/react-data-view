@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useMemo } from 'react';
-import { Drawer, DrawerActions, DrawerCloseButton, DrawerContent, DrawerContentBody, DrawerHead, DrawerPanelContent, Title, Text } from '@patternfly/react-core';
+import { Drawer, DrawerActions, DrawerCloseButton, DrawerContent, DrawerContentBody, DrawerHead, DrawerPanelContent, Title, Content } from '@patternfly/react-core';
 import { DataView } from '@patternfly/react-data-view/dist/dynamic/DataView';
 import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 import { DataViewEventsProvider, EventTypes, useDataViewEventsContext } from '@patternfly/react-data-view/dist/dynamic/DataViewEventsContext';
@@ -48,10 +48,10 @@ const RepositoryDetail: React.FunctionComponent<RepositoryDetailProps> = ({ sele
         <Title className="pf-v5-u-mb-md" headingLevel="h2" ouiaId="detail-drawer-title">
           Detail of {selectedRepo?.name}
         </Title>
-        <Text>Branches: {selectedRepo?.branches}</Text>
-        <Text>Pull requests: {selectedRepo?.prs}</Text>
-        <Text>Workspaces: {selectedRepo?.workspaces}</Text>
-        <Text>Last commit: {selectedRepo?.lastCommit}</Text>
+        <Content component="p">Branches: {selectedRepo?.branches}</Content>
+        <Content component="p">Pull requests: {selectedRepo?.prs}</Content>
+        <Content component="p">Workspaces: {selectedRepo?.workspaces}</Content>
+        <Content component="p">Last commit: {selectedRepo?.lastCommit}</Content>
         <DrawerActions>
           <DrawerCloseButton onClick={() => setSelectedRepo(undefined)} data-ouia-component-id="detail-drawer-close-btn"/>
         </DrawerActions>

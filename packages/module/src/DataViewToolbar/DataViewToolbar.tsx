@@ -23,7 +23,7 @@ export const DataViewToolbar: React.FC<DataViewToolbarProps> = ({ className, oui
         </ToolbarItem>
       )}
       {actions && (
-        <ToolbarItem variant={ToolbarItemVariant['overflow-menu']}>
+        <ToolbarItem>
           {actions}
         </ToolbarItem>
       )}

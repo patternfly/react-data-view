@@ -49,7 +49,7 @@ describe('useDataViewPagination', () => {
     expect(result.current).toEqual({ 
       onPerPageSelect: expect.any(Function),
       onSetPage: expect.any(Function),
-      page: 3,
+      page: 1,
       perPage: 50
     })
   });

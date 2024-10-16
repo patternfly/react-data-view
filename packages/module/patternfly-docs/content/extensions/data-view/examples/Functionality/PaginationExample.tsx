@@ -9,7 +9,7 @@ import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataView
 const perPageOptions = [
   { title: '5', value: 5 },
   { title: '10', value: 10 }
-]
+];
 
 interface Repository {
   name: string;
@@ -17,7 +17,7 @@ interface Repository {
   prs: string | null;
   workspaces: string;
   lastCommit: string;
-}
+};
 
 const repositories: Repository[] = [
   { name: 'Repository one', branches: 'Branch one', prs: 'Pull request one', workspaces: 'Workspace one', lastCommit: 'Timestamp one' },
@@ -46,11 +46,11 @@ const MyTable: React.FunctionComponent = () => {
       <DataViewTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={pageRows} />
       <DataViewToolbar ouiaId='DataViewFooter' pagination={<Pagination isCompact perPageOptions={perPageOptions} itemCount={repositories.length} {...pagination} />} />
     </DataView>
-  )
-}
+  );
+};
 
 export const BasicExample: React.FunctionComponent = () => (
   <BrowserRouter>
     <MyTable/>
   </BrowserRouter>
-)
+);

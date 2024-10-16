@@ -26,7 +26,7 @@ const error = (
   <Tbody>
     <Tr key="loading" ouiaId={`${ouiaId}-tr-loading`}>
       <Td colSpan={columns.length}>
-        <ErrorState errorTitle='Unable to load data' errorDescription='There was an error retrieving data. Check your connection and reload the page.' />
+        <ErrorState titleText='Unable to load data' bodyText='There was an error retrieving data. Check your connection and reload the page.' />
       </Td>
     </Tr>
   </Tbody>

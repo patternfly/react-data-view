@@ -54,7 +54,7 @@ const rows: DataViewTr[] = repositories.map(({ id, name, branches, prs, workspac
 const columns: DataViewTh[] = [
   null,
   'Repositories', 
-  { cell: <>Branches<ExclamationCircleIcon className='pf-v5-u-ml-sm' color='var(--pf-v5-global--danger-color--100)'/></> }, 
+  { cell: <>Branches<ExclamationCircleIcon className='pf-v5-u-ml-sm' color="var(--pf-t--temp--dev--tbd)"/* CODEMODS: original v5 color was --pf-v5-global--danger-color--100 *//></> }, 
   'Pull requests', 
   { cell: 'Workspaces', props: { info: { tooltip: 'More information' } } }, 
   { cell: 'Last commit', props: { sort: { sortBy: {}, columnIndex: 4 } } },

@@ -14,6 +14,7 @@ sortValue: 3
 sourceLink: https://github.com/patternfly/react-data-view/blob/main/packages/module/patternfly-docs/content/extensions/data-view/examples/Functionality/Functionality.md
 ---
 import { useMemo } from 'react';
+import { BrowserRouter, useSearchParams } from 'react-router-dom';
 import { useDataViewPagination, useDataViewSelection } from '@patternfly/react-data-view/dist/dynamic/Hooks';
 import { DataView } from '@patternfly/react-data-view/dist/dynamic/DataView';
 import { BulkSelect, BulkSelectValue } from '@patternfly/react-component-groups/dist/dynamic/BulkSelect';

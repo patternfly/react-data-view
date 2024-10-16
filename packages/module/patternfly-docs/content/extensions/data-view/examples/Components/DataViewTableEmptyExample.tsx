@@ -2,7 +2,7 @@ import React from 'react';
 import { DataView, DataViewState } from '@patternfly/react-data-view/dist/dynamic/DataView';
 import { DataViewTable, DataViewTr, DataViewTh } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 import { CubesIcon } from '@patternfly/react-icons';
-import { Button, EmptyState, EmptyStateActions, EmptyStateBody, EmptyStateFooter, EmptyStateHeader, EmptyStateIcon } from '@patternfly/react-core';
+import { Button, EmptyState, EmptyStateActions, EmptyStateBody, EmptyStateFooter,  } from '@patternfly/react-core';
 import { Tbody, Td, Tr } from '@patternfly/react-table';
 
 interface Repository {
@@ -27,8 +27,7 @@ const empty = (
   <Tbody>
     <Tr key="loading" ouiaId={`${ouiaId}-tr-loading`}>
       <Td colSpan={columns.length}>
-        <EmptyState>
-          <EmptyStateHeader titleText="No data found" headingLevel="h4" icon={<EmptyStateIcon icon={CubesIcon} />} />
+        <EmptyState  headingLevel="h4" icon={CubesIcon} titleText="No data found">
           <EmptyStateBody>There are no matching data to be displayed.</EmptyStateBody>
           <EmptyStateFooter>
             <EmptyStateActions>
