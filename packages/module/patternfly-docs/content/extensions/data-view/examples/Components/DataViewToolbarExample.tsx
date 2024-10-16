@@ -6,15 +6,15 @@ import DataViewToolbar from '@patternfly/react-data-view/dist/dynamic/DataViewTo
 
 export const BasicExample: React.FunctionComponent = () => (
   <DataViewToolbar 
-    pagination={
-      <Pagination page={1} perPage={10} />
-    }
     bulkSelect={
       <BulkSelect
         selectedCount={0}
         pageCount={5}
         onSelect={() => null}
       />  
-    } 
+    }
+    pagination={
+      <Pagination page={1} perPage={10} />
+    }
   />
 )

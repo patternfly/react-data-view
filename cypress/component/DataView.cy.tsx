@@ -1,9 +1,9 @@
 import React from 'react';
 import { Pagination } from '@patternfly/react-core';
-import { Table, Tbody, Th, Thead, Tr, Td } from '@patternfly/react-table';
 import { BulkSelect } from '@patternfly/react-component-groups/dist/dynamic/BulkSelect';
-import DataView from '../../packages/module/dist/dynamic/DataView';
-import DataViewToolbar from '../../packages/module/dist/dynamic/DataViewToolbar';
+import { DataView } from '@patternfly/react-data-view/dist/dynamic/DataView';
+import { DataViewToolbar } from '@patternfly/react-data-view/dist/dynamic/DataViewToolbar';
+import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 
 interface Repository {
   name: string;
@@ -19,21 +19,16 @@ const PAGINATION = {
 }
 
 const repositories: Repository[] = [
-  { name: 'one', branches: 'two', prs: 'three', workspaces: 'four', lastCommit: 'five' },
-  { name: 'one - 2', branches: null, prs: null, workspaces: 'four - 2', lastCommit: 'five - 2' },
-  { name: 'one - 3', branches: 'two - 3', prs: 'three - 3', workspaces: 'four - 3', lastCommit: 'five - 3' },
-  { name: 'one - 4', branches: 'two - 4', prs: 'null', workspaces: 'four - 4', lastCommit: 'five - 4' },
-  { name: 'one - 5', branches: 'two - 5', prs: 'three - 5', workspaces: 'four - 5', lastCommit: 'five - 5' },
-  { name: 'one - 6', branches: 'two - 6', prs: 'three - 6', workspaces: 'four - 6', lastCommit: 'five - 6' }
+  { name: 'Repository one', branches: 'Branch one', prs: 'Pull request one', workspaces: 'Workspace one', lastCommit: 'Timestamp one' },
+  { name: 'Repository two', branches: 'Branch two', prs: 'Pull request two', workspaces: 'Workspace two', lastCommit: 'Timestamp two' },
+  { name: 'Repository three', branches: 'Branch three', prs: 'Pull request three', workspaces: 'Workspace three', lastCommit: 'Timestamp three' },
+  { name: 'Repository four', branches: 'Branch four', prs: 'Pull request four', workspaces: 'Workspace four', lastCommit: 'Timestamp four' },
+  { name: 'Repository five', branches: 'Branch five', prs: 'Pull request five', workspaces: 'Workspace five', lastCommit: 'Timestamp five' },
+  { name: 'Repository six', branches: 'Branch six', prs: 'Pull request six', workspaces: 'Workspace six', lastCommit: 'Timestamp six' }
 ];
+const rows = repositories.map(item => Object.values(item));
 
-const cols: Record<keyof Repository, string> = {
-  name: 'Repositories',
-  branches: 'Branches',
-  prs: 'Pull requests',
-  workspaces: 'Workspaces',
-  lastCommit: 'Last commit'
-};
+const columns = [ 'Repositories', 'Branches', 'Pull requests', 'Workspaces', 'Last commit' ];
 
 describe('DataView', () => {
   it('renders the data view layout', () => {
@@ -61,24 +56,7 @@ describe('DataView', () => {
             />
           } 
         />
-        <Table aria-label="Repositories table" ouiaId={ouiaId}>
-          <Thead data-ouia-component-id={`${ouiaId}-thead`}>
-            <Tr ouiaId={`${ouiaId}-tr-head`}>
-              {Object.values(cols).map((column, index) => <Th key={index} data-ouia-component-id={`${ouiaId}-th-${index}`}>{column}</Th>)}
-            </Tr>
-          </Thead>
-          <Tbody>
-            {repositories.map((repo, rowIndex) => (
-              <Tr key={repo.name}>
-                <Td data-ouia-component-id={`${ouiaId}-td-${rowIndex}-name`} dataLabel={cols.name}>{repo.name}</Td>
-                <Td data-ouia-component-id={`${ouiaId}-td-${rowIndex}-branches`} dataLabel={cols.branches}>{repo.branches}</Td>
-                <Td data-ouia-component-id={`${ouiaId}-td-${rowIndex}-prs`} dataLabel={cols.prs}>{repo.prs}</Td>
-                <Td data-ouia-component-id={`${ouiaId}-td-${rowIndex}-workspaces`} dataLabel={cols.workspaces}>{repo.workspaces}</Td>
-                <Td data-ouia-component-id={`${ouiaId}-td-${rowIndex}-last-commit`} dataLabel={cols.lastCommit}>{repo.lastCommit}</Td>
-              </Tr>
-            ))}
-          </Tbody>
-        </Table>
+        <DataViewTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={rows} />
         <DataViewToolbar ouiaId="DataViewFooter" pagination={<Pagination isCompact {...PAGINATION} />} />
       </DataView>
     );
@@ -91,11 +69,11 @@ describe('DataView', () => {
     cy.get('[data-ouia-component-id="data-th-3"]').contains('Workspaces');
     cy.get('[data-ouia-component-id="data-th-4"]').contains('Last commit');
 
-    cy.get('[data-ouia-component-id="data-td-0-name"]').contains('one');
-    cy.get('[data-ouia-component-id="data-td-2-branches"]').contains('two - 3');
-    cy.get('[data-ouia-component-id="data-td-3-prs"]').contains('null');
-    cy.get('[data-ouia-component-id="data-td-4-workspaces"]').contains('four - 5');
-    cy.get('[data-ouia-component-id="data-td-5-last-commit"]').contains('five - 6');
+    cy.get('[data-ouia-component-id="data-td-0-0"]').contains('Repository one');
+    cy.get('[data-ouia-component-id="data-td-2-1"]').contains('Branch three');
+    cy.get('[data-ouia-component-id="data-td-3-2"]').contains('Pull request four');
+    cy.get('[data-ouia-component-id="data-td-4-3"]').contains('Workspace five');
+    cy.get('[data-ouia-component-id="data-td-5-4"]').contains('Timestamp six');
 
     cy.get('[data-ouia-component-id="DataViewFooter-pagination"]').should('exist');
   });

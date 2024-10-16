@@ -2,18 +2,17 @@
 import { useState } from "react";
 
 export interface UseDataViewSelectionProps {
+  /** Function to compare items when checking if item is selected */
+  matchOption: (item: any, another: any) => boolean;
   /** Array of initially selected entries */
   initialSelected?: (any)[];
-  /** Function to compare items when checking if entry is selected */
-  matchOption?: (item: any, another: any) => boolean;
 }
 
-export const useDataViewSelection = (props: UseDataViewSelectionProps) => {
-  const [ selected, setSelected ] = useState<any[]>(props.initialSelected ?? []);
-  const matchOption = props.matchOption ? props.matchOption : (option, another) => (option === another);
+export const useDataViewSelection = ({ matchOption, initialSelected = [] }: UseDataViewSelectionProps) => {
+  const [ selected, setSelected ] = useState<any[]>(initialSelected);
 
   const onSelect = (isSelecting: boolean, items?: any[] | any) => {
-    isSelecting ?
+    isSelecting && items ?
       setSelected(prev => {
         const newSelectedItems = [ ...prev ];
         (Array.isArray(items) ? items : [ items ]).forEach(newItem => !prev.some(prevItem => matchOption(prevItem, newItem)) && newSelectedItems.push(newItem));
@@ -22,7 +21,7 @@ export const useDataViewSelection = (props: UseDataViewSelectionProps) => {
       : setSelected(items ? prev => prev.filter(prevSelected => !(Array.isArray(items) ? items : [ items ]).some(item => matchOption(item, prevSelected))) : []);
   };
   
-  const isSelected = (item: any): boolean => props?.matchOption ? Boolean(selected.find(selected => matchOption(selected, item))) : selected.includes(item);
+  const isSelected = (item: any): boolean => Boolean(selected.find(selected => matchOption(selected, item)));
 
   return {
     selected,

@@ -117,7 +117,7 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                       type="button"
                     >
                       <span
-                        class="pf-v6-c-button__icon pf-m-start"
+                        class="pf-v6-c-button__icon"
                       >
                         <svg
                           aria-hidden="true"
@@ -150,7 +150,7 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                       type="button"
                     >
                       <span
-                        class="pf-v6-c-button__icon pf-m-start"
+                        class="pf-v6-c-button__icon"
                       >
                         <svg
                           aria-hidden="true"
@@ -201,7 +201,7 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                       type="button"
                     >
                       <span
-                        class="pf-v6-c-button__icon pf-m-start"
+                        class="pf-v6-c-button__icon"
                       >
                         <svg
                           aria-hidden="true"
@@ -233,7 +233,7 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                       type="button"
                     >
                       <span
-                        class="pf-v6-c-button__icon pf-m-start"
+                        class="pf-v6-c-button__icon"
                       >
                         <svg
                           aria-hidden="true"
@@ -380,7 +380,7 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                     type="button"
                   >
                     <span
-                      class="pf-v6-c-button__icon pf-m-start"
+                      class="pf-v6-c-button__icon"
                     >
                       <svg
                         aria-hidden="true"
@@ -413,7 +413,7 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                     type="button"
                   >
                     <span
-                      class="pf-v6-c-button__icon pf-m-start"
+                      class="pf-v6-c-button__icon"
                     >
                       <svg
                         aria-hidden="true"
@@ -464,7 +464,7 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                     type="button"
                   >
                     <span
-                      class="pf-v6-c-button__icon pf-m-start"
+                      class="pf-v6-c-button__icon"
                     >
                       <svg
                         aria-hidden="true"
@@ -496,7 +496,7 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                     type="button"
                   >
                     <span
-                      class="pf-v6-c-button__icon pf-m-start"
+                      class="pf-v6-c-button__icon"
                     >
                       <svg
                         aria-hidden="true"

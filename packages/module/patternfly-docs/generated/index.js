@@ -34,11 +34,23 @@ module.exports = {
     sortValue: 3,
     Component: () => import(/* webpackChunkName: "extensions/data-view/functionality/react/index" */ './extensions/data-view/functionality/react')
   },
+  '/extensions/data-view/events-context/react': {
+    id: "Events context",
+    title: "Events context",
+    toc: [[{"text":"Row click subscription example"}]],
+    examples: ["Row click subscription example"],
+    section: "extensions",
+    subsection: "Data view",
+    source: "react",
+    tabName: null,
+    sortValue: 3,
+    Component: () => import(/* webpackChunkName: "extensions/data-view/events-context/react/index" */ './extensions/data-view/events-context/react')
+  },
   '/extensions/data-view/components/react': {
     id: "Components",
     title: "Components",
-    toc: [{"text":"Data view toolbar"},[{"text":"Basic example"}]],
-    examples: ["Basic example"],
+    toc: [{"text":"Data view toolbar"},[{"text":"Basic toolbar example"}],{"text":"Data view table"},[{"text":"Rows and columns customization"},{"text":"Tree table example"},{"text":"Empty state example"}]],
+    examples: ["Basic toolbar example","Rows and columns customization","Tree table example","Empty state example"],
     section: "extensions",
     subsection: "Data view",
     source: "react",
