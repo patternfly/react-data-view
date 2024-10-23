@@ -72,6 +72,8 @@ The `DataViewTable` component accepts the following props:
 
 - optional `props` (`TableProps`) that are passed down to the `<Table>` component, except for `onSelect`, which is managed internally.
 
+It is also possible to disable row selection using the `isSelectDisabled` function passed to the wrapping data view component.
+
 ### Tree table example
 This example shows the tree table variant with expandable rows, custom icons for leaf and parent nodes. Tree table is turned on by passing `isTreeTable` flag to the `DataViewTable` component. You can pass `collapsedIcon`, `expandedIcon` or `leafIcon` to be displayen rows with given status. The tree table rows have to be defined in a format of object with following keys:
   - `row` (`DataViewTd[]`) defining the content for each cell in the row.
