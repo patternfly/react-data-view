@@ -12,8 +12,7 @@ updates:
     allow:
       - dependency-type: "direct"
     ignore:
-      # Ignore all direct dependencies for major updates
-      - dependency-type: "direct"
+      - dependency-name: "*"
         update-types:
           - "version-update:semver-major"
     open-pull-requests-limit: 10
@@ -34,8 +33,7 @@ updates:
     allow:
       - dependency-type: "direct"
     ignore:
-      # Ignore all direct dependencies for major updates
-      - dependency-type: "direct"
+      - dependency-name: "*"
         update-types:
           - "version-update:semver-major"
     open-pull-requests-limit: 10
