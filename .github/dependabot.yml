@@ -3,7 +3,6 @@ updates:
   - package-ecosystem: npm
     commit-message:
       prefix: "fix(deps)"
-    update-lockfile: true
     directory: "/"
     schedule:
       interval: weekly
@@ -25,7 +24,6 @@ updates:
   - package-ecosystem: npm
     commit-message:
       prefix: "fix(deps)"
-    update-lockfile: true
     directory: "/packages/module"
     schedule:
       interval: weekly
