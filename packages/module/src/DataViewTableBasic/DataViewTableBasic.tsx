@@ -11,6 +11,7 @@ import { DataViewTableHead } from '../DataViewTableHead';
 import { DataViewTh, DataViewTr, isDataViewTdObject, isDataViewTrObject } from '../DataViewTable';
 import { DataViewState } from '../DataView/DataView';
 
+/** extends TableProps */
 export interface DataViewTableBasicProps extends Omit<TableProps, 'onSelect' | 'rows'> {
   /** Columns definition */
   columns: DataViewTh[];
