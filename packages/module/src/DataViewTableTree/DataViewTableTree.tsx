@@ -30,6 +30,7 @@ const isNodeChecked = (node: DataViewTrTree, isSelected: (node: DataViewTrTree) 
   return allSelected;
 };
 
+/** extends TableProps */
 export interface DataViewTableTreeProps extends Omit<TableProps, 'onSelect' | 'rows'> {
   /** Columns definition */
   columns: DataViewTh[];
