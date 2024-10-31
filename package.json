@@ -37,7 +37,7 @@
     "@babel/preset-env": "^7.24.7",
     "@babel/preset-flow": "^7.24.7",
     "@babel/preset-react": "^7.24.7",
-    "@babel/preset-typescript": "^7.24.7",
+    "@babel/preset-typescript": "^7.26.0",
     "@octokit/rest": "^20.1.1",
     "@patternfly/documentation-framework": "6.0.0-alpha.117",
     "@swc/core": "1.6.1",
