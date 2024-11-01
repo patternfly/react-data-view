@@ -90,7 +90,7 @@ const RepositoriesTable: React.FunctionComponent<RepositoriesTableProps> = ({ se
   const rows = useMemo(() => {
     const handleRowClick = (event, repo: Repository | undefined) => {
       // prevents drawer toggle on actions or checkbox click
-      event.target.matches('td') && trigger(EventTypes.rowClick, repo);
+      (event.target.matches('td') || event.target.matches('tr')) && trigger(EventTypes.rowClick, repo);
     };
 
     return repositories.map(repo => ({
