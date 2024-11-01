@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, StackItem } from '@patternfly/react-core';
+import { Stack, StackItem, StackProps } from '@patternfly/react-core';
 import { DataViewSelection, InternalContextProvider } from '../InternalContext';
 
 export const DataViewState = {
@@ -10,7 +10,8 @@ export const DataViewState = {
 
 export type DataViewState = typeof DataViewState[keyof typeof DataViewState];
 
-export interface DataViewProps {
+/** extends StackProps */
+export interface DataViewProps extends StackProps {
   /** Content rendered inside the data view */
   children: React.ReactNode;
   /** Custom OUIA ID */
