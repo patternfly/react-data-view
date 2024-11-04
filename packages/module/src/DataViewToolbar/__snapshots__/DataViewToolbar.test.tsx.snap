@@ -526,6 +526,20 @@ exports[`DataViewToolbar component should render correctly 1`] = `
         <div
           class="pf-v6-c-toolbar__group"
         />
+        <div
+          class="pf-v5-c-toolbar__item"
+        >
+          <button
+            aria-disabled="false"
+            class="pf-v5-c-button pf-m-link pf-m-inline"
+            data-ouia-component-id="DataViewToolbar-clear-all-filters"
+            data-ouia-component-type="PF5/Button"
+            data-ouia-safe="true"
+            type="button"
+          >
+            Clear filters
+          </button>
+        </div>
       </div>
     </div>
   </div>,
