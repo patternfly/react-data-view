@@ -42,10 +42,16 @@ export const DataViewFilters = <T extends object>({
   const attributeMenuRef = useRef<HTMLDivElement>(null);
   const attributeContainerRef = useRef<HTMLDivElement>(null);
 
+  const childrenHash = useMemo(() => JSON.stringify(
+    React.Children.map(children, (child) =>
+      React.isValidElement(child) ? { type: child.type, key: child.key, props: child.props } : child
+    )
+  ), [ children ]);
+
   const filterItems: DataViewFilterIdentifiers[] = useMemo(() => React.Children.toArray(children)
     .map(child =>
       React.isValidElement(child) ? { filterId: String(child.props.filterId), title: String(child.props.title) } : undefined
-    ).filter((item): item is DataViewFilterIdentifiers => !!item), []);  // eslint-disable-line react-hooks/exhaustive-deps
+    ).filter((item): item is DataViewFilterIdentifiers => !!item), [ childrenHash ]);  // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     filterItems.length > 0 && setActiveAttributeMenu(filterItems[0].title);
