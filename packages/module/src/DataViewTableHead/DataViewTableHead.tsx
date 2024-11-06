@@ -8,6 +8,7 @@ import {
 import { useInternalContext } from '../InternalContext';
 import { DataViewTh, isDataViewThObject } from '../DataViewTable';
 
+/** extends TheadProps */
 export interface DataViewTableHeadProps extends TheadProps {
   /** Indicates whether table is a tree */
   isTreeTable?: boolean;
