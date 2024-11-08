@@ -19,7 +19,7 @@ import { useDataViewEventsContext, DataViewEventsContext, DataViewEventsProvider
 
 **Note:** Data view lives in its own package [`@patternfly/react-data-view`](https://www.npmjs.com/package/@patternfly/react-data-view) 
 
-If you notice a bug, or if have a suggestion for improving the data view extension or its documentation, file an issue in [the react-data-view repository](https://github.com/patternfly/react-data-view/issues)! Before creating a new issue, make sure there is not already a pre-existing issue. 
+If you notice a bug, or if you have a suggestion for improving the data view extension or its documentation, file an issue in [the react-data-view repository](https://github.com/patternfly/react-data-view/issues)! Before creating a new issue, make sure there is not already a pre-existing issue. 
 
 ## Basic data view 
 
@@ -96,7 +96,7 @@ This example includes the following:
     - An optional `searchParams` object
     - An optional `setSearchParams` function
 
-    - While the hook works seamlessly with React Router library, you do not need to use it to take advantage of URL persistence. The `searchParams` and `setSearchParams` props can be managed using native browser APIs (`URLSearchParams` and `window.history.pushState`) or any other routing library of your choice. If you don't pass these two props, the pagination state will be stored internally without the URL usage.
+    - While the hook works seamlessly with the React Router library, you do not need to use it to take advantage of URL persistence. The `searchParams` and `setSearchParams` props can be managed using native browser APIs (`URLSearchParams` and `window.history.pushState`) or any other routing library of your choice. If you don't pass these two props, the pagination state will be stored internally without the URL usage.
 
     You can also pass custom `pageParam` or `perPageParam` names, renaming the pagination parameters in the URL.
 
@@ -118,7 +118,7 @@ A basic data view table supports various customizations of the table head and bo
 
 The `<DataViewTable>` component accepts the following props:
 
-- `columns`: Defines the columns the table. Each item in the array can be a `ReactNode` (for simple heads) or an object with the following properties:
+- `columns`: Defines the columns of the table. Each item in the array can be a `ReactNode` (for simple heads) or an object with the following properties:
   - `cell` (`ReactNode`): Content to display in the column head
   - Optional `props` (`ThProps`) to pass to the `<Th>` component, such as `width`, `sort`, and other table head cell properties.
 
@@ -198,4 +198,3 @@ This example illustrates how to set up a layout that listens for row click event
 ```js file="./EventsExample.tsx"
 
 ```
-
