@@ -25,5 +25,8 @@ export * from './DataViewTable';
 export { default as DataViewEventsContext } from './DataViewEventsContext';
 export * from './DataViewEventsContext';
 
+export { default as DataViewCheckboxFilter } from './DataViewCheckboxFilter';
+export * from './DataViewCheckboxFilter';
+
 export { default as DataView } from './DataView';
 export * from './DataView';
