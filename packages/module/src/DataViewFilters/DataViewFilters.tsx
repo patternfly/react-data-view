@@ -1,8 +1,15 @@
-import React, { useMemo, useState, useRef, useEffect, ReactElement } from 'react';
+import React, { useMemo, useState, useRef, useEffect, ReactElement, ReactNode } from 'react';
 import {
   Menu, MenuContent, MenuItem, MenuList, MenuToggle, Popper, ToolbarGroup, ToolbarToggleGroup, ToolbarToggleGroupProps,
 } from '@patternfly/react-core';
 import { FilterIcon } from '@patternfly/react-icons';
+
+export interface DataViewFilterOption {
+  /** Filter option label */
+  label: ReactNode;
+  /** Filter option value */
+  value: string;
+}
 
 // helper interface to generate attribute menu
 interface DataViewFilterIdentifiers {
@@ -57,6 +64,19 @@ export const DataViewFilters = <T extends object>({
     filterItems.length > 0 && setActiveAttributeMenu(filterItems[0].title);
   }, [ filterItems ]);
 
+  const handleClickOutside = (event: MouseEvent) => 
+    isAttributeMenuOpen &&
+    !attributeMenuRef.current?.contains(event.target as Node) &&
+    !attributeToggleRef.current?.contains(event.target as Node)
+    && setIsAttributeMenuOpen(false);
+
+  useEffect(() => {
+    window.addEventListener('click', handleClickOutside);
+    return () => {
+      window.removeEventListener('click', handleClickOutside);
+    };
+  }, [ isAttributeMenuOpen ]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const attributeToggle = (
     <MenuToggle
       ref={attributeToggleRef}
@@ -102,9 +122,9 @@ export const DataViewFilters = <T extends object>({
             isVisible={isAttributeMenuOpen}
           />
         </div>
-        {React.Children.map(children, (child) => (
-          React.isValidElement(child) ? (
-            React.cloneElement(child as ReactElement<{
+        {React.Children.map(children, (child) =>
+          React.isValidElement(child)
+            ? React.cloneElement(child as ReactElement<{
               showToolbarItem: boolean;
               onChange: (_e: unknown, values: unknown) => void;
               value: unknown;
@@ -114,9 +134,8 @@ export const DataViewFilters = <T extends object>({
               value: values?.[child.props.filterId],
               ...child.props
             })
-          ) : child
-        ))}
-
+            : child
+        )}
       </ToolbarGroup>
     </ToolbarToggleGroup>
   );
