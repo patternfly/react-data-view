@@ -72,7 +72,7 @@ const MyTable: React.FunctionComponent = () => {
         pagination={
           <Pagination 
             perPageOptions={perPageOptions} 
-            itemCount={repositories.length} 
+            itemCount={filteredData.length} 
             {...pagination} 
           />
         }
