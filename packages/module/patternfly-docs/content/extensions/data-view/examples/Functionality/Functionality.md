@@ -11,7 +11,7 @@ source: react
 # If you use typescript, the name of the interface to display props for
 # These are found through the sourceProps function provided in patternfly-docs.source.js
 sortValue: 3
-propComponents: ['DataViewFilters', 'DataViewTextFilter']
+propComponents: ['DataViewFilters', 'DataViewTextFilter', 'DataViewCheckboxFilter']
 sourceLink: https://github.com/patternfly/react-data-view/blob/main/packages/module/patternfly-docs/content/extensions/data-view/examples/Functionality/Functionality.md
 ---
 import { useMemo } from 'react';
@@ -23,6 +23,7 @@ import { DataViewToolbar } from '@patternfly/react-data-view/dist/dynamic/DataVi
 import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 import { DataViewFilters } from '@patternfly/react-data-view/dist/dynamic/DataViewFilters';
 import { DataViewTextFilter } from '@patternfly/react-data-view/dist/dynamic/DataViewTextFilter';
+import { DataViewCheckboxFilter } from '@patternfly/react-data-view/dist/dynamic/DataViewCheckboxFilter';
 
 This is a list of functionality you can use to manage data displayed in the **data view**.
 
@@ -90,7 +91,7 @@ The `useDataViewSelection` hook manages the selection state of the data view.
 Enables filtering of data records in the data view and displays the applied filter chips.
 
 ### Toolbar usage
-The data view toolbar can include a set of filters by passing a React node to the `filters` property. You can use predefined components `DataViewFilters` and `DataViewTextFilter` to customize and handle filtering directly in the toolbar. The `DataViewFilters` is a wrapper allowing conditional filtering using multiple attributes. If you need just a single filter, you can use `DataViewTextFilter` or a different filter component alone. Props of these filter components are listed at the bottom of this page. 
+The data view toolbar can include a set of filters by passing a React node to the `filters` property. You can use predefined components `DataViewFilters`, `DataViewTextFilter` and `DataViewCheckboxFilter` to customize and handle filtering directly in the toolbar. The `DataViewFilters` is a wrapper allowing conditional filtering using multiple attributes. If you need just a single filter, you can use `DataViewTextFilter`, `DataViewCheckboxFilter` or a different filter component alone. Props of these filter components are listed at the bottom of this page. 
 
 You can decide between passing `value` and `onChange` event to every filter separately or pass `values` and `onChange` to the `DataViewFilters` wrapper which make them available to its children. Props directly passed to child filters have a higher priority than the "inherited" ones. 
 
@@ -99,7 +100,7 @@ You can decide between passing `value` and `onChange` event to every filter sepa
 The `useDataViewFilters` hook manages the filter state of the data view. It allows you to define default filter values, synchronize filter state with URL parameters, and handle filter changes efficiently.
 
 **Initial values:**
-- `initialFilters` object with default filter values
+- `initialFilters` object with default filter values (if the filter param allows multiple values, pass an array)
 - optional `searchParams` object for managing URL-based filter state
 - optional `setSearchParams` function to update the URL when filters are modified
 
