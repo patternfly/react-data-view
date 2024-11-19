@@ -16,15 +16,19 @@ export const useDataViewFilters = <T extends object>({
 }: UseDataViewFiltersProps<T>) => {
   const isUrlSyncEnabled = useMemo(() => searchParams && !!setSearchParams, [ searchParams, setSearchParams ]);
 
-  const getInitialFilters = useCallback((): T => isUrlSyncEnabled ? Object.keys(initialFilters).reduce((loadedFilters, key) => {
-    const urlValue = searchParams?.get(key);
-    loadedFilters[key as keyof T] = urlValue
-      ? (urlValue as T[keyof T] | T[keyof T])
-      : initialFilters[key as keyof T];
-    return loadedFilters;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, { ...initialFilters }) : initialFilters, [ isUrlSyncEnabled, JSON.stringify(initialFilters), searchParams?.toString() ]);
+  const getInitialFilters = useCallback((): T => isUrlSyncEnabled
+    ? Object.keys(initialFilters).reduce((loadedFilters, key) => {
+      const urlValue = searchParams?.get(key);
+      const isArrayFilter = Array.isArray(initialFilters[key]);
 
+      // eslint-disable-next-line no-nested-ternary
+      loadedFilters[key] = urlValue
+        ? (isArrayFilter && !Array.isArray(urlValue) ? [ urlValue ] : urlValue)
+        : initialFilters[key];
+
+      return loadedFilters;
+    }, { ...initialFilters })
+    : initialFilters, [ isUrlSyncEnabled, initialFilters, searchParams ]);
   const [ filters, setFilters ] = useState<T>(getInitialFilters());
 
   const updateSearchParams = useCallback(
@@ -32,11 +36,8 @@ export const useDataViewFilters = <T extends object>({
       if (isUrlSyncEnabled) {
         const params = new URLSearchParams(searchParams);
         Object.entries(newFilters).forEach(([ key, value ]) => {
-          if (value) {
-            params.set(key, Array.isArray(value) ? value.join(',') : value);
-          } else {
-            params.delete(key);
-          }
+          params.delete(key);
+          (Array.isArray(value) ? value : [ value ]).forEach((val) => value && params.append(key, val));
         });
         setSearchParams?.(params);
       }
