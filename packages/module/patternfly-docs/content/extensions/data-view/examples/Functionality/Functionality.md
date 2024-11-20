@@ -16,7 +16,7 @@ sourceLink: https://github.com/patternfly/react-data-view/blob/main/packages/mod
 ---
 import { useMemo } from 'react';
 import { BrowserRouter, useSearchParams } from 'react-router-dom';
-import { useDataViewPagination, useDataViewSelection, useDataViewFilters } from '@patternfly/react-data-view/dist/dynamic/Hooks';
+import { useDataViewPagination, useDataViewSelection, useDataViewFilters, useDataViewSort } from '@patternfly/react-data-view/dist/dynamic/Hooks';
 import { DataView } from '@patternfly/react-data-view/dist/dynamic/DataView';
 import { BulkSelect, BulkSelectValue } from '@patternfly/react-component-groups/dist/dynamic/BulkSelect';
 import { DataViewToolbar } from '@patternfly/react-data-view/dist/dynamic/DataViewToolbar';
@@ -115,5 +115,36 @@ The `useDataViewFilters` hook works well with the React Router library to suppor
 This example demonstrates the setup and usage of filters within the data view. It includes text filters for different attributes, the ability to clear all filters, and persistence of filter state in the URL.
 
 ```js file="./FiltersExample.tsx"
+
+```
+
+### Sort state
+
+The `useDataViewSort` hook manages the sorting state of a data view. It provides an easy way to handle sorting logic, including synchronization with URL parameters and defining default sorting behavior.
+
+**Initial values:**
+- `initialSort` object to set default `sortBy` and `direction` values:
+  - `sortBy`: key of the initial column to sort.
+  - `direction`: default sorting direction (`asc` or `desc`).
+- Optional `searchParams` object to manage URL-based synchronization of sort state.
+- Optional `setSearchParams` function to update the URL parameters when sorting changes.
+- `defaultDirection` to set the default direction when no direction is specified.
+- Customizable parameter names for the URL:
+  - `sortByParam`: name of the URL parameter for the column key.
+  - `directionParam`: name of the URL parameter for the sorting direction.
+
+The `useDataViewSort` hook integrates seamlessly with React Router to manage sort state via URL parameters. Alternatively, you can use `URLSearchParams` and `window.history.pushState` APIs, or other routing libraries. If URL synchronization is not configured, the sort state is managed internally within the component.
+
+**Return values:**
+- `sortBy`: key of the column currently being sorted.
+- `direction`: current sorting direction (`asc` or `desc`).
+- `onSort`: function to handle sorting changes programmatically or via user interaction.
+
+### Sorting example
+
+This example demonstrates how to set up and use sorting functionality within a data view. The implementation includes dynamic sorting by column with persistence of sort state in the URL using React Router.
+
+
+```js file="./SortingExample.tsx"
 
 ```
