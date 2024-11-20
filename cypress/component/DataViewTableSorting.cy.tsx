@@ -39,7 +39,7 @@ const sortData = (data: Repository[], sortBy: keyof Repository | undefined, dire
     )
     : data;
 
-const TestableTable: React.FunctionComponent = () => {
+const TestTable: React.FunctionComponent = () => {
   const [ searchParams, setSearchParams ] = useSearchParams();
   const { sortBy, direction, onSort } = useDataViewSort({ searchParams, setSearchParams });
   const sortByIndex = React.useMemo(() => COLUMNS.findIndex(item => item.key === sortBy), [ sortBy ]);
@@ -78,7 +78,7 @@ describe('DataViewTable Sorting with Hook', () => {
   it('sorts by repository name in ascending and descending order', () => {
     cy.mount(
       <BrowserRouter>
-        <TestableTable />
+        <TestTable />
       </BrowserRouter>
     );
 
@@ -94,7 +94,7 @@ describe('DataViewTable Sorting with Hook', () => {
   it('sorts by last commit date in ascending and descending order', () => {
     cy.mount(
       <BrowserRouter>
-        <TestableTable />
+        <TestTable />
       </BrowserRouter>
     );
 
