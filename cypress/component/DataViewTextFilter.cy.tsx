@@ -37,14 +37,14 @@ describe('DataViewTextFilter', () => {
       .should('have.value', 'Repository one');
   });
 
-  it('displays a chip when value is present and removes it on delete', () => {
+  it('displays a label when value is present and removes it on delete', () => {
     cy.mount(<DataViewToolbarWithState />);
     cy.get('[data-ouia-component-id="DataViewTextFilter-input"] input').should('have.value', 'Repository one');
 
-    cy.get('.pf-v5-c-chip__text').contains('Repository one');
-    cy.get('.pf-m-chip-group button.pf-v5-c-button.pf-m-plain').click();
+    cy.get('.pf-v6-c-label__text').contains('Repository one');
+    cy.get('.pf-m-label-group button.pf-v6-c-button.pf-m-plain').click();
 
-    cy.get('.pf-v5-c-chip__text').should('not.exist');
+    cy.get('.pf-v6-c-label__text').should('not.exist');
     cy.get('[data-ouia-component-id="DataViewTextFilter-input"] input').should('have.value', '');
   });
 

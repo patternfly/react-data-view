@@ -14,8 +14,8 @@ import {
 import { FilterIcon } from '@patternfly/react-icons';
 import { DataViewFilterOption } from '../DataViewFilters';
 
-const isToolbarChip = (chip: string | ToolbarLabel): chip is ToolbarLabel =>
-  typeof chip === 'object' && 'key' in chip;
+const isToolbarLabel = (label: string | ToolbarLabel): label is ToolbarLabel =>
+  typeof label === 'object' && 'key' in label;
 
 export const isDataViewFilterOption = (obj: unknown): obj is DataViewFilterOption =>
   !!obj &&
@@ -117,8 +117,8 @@ export const DataViewCheckboxFilter: React.FC<DataViewCheckboxFilterProps> = ({
         const activeOption = normalizeOptions.find(option => option.value === item);
         return ({ key: activeOption?.value as string, node: activeOption?.label })
       })}
-      deleteLabel={(_, chip) =>
-        onChange?.(undefined, value.filter(item => item !== (isToolbarChip(chip) ? chip.key : chip)))
+      deleteLabel={(_, label) =>
+        onChange?.(undefined, value.filter(item => item !== (isToolbarLabel(label) ? label.key : label)))
       }
       categoryName={title}
       showToolbarItem={showToolbarItem}

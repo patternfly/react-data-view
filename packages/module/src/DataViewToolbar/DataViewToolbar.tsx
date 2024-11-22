@@ -15,11 +15,11 @@ export interface DataViewToolbarProps extends Omit<PropsWithChildren<ToolbarProp
   actions?: React.ReactNode;
   /** React node to display filters */
   filters?: React.ReactNode;
-  /** React node to display custom filter chips */
-  customChipGroupContent?: React.ReactNode;
+  /** React node to display custom filter labels */
+  customLabelGroupContent?: React.ReactNode;
 }
 
-export const DataViewToolbar: React.FC<DataViewToolbarProps> = ({ className, ouiaId = 'DataViewToolbar', bulkSelect, actions, pagination, filters, customChipGroupContent, clearAllFilters, children, ...props }: DataViewToolbarProps) => {
+export const DataViewToolbar: React.FC<DataViewToolbarProps> = ({ className, ouiaId = 'DataViewToolbar', bulkSelect, actions, pagination, filters, customLabelGroupContent, clearAllFilters, children, ...props }: DataViewToolbarProps) => {
   const defaultClearFilters = useRef(
     <ToolbarItem>
       <Button ouiaId={`${ouiaId}-clear-all-filters`} variant="link" onClick={clearAllFilters} isInline>
@@ -28,7 +28,7 @@ export const DataViewToolbar: React.FC<DataViewToolbarProps> = ({ className, oui
     </ToolbarItem>
   );
   return (
-    <Toolbar ouiaId={ouiaId} className={className} customLabelGroupContent={customChipGroupContent ?? defaultClearFilters.current} {...props}>
+    <Toolbar ouiaId={ouiaId} className={className} customLabelGroupContent={customLabelGroupContent ?? defaultClearFilters.current} {...props}>
       <ToolbarContent>
         {bulkSelect && (
           <ToolbarItem data-ouia-component-id={`${ouiaId}-bulk-select`}>

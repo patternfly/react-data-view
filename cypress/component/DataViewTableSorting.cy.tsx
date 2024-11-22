@@ -82,11 +82,15 @@ describe('DataViewTable Sorting with Hook', () => {
       </BrowserRouter>
     );
 
-    cy.get('[data-ouia-component-id="test-table-th-0"]').click();
+    cy.get('[data-ouia-component-id="test-table-th-0"]')
+      .find('button')
+      .click();
     cy.get('[data-ouia-component-id="test-table-td-0-0"]').should('contain', 'Repository five');
     cy.get('[data-ouia-component-id="test-table-td-5-0"]').should('contain', 'Repository two');
 
-    cy.get('[data-ouia-component-id="test-table-th-0"]').click();
+    cy.get('[data-ouia-component-id="test-table-th-0"]')
+      .find('button')
+      .click();
     cy.get('[data-ouia-component-id="test-table-td-0-0"]').should('contain', 'Repository two');
     cy.get('[data-ouia-component-id="test-table-td-5-0"]').should('contain', 'Repository five');
   });
@@ -98,11 +102,15 @@ describe('DataViewTable Sorting with Hook', () => {
       </BrowserRouter>
     );
 
-    cy.get('[data-ouia-component-id="test-table-th-4"]').click();
+    cy.get('[data-ouia-component-id="test-table-th-4"]')
+      .find('button')
+      .click();
     cy.get('[data-ouia-component-id="test-table-td-0-4"]').should('contain', '2023-11-01');
     cy.get('[data-ouia-component-id="test-table-td-5-4"]').should('contain', '2023-11-06');
 
-    cy.get('[data-ouia-component-id="test-table-th-4"]').click();
+    cy.get('[data-ouia-component-id="test-table-th-4"]')
+      .find('button')
+      .click();
     cy.get('[data-ouia-component-id="test-table-td-0-4"]').should('contain', '2023-11-06');
     cy.get('[data-ouia-component-id="test-table-td-5-4"]').should('contain', '2023-11-01');
   });

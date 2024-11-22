@@ -88,7 +88,7 @@ The `useDataViewSelection` hook manages the selection state of the data view.
 ```
 
 # Filters
-Enables filtering of data records in the data view and displays the applied filter chips.
+Enables filtering of data records in the data view and displays the applied filter labels.
 
 ### Toolbar usage
 The data view toolbar can include a set of filters by passing a React node to the `filters` property. You can use predefined components `DataViewFilters`, `DataViewTextFilter` and `DataViewCheckboxFilter` to customize and handle filtering directly in the toolbar. The `DataViewFilters` is a wrapper allowing conditional filtering using multiple attributes. If you need just a single filter, you can use `DataViewTextFilter`, `DataViewCheckboxFilter` or a different filter component alone. Props of these filter components are listed at the bottom of this page. 

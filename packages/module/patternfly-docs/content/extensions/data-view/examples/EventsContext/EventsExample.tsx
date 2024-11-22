@@ -47,7 +47,7 @@ const RepositoryDetail: React.FunctionComponent<RepositoryDetailProps> = ({ sele
   return (
     <DrawerPanelContent>
       <DrawerHead>
-        <Title className="pf-v5-u-mb-md" headingLevel="h2" ouiaId="detail-drawer-title">
+        <Title className="pf-v6-u-mb-md" headingLevel="h2" ouiaId="detail-drawer-title">
           Detail of {selectedRepo?.name}
         </Title>
         <Content component="p">Branches: {selectedRepo?.branches}</Content>

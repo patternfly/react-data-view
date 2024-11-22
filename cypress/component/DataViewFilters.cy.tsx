@@ -37,7 +37,7 @@ describe('DataViewFilters', () => {
   it('renders DataViewFilters with menu and filter items', () => {
     cy.mount(<DataViewToolbarWithState />);
     cy.get('[data-ouia-component-id="DataViewFilters"]').should('exist');
-    cy.get('[data-ouia-component-id="DataViewFilters"] .pf-v5-c-menu-toggle').click();
+    cy.get('[data-ouia-component-id="DataViewFilters"] .pf-v6-c-menu-toggle').click();
 
     cy.contains('Name').should('exist');
     cy.contains('Branch').should('exist');
@@ -46,7 +46,7 @@ describe('DataViewFilters', () => {
   it('can select a filter option', () => {
     cy.mount(<DataViewToolbarWithState />);
     cy.get('[data-ouia-component-id="DataViewFilters"]').should('contain.text', 'Name');
-    cy.get('[data-ouia-component-id="DataViewFilters"] .pf-v5-c-menu-toggle').click();
+    cy.get('[data-ouia-component-id="DataViewFilters"] .pf-v6-c-menu-toggle').click();
     cy.contains('Branch').click();
 
     cy.get('[data-ouia-component-id="DataViewFilters"]').should('contain.text', 'Branch');
@@ -54,55 +54,57 @@ describe('DataViewFilters', () => {
 
   it('responds to input and clears the filters', () => {
     cy.mount(<DataViewToolbarWithState />);
-    cy.get('[data-ouia-component-id="DataViewFilters"] .pf-v5-c-menu-toggle').click();
+    cy.get('[data-ouia-component-id="DataViewFilters"] .pf-v6-c-menu-toggle').click();
     cy.contains('Name').click();
 
     cy.get('input[placeholder="Filter by name"]').type('Repository one');
-    cy.get('.pf-v5-c-chip__text').should('have.length', 1);
+    cy.get('.pf-v6-c-label__text').should('have.length', 1);
     cy.get('input[placeholder="Filter by name"]').clear();
-    cy.get('.pf-v5-c-chip__text').should('have.length', 0);
+    cy.get('.pf-v6-c-label__text').should('have.length', 0);
   });
 
-  it('displays chips for selected filters', () => {
+  it('displays labels for selected filters', () => {
     cy.mount(<DataViewToolbarWithState />);
-    cy.get('[data-ouia-component-id="DataViewFilters"] .pf-v5-c-menu-toggle').click();
+    cy.get('[data-ouia-component-id="DataViewFilters"] .pf-v6-c-menu-toggle').click();
     cy.contains('Name').click();
     cy.get('input[placeholder="Filter by name"]').type('Repository one');
 
-    cy.get('[data-ouia-component-id="DataViewFilters"] .pf-v5-c-menu-toggle').click();
+    cy.get('[data-ouia-component-id="DataViewFilters"] .pf-v6-c-menu-toggle').click();
     cy.contains('Branch').click();
     cy.get('input[placeholder="Filter by branch"]').type('Main branch');
 
-    cy.get('.pf-v5-c-chip__text').should('have.length', 2);
-    cy.get('.pf-v5-c-chip__text').eq(0).should('contain.text', 'Repository one');
-    cy.get('.pf-v5-c-chip__text').eq(1).should('contain.text', 'Main branch');
+    cy.get('.pf-v6-c-label__text').should('have.length', 2);
+    cy.get('.pf-v6-c-label__text').eq(0).should('contain.text', 'Repository one');
+    cy.get('.pf-v6-c-label__text').eq(1).should('contain.text', 'Main branch');
   });
 
-  it('removes filters by clicking individual chips', () => {
+  it('removes filters by clicking individual labels', () => {
     cy.mount(<DataViewToolbarWithState />);
-    cy.get('[data-ouia-component-id="DataViewFilters"] .pf-v5-c-menu-toggle').click();
+    cy.get('[data-ouia-component-id="DataViewFilters"] .pf-v6-c-menu-toggle').click();
     cy.contains('Name').click();
     cy.get('input[placeholder="Filter by name"]').type('Repository one');
 
-    cy.get('[data-ouia-component-id="DataViewFilters"] .pf-v5-c-menu-toggle').click();
+    cy.get('[data-ouia-component-id="DataViewFilters"] .pf-v6-c-menu-toggle').click();
     cy.contains('Branch').click();
     cy.get('input[placeholder="Filter by branch"]').type('Main branch');
 
-    cy.get('[data-ouia-component-id="close"]').should('have.length', 2);
+    cy.get('[aria-label="Close Repository one"]').should('have.length', 1);
+    cy.get('[aria-label="Close Main branch"]').should('have.length', 1);
 
-    cy.get('[data-ouia-component-id="close"]').first().click();
-    cy.get('[data-ouia-component-id="close"]').last().click();
+    cy.get('[aria-label="Close Repository one"]').click();
+    cy.get('[aria-label="Close Repository one"]').should('have.length', 0);
 
-    cy.get('[data-ouia-component-id="close"]').should('have.length', 0);
+    cy.get('[aria-label="Close Main branch"]').click();
+    cy.get('[aria-label="Close Main branch"]').should('have.length', 0);
   });
 
   it('clears all filters using the clear-all button', () => {
     cy.mount(<DataViewToolbarWithState />);
-    cy.get('[data-ouia-component-id="DataViewFilters"] .pf-v5-c-menu-toggle').click();
+    cy.get('[data-ouia-component-id="DataViewFilters"] .pf-v6-c-menu-toggle').click();
     cy.contains('Name').click();
     cy.get('input[placeholder="Filter by name"]').type('Repository one');
 
-    cy.get('[data-ouia-component-id="DataViewFilters"] .pf-v5-c-menu-toggle').click();
+    cy.get('[data-ouia-component-id="DataViewFilters"] .pf-v6-c-menu-toggle').click();
     cy.contains('Branch').click();
     cy.get('input[placeholder="Filter by branch"]').type('Main branch');
 
