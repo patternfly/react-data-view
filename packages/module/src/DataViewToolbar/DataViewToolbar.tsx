@@ -28,7 +28,7 @@ export const DataViewToolbar: React.FC<DataViewToolbarProps> = ({ className, oui
     </ToolbarItem>
   );
   return (
-    <Toolbar ouiaId={ouiaId} className={className} customChipGroupContent={customChipGroupContent ?? defaultClearFilters.current} {...props}>
+    <Toolbar ouiaId={ouiaId} className={className} customLabelGroupContent={customChipGroupContent ?? defaultClearFilters.current} {...props}>
       <ToolbarContent>
         {bulkSelect && (
           <ToolbarItem data-ouia-component-id={`${ouiaId}-bulk-select`}>
@@ -36,12 +36,12 @@ export const DataViewToolbar: React.FC<DataViewToolbarProps> = ({ className, oui
           </ToolbarItem>
         )}
         {actions && (
-          <ToolbarItem variant={ToolbarItemVariant['overflow-menu']}>
+          <ToolbarItem>
             {actions}
           </ToolbarItem>
         )}
         {filters && (
-          <ToolbarItem variant={ToolbarItemVariant['search-filter']}>
+          <ToolbarItem>
             {filters}
           </ToolbarItem>
         )}

@@ -33,8 +33,8 @@ export const DataViewTextFilter: React.FC<DataViewTextFilterProps> = ({
   <ToolbarFilter
     key={ouiaId}
     data-ouia-component-id={ouiaId}
-    chips={value.length > 0 ? [ { key: title, node: value } ] : []}
-    deleteChip={() => onChange?.(undefined, '')}
+    labels={value.length > 0 ? [ { key: title, node: value } ] : []}
+    deleteLabel={() => onChange?.(undefined, '')}
     categoryName={title}
     showToolbarItem={showToolbarItem}
   >

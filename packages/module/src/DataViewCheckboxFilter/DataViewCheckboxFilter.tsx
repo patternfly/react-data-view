@@ -8,13 +8,13 @@ import {
   MenuProps,
   MenuToggle,
   Popper,
-  ToolbarChip,
+  ToolbarLabel,
   ToolbarFilter,
 } from '@patternfly/react-core';
 import { FilterIcon } from '@patternfly/react-icons';
 import { DataViewFilterOption } from '../DataViewFilters';
 
-const isToolbarChip = (chip: string | ToolbarChip): chip is ToolbarChip =>
+const isToolbarChip = (chip: string | ToolbarLabel): chip is ToolbarLabel =>
   typeof chip === 'object' && 'key' in chip;
 
 export const isDataViewFilterOption = (obj: unknown): obj is DataViewFilterOption =>
@@ -113,11 +113,11 @@ export const DataViewCheckboxFilter: React.FC<DataViewCheckboxFilterProps> = ({
     <ToolbarFilter
       key={ouiaId}
       data-ouia-component-id={ouiaId}
-      chips={value.map(item => {
+      labels={value.map(item => {
         const activeOption = normalizeOptions.find(option => option.value === item);
         return ({ key: activeOption?.value as string, node: activeOption?.label })
       })}
-      deleteChip={(_, chip) =>
+      deleteLabel={(_, chip) =>
         onChange?.(undefined, value.filter(item => item !== (isToolbarChip(chip) ? chip.key : chip)))
       }
       categoryName={title}
