@@ -17,6 +17,7 @@ export interface InternalContextProps {
   activeState?: DataViewState | string;
 }
 
+/** extends InternalContextProps */
 export interface InternalContextValue extends InternalContextProps {
   /** Flag indicating if data view is selectable (auto-calculated) */
   isSelectable: boolean; 

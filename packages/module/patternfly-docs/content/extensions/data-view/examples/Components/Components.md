@@ -11,7 +11,7 @@ source: react
 # If you use typescript, the name of the interface to display props for
 # These are found through the sourceProps function provided in patternfly-docs.source.js
 sortValue: 4
-propComponents: ['DataViewToolbar', 'DataViewTableBasic', 'DataViewTableTree']
+propComponents: ['DataViewToolbar', 'DataViewTableBasic', 'DataViewTableTree', 'DataViewTrTree', 'DataViewTrObject']
 sourceLink: https://github.com/patternfly/react-data-view/blob/main/packages/module/patternfly-docs/content/extensions/data-view/examples/Components/Components.md
 ---
 import { Button, EmptyState, EmptyStateActions, EmptyStateBody, EmptyStateFooter } from '@patternfly/react-core';
@@ -26,7 +26,7 @@ import { DataView, DataViewState } from '@patternfly/react-data-view/dist/dynami
 
 The **data view toolbar** component renders a default opinionated data view toolbar above or below the data section. 
 
-Data view toolbar can contain a `pagination`, `bulkSelect`, `actions` or other children content passed. The preffered way of passing children toolbar items is using the [toolbar item](/components/toolbar#toolbar-items) component.
+Data view toolbar can contain a `pagination`, `bulkSelect`, `filters`, `actions` or other children content passed. The preffered way of passing children toolbar items is using the [toolbar item](/components/toolbar#toolbar-items) component.
 
 ### Basic toolbar example
 
@@ -72,13 +72,15 @@ The `DataViewTable` component accepts the following props:
 
 - optional `props` (`TableProps`) that are passed down to the `<Table>` component, except for `onSelect`, which is managed internally.
 
+It is also possible to disable row selection using the `isSelectDisabled` function passed to the wrapping data view component through `selection`.
+
 ### Tree table example
 This example shows the tree table variant with expandable rows, custom icons for leaf and parent nodes. Tree table is turned on by passing `isTreeTable` flag to the `DataViewTable` component. You can pass `collapsedIcon`, `expandedIcon` or `leafIcon` to be displayen rows with given status. The tree table rows have to be defined in a format of object with following keys:
   - `row` (`DataViewTd[]`) defining the content for each cell in the row.
   - `id` (`string`) for the row (used to match items in selection end expand the rows).
   - optional `children` (`DataViewTrTree[]`) defining the children rows.
 
-It is also possible to disable row selection using the `isSelectDisabled` function passed to the wrapping data view component.
+It is also possible to disable row selection using the `isSelectDisabled` function passed to the wrapping data view component through `selection`.
 
 ```js file="./DataViewTableTreeExample.tsx"
 

@@ -3,6 +3,8 @@ import { Drawer, DrawerActions, DrawerCloseButton, DrawerContent, DrawerContentB
 import { DataView } from '@patternfly/react-data-view/dist/dynamic/DataView';
 import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 import { DataViewEventsProvider, EventTypes, useDataViewEventsContext } from '@patternfly/react-data-view/dist/dynamic/DataViewEventsContext';
+import { useDataViewSelection } from '@patternfly/react-data-view/dist/dynamic/Hooks';
+import { ActionsColumn } from '@patternfly/react-table';
 
 interface Repository {
   name: string;
@@ -45,7 +47,7 @@ const RepositoryDetail: React.FunctionComponent<RepositoryDetailProps> = ({ sele
   return (
     <DrawerPanelContent>
       <DrawerHead>
-        <Title className="pf-v5-u-mb-md" headingLevel="h2" ouiaId="detail-drawer-title">
+        <Title className="pf-v6-u-mb-md" headingLevel="h2" ouiaId="detail-drawer-title">
           Detail of {selectedRepo?.name}
         </Title>
         <Content component="p">Branches: {selectedRepo?.branches}</Content>
@@ -64,25 +66,45 @@ interface RepositoriesTableProps {
   selectedRepo?: Repository;
 }
 
+const rowActions = [
+  {
+    title: 'Some action',
+    onClick: () => console.log('clicked on Some action')  // eslint-disable-line no-console
+  },
+  {
+    title: <div>Another action</div>,
+    onClick: () => console.log('clicked on Another action')  // eslint-disable-line no-console
+  },
+  {
+    isSeparator: true
+  },
+  {
+    title: 'Third action',
+    onClick: () => console.log('clicked on Third action')  // eslint-disable-line no-console
+  }
+];
+
 const RepositoriesTable: React.FunctionComponent<RepositoriesTableProps> = ({ selectedRepo = undefined }) => {
+  const selection = useDataViewSelection({ matchOption: (a, b) => a.row[0] === b.row[0] });
   const { trigger } = useDataViewEventsContext();
   const rows = useMemo(() => {
-    const handleRowClick = (repo: Repository | undefined) => {
-      trigger(EventTypes.rowClick, repo);
+    const handleRowClick = (event, repo: Repository | undefined) => {
+      // prevents drawer toggle on actions or checkbox click
+      (event.target.matches('td') || event.target.matches('tr')) && trigger(EventTypes.rowClick, repo);
     };
 
     return repositories.map(repo => ({
-      row: Object.values(repo),
+      row: [ ...Object.values(repo), { cell: <ActionsColumn items={rowActions}/>, props: { isActionCell: true } } ],
       props: {
         isClickable: true,
-        onRowClick: () => handleRowClick(selectedRepo?.name === repo.name ? undefined : repo),
+        onRowClick: (event) => handleRowClick(event, selectedRepo?.name === repo.name ? undefined : repo),
         isRowSelected: selectedRepo?.name === repo.name
       }
     }));
   }, [ selectedRepo?.name, trigger ]);
 
   return (
-    <DataView>
+    <DataView selection={selection}>
       <DataViewTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={rows} />
     </DataView>
   );

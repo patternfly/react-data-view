@@ -18,6 +18,7 @@ import { Table, Tbody, Th, Thead, Tr, Td } from '@patternfly/react-table';
 import { DataView } from '@patternfly/react-data-view/dist/dynamic/DataView';
 import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 import { useDataViewEventsContext, DataViewEventsContext, DataViewEventsProvider, EventTypes } from '@patternfly/react-data-view/dist/dynamic/DataViewEventsContext';
+import { useDataViewSelection } from '@patternfly/react-data-view/dist/dynamic/Hooks';
 import { Drawer, DrawerContent, DrawerContentBody } from '@patternfly/react-core';
 
 The **data view  events context** provides a way of listening to the data view events from the outside of the component.

@@ -49,8 +49,8 @@ module.exports = {
   '/extensions/data-view/components/react': {
     id: "Components",
     title: "Components",
-    toc: [{"text":"Data view toolbar"},[{"text":"Basic toolbar example"}],{"text":"Data view table"},[{"text":"Rows and columns customization"},{"text":"Tree table example"},{"text":"Empty state example"}]],
-    examples: ["Basic toolbar example","Rows and columns customization","Tree table example","Empty state example"],
+    toc: [{"text":"Data view toolbar"},[{"text":"Basic toolbar example"},{"text":"Actions configuration"},{"text":"Actions example"}],{"text":"Data view table"},[{"text":"Rows and columns customization"},{"text":"Tree table example"},{"text":"Empty state example"},{"text":"Error state example"},{"text":"Loading state example"}]],
+    examples: ["Basic toolbar example","Actions example","Rows and columns customization","Tree table example","Empty state example","Error state example","Loading state example"],
     section: "extensions",
     subsection: "Data view",
     source: "react",

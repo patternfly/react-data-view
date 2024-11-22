@@ -12,24 +12,46 @@ import { DataViewTableHead } from '../DataViewTableHead';
 import { DataViewTh, DataViewTrTree, isDataViewTdObject } from '../DataViewTable';
 import { DataViewState } from '../DataView/DataView';
 
-const getDescendants = (node: DataViewTrTree): DataViewTrTree[] => (!node.children || !node.children.length) ? [ node ] : node.children.flatMap(getDescendants);
+const getNodesAffectedBySelection = (
+  allRows: DataViewTrTree[],
+  node: DataViewTrTree,
+  isChecking: boolean,
+  isSelected?: (item: DataViewTrTree) => boolean
+): DataViewTrTree[] => {
 
-const isNodeChecked = (node: DataViewTrTree, isSelected: (node: DataViewTrTree) => boolean) => {
-  let allSelected = true;
-  let someSelected = false;
+  const getDescendants = (node: DataViewTrTree): DataViewTrTree[] =>
+    node.children ? node.children.flatMap(getDescendants).concat(node) : [ node ];
 
-  for (const descendant of getDescendants(node)) {
-    const selected = !!isSelected?.(descendant);
+  const findParent = (child: DataViewTrTree, rows: DataViewTrTree[]): DataViewTrTree | undefined =>
+    rows.find(row => row.children?.some(c => c === child)) ?? 
+    rows.flatMap(row => row.children ?? []).map(c => findParent(child, [ c ])).find(p => p);
 
-    someSelected ||= selected;
-    allSelected &&= selected;
+  const getAncestors = (node: DataViewTrTree): DataViewTrTree[] => {
+    const ancestors: DataViewTrTree[] = [];
+    let parent = findParent(node, allRows);
+    while (parent) {
+      ancestors.push(parent);
+      parent = findParent(parent, allRows);
+    }
+    return ancestors;
+  };
 
-    if (!allSelected && someSelected) { return null }
-  }
+  const affectedNodes = new Set([ node, ...getDescendants(node) ]);
 
-  return allSelected;
+  getAncestors(node).forEach(ancestor => {
+    const allChildrenSelected = ancestor.children?.every(child => isSelected?.(child) || affectedNodes.has(child));
+    const anyChildAffected = ancestor.children?.some(child => affectedNodes.has(child) || child.id === node.id);
+
+    if (isChecking ? !isSelected?.(ancestor) && allChildrenSelected : isSelected?.(ancestor) && anyChildAffected) {
+      affectedNodes.add(ancestor);
+    }
+  });
+
+  return Array.from(affectedNodes);
 };
 
+
+/** extends TableProps */
 export interface DataViewTableTreeProps extends Omit<TableProps, 'onSelect' | 'rows'> {
   /** Columns definition */
   columns: DataViewTh[];
@@ -82,7 +104,7 @@ export const DataViewTableTree: React.FC<DataViewTableTreeProps> = ({
       }
       const isExpanded = expandedNodeIds.includes(node.id);
       const isDetailsExpanded = expandedDetailsNodeNames.includes(node.id);
-      const isChecked = isSelected && isNodeChecked(node, isSelected);
+      const isChecked = isSelected?.(node);
       let icon = leafIcon;
       if (node.children) {
         icon = isExpanded ? expandedIcon : collapsedIcon;
@@ -99,7 +121,7 @@ export const DataViewTableTree: React.FC<DataViewTableTreeProps> = ({
             const otherDetailsExpandedNodeIds = prevDetailsExpanded.filter(id => id !== node.id);
             return isDetailsExpanded ? otherDetailsExpandedNodeIds : [ ...otherDetailsExpandedNodeIds, node.id ];
           }),
-        onCheckChange: (isSelectDisabled?.(node) || !onSelect) ? undefined : (_event, isChecking) => onSelect?.(isChecking, getDescendants(node)),
+        onCheckChange: (isSelectDisabled?.(node) || !onSelect) ? undefined : (_event, isChecking) => onSelect?.(isChecking, getNodesAffectedBySelection(rows, node, isChecking, isSelected)),
         rowIndex,
         props: {
           isExpanded,

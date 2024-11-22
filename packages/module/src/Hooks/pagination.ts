@@ -15,6 +15,7 @@ export interface UseDataViewPaginationProps {
   perPageParam?: string;
 }
 
+/** extends UseDataViewPaginationProps */
 export interface DataViewPaginationProps extends UseDataViewPaginationProps {
   /** Current page number */
     page: number;
