@@ -5,30 +5,56 @@ section: extensions
 subsection: Data view
 # Sidenav secondary level section
 # should be the same for all markdown files
-id: Functionality
+id: Toolbar
 # Tab (react | react-demos | html | html-demos | design-guidelines | accessibility)
 source: react
 # If you use typescript, the name of the interface to display props for
 # These are found through the sourceProps function provided in patternfly-docs.source.js
-sortValue: 3
-propComponents: ['DataViewFilters', 'DataViewTextFilter', 'DataViewCheckboxFilter']
-sourceLink: https://github.com/patternfly/react-data-view/blob/main/packages/module/patternfly-docs/content/extensions/data-view/examples/Functionality/Functionality.md
+sortValue: 2
+propComponents: ['DataViewToolbar', 'DataViewFilters', 'DataViewTextFilter', 'DataViewCheckboxFilter']
+sourceLink: https://github.com/patternfly/react-data-view/blob/main/packages/module/patternfly-docs/content/extensions/data-view/examples/Toolbar/Toolbar.md
 ---
 import { useMemo } from 'react';
 import { BrowserRouter, useSearchParams } from 'react-router-dom';
-import { useDataViewPagination, useDataViewSelection, useDataViewFilters, useDataViewSort } from '@patternfly/react-data-view/dist/dynamic/Hooks';
+import { useDataViewPagination, useDataViewSelection, useDataViewFilters } from '@patternfly/react-data-view/dist/dynamic/Hooks';
 import { DataView } from '@patternfly/react-data-view/dist/dynamic/DataView';
-import { BulkSelect, BulkSelectValue } from '@patternfly/react-component-groups/dist/dynamic/BulkSelect';
+import { BulkSelect, BulkSelectValue, ErrorState, ResponsiveAction, ResponsiveActions, SkeletonTableHead, SkeletonTableBody } from '@patternfly/react-component-groups';
 import { DataViewToolbar } from '@patternfly/react-data-view/dist/dynamic/DataViewToolbar';
 import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 import { DataViewFilters } from '@patternfly/react-data-view/dist/dynamic/DataViewFilters';
 import { DataViewTextFilter } from '@patternfly/react-data-view/dist/dynamic/DataViewTextFilter';
 import { DataViewCheckboxFilter } from '@patternfly/react-data-view/dist/dynamic/DataViewCheckboxFilter';
 
-This is a list of functionality you can use to manage data displayed in the **data view**.
+## Data view toolbar
 
-# Pagination
-Allows to display data records on multiple pages and display the pagination state.
+The **data view toolbar** component renders a default opinionated data view toolbar above or below the data section. 
+
+Data view toolbar can contain pagination, bulk select, filters, actions or other child content passed. The preffered way of passing child toolbar items is using the [toolbar item](/components/toolbar#toolbar-items) component or predefined `DataViewToolbar` props for specific use cases.
+
+You can further customize toolbar interactions by referring to the additional documentation: 
+- [Actions](#toolbar-actions)
+- [Pagination](#pagination)
+- [Selection](#selection)
+- [Filters](#filters)
+
+### Basic toolbar example
+
+```js file="./DataViewToolbarExample.tsx"
+
+```
+
+## Toolbar actions
+To support additional user needs, you can pass relevant actions to the toolbar via `actions`. Add standard PatternFly actions (like buttons) or choose predefined [responsive actions](/component-groups/responsive-actions) which ensure the responsive behavior of multiple actions in one toolbar.
+
+### Actions example
+
+```js file="./DataViewToolbarActionsExample.tsx"
+
+```
+
+## Pagination
+
+Helps users navigate data records that span multiple pages.
 
 ### Toolbar usage
 Data view toolbar can display a pagination using the `pagination` property accepting a React node. You can also pass a custom `ouiaId` for testing purposes.
@@ -43,7 +69,7 @@ The `useDataViewPagination` hook manages the pagination state of the data view.
 - optional `searchParams` object
 - optional `setSearchParams` function
 
-While the hook works seamlessly with React Router library, you do not need to use it to take advantage of URL persistence. The `searchParams` and `setSearchParams` props can be managed using native browser APIs (`URLSearchParams` and `window.history.pushState`) or any other routing library of your choice. If you don't pass these two props, the pagination state will be stored internally without the URL usage.
+While the hook works seamlessly with the React Router library, you do not need to use it to take advantage of URL persistence. The `searchParams` and `setSearchParams` props can be managed using native browser APIs (`URLSearchParams` and `window.history.pushState`) or any other routing library of your choice. If you don't pass these two props, the pagination state will be stored internally without the URL usage.
 
 You can also pass custom `pageParam` or `perPageParam` names, renaming the pagination parameters in the URL.
 
@@ -60,7 +86,7 @@ The retrieved values are named to match the PatternFly [pagination](/components/
 
 ```
 
-# Selection
+## Selection
 Allows to select data records inside the data view and show the selection state.
 
 ### Toolbar usage
@@ -87,8 +113,8 @@ The `useDataViewSelection` hook manages the selection state of the data view.
 
 ```
 
-# Filters
-Enables filtering of data records in the data view and displays the applied filter labels.
+## Filters
+Enables filtering of data records in the data view and displays the applied filter chips.
 
 ### Toolbar usage
 The data view toolbar can include a set of filters by passing a React node to the `filters` property. You can use predefined components `DataViewFilters`, `DataViewTextFilter` and `DataViewCheckboxFilter` to customize and handle filtering directly in the toolbar. The `DataViewFilters` is a wrapper allowing conditional filtering using multiple attributes. If you need just a single filter, you can use `DataViewTextFilter`, `DataViewCheckboxFilter` or a different filter component alone. Props of these filter components are listed at the bottom of this page. 
@@ -115,36 +141,5 @@ The `useDataViewFilters` hook works well with the React Router library to suppor
 This example demonstrates the setup and usage of filters within the data view. It includes text filters for different attributes, the ability to clear all filters, and persistence of filter state in the URL.
 
 ```js file="./FiltersExample.tsx"
-
-```
-
-### Sort state
-
-The `useDataViewSort` hook manages the sorting state of a data view. It provides an easy way to handle sorting logic, including synchronization with URL parameters and defining default sorting behavior.
-
-**Initial values:**
-- `initialSort` object to set default `sortBy` and `direction` values:
-  - `sortBy`: key of the initial column to sort.
-  - `direction`: default sorting direction (`asc` or `desc`).
-- Optional `searchParams` object to manage URL-based synchronization of sort state.
-- Optional `setSearchParams` function to update the URL parameters when sorting changes.
-- `defaultDirection` to set the default direction when no direction is specified.
-- Customizable parameter names for the URL:
-  - `sortByParam`: name of the URL parameter for the column key.
-  - `directionParam`: name of the URL parameter for the sorting direction.
-
-The `useDataViewSort` hook integrates seamlessly with React Router to manage sort state via URL parameters. Alternatively, you can use `URLSearchParams` and `window.history.pushState` APIs, or other routing libraries. If URL synchronization is not configured, the sort state is managed internally within the component.
-
-**Return values:**
-- `sortBy`: key of the column currently being sorted.
-- `direction`: current sorting direction (`asc` or `desc`).
-- `onSort`: function to handle sorting changes programmatically or via user interaction.
-
-### Sorting example
-
-This example demonstrates how to set up and use sorting functionality within a data view. The implementation includes dynamic sorting by column with persistence of sort state in the URL using React Router.
-
-
-```js file="./SortingExample.tsx"
 
 ```
