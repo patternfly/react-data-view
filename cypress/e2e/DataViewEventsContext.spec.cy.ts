@@ -3,9 +3,9 @@ describe('Test the Data view docs page', () => {
   it('displays a table and opens detail', () => {
     const ouiaId = 'ContextExample';
 
-    cy.visit('http://localhost:8006/extensions/data-view/events-context');
+    cy.visit('http://localhost:8006/extensions/data-view/data-view');
     
-    cy.get(`[data-ouia-component-id="${ouiaId}-th-0"]`).contains('Repositories');
+    cy.get(`[data-ouia-component-id="${ouiaId}-th-0"]`).scrollIntoView().contains('Repositories');
     cy.get(`[data-ouia-component-id="${ouiaId}-th-4"]`).contains('Last commit');
 
     cy.get(`[data-ouia-component-id="${ouiaId}-td-0-0"]`).contains('Repository one');

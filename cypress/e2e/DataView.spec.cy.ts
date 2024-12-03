@@ -3,8 +3,9 @@ describe('Test the Data view docs page', () => {
   it('displays a layout with a table and paginates', () => {
     const ouiaId = 'LayoutExample';
 
-    cy.visit('http://localhost:8006/extensions/data-view/layout');
+    cy.visit('http://localhost:8006/extensions/data-view/data-view');
 
+    cy.get(`[data-ouia-component-id="${ouiaId}-th-0"]`).scrollIntoView().contains('Repositories');
     cy.get(`[data-ouia-component-id="${ouiaId}Header-pagination"]`).should('exist');
     cy.get(`[data-ouia-component-id="${ouiaId}Header-bulk-select"]`).should('exist');
 
@@ -27,11 +28,17 @@ describe('Test the Data view docs page', () => {
     cy.get(`[data-ouia-component-id="${ouiaId}-td-0-4"]`).contains('Timestamp one');
 
     // test bulk select
-    cy.get(`input[type="checkbox"`).each(($checkbox) => {cy.wrap($checkbox).should('not.be.checked')});
+    cy.get('[data-ouia-component-id="LayoutExample"] input[type="checkbox"]')
+      .each(($checkbox) => {
+        cy.wrap($checkbox).should('not.be.checked');
+      });
 
     // page checkbox select
     cy.get(`[data-ouia-component-id="BulkSelect-checkbox"`).first().click();
-    cy.get(`input[type="checkbox"`).each(($checkbox) => {cy.wrap($checkbox).should('be.checked')});
+    cy.get('[data-ouia-component-id="LayoutExample"] input[type="checkbox"]')
+      .each(($checkbox) => {
+        cy.wrap($checkbox).should('be.checked');
+      });
     cy.contains('5 selected').should('exist');
 
     // select none
@@ -42,18 +49,27 @@ describe('Test the Data view docs page', () => {
     // select all
     cy.get(`[data-ouia-component-id="BulkSelect-toggle"`).first().click({ force: true });
     cy.get(`[data-ouia-component-id="BulkSelect-select-all"`).first().click();
-    cy.get(`input[type="checkbox"`).each(($checkbox) => {cy.wrap($checkbox).should('be.checked')});
+    cy.get('[data-ouia-component-id="LayoutExample"] input[type="checkbox"]')
+      .each(($checkbox) => {
+        cy.wrap($checkbox).should('be.checked');
+      });
     cy.contains('6 selected').should('exist');
 
     // page checkbox deselect
     cy.get(`[data-ouia-component-id="BulkSelect-checkbox"`).first().click();
-    cy.get(`input[type="checkbox"`).each(($checkbox) => {cy.wrap($checkbox).should('not.be.checked')});
+    cy.get('[data-ouia-component-id="LayoutExample"] input[type="checkbox"]')
+      .each(($checkbox) => {
+        cy.wrap($checkbox).should('not.be.checked');
+      });
     cy.contains('1 selected').should('exist');
 
     // select page
     cy.get(`[data-ouia-component-id="BulkSelect-toggle"`).first().click({ force: true });
     cy.get(`[data-ouia-component-id="BulkSelect-select-page"`).first().click();
-    cy.get(`input[type="checkbox"`).each(($checkbox) => {cy.wrap($checkbox).should('be.checked')});
+    cy.get('[data-ouia-component-id="LayoutExample"] input[type="checkbox"]')
+      .each(($checkbox) => {
+        cy.wrap($checkbox).should('be.checked');
+      });
     cy.contains('6 selected').should('exist');
   })
 });
