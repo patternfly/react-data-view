@@ -37,7 +37,7 @@ You can further customize toolbar interactions by referring to the additional do
 - [Selection](#selection)
 - [Filters](#filters)
 
-### Basic toolbar example
+### Toolbar example
 
 ```js file="./DataViewToolbarExample.tsx"
 
