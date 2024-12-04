@@ -8,12 +8,16 @@ sourceLink: https://github.com/patternfly/react-data-view/blob/main/packages/mod
 --- 
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { Drawer, DrawerContent, DrawerContentBody } from '@patternfly/react-core';
-import { useDataViewPagination, useDataViewSelection } from '@patternfly/react-data-view/dist/dynamic/Hooks';
-import { BulkSelect, BulkSelectValue } from '@patternfly/react-component-groups/dist/dynamic/BulkSelect';
+import { CubesIcon } from '@patternfly/react-icons';
+import { useDataViewPagination, useDataViewSelection, useDataViewFilters, useDataViewSort } from '@patternfly/react-data-view/dist/dynamic/Hooks';
+import { BulkSelect, BulkSelectValue, ErrorState, ResponsiveAction, ResponsiveActions, SkeletonTableHead, SkeletonTableBody } from '@patternfly/react-component-groups';
 import { DataView } from '@patternfly/react-data-view/dist/dynamic/DataView';
 import { DataViewToolbar } from '@patternfly/react-data-view/dist/dynamic/DataViewToolbar';
 import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 import { useDataViewEventsContext, DataViewEventsContext, DataViewEventsProvider, EventTypes } from '@patternfly/react-data-view/dist/dynamic/DataViewEventsContext';
+import { DataViewFilters } from '@patternfly/react-data-view/dist/dynamic/DataViewFilters';
+import { DataViewTextFilter } from '@patternfly/react-data-view/dist/dynamic/DataViewTextFilter';
+import { DataViewCheckboxFilter } from '@patternfly/react-data-view/dist/dynamic/DataViewCheckboxFilter';
 
 ## Core concepts
 
@@ -45,7 +49,7 @@ For the toolbar, you can make use of the predefined `DataViewToolbar` component,
 
 Data can be presented using the predefined `DataViewTable` component, which is an abstraction above the PatternFly [table](/components/table). For more details, please refer to the [Table](/extensions/data-view/table) docs section. In the near future, we are also planning to introduce a predefined Card view component. If you have more specific needs to display data, you can pass your custom implementation as a `DataView` child.
 
-```js file="./PredefinedLayoutExample.tsx"
+```js file="./PredefinedLayoutFullExample.tsx"
 
 ```
 
