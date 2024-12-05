@@ -6,6 +6,7 @@ subsection: Data view
 # Sidenav secondary level section
 # should be the same for all markdown files
 id: Table
+title: Data view table
 # Tab (react | react-demos | html | html-demos | design-guidelines | accessibility)
 source: react
 # If you use typescript, the name of the interface to display props for
@@ -23,8 +24,6 @@ import { DataViewToolbar } from '@patternfly/react-data-view/dist/dynamic/DataVi
 import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 import { useDataViewSelection, useDataViewSort } from '@patternfly/react-data-view/dist/dynamic/Hooks';
 import { DataView, DataViewState } from '@patternfly/react-data-view/dist/dynamic/DataView';
-
-## Data view table
 
 The **data view table** component is an abstraction that renders your columns and rows in the PatternFly [table](/components/table) component. 
 
