@@ -6,6 +6,7 @@ subsection: Data view
 # Sidenav secondary level section
 # should be the same for all markdown files
 id: Toolbar
+title: Data view toolbar
 # Tab (react | react-demos | html | html-demos | design-guidelines | accessibility)
 source: react
 # If you use typescript, the name of the interface to display props for
@@ -24,8 +25,6 @@ import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataView
 import { DataViewFilters } from '@patternfly/react-data-view/dist/dynamic/DataViewFilters';
 import { DataViewTextFilter } from '@patternfly/react-data-view/dist/dynamic/DataViewTextFilter';
 import { DataViewCheckboxFilter } from '@patternfly/react-data-view/dist/dynamic/DataViewCheckboxFilter';
-
-## Data view toolbar
 
 The **data view toolbar** component renders a default opinionated data view toolbar above or below the data section. 
 

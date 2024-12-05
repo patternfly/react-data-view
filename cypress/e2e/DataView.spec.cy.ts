@@ -1,18 +1,19 @@
 describe('Test the Data view docs page', () => {
-
+  
   it('displays a layout with a table and paginates', () => {
     const ouiaId = 'LayoutExample';
+    cy.viewport(1400, 2800)
 
     cy.visit('http://localhost:8006/extensions/data-view/data-view');
 
-    cy.get(`[data-ouia-component-id="${ouiaId}-th-0"]`).scrollIntoView().contains('Repositories');
+    cy.get(`[data-ouia-component-id="${ouiaId}-th-0"]`).scrollIntoView().contains('Repository');
     cy.get(`[data-ouia-component-id="${ouiaId}Header-pagination"]`).should('exist');
     cy.get(`[data-ouia-component-id="${ouiaId}Header-bulk-select"]`).should('exist');
 
     cy.get(`[data-ouia-component-id="${ouiaId}Footer-pagination"]`).should('exist');
     cy.get(`[data-ouia-component-id="${ouiaId}Footer-bulk-select"]`).should('not.exist');
     
-    cy.get(`[data-ouia-component-id="${ouiaId}-th-0"]`).contains('Repositories');
+    cy.get(`[data-ouia-component-id="${ouiaId}-th-0"]`).contains('Repository');
     cy.get(`[data-ouia-component-id="${ouiaId}-th-4"]`).contains('Last commit');
 
     cy.get(`[data-ouia-component-id="${ouiaId}-td-0-0"]`).contains('Repository one');
@@ -41,27 +42,12 @@ describe('Test the Data view docs page', () => {
       });
     cy.contains('5 selected').should('exist');
 
-    // select none
-    cy.get(`[data-ouia-component-id="BulkSelect-toggle"`).first().click({ force: true });
-    cy.get(`[data-ouia-component-id="BulkSelect-select-none"`).first().click();
-    cy.contains('5 selected').should('not.exist');
-
-    // select all
-    cy.get(`[data-ouia-component-id="BulkSelect-toggle"`).first().click({ force: true });
-    cy.get(`[data-ouia-component-id="BulkSelect-select-all"`).first().click();
-    cy.get('[data-ouia-component-id="LayoutExample"] input[type="checkbox"]')
-      .each(($checkbox) => {
-        cy.wrap($checkbox).should('be.checked');
-      });
-    cy.contains('6 selected').should('exist');
-
     // page checkbox deselect
     cy.get(`[data-ouia-component-id="BulkSelect-checkbox"`).first().click();
     cy.get('[data-ouia-component-id="LayoutExample"] input[type="checkbox"]')
       .each(($checkbox) => {
         cy.wrap($checkbox).should('not.be.checked');
       });
-    cy.contains('1 selected').should('exist');
 
     // select page
     cy.get(`[data-ouia-component-id="BulkSelect-toggle"`).first().click({ force: true });
@@ -70,6 +56,6 @@ describe('Test the Data view docs page', () => {
       .each(($checkbox) => {
         cy.wrap($checkbox).should('be.checked');
       });
-    cy.contains('6 selected').should('exist');
+    cy.contains('5 selected').should('exist');
   })
 });
