@@ -4,7 +4,7 @@ describe('Test the Data view docs page', () => {
     const ouiaId = 'LayoutExample';
     cy.viewport(1400, 2800)
 
-    cy.visit('http://localhost:8006/extensions/data-view/layout');
+    cy.visit('http://localhost:8006/extensions/data-view/overview');
 
     cy.get(`[data-ouia-component-id="${ouiaId}-th-0"]`).scrollIntoView().contains('Repository');
     cy.get(`[data-ouia-component-id="${ouiaId}Header-pagination"]`).should('exist');
