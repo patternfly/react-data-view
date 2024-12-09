@@ -26,11 +26,11 @@ If you notice a bug, or if you have a suggestion for improving the data view ext
 
 ---
 
-The **data view** extension helps you display datasets in organized layouts containing data representation and toolbars allowing interactions like selection or pagination. 
+The **data view** extension enables you to display datasets in organized layouts, with data representations and interactive toolbars for actions like selection and pagination.
 
 ### Layout
 
-A data view should contain a header, the data representation (like a card view or table), and a footer. These parts are organized in a [stack layout](/layouts/stack).
+A data view should contain a header, the data representation, and a footer. These parts are organized in a [stack layout](/layouts/stack).
 
 The data view toolbars and sub-components that display the data (like a card view or table) are always passed as `children` to the `<DataView>` component.
 
@@ -40,7 +40,7 @@ The data view toolbars and sub-components that display the data (like a card vie
 
 ### Modularity
 
-The extension's modular architecture lets you efficiently create consistent data views, by either using predefined sub-components and hooks, or by defining your own. You can choose the tools that suit your needs and easily replace any part with a custom implementation.
+The extension's modular architecture lets you efficiently create consistent data views, either by using predefined sub-components and hooks or by defining your own. You can choose the tools that suit your needs and easily replace any part with a custom implementation.
 
 The `<DataViewToolbar>` component extends the [PatternFly toolbar](/components/toolbar) to support the most common needs. For more details, refer to the [data view toolbar](/extensions/data-view/toolbar) examples. You can also use a custom toolbar component if needed for your use case.
 
@@ -50,18 +50,12 @@ Data can be presented using the predefined `<DataViewTable>` component, which is
 
 ```
 
-## Advanced concepts
+## Events context
 
-This section contains advanced features related to the `<DataView>` wrapping component and information to better understand how the data view works under the hood. 
+The `<DataViewEventsContext>` component is an advanced feature that enables external listening of data view events. In order to share data view context with your other UI components, both your components and your data view should be wrapped with the `<DataViewEventsProvider>`. This is demonstrated in the following example.
 
-### Events context
-
-The `<DataViewEventsContext>` provides a method of listening to the data view events from the outside of the component.
-
-In order to give your other UI components access to the shared context, wrap them and your data view with the `<DataViewEventsProvider>`.
-
-### Row click subscription example
-This example illustrates how to set up a layout that listens for row click events and displays detailed information about the selected row in a [drawer component](/components/drawer).
+### Row click subscription
+This example uses the `<DataViewEventsProvider>` to display details about a selected row in a [drawer component](/components/drawer).
 
 
 ```js file="./EventsExample.tsx"
