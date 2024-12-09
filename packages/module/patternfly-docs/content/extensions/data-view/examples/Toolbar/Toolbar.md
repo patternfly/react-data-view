@@ -28,7 +28,7 @@ import { DataViewCheckboxFilter } from '@patternfly/react-data-view/dist/dynamic
 
 The **data view toolbar** component renders a default opinionated data view toolbar above or below the data section. 
 
-Data view toolbar can contain pagination, bulk select, filters, actions or other child content passed. The preffered way of passing child toolbar items is using the [toolbar item](/components/toolbar#toolbar-items) component or predefined `DataViewToolbar` props for specific use cases.
+Data view toolbar can contain pagination, bulk select, filters, actions, or other custom child content. To pass child items to the toolbar, use the [toolbar item](/components/toolbar#toolbar-items) component or predefined `<DataViewToolbar>` props for specific use cases.
 
 You can further customize toolbar interactions by referring to the additional documentation: 
 - [Actions](#toolbar-actions)
@@ -53,10 +53,9 @@ To support additional user needs, you can pass relevant actions to the toolbar v
 
 ## Pagination
 
-Helps users navigate data records that span multiple pages.
+To help users navigate data records that span multiple pages, add pagination support to your toolbar.
 
-### Toolbar usage
-Data view toolbar can display a pagination using the `pagination` property accepting a React node. You can also pass a custom `ouiaId` for testing purposes.
+The data view toolbar can display a pagination using the `pagination` prop. You can also pass a custom `ouiaId` for testing purposes to the toolbar. You can also persist pagination values in the URL, to make it easier to share or bookmark specific pages of your data.
 
 ### Pagination state
 
@@ -64,39 +63,40 @@ The `useDataViewPagination` hook manages the pagination state of the data view.
 
 **Initial values:**
 - `perPage` initial value
-- optional `page` initial value
-- optional `searchParams` object
-- optional `setSearchParams` function
+- Optional `page` initial value
+- Optional `searchParams` object
+- Optional `setSearchParams` function
 
 While the hook works seamlessly with the React Router library, you do not need to use it to take advantage of URL persistence. The `searchParams` and `setSearchParams` props can be managed using native browser APIs (`URLSearchParams` and `window.history.pushState`) or any other routing library of your choice. If you don't pass these two props, the pagination state will be stored internally without the URL usage.
 
 You can also pass custom `pageParam` or `perPageParam` names, renaming the pagination parameters in the URL.
 
-The retrieved values are named to match the PatternFly [pagination](/components/pagination) component props, so you can easily spread them to the component.
+The retrieved values are named to match the PatternFly pagination component props.
 
 **Return values:**
-- current `page` number
+- Current `page` number
 - `onSetPage` to modify current page
-- items `perPage` value
+- Items `perPage` value
 - `onPerPageSelect` to modify per page value
 
 ### Pagination example
+This example uses the URL to persist the pagination state.
+
 ```js file="./PaginationExample.tsx"
 
 ```
 
 ## Selection
-Allows to select data records inside the data view and show the selection state.
+To allow users to select data records inside the data view, add selection support that displays a row's selection state.
 
-### Toolbar usage
-Data view toolbar can display a bulk selection component using the `bulkSelect` property accepting a React node. You can make use of a predefined [bulk select](/extensions/component-groups/bulk-select) component from the [component groups](/extensions/component-groups/about-component-groups) extension.
+The data view toolbar can display a bulk selection component using bulkSelect. You can make use of a predefined [component group extension bulk select](/extensions/component-groups/bulk-select) component.
 
 ### Selection state
 
 The `useDataViewSelection` hook manages the selection state of the data view. 
 
 **Initial values:**
-- optional `initialSelected` array of record's identifiers selected by default 
+- Optional `initialSelected` array of record's identifiers selected by default 
 - `matchOption` function to check if given record is selected
 
 *When no `matchOption` is passed, the `Array.prototype.includes()` operation is performed on the `selected` array.*
@@ -113,12 +113,11 @@ The `useDataViewSelection` hook manages the selection state of the data view.
 ```
 
 ## Filters
-Enables filtering of data records in the data view and displays the applied filter chips.
+To allow users to filter data records in the data view, add filtering support that displays the applied filter chips.
 
-### Toolbar usage
-The data view toolbar can include a set of filters by passing a React node to the `filters` property. You can use predefined components `DataViewFilters`, `DataViewTextFilter` and `DataViewCheckboxFilter` to customize and handle filtering directly in the toolbar. The `DataViewFilters` is a wrapper allowing conditional filtering using multiple attributes. If you need just a single filter, you can use `DataViewTextFilter`, `DataViewCheckboxFilter` or a different filter component alone. Props of these filter components are listed at the bottom of this page. 
+The data view toolbar can include a set of filters by passing a React node to the `filters` property. You can use the predefined components `<DataViewFilters>`, `<DataViewTextFilter>`, and `<DataViewCheckboxFilter>` to customize and handle filtering directly in the toolbar. The `<DataViewFilters>` component is a wrapper that allows conditional filtering using multiple attributes. If you need just a single filter, you can use `<DataViewTextFilter>`, `<DataViewCheckboxFilter>`, or a different filter component alone. Props of these filter components are listed at the bottom of this page. 
 
-You can decide between passing `value` and `onChange` event to every filter separately or pass `values` and `onChange` to the `DataViewFilters` wrapper which make them available to its children. Props directly passed to child filters have a higher priority than the "inherited" ones. 
+You can either pass a `value` and `onChange` event to every filter separately, or you can pass `values` and `onChange` to the `<DataViewFilters>` wrapper, which makes them available to its children. Props directly passed to child filters have a higher priority than the "inherited" ones. 
 
 ### Filters state
 
@@ -126,10 +125,10 @@ The `useDataViewFilters` hook manages the filter state of the data view. It allo
 
 **Initial values:**
 - `initialFilters` object with default filter values (if the filter param allows multiple values, pass an array)
-- optional `searchParams` object for managing URL-based filter state
-- optional `setSearchParams` function to update the URL when filters are modified
+- Optional `searchParams` object for managing URL-based filter state
+- Optional `setSearchParams` function to update the URL when filters are modified
 
-The `useDataViewFilters` hook works well with the React Router library to support URL-based filtering. Alternatively, you can manage filter state in the URL using `URLSearchParams` and `window.history.pushState` APIs, or other routing libraries. If no URL parameters are provided, the filter state is managed internally.
+The `useDataViewFilters` hook works well with the React Router library to support URL-based filtering. Alternatively, you can manage the filter state in the URL using `URLSearchParams` and `window.history.pushState` APIs, or other routing libraries. If no URL parameters are provided, the filter state is managed internally.
 
 **Return values:**
 - `filters` object representing the current filter values

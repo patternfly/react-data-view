@@ -25,100 +25,93 @@ import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataView
 import { useDataViewSelection, useDataViewSort } from '@patternfly/react-data-view/dist/dynamic/Hooks';
 import { DataView, DataViewState } from '@patternfly/react-data-view/dist/dynamic/DataView';
 
-The **data view table** component is an abstraction that renders your columns and rows in the PatternFly [table](/components/table) component. 
+The **data view table** component renders your data into columns and rows within a [PatternFly table](/components/table) component. You can easily customize and configure the table by adjusting the properties listed at the bottom of this page.
 
-Below, you can see an example of displaying `rows` and `columns` in the `DataViewTable`, which simplifies the table declaration, but at the same time keeps the customization possibilities of the core component. 
+## Configuring rows and columns
+Below is a detailed description of properties used to define rows and columns for your table:
+- `columns`: Defines the column heads of the table. Each item in the array can be a `ReactNode` for simple heads, or an object with the following properties:
+  - `cell`: Content to display in the column head.
+  - `props` (optional): (`ThProps`) to pass to the `<Th>` component, such as `width`, `sort`, and other table head cell properties.
+- `rows`: Defines the rows to be displayed in the table. Each item in the array can be either an array of `DataViewTd` for simple rows, or an object with the following properties:
+  - `row`: Content to display in each cell in the row.
+  - `id` (optional): Unique identifier for the row that's used for matching selected items.
+  - `props` (optional): (`TrProps`) to pass to the `<Tr>` component, such as `isHoverable`, `isRowSelected`, and other table row properties.
 
-### Customized table example
+It is also possible to disable row selection using the `isSelectDisabled` function, which can be passed to the wrapping `DataView` component through the `selection`.
+
+### Table example
 ```js file="./DataViewTableExample.tsx"
 
 ```
 
-The `DataViewTable` component accepts the following props:
-
-- `columns` defining the column heads of the table. Each item in the array can be a `ReactNode` (for simple heads) or an object with the following properties:
-  - `cell` (`ReactNode`) content to display in the column head.
-  - optional `props` (`ThProps`) to pass to the `<Th>` component, such as `width`, `sort`, and other table head cell properties.
-
-- `rows` defining the rows to be displayed in the table. Each item in the array can be either an array of `DataViewTd` (for simple rows) or an object with the following properties:
-  - `row` (`DataViewTd[]`) defining the content for each cell in the row.
-  - optional `id` (`string`) for the row (can be used to match items in selection).
-  - optional `props` (`TrProps`) to pass to the `<Tr>` component, such as `isHoverable`, `isRowSelected`, and other table row properties.
-
-- optional `ouiaId`
-
-- optional `props` (`TableProps`) that are passed down to the `<Table>` component, except for `onSelect`, which is managed internally.
-
-It is also possible to disable row selection using the `isSelectDisabled` function passed to the wrapping data view component through `selection`.
-
 ## Tree table
 
-Instead of a basic table, your data view can use a tree table variant, with expandable rows and custom icons for leaf and parent nodes. 
+A tree table includes expandable rows and custom icons for leaf and parent nodes. 
+To enable a tree table, pass the `isTreeTable` flag to the `<DataViewTable>` component.
 
-To enable a tree table, pass the `isTreeTable` flag to the `<DataViewTable>` component. 
 
-Pass `collapsedIcon`, `expandedIcon`, and `leafIcon` to `<DataViewTable>`, to align a row's icon to its state. 
+Tree table rows have to be defined with following keys:
+  - `row`: Defines the content for each cell in the row.
+  - `id`: Unique identifier for the row that's used for matching selected items.
+  - `children` (optional): Defines the children rows.
 
-Tree table rows have to be defined in a format of object with following keys:
-  - `row` (`DataViewTd[]`) defining the content for each cell in the row.
-  - `id` (`string`) for the row (used to match items in selection end expand the rows).
-  - optional `children` (`DataViewTrTree[]`) defining the children rows.
+To update a row's icon to reflect its expansion state, pass `collapsedIcon`, `expandedIcon`, and `leafIcon` to `<DataViewTable>`.
 
-It is also possible to disable row selection using the `isSelectDisabled` function passed to the wrapping data view component through `selection`.
+To disable row selection, pass the `isSelectDisabled` function to `selection` prop of the wrapping `<DataView>` component .
 
 ### Tree table example
+
 ```js file="./DataViewTableTreeExample.tsx"
 
 ```
 
 ## Sorting
+The following example demonstrates how to enable sorting functionality within a data view. This implementation support dynamic sorting by column and persists the sort state in the page's URL via [React Router](https://reactrouter.com/).
+
+### Sorting example
+```js file="./SortingExample.tsx"
+
+```
+### useDataViewSort hook
 
 The `useDataViewSort` hook manages the sorting state of a data view. It provides an easy way to handle sorting logic, including synchronization with URL parameters and defining default sorting behavior.
 
 **Initial values:**
 - `initialSort` object to set default `sortBy` and `direction` values:
-  - `sortBy`: key of the initial column to sort.
-  - `direction`: default sorting direction (`asc` or `desc`).
-- Optional `searchParams` object to manage URL-based synchronization of sort state.
-- Optional `setSearchParams` function to update the URL parameters when sorting changes.
-- `defaultDirection` to set the default direction when no direction is specified.
+  - `sortBy`: Key of the initial column to sort.
+  - `direction`: Default sorting direction (`asc` or `desc`).
+- `searchParams` (optional): Object to manage URL-based synchronization of sort state.
+- `setSearchParams` (optional): Function to update the URL parameters when sorting changes.
+- `defaultDirection`: Used to set the default direction when no direction is specified.
 - Customizable parameter names for the URL:
-  - `sortByParam`: name of the URL parameter for the column key.
-  - `directionParam`: name of the URL parameter for the sorting direction.
-
-The `useDataViewSort` hook integrates seamlessly with React Router to manage sort state via URL parameters. Alternatively, you can use `URLSearchParams` and `window.history.pushState` APIs, or other routing libraries. If URL synchronization is not configured, the sort state is managed internally within the component.
+  - `sortByParam`: Name of the URL parameter for the column key.
+  - `directionParam`: Name of the URL parameter for the sorting direction.
+The `useDataViewSort` hook integrates seamlessly with [React Router](https://reactrouter.com/) to manage the sort state via URL parameters. Alternatively, you can use `URLSearchParams` and `window.history.pushState` APIs, or other routing libraries. If URL synchronization is not configured, the sort state is managed internally within the component.
 
 **Return values:**
-- `sortBy`: key of the column currently being sorted.
-- `direction`: current sorting direction (`asc` or `desc`).
-- `onSort`: function to handle sorting changes programmatically or via user interaction.
-
-### Sorting example
-
-The following example demonstrates how to set up and use sorting functionality within a data view. The implementation includes dynamic sorting by column with persistence of sort state in the URL using React Router.
-```js file="./SortingExample.tsx"
-
-```
+- `sortBy`: Key of the column currently being sorted.
+- `direction`: Current sorting direction (`asc` or `desc`).
+- `onSort`: Function to handle sorting changes programmatically or via user interaction.
 
 ## States
 
-The data view table allows you to react to the `activeState` property passed to the data view (`loading`, `error`, `empty`, etc.). You can use `headStates` and `bodyStates` props to define table head and body applicable to given state. Below, you can see examples of the most common use cases.
+The data view table allows you to react to the `activeState` property passed to the data view (such as `empty`, `error`, `loading`). You can use the `headStates` and `bodyStates` props to define the table head and body for a given state. 
 
 ### Empty
 When there is no data to render in the data view, you can instead display an empty state. 
 
-You can create your error state by using the PatternFly [empty state](/components/empty-state) component. To render the empty state, pass the component under `empty` key to `headStates` or `bodyStates`. 
+You can create your error state by using a [PatternFly empty state](/components/empty-state). To render the empty state, pass the component under `empty` key to `headStates` or `bodyStates`. 
 
 ```js file="./DataViewTableEmptyExample.tsx"
 
 ```
 
 ### Error
-When there is a data connection or retrieval error, you can display an error state. 
-
-You can create your error state by using the [error state](/component-groups/error-state) component from the [component groups](/extensions/component-groups/about-component-groups) extension or PatternFly [empty state](/components/empty-state) component. To render the error state, pass the component under `error` key to `headStates` or `bodyStates`. 
+When there is a data connection or retrieval error, you can display an error state.
 
 The error state will be displayed when the data view `activeState` value is `error`.
+
+You can create your error state by either using the [component groups extension's error state](/component-groups/error-state) or a [PatternFly empty state](/components/empty-state) component. To render the error state, pass the component under `error` key to `headStates` or `bodyStates`. 
 
 ```js file="./DataViewTableErrorExample.tsx"
 
@@ -127,9 +120,10 @@ The error state will be displayed when the data view `activeState` value is `err
 ### Loading
 To indicate that data is loading, you can display a loading state.
 
-You can create your loading state by using the [skeleton table](/component-groups/skeleton-table) from the [component groups](/extensions/component-groups/about-component-groups)extension or customized PatternFly [empty state](/components/empty-state) component. To render the loading state, pass the component under `loading` key to `headStates` or `bodyStates`. 
-
 The loading state will be displayed when the data view `activeState` value is `loading`.
+
+You can create your loading state by either using the [component groups extension's skeleton table](/component-groups/skeleton-table) or a customized [PatternFly empty state](/components/empty-state). To render the loading state, pass the component under the `loading` key to `headStates` or `bodyStates`. 
+
 
 ```js file="./DataViewTableLoadingExample.tsx"
 
