@@ -25,8 +25,8 @@ module.exports = {
   '/extensions/data-view/functionality/react': {
     id: "Functionality",
     title: "Functionality",
-    toc: [[{"text":"Toolbar usage"},{"text":"Pagination state"},{"text":"Pagination example"},{"text":"Toolbar usage","id":"toolbar-usage-0"},{"text":"Selection state"},{"text":"Selection example"}]],
-    examples: ["Pagination example","Selection example"],
+    toc: [[{"text":"Toolbar usage"},{"text":"Pagination state"},{"text":"Pagination example"},{"text":"Toolbar usage","id":"toolbar-usage-0"},{"text":"Selection state"},{"text":"Selection example"},{"text":"Toolbar usage","id":"toolbar-usage-1"},{"text":"Filters state"},{"text":"Filtering example"},{"text":"Sort state"},{"text":"Sorting example"}]],
+    examples: ["Pagination example","Selection example","Filtering example","Sorting example"],
     section: "extensions",
     subsection: "Data view",
     source: "react",
