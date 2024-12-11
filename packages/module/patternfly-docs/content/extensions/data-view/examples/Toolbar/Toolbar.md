@@ -43,7 +43,7 @@ You can further customize toolbar interactions by referring to the additional do
 ```
 
 ## Toolbar actions
-To support additional user needs, you can pass relevant actions to the toolbar via `actions`. Add standard PatternFly actions (like buttons) or choose predefined [responsive actions](/component-groups/responsive-actions) which ensure the responsive behavior of multiple actions in one toolbar.
+To support additional user needs, you can pass relevant actions to the toolbar via `actions`. Add standard PatternFly actions (like buttons) or choose predefined [responsive actions](/component-groups/responsive-actions) which ensure the responsive behavior of multiple actions in 1 toolbar.
 
 ### Actions example
 
@@ -55,7 +55,7 @@ To support additional user needs, you can pass relevant actions to the toolbar v
 
 To help users navigate data records that span multiple pages, add pagination support to your toolbar.
 
-The data view toolbar can display a pagination using the `pagination` prop. You can also pass a custom `ouiaId` for testing purposes to the toolbar. You can also persist pagination values in the URL, to make it easier to share or bookmark specific pages of your data.
+The data view toolbar can display a pagination using the `pagination` prop. You can also pass a custom `ouiaId` to the toolbar for testing purposes. You can also persist pagination values in the URL to make it easier to share or bookmark specific pages of your data.
 
 ### Pagination state
 
@@ -97,13 +97,13 @@ The `useDataViewSelection` hook manages the selection state of the data view.
 
 **Initial values:**
 - Optional `initialSelected` array of record's identifiers selected by default.
-- `matchOption` function to check if given record is selected.
+- `matchOption` function to check if the record is selected.
     - When no `matchOption` is passed, the `Array.prototype.includes()` operation is performed on the `selected` array.
 
 **Return values:**
 - `selected` array of currently selected records.
-- `isSelected` function returning the selection state for given record.
-- `onSelect` callback to modify the selection state and accepting `isSelecting` flag indicating if records are changing to selected or deselected and `items` containing affected records.
+- `isSelected` function returning the selection state for the record.
+- `onSelect` callback to modify the selection state. This accepts the `isSelecting` flag (indicates if records are being selected or deselected) and `items` (affected records).
 
 ### Selection example
 

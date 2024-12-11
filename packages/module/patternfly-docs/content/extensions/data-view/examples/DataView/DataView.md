@@ -40,7 +40,7 @@ The data view toolbars and sub-components that display the data (like a card vie
 
 ### Modularity
 
-The extension's modular architecture lets you efficiently create consistent data views, either by using predefined sub-components and hooks or by defining your own. You can choose the tools that suit your needs and easily replace any part with a custom implementation.
+The extension's modular architecture lets you efficiently create consistent data views, either by using predefined sub-components and hooks, or by defining your own. You can choose the tools that suit your needs and easily replace any part with a custom implementation.
 
 The `<DataViewToolbar>` component extends the [PatternFly toolbar](/components/toolbar) to support the most common needs. For more details, refer to the [data view toolbar](/extensions/data-view/toolbar) examples. You can also use a custom toolbar component if needed for your use case.
 
@@ -54,7 +54,7 @@ Data can be presented using the predefined `<DataViewTable>` component, which is
 
 The `<DataViewEventsContext>` component is an advanced feature that enables external listening of data view events. In order to share data view context with your other UI components, both your components and your data view should be wrapped with the `<DataViewEventsProvider>`. This is demonstrated in the following example.
 
-### Row click subscription
+### Row click subscription example
 This example uses the `<DataViewEventsProvider>` to display details about a selected row in a [drawer component](/components/drawer).
 
 
