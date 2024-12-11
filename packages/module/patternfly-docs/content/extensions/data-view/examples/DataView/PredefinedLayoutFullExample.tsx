@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import React, { useEffect, useState, useRef, useMemo } from 'react';
-import { Drawer, DrawerActions, DrawerCloseButton, DrawerContent, DrawerContentBody, DrawerHead, DrawerPanelContent, Title, Text, EmptyState, EmptyStateHeader, EmptyStateBody, EmptyStateFooter, EmptyStateActions, Button, EmptyStateIcon } from '@patternfly/react-core';
+import { Drawer, DrawerActions, DrawerCloseButton, DrawerContent, DrawerContentBody, DrawerHead, DrawerPanelContent, Title, Content, EmptyState, EmptyStateBody, EmptyStateFooter, EmptyStateActions, Button,  } from '@patternfly/react-core';
 import { ActionsColumn, Tbody, Td, ThProps, Tr } from '@patternfly/react-table';
 import { BulkSelect, BulkSelectValue } from '@patternfly/react-component-groups/dist/dynamic/BulkSelect';
 import { Pagination } from '@patternfly/react-core';
@@ -72,8 +72,7 @@ const empty = (
   <Tbody>
     <Tr key="loading" ouiaId={`${ouiaId}-tr-loading`}>
       <Td colSpan={COLUMNS.length}>
-        <EmptyState>
-          <EmptyStateHeader titleText="No data found" headingLevel="h4" icon={<EmptyStateIcon icon={CubesIcon } />} />
+        <EmptyState headingLevel="h4" icon={CubesIcon} titleText="No data found">
           <EmptyStateBody>There are no matching data to be displayed.</EmptyStateBody>
           <EmptyStateFooter>
             <EmptyStateActions>
@@ -113,10 +112,10 @@ const RepositoryDetail: React.FunctionComponent<RepositoryDetailProps> = ({ sele
         <Title className="pf-v5-u-mb-md" headingLevel="h2" ouiaId="detail-drawer-title">
           Detail of {selectedRepo?.name}
         </Title>
-        <Text>Branch: {selectedRepo?.branch}</Text>
-        <Text>Pull requests: {selectedRepo?.prs}</Text>
-        <Text>Workspace: {selectedRepo?.workspace}</Text>
-        <Text>Last commit: {selectedRepo?.lastCommit}</Text>
+        <Content component="p">Branch: {selectedRepo?.branch}</Content>
+        <Content component="p">Pull requests: {selectedRepo?.prs}</Content>
+        <Content component="p">Workspace: {selectedRepo?.workspace}</Content>
+        <Content component="p">Last commit: {selectedRepo?.lastCommit}</Content>
         <DrawerActions>
           <DrawerCloseButton onClick={() => setSelectedRepo(undefined)} data-ouia-component-id="detail-drawer-close-btn"/>
         </DrawerActions>
