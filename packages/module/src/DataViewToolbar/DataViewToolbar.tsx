@@ -35,14 +35,14 @@ export const DataViewToolbar: React.FC<DataViewToolbarProps> = ({ className, oui
             {bulkSelect}
           </ToolbarItem>
         )}
-        {actions && (
-          <ToolbarItem>
-            {actions}
-          </ToolbarItem>
-        )}
         {filters && (
           <ToolbarItem>
             {filters}
+          </ToolbarItem>
+        )}
+        {actions && (
+          <ToolbarItem>
+            {actions}
           </ToolbarItem>
         )}
         {pagination && (

@@ -3,7 +3,7 @@ describe('Test the Data view docs with tree table', () => {
   it('displays a a components page with tree table', () => {
     const ouiaId = 'TreeTableExample';
   
-    cy.visit('http://localhost:8006/extensions/data-view/components');
+    cy.visit('http://localhost:8006/extensions/data-view/table');
       
     cy.get(`[data-ouia-component-id="${ouiaId}-th-0"]`).scrollIntoView().contains('Repositories');
     cy.get(`[data-ouia-component-id="${ouiaId}-th-1"]`).contains('Branches');
