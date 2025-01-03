@@ -31,7 +31,7 @@
     "tag": "prerelease"
   },
   "dependencies": {
-    "@patternfly/react-component-groups": "^6.0.0",
+    "@patternfly/react-component-groups": "^6.1.0",
     "@patternfly/react-core": "^6.0.0",
     "@patternfly/react-icons": "^6.0.0",
     "@patternfly/react-table": "^6.0.0",
@@ -54,7 +54,7 @@
     "react-dom": "^18.3.1",
     "react-router": "^6.23.0",
     "react-router-dom": "^6.28.0",
-    "rimraf": "^5.0.5",
+    "rimraf": "^6.0.1",
     "typescript": "^5.4.5"
   }
 }
