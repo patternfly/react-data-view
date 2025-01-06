@@ -29,11 +29,11 @@ describe('Test the Data view docs page', () => {
     cy.get(`[data-ouia-component-id="${ouiaId}-td-0-4"]`).contains('Timestamp one');
 
     // test bulk select
-    cy.get(`input[type="checkbox"`).each(($checkbox) => {cy.wrap($checkbox).should('not.be.checked')});
+    cy.get(`[data-ouia-component-id="LayoutExample"] input[type="checkbox"]`).each(($checkbox) => {cy.wrap($checkbox).should('not.be.checked')});
 
     // page checkbox select
     cy.get(`[data-ouia-component-id="BulkSelect-checkbox"`).first().click();
-    cy.get(`input[type="checkbox"`).each(($checkbox) => {cy.wrap($checkbox).should('be.checked')});
+    cy.get(`[data-ouia-component-id="LayoutExample"] input[type="checkbox"]`).each(($checkbox) => {cy.wrap($checkbox).should('be.checked')});
     cy.contains('5 selected').should('exist');
 
     // page checkbox deselect
