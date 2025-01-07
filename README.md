@@ -7,7 +7,7 @@ This repo contains React Data view implementation.
 
 `v5` - PatternFly 5 implementation
 
-> NOTE: In the case of data view, new features are currently primarily added to `v5` branch to be consumed by Red Hat projects, still using PatternFly 5. In the follow-up step, they should be mirrored to the `main` branch. For bug fixes, it is preferred to fix the bug for both versions (fix in one branch and cherry-pick to another). Pulling new changes from 5 to 6 and vice versa is not recommended using `rebase`. Rather, always cherry-pick specific commits to avoid getting lost in unnecesary conflicts.
+> NOTE: In the case of data view, new features are currently primarily added to `v5` branch to be consumed by Red Hat projects, still using PatternFly 5. In the follow-up step, they should be mirrored to the `main` branch. For bug fixes, it is preferred to fix the bug for both versions (fix in one branch and cherry-pick to another). Pulling new changes from 5 to 6 and vice versa is not recommended using `rebase`. Rather, always cherry-pick specific commits to avoid getting lost in unnecessary conflicts.
 
 ---
 ## Contribution guide
