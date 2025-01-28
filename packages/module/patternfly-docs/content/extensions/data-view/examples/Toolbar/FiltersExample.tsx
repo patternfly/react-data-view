@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Pagination } from '@patternfly/react-core';
+import { Pagination, TreeViewDataItem } from '@patternfly/react-core';
 import { BrowserRouter, useSearchParams } from 'react-router-dom';
 import { useDataViewFilters, useDataViewPagination } from '@patternfly/react-data-view/dist/dynamic/Hooks';
 import { DataView } from '@patternfly/react-data-view/dist/dynamic/DataView';
@@ -8,6 +8,7 @@ import { DataViewToolbar } from '@patternfly/react-data-view/dist/dynamic/DataVi
 import { DataViewFilterOption, DataViewFilters } from '@patternfly/react-data-view/dist/dynamic/DataViewFilters';
 import { DataViewTextFilter } from '@patternfly/react-data-view/dist/dynamic/DataViewTextFilter';
 import { DataViewCheckboxFilter } from '@patternfly/react-data-view/dist/dynamic/DataViewCheckboxFilter';
+import { DataViewTreeFilter } from '@patternfly/react-data-view/dist/dynamic/DataViewTreeFilter';
 
 const perPageOptions = [
   { title: '5', value: 5 },
@@ -41,6 +42,61 @@ const filterOptions: DataViewFilterOption[] = [
   { label: 'Workspace one', value: 'workspace-one' },
   { label: 'Workspace two', value: 'workspace-two' },
   { label: 'Workspace three', value: 'workspace-three' }
+];
+
+const statusOptions: TreeViewDataItem[] = [
+  {
+    name: 'Ready',
+    id: 'ready',
+    checkProps: { checked: false },
+    customBadgeContent: 1,
+    children: [
+      {
+        name: 'Updated',
+        id: 'updated',
+        checkProps: { checked: false },
+        customBadgeContent: 0
+      },
+      {
+        name: 'Waiting to update',
+        id: 'waiting',
+        checkProps: { checked: false },
+        customBadgeContent: 0
+      },
+      {
+        name: 'Conditions degraded',
+        id: 'degraded',
+        checkProps: { checked: false },
+        customBadgeContent: 1
+      },
+      {
+        name: 'Approval required',
+        id: 'approval',
+        checkProps: { checked: false },
+        customBadgeContent: 0
+      }
+    ]
+  },
+  {
+    name: 'Not ready',
+    id: 'nr',
+    checkProps: { checked: false },
+    customBadgeContent: 1,
+    children: [
+      {
+        name: 'Conditions degraded',
+        id: 'nr-degraded',
+        checkProps: { checked: false },
+        customBadgeContent: 1
+      }
+    ]
+  },
+  {
+    name: 'Updating',
+    id: 'updating',
+    checkProps: { checked: false },
+    customBadgeContent: 0
+  }
 ];
 
 const columns = [ 'Name', 'Branch', 'Pull requests', 'Workspace', 'Last commit' ];
@@ -81,6 +137,7 @@ const MyTable: React.FunctionComponent = () => {
             <DataViewTextFilter filterId="name" title='Name' placeholder='Filter by name' />
             <DataViewTextFilter filterId="branch" title='Branch' placeholder='Filter by branch' />
             <DataViewCheckboxFilter filterId="workspace" title='Workspace' placeholder='Filter by workspace' options={filterOptions} />
+            <DataViewTreeFilter filterId="status" title='Status' placeholder='Filter by status' options={statusOptions} />
           </DataViewFilters>
         }
       />

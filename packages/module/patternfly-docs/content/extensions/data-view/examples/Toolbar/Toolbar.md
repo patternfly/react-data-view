@@ -25,6 +25,7 @@ import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataView
 import { DataViewFilters } from '@patternfly/react-data-view/dist/dynamic/DataViewFilters';
 import { DataViewTextFilter } from '@patternfly/react-data-view/dist/dynamic/DataViewTextFilter';
 import { DataViewCheckboxFilter } from '@patternfly/react-data-view/dist/dynamic/DataViewCheckboxFilter';
+import { DataViewTreeFilter } from '@patternfly/react-data-view/dist/dynamic/DataViewTreeFilter';
 
 The **data view toolbar** component renders a default opinionated data view toolbar above or below the data section. 
 
