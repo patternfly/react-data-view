@@ -13,13 +13,15 @@ export interface DataViewToolbarProps extends Omit<PropsWithChildren<ToolbarProp
   pagination?: React.ReactNode;
   /** React node to display actions */
   actions?: React.ReactNode;
+  /** React node to display toggle group */
+  toggleGroup?: React.ReactNode;
   /** React node to display filters */
   filters?: React.ReactNode;
   /** React node to display custom filter labels */
   customLabelGroupContent?: React.ReactNode;
 }
 
-export const DataViewToolbar: React.FC<DataViewToolbarProps> = ({ className, ouiaId = 'DataViewToolbar', bulkSelect, actions, pagination, filters, customLabelGroupContent, clearAllFilters, children, ...props }: DataViewToolbarProps) => {
+export const DataViewToolbar: React.FC<DataViewToolbarProps> = ({ className, ouiaId = 'DataViewToolbar', bulkSelect, actions, toggleGroup, pagination, filters, customLabelGroupContent, clearAllFilters, children, ...props }: DataViewToolbarProps) => {
   const defaultClearFilters = useRef(
     <ToolbarItem>
       <Button ouiaId={`${ouiaId}-clear-all-filters`} variant="link" onClick={clearAllFilters} isInline>
@@ -43,6 +45,11 @@ export const DataViewToolbar: React.FC<DataViewToolbarProps> = ({ className, oui
         {actions && (
           <ToolbarItem>
             {actions}
+          </ToolbarItem>
+        )}
+        {toggleGroup && (
+          <ToolbarItem>
+            {toggleGroup}
           </ToolbarItem>
         )}
         {pagination && (

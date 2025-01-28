@@ -15,8 +15,9 @@ sortValue: 2
 propComponents: ['DataViewToolbar', 'DataViewFilters', 'DataViewTextFilter', 'DataViewCheckboxFilter']
 sourceLink: https://github.com/patternfly/react-data-view/blob/main/packages/module/patternfly-docs/content/extensions/data-view/examples/Toolbar/Toolbar.md
 ---
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { BrowserRouter, useSearchParams } from 'react-router-dom';
+import { Pagination, ToggleGroup, ToggleGroupItem } from '@patternfly/react-core';
 import { useDataViewPagination, useDataViewSelection, useDataViewFilters } from '@patternfly/react-data-view/dist/dynamic/Hooks';
 import { DataView } from '@patternfly/react-data-view/dist/dynamic/DataView';
 import { BulkSelect, BulkSelectValue, ErrorState, ResponsiveAction, ResponsiveActions, SkeletonTableHead, SkeletonTableBody } from '@patternfly/react-component-groups';
@@ -138,5 +139,36 @@ The `useDataViewFilters` hook works well with the [React Router](https://reactro
 This example demonstrates the setup and usage of filters within the data view. It includes text filters for different attributes, the ability to clear all filters, and persistence of filter state in the URL.
 
 ```js file="./FiltersExample.tsx"
+
+```
+
+
+## All/selected data switch
+To allow users to filter data records in the data view, add filtering support that displays the applied filter chips.
+
+The data view toolbar can include a set of filters by passing a React node to the `filters` property. You can use the predefined components `<DataViewFilters>`, `<DataViewTextFilter>`, and `<DataViewCheckboxFilter>` to customize and handle filtering directly in the toolbar. The `<DataViewFilters>` component is a wrapper that allows conditional filtering using multiple attributes. If you need just a single filter, you can use `<DataViewTextFilter>`, `<DataViewCheckboxFilter>`, or a different filter component alone. Props of these filter components are listed in the [props section of this page](#props).
+
+You can either pass a `value` and `onChange` event to every filter separately, or you can pass `values` and `onChange` to the `<DataViewFilters>` wrapper, which makes them available to its children. Props directly passed to child filters have a higher priority than the "inherited" ones. 
+
+### Filters state
+
+The `useDataViewFilters` hook manages the filter state of the data view. It allows you to define default filter values, synchronize filter state with URL parameters, and handle filter changes efficiently.
+
+**Initial values:**
+- `initialFilters` object with default filter values (if the filter param allows multiple values, pass an array).
+- Optional `searchParams` object for managing URL-based filter state.
+- Optional `setSearchParams` function to update the URL when filters are modified.
+
+The `useDataViewFilters` hook works well with the [React Router](https://reactrouter.com/) library to support URL-based filtering. Alternatively, you can manage the filter state in the URL using `URLSearchParams` and `window.history.pushState` APIs, or other routing libraries. If no URL parameters are provided, the filter state is managed internally.
+
+**Return values:**
+- `filters` object representing the current filter values.
+- `onSetFilters` function to update the filter state.
+- `clearAllFilters` function to reset all filters to their initial values.
+
+### All/selected example
+This example demonstrates the setup and usage of filters within the data view. It includes text filters for different attributes, the ability to clear all filters, and persistence of filter state in the URL.
+
+```js file="./AllSelectedExample.tsx"
 
 ```
