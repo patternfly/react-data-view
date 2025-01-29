@@ -15,8 +15,9 @@ sortValue: 2
 propComponents: ['DataViewToolbar', 'DataViewFilters', 'DataViewTextFilter', 'DataViewCheckboxFilter']
 sourceLink: https://github.com/patternfly/react-data-view/blob/main/packages/module/patternfly-docs/content/extensions/data-view/examples/Toolbar/Toolbar.md
 ---
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { BrowserRouter, useSearchParams } from 'react-router-dom';
+import { Pagination, ToggleGroup, ToggleGroupItem } from '@patternfly/react-core';
 import { useDataViewPagination, useDataViewSelection, useDataViewFilters } from '@patternfly/react-data-view/dist/dynamic/Hooks';
 import { DataView } from '@patternfly/react-data-view/dist/dynamic/DataView';
 import { BulkSelect, BulkSelectValue, ErrorState, ResponsiveAction, ResponsiveActions, SkeletonTableHead, SkeletonTableBody } from '@patternfly/react-component-groups';
@@ -138,5 +139,16 @@ The `useDataViewFilters` hook works well with the [React Router](https://reactro
 This example demonstrates the setup and usage of filters within the data view. It includes text filters for different attributes, the ability to clear all filters, and persistence of filter state in the URL.
 
 ```js file="./FiltersExample.tsx"
+
+```
+
+
+## All/selected data switch
+All/selected data switch allows users to toggle between displaying the entire table (All) and only the rows they have selected (Selected). If the user deselects the last selected row, the filter automatically switches back to All, displaying all table rows again. Until at least one row is selected, a tooltip with guidance is displayed, and the Selected button does not perform any action. The Selected button is intentionally not disabled for accessibility reasons but instead has `aria-disabled` set.
+
+### All/selected example
+This example demonstrates the setup and usage of All/selected row switch.
+
+```js file="./AllSelectedExample.tsx"
 
 ```
