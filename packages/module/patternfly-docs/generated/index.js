@@ -2,8 +2,8 @@ module.exports = {
   '/extensions/data-view/toolbar/react': {
     id: "Toolbar",
     title: "Data view toolbar",
-    toc: [[{"text":"Toolbar example"}],{"text":"Toolbar actions"},[{"text":"Actions example"}],{"text":"Pagination"},[{"text":"Pagination state"},{"text":"Pagination example"}],{"text":"Selection"},[{"text":"Selection state"},{"text":"Selection example"}],{"text":"Filters"},[{"text":"Filters state"},{"text":"Filtering example"}]],
-    examples: ["Toolbar example","Actions example","Pagination example","Selection example","Filtering example"],
+    toc: [[{"text":"Toolbar example"}],{"text":"Toolbar actions"},[{"text":"Actions example"}],{"text":"Pagination"},[{"text":"Pagination state"},{"text":"Pagination example"}],{"text":"Selection"},[{"text":"Selection state"},{"text":"Selection example"}],{"text":"Filters"},[{"text":"Filters state"},{"text":"Filtering example"}],{"text":"All/selected data switch"},[{"text":"All/selected example"}]],
+    examples: ["Toolbar example","Actions example","Pagination example","Selection example","Filtering example","All/selected example"],
     section: "extensions",
     subsection: "Data view",
     source: "react",
