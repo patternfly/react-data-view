@@ -53,6 +53,33 @@ describe('useDataViewFilters', () => {
     expect(setSearchParams).toHaveBeenCalled();
   });
 
+  it('should sync with URL search params with non array value', () => {
+    const searchParams = new URLSearchParams();
+    searchParams.set('test', 'foo');
+    const setSearchParams = jest.fn();
+    const props: UseDataViewFiltersProps<{ test: string }> = {
+      initialFilters: { test: '' },
+      searchParams,
+      setSearchParams,
+    };
+    const { result } = renderHook(() => useDataViewFilters(props));
+    expect(result.current.filters).toEqual({ test: 'foo' });
+  })  
+  it('should sync with URL search params with array value', () => {
+
+    const searchParams = new URLSearchParams();
+    searchParams.append('test', 'foo');
+    searchParams.append('test', 'bar');
+    const setSearchParams = jest.fn();
+    const props: UseDataViewFiltersProps<{ test: string[] }> = {
+      initialFilters: { test: [] },
+      searchParams,
+      setSearchParams,
+    };
+    const { result } = renderHook(() => useDataViewFilters(props));
+    expect(result.current.filters).toEqual({ test: [ 'foo', 'bar' ] });
+  })  
+
   it('should reset filters to default values when clearAllFilters is called', () => {
     const { result } = renderHook(() => useDataViewFilters({ initialFilters }));
     act(() => result.current.clearAllFilters());
