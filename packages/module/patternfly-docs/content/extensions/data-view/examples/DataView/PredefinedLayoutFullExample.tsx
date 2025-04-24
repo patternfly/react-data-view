@@ -152,7 +152,7 @@ const RepositoriesTable: React.FunctionComponent<RepositoriesTableProps> = ({ se
   const pagination = useDataViewPagination({ perPage: 5 });
   const { page, perPage } = pagination;
 
-  const selection = useDataViewSelection({ matchOption: (a, b) => a[0] === b[0] });
+  const selection = useDataViewSelection({ matchOption: (a, b) => a.row[0] === b.row[0] });
   const { selected, onSelect, isSelected } = selection;
   
   const { trigger } = useDataViewEventsContext();
