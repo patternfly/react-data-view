@@ -41,4 +41,4 @@ jobs:
         run: npm run build
         if: steps.dist.outputs.cache-hit != 'true'
       - name: Release to NPM
-        run: cd packages/module && npx semantic-release@19.0.5
+        run: cd packages/module && npx semantic-release@19.0.5 --debug
