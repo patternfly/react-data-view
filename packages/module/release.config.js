@@ -9,7 +9,7 @@ module.exports = {
       {
         preset: 'angular',
         parserOpts: {
-          noteKeywords: ['BREAKING-CHANGE']
+          noteKeywords: [ 'BREAKING-CHANGE' ]
         }
       }
     ],
