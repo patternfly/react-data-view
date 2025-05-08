@@ -60,7 +60,7 @@
     "eslint-plugin-n": "^15.7.0",
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-promise": "^6.2.0",
-    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "fs-extra": "^11.3.0",
     "glob": "^10.4.1",
