@@ -32,13 +32,7 @@ describe('DataViewFilters component', () => {
       />
     );
     const input = getByLabelText('One filter');
-    // Simulate user typing 'abc' in the input
     input.focus();
-    // fireEvent.change triggers the onChange handler of the input
-    // The SearchInput component expects the value as the second argument
-    // so we use fireEvent.change with { target: { value: 'abc' } }
-    // but since SearchInput is a custom component, we use fireEvent.input
-    // to trigger the native input event
     fireEvent.input(input, { target: { value: 'abc' } });
     expect(mockOnChange).toHaveBeenCalledWith('one', { one: 'abc' });
   });
