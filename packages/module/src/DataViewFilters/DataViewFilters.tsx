@@ -130,7 +130,7 @@ export const DataViewFilters = <T extends object>({
               value: unknown;
             }>, {
               showToolbarItem: activeAttributeMenu === child.props.title,
-              onChange: (event, value) => onChange?.(event, { [child.props.filterId]: value } as Partial<T>),
+              onChange: (event, value) => onChange?.(child.props.filterId, { [child.props.filterId]: value } as Partial<T>),
               value: values?.[child.props.filterId],
               ...child.props
             })
