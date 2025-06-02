@@ -1,4 +1,4 @@
-import React, { createContext, PropsWithChildren, useContext, useMemo } from 'react';
+import { FC, createContext, PropsWithChildren, useContext, useMemo } from 'react';
 import { DataViewState } from '../DataView';
 
 export interface DataViewSelection {
@@ -31,7 +31,7 @@ export const InternalContext = createContext<InternalContextValue>({
 
 export type InternalProviderProps = PropsWithChildren<InternalContextProps>
 
-export const InternalContextProvider: React.FC<InternalProviderProps> = ({
+export const InternalContextProvider: FC<InternalProviderProps> = ({
   children,
   selection,
   activeState

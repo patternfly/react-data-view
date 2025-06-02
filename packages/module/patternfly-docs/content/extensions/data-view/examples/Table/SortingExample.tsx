@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React, { useMemo } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { useDataViewSort } from '@patternfly/react-data-view/dist/dynamic/Hooks';
 import { DataViewTable, DataViewTr, DataViewTh } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 import { ThProps } from '@patternfly/react-table';
@@ -41,7 +41,7 @@ const sortData = (data: Repository[], sortBy: string | undefined, direction: 'as
 
 const ouiaId = 'TableExample';
 
-export const MyTable: React.FunctionComponent = () => {
+export const MyTable: FunctionComponent = () => {
   const [ searchParams, setSearchParams ] = useSearchParams();
   const { sortBy, direction, onSort } = useDataViewSort({ searchParams, setSearchParams });
   const sortByIndex = useMemo(() => COLUMNS.findIndex(item => item.key === sortBy), [ sortBy ]);
@@ -79,7 +79,7 @@ export const MyTable: React.FunctionComponent = () => {
   );
 };
 
-export const BasicExample: React.FunctionComponent = () => (
+export const BasicExample: FunctionComponent = () => (
   <BrowserRouter>
     <MyTable/>
   </BrowserRouter>

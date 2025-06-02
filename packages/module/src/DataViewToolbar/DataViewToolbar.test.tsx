@@ -1,4 +1,3 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 import DataViewToolbar from './DataViewToolbar';
 import { Pagination } from '@patternfly/react-core';

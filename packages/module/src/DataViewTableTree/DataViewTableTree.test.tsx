@@ -1,4 +1,3 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 import { FolderIcon, FolderOpenIcon, LeafIcon } from '@patternfly/react-icons';
 import { DataView } from '../DataView';

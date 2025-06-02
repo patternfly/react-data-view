@@ -1,4 +1,3 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 import DataView from './DataView';
 
@@ -11,11 +10,14 @@ const layoutItemStyling = {
 
 describe('DataView component', () => {
   test('should render correctly', () => {
-    expect(render(
-      <DataView>
-        <div style={layoutItemStyling}>Header</div>
-        <div style={layoutItemStyling}>Data representation</div>
-        <div style={layoutItemStyling}>Footer</div>
-      </DataView>)).toMatchSnapshot();
+    expect(
+      render(
+        <DataView>
+          <div style={layoutItemStyling}>Header</div>
+          <div style={layoutItemStyling}>Data representation</div>
+          <div style={layoutItemStyling}>Footer</div>
+        </DataView>
+      )
+    ).toMatchSnapshot();
   });
 });

@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useRef, useEffect, ReactElement, ReactNode } from 'react';
+import { Children, isValidElement, cloneElement, useMemo, useState, useRef, useEffect, ReactElement, ReactNode } from 'react';
 import {
   Menu, MenuContent, MenuItem, MenuList, MenuToggle, Popper, ToolbarGroup, ToolbarToggleGroup, ToolbarToggleGroupProps,
 } from '@patternfly/react-core';
@@ -50,14 +50,14 @@ export const DataViewFilters = <T extends object>({
   const attributeContainerRef = useRef<HTMLDivElement>(null);
 
   const childrenHash = useMemo(() => JSON.stringify(
-    React.Children.map(children, (child) =>
-      React.isValidElement(child) ? { type: child.type, key: child.key, props: child.props } : child
+    Children.map(children, (child) =>
+      isValidElement(child) ? { type: child.type, key: child.key, props: child.props } : child
     )
   ), [ children ]);
 
-  const filterItems: DataViewFilterIdentifiers[] = useMemo(() => React.Children.toArray(children)
+  const filterItems: DataViewFilterIdentifiers[] = useMemo(() => Children.toArray(children)
     .map(child =>
-      React.isValidElement(child) ? { filterId: String(child.props.filterId), title: String(child.props.title) } : undefined
+      isValidElement(child) ? { filterId: String((child.props as any).filterId), title: String((child.props as any).title) } : undefined
     ).filter((item): item is DataViewFilterIdentifiers => !!item), [ childrenHash ]);  // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
@@ -122,17 +122,17 @@ export const DataViewFilters = <T extends object>({
             isVisible={isAttributeMenuOpen}
           />
         </div>
-        {React.Children.map(children, (child) =>
-          React.isValidElement(child)
-            ? React.cloneElement(child as ReactElement<{
+        {Children.map(children, (child) =>
+          isValidElement(child)
+            ? cloneElement(child as ReactElement<{
               showToolbarItem: boolean;
               onChange: (_e: unknown, values: unknown) => void;
               value: unknown;
             }>, {
-              showToolbarItem: activeAttributeMenu === child.props.title,
-              onChange: (event, value) => onChange?.(child.props.filterId, { [child.props.filterId]: value } as Partial<T>),
-              value: values?.[child.props.filterId],
-              ...child.props
+              showToolbarItem: activeAttributeMenu === (child.props as any).title,
+              onChange: (event, value) => onChange?.((child.props as any).filterId, { [(child.props as any).filterId]: value } as Partial<T>),
+              value: values?.[(child.props as any).filterId],
+              ...(child.props as any)
             })
             : child
         )}

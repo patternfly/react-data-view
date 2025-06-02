@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import {
   Th,
   Thead,
@@ -18,7 +18,7 @@ export interface DataViewTableHeadProps extends TheadProps {
   ouiaId?: string;
 }
 
-export const DataViewTableHead: React.FC<DataViewTableHeadProps> = ({
+export const DataViewTableHead: FC<DataViewTableHeadProps> = ({
   isTreeTable = false,
   columns,
   ouiaId = 'DataViewTableHead',

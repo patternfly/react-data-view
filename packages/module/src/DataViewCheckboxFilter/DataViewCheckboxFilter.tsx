@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC, useState, useRef, useMemo, useEffect, MouseEvent as ReactMouseEvent } from 'react';
 import {
   Badge,
   Menu,
@@ -48,7 +48,7 @@ export interface DataViewCheckboxFilterProps extends Omit<MenuProps, 'onSelect' 
   ouiaId?: string;
 }
 
-export const DataViewCheckboxFilter: React.FC<DataViewCheckboxFilterProps> = ({
+export const DataViewCheckboxFilter: FC<DataViewCheckboxFilterProps> = ({
   filterId,
   title,
   value = [],
@@ -61,12 +61,12 @@ export const DataViewCheckboxFilter: React.FC<DataViewCheckboxFilterProps> = ({
   ouiaId = 'DataViewCheckboxFilter',
   ...props
 }: DataViewCheckboxFilterProps) => {
-  const [ isOpen, setIsOpen ] = React.useState(false);
-  const toggleRef = React.useRef<HTMLButtonElement>(null);
-  const menuRef = React.useRef<HTMLDivElement>(null);
-  const containerRef = React.useRef<HTMLDivElement>(null);
+  const [ isOpen, setIsOpen ] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const normalizeOptions = React.useMemo(
+  const normalizeOptions = useMemo(
     () =>
       options.map(option =>
         typeof option === 'string'
@@ -76,7 +76,7 @@ export const DataViewCheckboxFilter: React.FC<DataViewCheckboxFilterProps> = ({
     [ options ]
   );
 
-  const handleToggleClick = (event: React.MouseEvent) => {
+  const handleToggleClick = (event: ReactMouseEvent) => {
     event.stopPropagation();
     setTimeout(() => {
       const firstElement = menuRef.current?.querySelector('li > button:not(:disabled)') as HTMLElement;
@@ -85,7 +85,7 @@ export const DataViewCheckboxFilter: React.FC<DataViewCheckboxFilterProps> = ({
     setIsOpen(prev => !prev);
   };
 
-  const handleSelect = (event?: React.MouseEvent, itemId?: string | number) => {
+  const handleSelect = (event?: ReactMouseEvent, itemId?: string | number) => {
     const activeItem = String(itemId);
     const isSelected = value.includes(activeItem);
 
@@ -102,7 +102,7 @@ export const DataViewCheckboxFilter: React.FC<DataViewCheckboxFilterProps> = ({
     && setIsOpen(false);
 
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener('click', handleClickOutside);
     return () => {
       window.removeEventListener('click', handleClickOutside);
