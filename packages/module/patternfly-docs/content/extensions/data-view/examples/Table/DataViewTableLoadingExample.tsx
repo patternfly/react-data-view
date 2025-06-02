@@ -6,7 +6,7 @@ import { SkeletonTableBody, SkeletonTableHead } from '@patternfly/react-componen
 // you can also pass props to Tr by returning { row: DataViewTd[], props: TrProps } }
 const rows: DataViewTr[] = [];
 
-const columns: DataViewTh[] = ['Repositories', 'Branches', 'Pull requests', 'Workspaces', 'Last commit'];
+const columns: DataViewTh[] = [ 'Repositories', 'Branches', 'Pull requests', 'Workspaces', 'Last commit' ];
 
 const ouiaId = 'TableExample';
 
