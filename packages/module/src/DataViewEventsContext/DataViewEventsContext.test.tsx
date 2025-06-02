@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { useDataViewEventsContext, DataViewEventsProvider, EventTypes } from './DataViewEventsContext';
 
@@ -19,7 +19,7 @@ describe('DataViewEventsContext', () => {
     const TestComponent = () => {
       const { subscribe, trigger } = useDataViewEventsContext();
 
-      React.useEffect(() => {
+      useEffect(() => {
         const unsubscribe = subscribe(EventTypes.rowClick, callback);
         return () => unsubscribe();
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -46,7 +46,7 @@ describe('DataViewEventsContext', () => {
     const TestComponent = () => {
       const { subscribe, trigger } = useDataViewEventsContext();
 
-      React.useEffect(() => {
+      useEffect(() => {
         const unsubscribe = subscribe(EventTypes.rowClick, callback);
         unsubscribe();
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -75,7 +75,7 @@ describe('DataViewEventsContext', () => {
     const TestComponent = () => {
       const { subscribe, trigger } = useDataViewEventsContext();
 
-      React.useEffect(() => {
+      useEffect(() => {
         const unsubscribe1 = subscribe(EventTypes.rowClick, callback1);
         const unsubscribe2 = subscribe(EventTypes.rowClick, callback2);
         

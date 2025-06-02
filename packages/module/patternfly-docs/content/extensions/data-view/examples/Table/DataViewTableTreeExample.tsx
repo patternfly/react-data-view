@@ -1,4 +1,4 @@
-import React from 'react';
+import { FunctionComponent } from 'react';
 import { DataView } from '@patternfly/react-data-view/dist/dynamic/DataView';
 import { DataViewTable, DataViewTh, DataViewTrTree } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 import { useDataViewSelection } from '@patternfly/react-data-view/dist/dynamic/Hooks';
@@ -52,7 +52,7 @@ const columns: DataViewTh[] = [ 'Repositories', 'Branches', 'Pull requests', 'Wo
 
 const ouiaId = 'TreeTableExample';
 
-export const BasicExample: React.FunctionComponent = () => {
+export const BasicExample: FunctionComponent = () => {
   const selection = useDataViewSelection({ matchOption: (a, b) => a.id === b.id });
 
   return (

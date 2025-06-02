@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { SearchInput, SearchInputProps, ToolbarFilter, ToolbarFilterProps } from '@patternfly/react-core';
 
 /** extends SearchInputProps */
@@ -19,7 +19,7 @@ export interface DataViewTextFilterProps extends SearchInputProps {
   ouiaId?: string;
 }
 
-export const DataViewTextFilter: React.FC<DataViewTextFilterProps> = ({
+export const DataViewTextFilter: FC<DataViewTextFilterProps> = ({
   filterId,
   title,
   value = '',

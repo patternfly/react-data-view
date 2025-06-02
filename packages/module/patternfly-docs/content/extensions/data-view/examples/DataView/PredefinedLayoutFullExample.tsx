@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React, { useEffect, useState, useRef, useMemo } from 'react';
+import { FunctionComponent, useEffect, useState, useRef, useMemo } from 'react';
 import { Drawer, DrawerActions, DrawerCloseButton, DrawerContent, DrawerContentBody, DrawerHead, DrawerPanelContent, Title, Content, EmptyState, EmptyStateBody, EmptyStateFooter, EmptyStateActions, Button,  } from '@patternfly/react-core';
 import { ActionsColumn, Tbody, Td, ThProps, Tr } from '@patternfly/react-table';
 import { BulkSelect, BulkSelectValue } from '@patternfly/react-component-groups/dist/dynamic/BulkSelect';
@@ -94,7 +94,7 @@ interface RepositoryDetailProps {
   setSelectedRepo: React.Dispatch<React.SetStateAction<Repository | undefined>>;
 }
 
-const RepositoryDetail: React.FunctionComponent<RepositoryDetailProps> = ({ selectedRepo, setSelectedRepo }) => {
+const RepositoryDetail: FunctionComponent<RepositoryDetailProps> = ({ selectedRepo, setSelectedRepo }) => {
   const context = useDataViewEventsContext();
 
   useEffect(() => {
@@ -146,7 +146,7 @@ const rowActions = [
   }
 ];
 
-const RepositoriesTable: React.FunctionComponent<RepositoriesTableProps> = ({ selectedRepo = undefined }) => {
+const RepositoriesTable: FunctionComponent<RepositoriesTableProps> = ({ selectedRepo = undefined }) => {
   const { filters, onSetFilters, clearAllFilters } = useDataViewFilters<RepositoryFilters>({ initialFilters: { name: '', branch: '', workspace: [] } });
   
   const pagination = useDataViewPagination({ perPage: 5 });
@@ -255,7 +255,7 @@ const RepositoriesTable: React.FunctionComponent<RepositoriesTableProps> = ({ se
   );
 };
 
-export const BasicExample: React.FunctionComponent = () => {
+export const BasicExample: FunctionComponent = () => {
   const [ selectedRepo, setSelectedRepo ] = useState<Repository>();
   const drawerRef = useRef<HTMLDivElement>(null);
 

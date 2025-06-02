@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import {
   Table,
   TableProps,
@@ -25,7 +25,7 @@ export interface DataViewTableBasicProps extends Omit<TableProps, 'onSelect' | '
   ouiaId?: string;
 }
 
-export const DataViewTableBasic: React.FC<DataViewTableBasicProps> = ({
+export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
   columns,
   rows,
   ouiaId = 'DataViewTableBasic',

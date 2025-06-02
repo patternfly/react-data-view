@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC, Children } from 'react';
 import { Stack, StackItem, StackProps } from '@patternfly/react-core';
 import { DataViewSelection, InternalContextProvider } from '../InternalContext';
 
@@ -24,11 +24,11 @@ export interface DataViewProps extends StackProps {
 
 export type DataViewImpementationProps = Omit<DataViewProps, 'onSelect' | 'isItemSelected' | 'isItemSelectDisabled'>;
 
-const DataViewImplementation: React.FC<DataViewImpementationProps> = ({
+const DataViewImplementation: FC<DataViewImpementationProps> = ({
   children, ouiaId = 'DataView', ...props
 }: DataViewImpementationProps) => (
   <Stack data-ouia-component-id={`${ouiaId}-stack`} {...props}>
-    {React.Children.map(children, (child, index) => (
+    {Children.map(children, (child, index) => (
       <StackItem data-ouia-component-id={`${ouiaId}-stack-item-${index}`}>
         {child}
       </StackItem>
@@ -36,7 +36,7 @@ const DataViewImplementation: React.FC<DataViewImpementationProps> = ({
   </Stack>
 )
 
-export const DataView: React.FC<DataViewProps> = ({ children, selection, activeState, ...props }: DataViewProps) => (
+export const DataView: FC<DataViewProps> = ({ children, selection, activeState, ...props }: DataViewProps) => (
   <InternalContextProvider selection={selection} activeState={activeState} >
     <DataViewImplementation {...props}>{children}</DataViewImplementation>
   </InternalContextProvider>

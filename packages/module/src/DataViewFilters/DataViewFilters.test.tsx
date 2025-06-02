@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import DataViewFilters from './DataViewFilters';
 import DataViewToolbar from '../DataViewToolbar';
@@ -8,14 +7,16 @@ describe('DataViewFilters component', () => {
   const mockOnChange = jest.fn();
 
   it('should render correctly', () => {
-    const { container } = render(<DataViewToolbar
-      filters={
-        <DataViewFilters onChange={mockOnChange} values={{}}>
-          <DataViewTextFilter filterId="one" title="One" />
-          <DataViewTextFilter filterId="two" title="Two" />
-        </DataViewFilters>
-      }
-    />);
+    const { container } = render(
+      <DataViewToolbar
+        filters={
+          <DataViewFilters onChange={mockOnChange} values={{}}>
+            <DataViewTextFilter filterId="one" title="One" />
+            <DataViewTextFilter filterId="two" title="Two" />
+          </DataViewFilters>
+        }
+      />
+    );
     expect(container).toMatchSnapshot();
   });
 

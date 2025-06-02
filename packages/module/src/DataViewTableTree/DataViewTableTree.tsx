@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { FC, useState, useMemo, ReactNode } from 'react';
 import {
   Table,
   TableProps,
@@ -71,7 +71,7 @@ export interface DataViewTableTreeProps extends Omit<TableProps, 'onSelect' | 'r
   ouiaId?: string;
 }
 
-export const DataViewTableTree: React.FC<DataViewTableTreeProps> = ({
+export const DataViewTableTree: FC<DataViewTableTreeProps> = ({
   columns,
   rows,
   headStates,
@@ -84,8 +84,8 @@ export const DataViewTableTree: React.FC<DataViewTableTreeProps> = ({
 }: DataViewTableTreeProps) => {
   const { selection, activeState } = useInternalContext();
   const { onSelect, isSelected, isSelectDisabled } = selection ?? {};
-  const [ expandedNodeIds, setExpandedNodeIds ] = React.useState<string[]>([]);
-  const [ expandedDetailsNodeNames, setExpandedDetailsNodeIds ] = React.useState<string[]>([]);
+  const [ expandedNodeIds, setExpandedNodeIds ] = useState<string[]>([]);
+  const [ expandedDetailsNodeNames, setExpandedDetailsNodeIds ] = useState<string[]>([]);
 
   const activeHeadState = useMemo(() => activeState ? headStates?.[activeState] : undefined, [ activeState, headStates ]);
   const activeBodyState = useMemo(() => activeState ? bodyStates?.[activeState] : undefined, [ activeState, bodyStates ]);
@@ -98,7 +98,7 @@ export const DataViewTableTree: React.FC<DataViewTableTreeProps> = ({
       posinset = 1,
       rowIndex = 0,
       isHidden = false
-    ): React.ReactNode[] => {
+    ): ReactNode[] => {
       if (!node) {
         return [];
       }
