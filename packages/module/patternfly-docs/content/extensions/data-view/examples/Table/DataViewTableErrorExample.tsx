@@ -1,4 +1,4 @@
-import React from 'react';
+import { FunctionComponent } from 'react';
 import { DataView, DataViewState } from '@patternfly/react-data-view/dist/dynamic/DataView';
 import { DataViewTable, DataViewTr, DataViewTh } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 import { ErrorState } from '@patternfly/react-component-groups';
@@ -32,7 +32,7 @@ const error = (
   </Tbody>
 );
 
-export const BasicExample: React.FunctionComponent = () => (
+export const BasicExample: FunctionComponent = () => (
   <DataView activeState={DataViewState.error}>
     <DataViewTable 
       aria-label='Repositories table' 

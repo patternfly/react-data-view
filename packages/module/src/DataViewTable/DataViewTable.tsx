@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 import {
   TdProps,
   ThProps,
@@ -50,7 +50,7 @@ export type DataViewTableProps =
       isTreeTable?: false;
     } & DataViewTableBasicProps);
 
-export const DataViewTable: React.FC<DataViewTableProps> = (props) => (
+export const DataViewTable: FC<DataViewTableProps> = (props) => (
   props.isTreeTable ? <DataViewTableTree {...props} /> : <DataViewTableBasic {...props} />
 );
 

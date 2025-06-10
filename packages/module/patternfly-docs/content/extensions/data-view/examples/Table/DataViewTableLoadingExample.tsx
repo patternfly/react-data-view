@@ -1,4 +1,4 @@
-import React from 'react';
+import { FunctionComponent } from 'react';
 import { DataView, DataViewState } from '@patternfly/react-data-view/dist/dynamic/DataView';
 import { DataViewTable, DataViewTr, DataViewTh } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 import { SkeletonTableBody, SkeletonTableHead } from '@patternfly/react-component-groups';
@@ -10,13 +10,13 @@ const columns: DataViewTh[] = [ 'Repositories', 'Branches', 'Pull requests', 'Wo
 
 const ouiaId = 'TableExample';
 
-const headLoading = <SkeletonTableHead columns={columns} />
+const headLoading = <SkeletonTableHead columns={columns} />;
 const bodyLoading = <SkeletonTableBody rowsCount={5} columnsCount={columns.length} />;
 
-export const BasicExample: React.FunctionComponent = () => (
+export const BasicExample: FunctionComponent = () => (
   <DataView activeState={DataViewState.loading}>
     <DataViewTable
-      aria-label='Repositories table' 
+      aria-label="Repositories table"
       ouiaId={ouiaId}
       columns={columns}
       rows={rows}

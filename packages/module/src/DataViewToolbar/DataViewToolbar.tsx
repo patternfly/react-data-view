@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useRef } from 'react';
+import { FC, PropsWithChildren, useRef } from 'react';
 import { Button, Toolbar, ToolbarContent, ToolbarItem, ToolbarItemVariant, ToolbarProps } from '@patternfly/react-core';
 
 /** extends ToolbarProps */
@@ -21,7 +21,7 @@ export interface DataViewToolbarProps extends Omit<PropsWithChildren<ToolbarProp
   customLabelGroupContent?: React.ReactNode;
 }
 
-export const DataViewToolbar: React.FC<DataViewToolbarProps> = ({ className, ouiaId = 'DataViewToolbar', bulkSelect, actions, toggleGroup, pagination, filters, customLabelGroupContent, clearAllFilters, children, ...props }: DataViewToolbarProps) => {
+export const DataViewToolbar: FC<DataViewToolbarProps> = ({ className, ouiaId = 'DataViewToolbar', bulkSelect, actions, toggleGroup, pagination, filters, customLabelGroupContent, clearAllFilters, children, ...props }: DataViewToolbarProps) => {
   const defaultClearFilters = useRef(
     <ToolbarItem>
       <Button ouiaId={`${ouiaId}-clear-all-filters`} variant="link" onClick={clearAllFilters} isInline>

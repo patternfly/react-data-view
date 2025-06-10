@@ -7,7 +7,7 @@ propComponents: ['DataView']
 sortValue: 1
 sourceLink: https://github.com/patternfly/react-data-view/blob/main/packages/module/patternfly-docs/content/extensions/data-view/examples/DataView/DataView.md
 --- 
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { FunctionComponent, useState, useEffect, useRef, useMemo } from 'react';
 import { Drawer, DrawerContent, DrawerContentBody } from '@patternfly/react-core';
 import { CubesIcon } from '@patternfly/react-icons';
 import { useDataViewPagination, useDataViewSelection, useDataViewFilters, useDataViewSort } from '@patternfly/react-data-view/dist/dynamic/Hooks';

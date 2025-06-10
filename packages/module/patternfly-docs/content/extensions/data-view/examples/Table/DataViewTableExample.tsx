@@ -1,4 +1,4 @@
-import React from 'react';
+import { FunctionComponent } from 'react';
 import { DataViewTable, DataViewTr, DataViewTh } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { Button } from '@patternfly/react-core';
@@ -62,6 +62,6 @@ const columns: DataViewTh[] = [
 
 const ouiaId = 'TableExample';
 
-export const BasicExample: React.FunctionComponent = () => (
+export const BasicExample: FunctionComponent = () => (
   <DataViewTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={rows} />
 );
