@@ -39,7 +39,7 @@ To define rows and columns for your table, use these props:
 
 It is also possible to disable row selection using the `isSelectDisabled` function, which can be passed to the wrapping `DataView` component through the `selection` prop.
 
-If you want to have all expandable nodes open on initial load pass the 'expandAll' prop to the DataViewTable component
+If you want to have all expandable nodes open on initial load pass the `expandAll` prop to the DataViewTable component
 
 ### Table example
 ```js file="./DataViewTableExample.tsx"
