@@ -101,6 +101,15 @@ describe('DataViewTableTree component', () => {
     expect(container).toMatchSnapshot();
   });
 
+  test('should render tree table with all expandable nodes expanded', () => {
+    const { container } = render(
+      <DataView selection={mockSelection}>
+        <DataViewTable isTreeTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} expandAll rows={rows} leafIcon={<LeafIcon/>} expandedIcon={<FolderOpenIcon aria-hidden />} collapsedIcon={<FolderIcon aria-hidden />} />
+      </DataView>
+    );
+    expect(container).toMatchSnapshot();
+  });
+
   test('should render tree table with a loading state', () => {
     const { container } = render(
       <DataView activeState="loading">

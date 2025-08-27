@@ -1,4 +1,4 @@
-import { FC, useState, useMemo, ReactNode } from 'react';
+import { FC, useState, useMemo, useEffect, ReactNode } from 'react';
 import {
   Table,
   TableProps,
@@ -67,6 +67,8 @@ export interface DataViewTableTreeProps extends Omit<TableProps, 'onSelect' | 'r
   expandedIcon?: React.ReactNode;
   /** Optional icon for the collapsed parent rows */
   collapsedIcon?: React.ReactNode;
+  /** Expand all expandable nodes on initial load */
+  expandAll?: boolean;
   /** Custom OUIA ID */
   ouiaId?: string;
 }
@@ -79,6 +81,7 @@ export const DataViewTableTree: FC<DataViewTableTreeProps> = ({
   leafIcon = null,
   expandedIcon = null,
   collapsedIcon = null,
+  expandAll = false,
   ouiaId = 'DataViewTableTree',
   ...props
 }: DataViewTableTreeProps) => {
@@ -86,6 +89,37 @@ export const DataViewTableTree: FC<DataViewTableTreeProps> = ({
   const { onSelect, isSelected, isSelectDisabled } = selection ?? {};
   const [ expandedNodeIds, setExpandedNodeIds ] = useState<string[]>([]);
   const [ expandedDetailsNodeNames, setExpandedDetailsNodeIds ] = useState<string[]>([]);
+
+  // Helper function to collect all node IDs that have children (are expandable)
+  const getExpandableNodeIds = (nodes: DataViewTrTree[]): string[] => {
+    const expandableIds: string[] = [];
+    
+    const traverse = (nodeList: DataViewTrTree[]) => {
+      nodeList.forEach(node => {
+        if (node.children && node.children.length > 0) {
+          expandableIds.push(node.id);
+          traverse(node.children);
+        }
+      });
+    };
+    
+    traverse(nodes);
+    return expandableIds;
+  };
+
+  // Effect to handle expandAll behavior
+  // Memoize the expandable IDs to avoid recalculating when rows object reference changes but structure is the same
+  const expandableIds = useMemo(() => getExpandableNodeIds(rows), [ rows ]);
+
+  // Effect to handle expandAll behavior - only runs when IDs actually change
+  useEffect(() => {
+    if (expandAll) {
+      setExpandedNodeIds(expandableIds);
+    } else {
+      setExpandedNodeIds([]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ expandAll, expandableIds.join(',') ]);
 
   const activeHeadState = useMemo(() => activeState ? headStates?.[activeState] : undefined, [ activeState, headStates ]);
   const activeBodyState = useMemo(() => activeState ? bodyStates?.[activeState] : undefined, [ activeState, bodyStates ]);
