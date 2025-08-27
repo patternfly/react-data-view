@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDataViewSelection } from '@patternfly/react-data-view/dist/dynamic/Hooks';
 import { BulkSelect, BulkSelectValue } from '@patternfly/react-component-groups/dist/dynamic/BulkSelect';
+import { Button } from '@patternfly/react-core';
 import { DataView } from '@patternfly/react-data-view/dist/dynamic/DataView';
 import { DataViewToolbar } from '@patternfly/react-data-view/dist/dynamic/DataViewToolbar';
 import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
@@ -30,11 +31,16 @@ const ouiaId = 'LayoutExample';
 
 export const BasicExample: React.FunctionComponent = () => { 
   const selection = useDataViewSelection({ matchOption: (a, b) => a[0] === b[0] });
-  const { selected, onSelect } = selection;
+  const { selected, onSelect, setSelected } = selection;
 
   const handleBulkSelect = (value: BulkSelectValue) => {
     value === BulkSelectValue.none && onSelect(false);
     value === BulkSelectValue.all && onSelect(true, rows);
+  };
+
+  // Example: Select first two rows programmatically using setSelected
+  const handleSelectFirstTwo = () => {
+    setSelected(rows.slice(0, 2));
   };
 
   return (
@@ -49,7 +55,12 @@ export const BasicExample: React.FunctionComponent = () => {
             selectedCount={selected.length}
             onSelect={handleBulkSelect}
           />
-        } 
+        }
+        actions={
+          <Button variant="secondary" onClick={handleSelectFirstTwo}>
+            Select First Two
+          </Button>
+        }
       />
       <DataViewTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={rows} />
     </DataView>

@@ -105,6 +105,7 @@ The `useDataViewSelection` hook manages the selection state of the data view.
 - `selected` array of currently selected records.
 - `isSelected` function returning the selection state for the record.
 - `onSelect` callback to modify the selection state. This accepts the `isSelecting` flag (indicates if records are being selected or deselected) and `items` (affected records).
+- `setSelected` function to directly set the selected items array. This is useful for programmatically setting a specific selection state without needing to use the `onSelect` callback.
 
 ### Selection example
 

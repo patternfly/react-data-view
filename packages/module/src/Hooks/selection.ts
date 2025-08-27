@@ -24,9 +24,14 @@ export const useDataViewSelection = (props?: UseDataViewSelectionProps) => {
   
   const isSelected = (item: any): boolean => Boolean(selected.find(selected => matchOption(selected, item)));
 
+  const setSelectedItems = (items: any[]) => {
+    setSelected(items);
+  };
+
   return {
     selected,
     onSelect,
-    isSelected
+    isSelected,
+    setSelected: setSelectedItems
   };
 };

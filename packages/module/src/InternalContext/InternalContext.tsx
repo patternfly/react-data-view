@@ -6,6 +6,8 @@ export interface DataViewSelection {
   onSelect: (isSelecting: boolean, items?: any[] | any) => void;  // eslint-disable-line @typescript-eslint/no-explicit-any
   /** Checks if a specific item is currently selected */
   isSelected: (item: any) => boolean;  // eslint-disable-line @typescript-eslint/no-explicit-any
+  /** Directly sets the selected items */
+  setSelected?: (items: any[]) => void;  // eslint-disable-line @typescript-eslint/no-explicit-any
   /** Determines if selection is disabled for a given item */
   isSelectDisabled?: (item: any) => boolean;  // eslint-disable-line @typescript-eslint/no-explicit-any
 }
