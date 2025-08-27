@@ -9,6 +9,7 @@ describe('useDataViewSelection', () => {
       selected: [],
       onSelect: expect.any(Function),
       isSelected: expect.any(Function),
+      setSelected: expect.any(Function),
     })
   });
 
@@ -19,6 +20,7 @@ describe('useDataViewSelection', () => {
       selected: initialSelected,
       onSelect: expect.any(Function),
       isSelected: expect.any(Function),
+      setSelected: expect.any(Function),
     })
   });
 
