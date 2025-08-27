@@ -108,14 +108,18 @@ export const DataViewTableTree: FC<DataViewTableTreeProps> = ({
   };
 
   // Effect to handle expandAll behavior
+  // Memoize the expandable IDs to avoid recalculating when rows object reference changes but structure is the same
+  const expandableIds = useMemo(() => getExpandableNodeIds(rows), [ rows ]);
+
+  // Effect to handle expandAll behavior - only runs when IDs actually change
   useEffect(() => {
     if (expandAll) {
-      const expandableIds = getExpandableNodeIds(rows);
       setExpandedNodeIds(expandableIds);
     } else {
       setExpandedNodeIds([]);
     }
-  }, [ expandAll, rows ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ expandAll, expandableIds.join(',') ]);
 
   const activeHeadState = useMemo(() => activeState ? headStates?.[activeState] : undefined, [ activeState, headStates ]);
   const activeBodyState = useMemo(() => activeState ? bodyStates?.[activeState] : undefined, [ activeState, bodyStates ]);
