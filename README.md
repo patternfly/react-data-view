@@ -1,6 +1,6 @@
 # PatternFly Data view
 
-This repo contains React Data view implementation.
+This repo contains React Data view implementation. 
   
 ### Branches
 `main` - PatternFly 6 implementation
