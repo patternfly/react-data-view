@@ -79,7 +79,7 @@
     "surge": "^0.23.1",
     "swc-loader": "0.2.6",
     "ts-jest": "29.3.4",
-    "wait-on": "^8.0.1",
+    "wait-on": "^8.0.5",
     "whatwg-fetch": "^3.6.20"
   }
 }
