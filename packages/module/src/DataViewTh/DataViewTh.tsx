@@ -49,7 +49,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
 
   const isResizable = resizableProps.isResizable;
   const resizeButtonRef = useRef<HTMLButtonElement>(null);
-  const [width, setWidth] = useState(resizableProps.width ? resizableProps.width : 0);
+  const [ width, setWidth ] = useState(resizableProps.width ? resizableProps.width : 0);
   const increment = resizableProps.increment || 5;
   const onResize = resizableProps.onResize;
   const setInitialVals = useRef(true);
@@ -65,7 +65,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
 
     const observed = resizeButtonRef.current;
     const observer = new IntersectionObserver(
-      ([entry]) => {
+      ([ entry ]) => {
         isInView.current = entry.isIntersecting;
       },
       { threshold: 0.3 }
@@ -87,7 +87,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
       setWidth(thRef.current?.getBoundingClientRect().width || 0);
       setInitialVals.current = false;
     }
-  }, [isResizable, setInitialVals]);
+  }, [ isResizable, setInitialVals ]);
 
   const setDragOffset = (e: ReactMouseEvent | ReactTouchEvent) => {
     const isRTL = getLanguageDirection(thRef.current as HTMLElement) === 'rtl';
