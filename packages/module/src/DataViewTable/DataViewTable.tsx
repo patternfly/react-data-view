@@ -1,46 +1,71 @@
-import { FC, ReactNode } from 'react';
-import {
-  TdProps,
-  ThProps,
-  TrProps
-} from '@patternfly/react-table';
+import { FC, ReactNode, MouseEvent as ReactMouseEvent, KeyboardEvent as ReactKeyboardEvent } from 'react';
+import { TdProps, ThProps, TrProps, InnerScrollContainer } from '@patternfly/react-table';
 import { DataViewTableTree, DataViewTableTreeProps } from '../DataViewTableTree';
 import { DataViewTableBasic, DataViewTableBasicProps } from '../DataViewTableBasic';
 
+// Table resizable typings
+export interface DataViewThResizableProps {
+  /** Whether the column is resizable */
+  isResizable?: boolean;
+  /** Callback after the column is resized */
+  onResize?: (
+    event: ReactMouseEvent | MouseEvent | ReactKeyboardEvent | KeyboardEvent | TouchEvent,
+    width: number
+  ) => void;
+  /** Width of the column */
+  width?: number;
+  /** Minimum width of the column */
+  minWidth?: number;
+  /** Increment for keyboard navigation */
+  increment?: number;
+}
+
 // Table head typings
-export type DataViewTh = ReactNode | {
-  /** Table head cell node */
-  cell: ReactNode;
-  /** Props passed to Th */
-  props?: ThProps
-};
-export const isDataViewThObject = (value: DataViewTh): value is { cell: ReactNode; props?: ThProps } => value != null && typeof value === 'object' && 'cell' in value;
+export type DataViewTh =
+  | ReactNode
+  | {
+      /** Table head cell node */
+      cell: ReactNode;
+      /** Whether the column is resizable */
+      resizableProps?: DataViewThResizableProps;
+      /** Props passed to Th */
+      props?: ThProps;
+    };
+export const isDataViewThObject = (value: DataViewTh): value is { cell: ReactNode; props?: ThProps } =>
+  value != null && typeof value === 'object' && 'cell' in value;
 
 // Basic table typings
 export interface DataViewTrObject {
   /** Array of rows */
-  row: DataViewTd[],
+  row: DataViewTd[];
   /** Unique identifier of a row */
-  id?: string,
+  id?: string;
   /** Props passed to Tr */
-  props?: TrProps
+  props?: TrProps;
 }
 
-export type DataViewTd = ReactNode | {
-  /** Table body cell node */
-  cell: ReactNode;
-  /** Props passed to Td */
-  props?: TdProps
-};
+export type DataViewTd =
+  | ReactNode
+  | {
+      /** Table body cell node */
+      cell: ReactNode;
+      /** Props passed to Td */
+      props?: TdProps;
+    };
 
 export type DataViewTr = DataViewTd[] | DataViewTrObject;
 
-export const isDataViewTdObject = (value: DataViewTd): value is { cell: ReactNode; props?: TdProps } => value != null && typeof value === 'object' && 'cell' in value;
-export const isDataViewTrObject = (value: DataViewTr): value is { row: DataViewTd[], id?: string } => value != null && typeof value === 'object' && 'row' in value;
+export const isDataViewTdObject = (value: DataViewTd): value is { cell: ReactNode; props?: TdProps } =>
+  value != null && typeof value === 'object' && 'cell' in value;
+export const isDataViewTrObject = (value: DataViewTr): value is { row: DataViewTd[]; id?: string } =>
+  value != null && typeof value === 'object' && 'row' in value;
 
 // Tree table typings
 /** extends DataViewTrObject */
-export interface DataViewTrTree extends DataViewTrObject { id: string, children?: DataViewTrTree[] }
+export interface DataViewTrTree extends DataViewTrObject {
+  id: string;
+  children?: DataViewTrTree[];
+}
 
 export type DataViewTableProps =
   | ({
@@ -48,10 +73,22 @@ export type DataViewTableProps =
     } & DataViewTableTreeProps)
   | ({
       isTreeTable?: false;
+      isResizable?: boolean;
     } & DataViewTableBasicProps);
 
-export const DataViewTable: FC<DataViewTableProps> = (props) => (
-  props.isTreeTable ? <DataViewTableTree {...props} /> : <DataViewTableBasic {...props} />
-);
+export const DataViewTable: FC<DataViewTableProps> = (props) => {
+  if (props.isTreeTable) {
+    return <DataViewTableTree {...props} />;
+  } else {
+    const { isResizable, ...rest } = props;
+    return isResizable ? (
+      <InnerScrollContainer>
+        <DataViewTableBasic {...rest} />
+      </InnerScrollContainer>
+    ) : (
+      <DataViewTableBasic {...rest} />
+    );
+  }
+};
 
 export default DataViewTable;

@@ -1,0 +1,261 @@
+import {
+  FC,
+  useState,
+  MouseEvent as ReactMouseEvent,
+  TouchEvent as ReactTouchEvent,
+  KeyboardEvent as ReactKeyboardEvent,
+  ReactNode,
+  useCallback,
+  useRef,
+  useEffect
+} from 'react';
+import { Th, ThProps } from '@patternfly/react-table';
+import { Button, getLanguageDirection } from '@patternfly/react-core';
+
+export interface DataViewThProps {
+  /** Cell content */
+  content: ReactNode;
+  /** Resizable props */
+  resizableProps?: {
+    /** Whether the column is resizable */
+    isResizable?: boolean;
+    /** Callback after the column is resized */
+    onResize?: (
+      event: ReactMouseEvent | MouseEvent | ReactKeyboardEvent | KeyboardEvent | TouchEvent,
+      width: number
+    ) => void;
+    /** Width of the column */
+    width?: number;
+    /** Minimum width of the column */
+    minWidth?: number;
+    /** Increment for keyboard navigation */
+    increment?: number;
+  };
+  /** Props passed to Th */
+  props?: ThProps;
+}
+
+export const DataViewTh: FC<DataViewThProps> = ({
+  resizableProps = {
+    isResizable: false,
+    width: 0,
+    increment: 10
+  },
+  content,
+  ...props
+}: DataViewThProps) => {
+  const thRef = useRef<HTMLTableCellElement>(null);
+
+  const isResizable = resizableProps.isResizable;
+  const resizeButtonRef = useRef<HTMLButtonElement>(null);
+  const [ width, setWidth ] = useState(resizableProps.width ? resizableProps.width : 0);
+  const increment = resizableProps.increment || 5;
+  const onResize = resizableProps.onResize;
+  const setInitialVals = useRef(true);
+  const dragOffset = useRef(0);
+  const isResizing = useRef(false);
+  const isInView = useRef(true);
+  let currWidth = 0;
+
+  useEffect(() => {
+    const observed = resizeButtonRef.current;
+    const observer = new IntersectionObserver(
+      ([ entry ]) => {
+        isInView.current = entry.isIntersecting;
+      },
+      { threshold: 0.3 }
+    );
+
+    if (observed) {
+      observer.observe(observed);
+    }
+
+    return () => {
+      if (observed) {
+        observer.unobserve(observed);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (setInitialVals.current && width === 0) {
+      setWidth(thRef.current?.getBoundingClientRect().width || 0);
+      setInitialVals.current = false;
+    }
+  }, [ setInitialVals ]);
+
+  const setDragOffset = (e: ReactMouseEvent | ReactTouchEvent) => {
+    const isRTL = getLanguageDirection(thRef.current as HTMLElement) === 'rtl';
+    const startingMousePos = 'clientX' in e ? e.clientX : e.touches[0].clientX;
+    const startingColumnPos =
+      (isRTL ? thRef.current?.getBoundingClientRect().left : thRef.current?.getBoundingClientRect().right) || 0;
+
+    dragOffset.current = startingColumnPos - startingMousePos;
+  };
+
+  const handleMousedown = (e: ReactMouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    document.addEventListener('mousemove', callbackMouseMove);
+    document.addEventListener('mouseup', callbackMouseUp);
+
+    // When a user begins resizing a column, set the drag offset so the drag motion aligns with the column edge
+    if (dragOffset.current === 0) {
+      setDragOffset(e);
+    }
+
+    isResizing.current = true;
+  };
+
+  const handleMouseMove = (e: MouseEvent) => {
+    const mousePos = e.clientX;
+
+    handleControlMove(e, dragOffset.current + mousePos);
+  };
+
+  const handleTouchStart = (e: ReactTouchEvent) => {
+    e.stopPropagation();
+    document.addEventListener('touchmove', callbackTouchMove, { passive: false });
+    document.addEventListener('touchend', callbackTouchEnd);
+
+    // When a user begins resizing a column, set the drag offset so the drag motion aligns with the column edge
+    if (dragOffset.current === 0) {
+      setDragOffset(e);
+    }
+
+    isResizing.current = true;
+  };
+
+  const handleTouchMove = (e: TouchEvent) => {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    const touchPos = e.touches[0].clientX;
+
+    handleControlMove(e, touchPos);
+  };
+
+  const handleControlMove = (e: MouseEvent | TouchEvent, controlPosition: number) => {
+    e.stopPropagation();
+
+    if (!isResizing.current) {
+      return;
+    }
+
+    const columnRect = thRef.current?.getBoundingClientRect();
+    if (columnRect === undefined) {
+      return;
+    }
+
+    const mousePos = controlPosition;
+    const isRTL = getLanguageDirection(thRef.current as HTMLElement) === 'rtl';
+    let newSize = isRTL ? columnRect?.right - mousePos : mousePos - columnRect?.left;
+
+    // Prevent the column from shrinking below a specified minimum width
+    if (resizableProps.minWidth && newSize < resizableProps.minWidth) {
+      newSize = resizableProps.minWidth;
+    }
+
+    thRef.current?.style.setProperty('min-width', newSize + 'px');
+    currWidth = newSize;
+  };
+
+  const handleMouseup = (e: MouseEvent) => {
+    if (!isResizing.current) {
+      return;
+    }
+    // Reset the isResizing and dragOffset values to their initial states
+    isResizing.current = false;
+    dragOffset.current = 0;
+
+    // Call the onResize callback with the new width
+    onResize && onResize(e, currWidth);
+
+    // Handle scroll into view when column drag button is moved off screen
+    if (resizeButtonRef.current && !isInView.current) {
+      resizeButtonRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    document.removeEventListener('mousemove', callbackMouseMove);
+    document.removeEventListener('mouseup', callbackMouseUp);
+  };
+
+  const handleTouchEnd = (e: TouchEvent) => {
+    e.stopPropagation();
+    if (!isResizing) {
+      return;
+    }
+    // Reset the isResizing and dragOffset values to their initial states
+    isResizing.current = false;
+    dragOffset.current = 0;
+
+    // Call the onResize callback with the new width
+    onResize && onResize(e, currWidth);
+  
+    document.removeEventListener('touchmove', callbackTouchMove);
+    document.removeEventListener('touchend', callbackTouchEnd);
+  };
+
+  const callbackMouseMove = useCallback(handleMouseMove, []);
+  const callbackTouchEnd = useCallback(handleTouchEnd, []);
+  const callbackTouchMove = useCallback(handleTouchMove, []);
+  const callbackMouseUp = useCallback(handleMouseup, []);
+
+  const handleKeys = (e: React.KeyboardEvent) => {
+    const key = e.key;
+  
+    if (key !== 'Escape' && key !== 'Enter' && key !== 'ArrowLeft' && key !== 'ArrowRight') {
+      if (isResizing) {
+        e.preventDefault();
+      }
+      return;
+    }
+    e.preventDefault();
+
+    if (key === 'Escape' || key === 'Enter') {
+      onResize && onResize(e, currWidth);
+    }
+
+    const isRTL = getLanguageDirection(thRef.current as HTMLElement) === 'rtl';
+    const columnRect = thRef.current?.getBoundingClientRect();
+  
+    let newSize = columnRect?.width || 0;
+    let delta = 0;
+    if (key === 'ArrowRight') {
+      if (isRTL) {
+        delta = -increment;
+      } else {
+        delta = increment;
+      }
+    } else if (key === 'ArrowLeft') {
+      if (isRTL) {
+        delta = increment;
+      } else {
+        delta = -increment;
+      }
+    }
+    newSize = newSize + delta;
+
+    thRef.current?.style.setProperty('min-width', newSize + 'px');
+    currWidth = newSize;
+  };
+
+  return (
+    <Th {...props} style={{ minWidth: width }} ref={thRef}>
+      {content}
+      {isResizable && (
+        <Button
+          ref={resizeButtonRef}
+          variant="plain"
+          onMouseDown={handleMousedown}
+          onKeyDown={handleKeys}
+          onTouchStart={handleTouchStart}
+          style={{ float: 'inline-end' }}
+        >
+          test
+        </Button>
+      )}
+    </Th>
+  );
+};
+
+export default DataViewTh;
