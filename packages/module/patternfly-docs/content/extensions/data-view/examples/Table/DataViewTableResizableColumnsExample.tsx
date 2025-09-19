@@ -103,6 +103,7 @@ const columns: DataViewTh[] = [
   'Repositories',
   {
     cell: 'col',
+    // eslint-disable-next-line no-console
     resizableProps: { isResizable: true, onResize: (e, width) => console.log('resized width: ', width) }
   },
   'Pull requests',

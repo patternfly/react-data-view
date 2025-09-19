@@ -42,13 +42,14 @@ export const DataViewTh: FC<DataViewThProps> = ({
     increment: 10
   },
   content,
-  ...props
+  props: thProps,
+  ...restProps
 }: DataViewThProps) => {
   const thRef = useRef<HTMLTableCellElement>(null);
 
   const isResizable = resizableProps.isResizable;
   const resizeButtonRef = useRef<HTMLButtonElement>(null);
-  const [ width, setWidth ] = useState(resizableProps.width ? resizableProps.width : 0);
+  const [width, setWidth] = useState(resizableProps.width ? resizableProps.width : 0);
   const increment = resizableProps.increment || 5;
   const onResize = resizableProps.onResize;
   const setInitialVals = useRef(true);
@@ -58,9 +59,13 @@ export const DataViewTh: FC<DataViewThProps> = ({
   let currWidth = 0;
 
   useEffect(() => {
+    if (!isResizable) {
+      return;
+    }
+
     const observed = resizeButtonRef.current;
     const observer = new IntersectionObserver(
-      ([ entry ]) => {
+      ([entry]) => {
         isInView.current = entry.isIntersecting;
       },
       { threshold: 0.3 }
@@ -78,11 +83,11 @@ export const DataViewTh: FC<DataViewThProps> = ({
   }, []);
 
   useEffect(() => {
-    if (setInitialVals.current && width === 0) {
+    if (isResizable && setInitialVals.current && width === 0) {
       setWidth(thRef.current?.getBoundingClientRect().width || 0);
       setInitialVals.current = false;
     }
-  }, [ setInitialVals ]);
+  }, [isResizable, setInitialVals]);
 
   const setDragOffset = (e: ReactMouseEvent | ReactTouchEvent) => {
     const isRTL = getLanguageDirection(thRef.current as HTMLElement) === 'rtl';
@@ -190,7 +195,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
 
     // Call the onResize callback with the new width
     onResize && onResize(e, currWidth);
-  
+
     document.removeEventListener('touchmove', callbackTouchMove);
     document.removeEventListener('touchend', callbackTouchEnd);
   };
@@ -202,7 +207,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
 
   const handleKeys = (e: React.KeyboardEvent) => {
     const key = e.key;
-  
+
     if (key !== 'Escape' && key !== 'Enter' && key !== 'ArrowLeft' && key !== 'ArrowRight') {
       if (isResizing) {
         e.preventDefault();
@@ -217,7 +222,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
 
     const isRTL = getLanguageDirection(thRef.current as HTMLElement) === 'rtl';
     const columnRect = thRef.current?.getBoundingClientRect();
-  
+
     let newSize = columnRect?.width || 0;
     let delta = 0;
     if (key === 'ArrowRight') {
@@ -240,7 +245,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
   };
 
   return (
-    <Th {...props} style={{ minWidth: width }} ref={thRef}>
+    <Th {...thProps} {...restProps} style={width > 0 ? { minWidth: width } : undefined} ref={thRef}>
       {content}
       {isResizable && (
         <Button
