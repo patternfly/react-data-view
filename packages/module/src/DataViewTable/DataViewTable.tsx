@@ -1,24 +1,8 @@
-import { FC, ReactNode, MouseEvent as ReactMouseEvent, KeyboardEvent as ReactKeyboardEvent } from 'react';
+import { FC, ReactNode } from 'react';
 import { TdProps, ThProps, TrProps, InnerScrollContainer } from '@patternfly/react-table';
 import { DataViewTableTree, DataViewTableTreeProps } from '../DataViewTableTree';
 import { DataViewTableBasic, DataViewTableBasicProps } from '../DataViewTableBasic';
-
-// Table resizable typings
-export interface DataViewThResizableProps {
-  /** Whether the column is resizable */
-  isResizable?: boolean;
-  /** Callback after the column is resized */
-  onResize?: (
-    event: ReactMouseEvent | MouseEvent | ReactKeyboardEvent | KeyboardEvent | TouchEvent,
-    width: number
-  ) => void;
-  /** Width of the column */
-  width?: number;
-  /** Minimum width of the column */
-  minWidth?: number;
-  /** Increment for keyboard navigation */
-  increment?: number;
-}
+import { DataViewThResizableProps } from '../DataViewTh/DataViewTh';
 
 // Table head typings
 export type DataViewTh =
@@ -83,7 +67,7 @@ export const DataViewTable: FC<DataViewTableProps> = (props) => {
     const { isResizable, ...rest } = props;
     return isResizable ? (
       <InnerScrollContainer>
-        <DataViewTableBasic {...rest} />
+        <DataViewTableBasic hasResizableColumns {...rest} />
       </InnerScrollContainer>
     ) : (
       <DataViewTableBasic {...rest} />

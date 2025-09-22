@@ -14,8 +14,8 @@ module.exports = {
   '/extensions/data-view/table/react': {
     id: "Table",
     title: "Data view table",
-    toc: [{"text":"Configuring rows and columns"},[{"text":"Table example"}],{"text":"Tree table"},[{"text":"Tree table example"}],{"text":"Sorting"},[{"text":"Sorting example"},{"text":"Sorting state"}],{"text":"States"},[{"text":"Empty"},{"text":"Error"},{"text":"Loading"}]],
-    examples: ["Table example","Tree table example","Sorting example","Empty","Error","Loading"],
+    toc: [{"text":"Configuring rows and columns"},[{"text":"Table example"},{"text":"Resizable columns"}],{"text":"Tree table"},[{"text":"Tree table example"}],{"text":"Sorting"},[{"text":"Sorting example"},{"text":"Sorting state"}],{"text":"States"},[{"text":"Empty"},{"text":"Error"},{"text":"Loading"}]],
+    examples: ["Table example","Resizable columns","Tree table example","Sorting example","Empty","Error","Loading"],
     section: "extensions",
     subsection: "Data view",
     source: "react",

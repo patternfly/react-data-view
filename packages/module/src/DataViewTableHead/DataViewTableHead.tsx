@@ -12,12 +12,15 @@ export interface DataViewTableHeadProps extends TheadProps {
   columns: DataViewTh[];
   /** Custom OUIA ID */
   ouiaId?: string;
+  /** @hide Indicates whether table is resizable */
+  hasResizableColumns?: boolean;
 }
 
 export const DataViewTableHead: FC<DataViewTableHeadProps> = ({
   isTreeTable = false,
   columns,
   ouiaId = 'DataViewTableHead',
+  hasResizableColumns,
   ...props
 }: DataViewTableHeadProps) => {
   const { selection } = useInternalContext();
@@ -35,10 +38,11 @@ export const DataViewTableHead: FC<DataViewTableHeadProps> = ({
           resizableProps={isDataViewThObject(column) ? column.resizableProps : undefined}
           data-ouia-component-id={`${ouiaId}-th-${index}`}
           props={isDataViewThObject(column) ? (column?.props ?? {}) : {}}
+          hasResizableColumns={hasResizableColumns}
         />
       ))
     ],
-    [ columns, ouiaId, onSelect, isSelected, isTreeTable ]
+    [ columns, ouiaId, onSelect, isSelected, isTreeTable, hasResizableColumns ]
   );
 
   return (

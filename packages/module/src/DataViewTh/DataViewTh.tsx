@@ -11,47 +11,53 @@ import {
 } from 'react';
 import { Th, ThProps } from '@patternfly/react-table';
 import { Button, getLanguageDirection } from '@patternfly/react-core';
-
+export interface DataViewThResizableProps {
+  /** Whether the column is resizable */
+  isResizable?: boolean;
+  /** Callback after the column is resized */
+  onResize?: (
+    event: ReactMouseEvent | MouseEvent | ReactKeyboardEvent | KeyboardEvent | TouchEvent,
+    width: number
+  ) => void;
+  /** Width of the column */
+  width?: number;
+  /** Minimum width of the column */
+  minWidth?: number;
+  /** Increment for keyboard navigation */
+  increment?: number;
+  /** Increment for keyboard navigation while shift is held */
+  shiftIncrement?: number;
+  /** Aria label for the resize button */
+  resizeButtonAriaLabel?: string;
+}
 export interface DataViewThProps {
   /** Cell content */
   content: ReactNode;
   /** Resizable props */
-  resizableProps?: {
-    /** Whether the column is resizable */
-    isResizable?: boolean;
-    /** Callback after the column is resized */
-    onResize?: (
-      event: ReactMouseEvent | MouseEvent | ReactKeyboardEvent | KeyboardEvent | TouchEvent,
-      width: number
-    ) => void;
-    /** Width of the column */
-    width?: number;
-    /** Minimum width of the column */
-    minWidth?: number;
-    /** Increment for keyboard navigation */
-    increment?: number;
-  };
+  resizableProps?: DataViewThResizableProps;
+  /** @hide Indicates whether the table has resizable columns */
+  hasResizableColumns?: boolean;
   /** Props passed to Th */
   props?: ThProps;
 }
 
 export const DataViewTh: FC<DataViewThProps> = ({
-  resizableProps = {
-    isResizable: false,
-    width: 0,
-    increment: 10
-  },
   content,
+  resizableProps = {},
+  hasResizableColumns = false,
   props: thProps,
   ...restProps
 }: DataViewThProps) => {
   const thRef = useRef<HTMLTableCellElement>(null);
 
-  const isResizable = resizableProps.isResizable;
+  const isResizable = resizableProps?.isResizable || false;
+  const increment = resizableProps?.increment || 5;
+  const shiftIncrement = resizableProps?.shiftIncrement || 25;
+  const resizeButtonAriaLabel = resizableProps?.resizeButtonAriaLabel || `Resize ${content}`;
+  const onResize = resizableProps?.onResize || undefined;
+
   const resizeButtonRef = useRef<HTMLButtonElement>(null);
-  const [ width, setWidth ] = useState(resizableProps.width ? resizableProps.width : 0);
-  const increment = resizableProps.increment || 5;
-  const onResize = resizableProps.onResize;
+  const [ width, setWidth ] = useState(resizableProps?.width ? resizableProps.width : 0);
   const setInitialVals = useRef(true);
   const dragOffset = useRef(0);
   const isResizing = useRef(false);
@@ -83,11 +89,11 @@ export const DataViewTh: FC<DataViewThProps> = ({
   }, []);
 
   useEffect(() => {
-    if (isResizable && setInitialVals.current && width === 0) {
+    if ((isResizable || hasResizableColumns) && setInitialVals.current && width === 0) {
       setWidth(thRef.current?.getBoundingClientRect().width || 0);
       setInitialVals.current = false;
     }
-  }, [ isResizable, setInitialVals ]);
+  }, [ isResizable, hasResizableColumns, setInitialVals ]);
 
   const setDragOffset = (e: ReactMouseEvent | ReactTouchEvent) => {
     const isRTL = getLanguageDirection(thRef.current as HTMLElement) === 'rtl';
@@ -205,10 +211,10 @@ export const DataViewTh: FC<DataViewThProps> = ({
   const callbackTouchMove = useCallback(handleTouchMove, []);
   const callbackMouseUp = useCallback(handleMouseup, []);
 
-  const handleKeys = (e: React.KeyboardEvent) => {
+  const handleKeys = (e: ReactKeyboardEvent) => {
     const key = e.key;
 
-    if (key !== 'Escape' && key !== 'Enter' && key !== 'ArrowLeft' && key !== 'ArrowRight') {
+    if (key !== 'Enter' && key !== 'ArrowLeft' && key !== 'ArrowRight' && key !== 'Tab' && key !== 'Space') {
       if (isResizing) {
         e.preventDefault();
       }
@@ -216,7 +222,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
     }
     e.preventDefault();
 
-    if (key === 'Escape' || key === 'Enter') {
+    if (key === 'Enter' || key === 'Tab' || key === 'Space') {
       onResize && onResize(e, currWidth);
     }
 
@@ -225,17 +231,19 @@ export const DataViewTh: FC<DataViewThProps> = ({
 
     let newSize = columnRect?.width || 0;
     let delta = 0;
+    const _increment = e.shiftKey ? shiftIncrement : increment;
+
     if (key === 'ArrowRight') {
       if (isRTL) {
-        delta = -increment;
+        delta = -_increment;
       } else {
-        delta = increment;
+        delta = _increment;
       }
     } else if (key === 'ArrowLeft') {
       if (isRTL) {
-        delta = increment;
+        delta = _increment;
       } else {
-        delta = -increment;
+        delta = -_increment;
       }
     }
     newSize = newSize + delta;
@@ -255,6 +263,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
           onKeyDown={handleKeys}
           onTouchStart={handleTouchStart}
           style={{ float: 'inline-end' }}
+          aria-label={resizeButtonAriaLabel}
         >
           test
         </Button>
