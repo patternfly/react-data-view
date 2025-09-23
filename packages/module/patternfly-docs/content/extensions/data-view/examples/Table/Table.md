@@ -24,7 +24,7 @@ propComponents:
 sourceLink: https://github.com/patternfly/react-data-view/blob/main/packages/module/patternfly-docs/content/extensions/data-view/examples/Table/Table.md
 ---
 
-import { FunctionComponent, useMemo } from 'react';
+import { FunctionComponent, useMemo, useState } from 'react';
 import { BrowserRouter, useSearchParams } from 'react-router-dom';
 import { Button, EmptyState, EmptyStateActions, EmptyStateBody, EmptyStateFooter } from '@patternfly/react-core';
 import { CubesIcon, FolderIcon, FolderOpenIcon, LeafIcon, ExclamationCircleIcon } from '@patternfly/react-icons';
