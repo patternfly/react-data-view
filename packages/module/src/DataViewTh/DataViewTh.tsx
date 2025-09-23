@@ -60,6 +60,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
   const resizeButtonAriaLabel = resizableProps?.resizeButtonAriaLabel || `Resize ${content}`;
   const onResize = resizableProps?.onResize || undefined;
   const screenreaderText = resizableProps?.screenreaderText || `Column ${width} pixels`;
+  console.log('sr text', resizableProps?.screenreaderText);
 
   const resizeButtonRef = useRef<HTMLButtonElement>(null);
   const setInitialVals = useRef(true);

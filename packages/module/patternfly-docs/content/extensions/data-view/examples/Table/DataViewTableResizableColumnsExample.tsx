@@ -103,31 +103,32 @@ const rows: DataViewTr[] = repositories.map(({ id, name, branches, prs, workspac
   { cell: <ActionsColumn items={rowActions} />, props: { isActionCell: true } }
 ]);
 
-const columns: DataViewTh[] = [
-  null,
-  'Repositories',
-  {
-    cell: 'col',
-    resizableProps: { isResizable: true }
-  },
-  'Pull requests',
-  { cell: 'Workspaces', props: { info: { tooltip: 'More information' } } },
-  { cell: 'Last commit', props: { sort: { sortBy: {}, columnIndex: 4 } } }
-];
-
 const ouiaId = 'TableExample';
 
 export const ResizableColumnsExample: FunctionComponent = () => {
   const [ screenReaderText, setScreenReaderText ] = useState('');
 
-  if (columns[2] && isDataViewThObject(columns[2]) && columns[2].resizableProps) {
-    columns[2].resizableProps.onResize = (_e, width) => {
-      // eslint-disable-next-line no-console
-      console.log('resized width: ', width);
-      setScreenReaderText(`Column ${width} pixels`);
-    };
-    columns[2].resizableProps.screenreaderText = screenReaderText;
-  }
+  const onResize = (_e, width) => {
+    // eslint-disable-next-line no-console
+    console.log('resized width: ', width);
+    setScreenReaderText(`Column ${width} pixels`);
+  };
+
+  const columns: DataViewTh[] = [
+    null,
+    'Repositories',
+    {
+      cell: 'col',
+      resizableProps: {
+        isResizable: true,
+        onResize,
+        screenreaderText: screenReaderText
+      }
+    },
+    'Pull requests',
+    { cell: 'Workspaces', props: { info: { tooltip: 'More information' } } },
+    { cell: 'Last commit', props: { sort: { sortBy: {}, columnIndex: 4 } } }
+  ];
 
   return <DataViewTable isResizable aria-label="Repositories table" ouiaId={ouiaId} columns={columns} rows={rows} />;
 };
