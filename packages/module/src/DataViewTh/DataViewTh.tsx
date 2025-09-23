@@ -223,9 +223,6 @@ export const DataViewTh: FC<DataViewThProps> = ({
     }
 
     if (key !== 'ArrowLeft' && key !== 'ArrowRight') {
-      if (isResizing) {
-        e.preventDefault();
-      }
       return;
     }
     e.preventDefault();
