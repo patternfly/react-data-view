@@ -30,7 +30,7 @@ import { Button, EmptyState, EmptyStateActions, EmptyStateBody, EmptyStateFooter
 import { CubesIcon, FolderIcon, FolderOpenIcon, LeafIcon, ExclamationCircleIcon } from '@patternfly/react-icons';
 import { ErrorState, ResponsiveAction, ResponsiveActions, SkeletonTableHead, SkeletonTableBody } from '@patternfly/react-component-groups';
 import { DataViewToolbar } from '@patternfly/react-data-view/dist/dynamic/DataViewToolbar';
-import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
+import { DataViewTable, isDataViewThObject } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 import { useDataViewSelection, useDataViewSort } from '@patternfly/react-data-view/dist/dynamic/Hooks';
 import { DataView, DataViewState } from '@patternfly/react-data-view/dist/dynamic/DataView';
 
