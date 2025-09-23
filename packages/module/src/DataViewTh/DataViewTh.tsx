@@ -53,26 +53,19 @@ export const DataViewTh: FC<DataViewThProps> = ({
   const thRef = useRef<HTMLTableCellElement>(null);
 
   const [ width, setWidth ] = useState(resizableProps?.width ? resizableProps.width : 0);
-  const [ screenreaderText, setScreenreaderText ] = useState(resizableProps?.screenreaderText || `Column ${width.toFixed(0)} pixels`);
-  let currWidth = 0;
 
   const isResizable = resizableProps?.isResizable || false;
   const increment = resizableProps?.increment || 5;
   const shiftIncrement = resizableProps?.shiftIncrement || 25;
   const resizeButtonAriaLabel = resizableProps?.resizeButtonAriaLabel || `Resize ${content}`;
   const onResize = resizableProps?.onResize || undefined;
+  const screenreaderText = resizableProps?.screenreaderText || `Column ${width.toFixed(0)} pixels`;
 
   const resizeButtonRef = useRef<HTMLButtonElement>(null);
   const setInitialVals = useRef(true);
   const dragOffset = useRef(0);
   const isResizing = useRef(false);
   const isInView = useRef(true);
-
-  useEffect(() => {
-    if (!resizableProps?.screenreaderText && currWidth > 0) {
-      setScreenreaderText(`Column ${currWidth.toFixed(0)} pixels`);
-    }
-  }, [ currWidth ]);
 
   useEffect(() => {
     if (!isResizable) {
@@ -177,7 +170,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
     }
 
     thRef.current?.style.setProperty('min-width', newSize + 'px');
-    currWidth = newSize;
+    setWidth(newSize);
   };
 
   const handleMouseup = (e: MouseEvent) => {
@@ -189,7 +182,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
     dragOffset.current = 0;
 
     // Call the onResize callback with the new width
-    onResize && onResize(e, currWidth);
+    onResize && onResize(e, width);
 
     // Handle scroll into view when column drag button is moved off screen
     if (resizeButtonRef.current && !isInView.current) {
@@ -210,7 +203,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
     dragOffset.current = 0;
 
     // Call the onResize callback with the new width
-    onResize && onResize(e, currWidth);
+    onResize && onResize(e, width);
 
     document.removeEventListener('touchmove', callbackTouchMove);
     document.removeEventListener('touchend', callbackTouchEnd);
@@ -257,8 +250,8 @@ export const DataViewTh: FC<DataViewThProps> = ({
     newSize = newSize + delta;
 
     thRef.current?.style.setProperty('min-width', newSize + 'px');
-    currWidth = newSize;
-    onResize && onResize(e, currWidth);
+    setWidth(newSize);
+    onResize && onResize(e, newSize);
   };
 
   return (
