@@ -249,10 +249,10 @@ export const DataViewTh: FC<DataViewThProps> = ({
       }
     }
     newSize = newSize + delta;
-    onResize && onResize(e, currWidth);
 
     thRef.current?.style.setProperty('min-width', newSize + 'px');
     currWidth = newSize;
+    onResize && onResize(e, currWidth);
   };
 
   return (
