@@ -30,7 +30,7 @@ export interface DataViewThResizableProps {
   /** Aria label for the resize button */
   resizeButtonAriaLabel?: string;
   /** Screenreader text for the column */
-  screenreaderText?: string;
+  screenReaderText?: string;
 }
 export interface DataViewThProps {
   /** Cell content */
@@ -59,7 +59,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
   const shiftIncrement = resizableProps?.shiftIncrement || 25;
   const resizeButtonAriaLabel = resizableProps?.resizeButtonAriaLabel || `Resize ${content}`;
   const onResize = resizableProps?.onResize || undefined;
-  const screenreaderText = resizableProps?.screenreaderText || `Column ${width.toFixed(0)} pixels`;
+  const screenReaderText = resizableProps?.screenReaderText || `Column ${width.toFixed(0)} pixels`;
 
   const resizeButtonRef = useRef<HTMLButtonElement>(null);
   const setInitialVals = useRef(true);
@@ -272,7 +272,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
       )}
       {isResizable && (
         <div aria-live="polite" className="pf-v6-screen-reader">
-          {screenreaderText}
+          {screenReaderText}
         </div>
       )}
     </Th>

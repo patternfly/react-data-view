@@ -121,7 +121,7 @@ export const ResizableColumnsExample: FunctionComponent = () => {
       resizableProps: {
         isResizable: true,
         onResize,
-        screenreaderText: screenReaderText
+        screenReaderText
       }
     },
     'Pull requests',
