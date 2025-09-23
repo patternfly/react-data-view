@@ -1,5 +1,10 @@
-import { FunctionComponent } from 'react';
-import { DataViewTable, DataViewTr, DataViewTh } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
+import { FunctionComponent, useState } from 'react';
+import {
+  DataViewTable,
+  DataViewTr,
+  DataViewTh,
+  isDataViewThObject
+} from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 import { Button } from '@patternfly/react-core';
 import { ActionsColumn } from '@patternfly/react-table';
 
@@ -103,8 +108,7 @@ const columns: DataViewTh[] = [
   'Repositories',
   {
     cell: 'col',
-    // eslint-disable-next-line no-console
-    resizableProps: { isResizable: true, onResize: (e, width) => console.log('resized width: ', width) }
+    resizableProps: { isResizable: true }
   },
   'Pull requests',
   { cell: 'Workspaces', props: { info: { tooltip: 'More information' } } },
@@ -113,6 +117,17 @@ const columns: DataViewTh[] = [
 
 const ouiaId = 'TableExample';
 
-export const ResizableColumnsExample: FunctionComponent = () => (
-  <DataViewTable isResizable aria-label="Repositories table" ouiaId={ouiaId} columns={columns} rows={rows} />
-);
+export const ResizableColumnsExample: FunctionComponent = () => {
+  const [ screenReaderText, setScreenReaderText ] = useState('');
+
+  if (columns[2] && isDataViewThObject(columns[2]) && columns[2].resizableProps) {
+    columns[2].resizableProps.onResize = (_e, width) => {
+      // eslint-disable-next-line no-console
+      console.log('resized width: ', width);
+      setScreenReaderText(`Column ${width} pixels`);
+    };
+    columns[2].resizableProps.screenreaderText = screenReaderText;
+  }
+
+  return <DataViewTable isResizable aria-label="Repositories table" ouiaId={ouiaId} columns={columns} rows={rows} />;
+};

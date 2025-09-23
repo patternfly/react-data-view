@@ -29,6 +29,8 @@ export interface DataViewThResizableProps {
   shiftIncrement?: number;
   /** Aria label for the resize button */
   resizeButtonAriaLabel?: string;
+  /** Screenreader text for the column */
+  screenreaderText?: string;
 }
 export interface DataViewThProps {
   /** Cell content */
@@ -50,14 +52,16 @@ export const DataViewTh: FC<DataViewThProps> = ({
 }: DataViewThProps) => {
   const thRef = useRef<HTMLTableCellElement>(null);
 
+  const [ width, setWidth ] = useState(resizableProps?.width ? resizableProps.width : 0);
+
   const isResizable = resizableProps?.isResizable || false;
   const increment = resizableProps?.increment || 5;
   const shiftIncrement = resizableProps?.shiftIncrement || 25;
   const resizeButtonAriaLabel = resizableProps?.resizeButtonAriaLabel || `Resize ${content}`;
   const onResize = resizableProps?.onResize || undefined;
+  const screenreaderText = resizableProps?.screenreaderText || `Column ${width} pixels`;
 
   const resizeButtonRef = useRef<HTMLButtonElement>(null);
-  const [ width, setWidth ] = useState(resizableProps?.width ? resizableProps.width : 0);
   const setInitialVals = useRef(true);
   const dragOffset = useRef(0);
   const isResizing = useRef(false);
@@ -214,7 +218,11 @@ export const DataViewTh: FC<DataViewThProps> = ({
   const handleKeys = (e: ReactKeyboardEvent) => {
     const key = e.key;
 
-    if (key !== 'Enter' && key !== 'ArrowLeft' && key !== 'ArrowRight' && key !== 'Tab' && key !== 'Space') {
+    if (key === 'Tab') {
+      isResizing.current = false;
+    }
+
+    if (key !== 'ArrowLeft' && key !== 'ArrowRight') {
       if (isResizing) {
         e.preventDefault();
       }
@@ -222,10 +230,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
     }
     e.preventDefault();
 
-    if (key === 'Enter' || key === 'Tab' || key === 'Space') {
-      onResize && onResize(e, currWidth);
-    }
-
+    isResizing.current = true;
     const isRTL = getLanguageDirection(thRef.current as HTMLElement) === 'rtl';
     const columnRect = thRef.current?.getBoundingClientRect();
 
@@ -247,6 +252,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
       }
     }
     newSize = newSize + delta;
+    onResize && onResize(e, currWidth);
 
     thRef.current?.style.setProperty('min-width', newSize + 'px');
     currWidth = newSize;
@@ -267,6 +273,11 @@ export const DataViewTh: FC<DataViewThProps> = ({
         >
           test
         </Button>
+      )}
+      {isResizable && (
+        <div aria-live="polite" className="pf-v6-screen-reader">
+          {screenreaderText}
+        </div>
       )}
     </Th>
   );
