@@ -110,7 +110,7 @@ export const ResizableColumnsExample: FunctionComponent = () => {
   const onResize = (_e, width) => {
     // eslint-disable-next-line no-console
     console.log('resized width: ', width);
-    setScreenReaderText(`Column ${width} pixels`);
+    setScreenReaderText(`Column ${width.toFixed(0)} pixels`);
   };
 
   const columns: DataViewTh[] = [
