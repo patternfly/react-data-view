@@ -37,7 +37,7 @@ export const DataViewTableHead: FC<DataViewTableHeadProps> = ({
           content={isDataViewThObject(column) ? column.cell : column}
           resizableProps={isDataViewThObject(column) ? column.resizableProps : undefined}
           data-ouia-component-id={`${ouiaId}-th-${index}`}
-          props={isDataViewThObject(column) ? (column?.props ?? {}) : {}}
+          thProps={isDataViewThObject(column) ? (column?.props ?? {}) : {}}
           hasResizableColumns={hasResizableColumns}
         />
       ))

@@ -27,9 +27,9 @@ export interface DataViewThResizableProps {
   increment?: number;
   /** Increment for keyboard navigation while shift is held */
   shiftIncrement?: number;
-  /** Aria label for the resize button */
+  /** Provides an accessible name for the resizable column via a human readable string. */
   resizeButtonAriaLabel?: string;
-  /** Screenreader text for the column */
+  /** Screenreader text that gets announced when the column is resized. */
   screenReaderText?: string;
 }
 export interface DataViewThProps {
@@ -40,15 +40,15 @@ export interface DataViewThProps {
   /** @hide Indicates whether the table has resizable columns */
   hasResizableColumns?: boolean;
   /** Props passed to Th */
-  props?: ThProps;
+  thProps?: ThProps;
 }
 
 export const DataViewTh: FC<DataViewThProps> = ({
   content,
   resizableProps = {},
   hasResizableColumns = false,
-  props: thProps,
-  ...restProps
+  thProps,
+  ...props
 }: DataViewThProps) => {
   const thRef = useRef<HTMLTableCellElement>(null);
 
@@ -57,7 +57,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
   const isResizable = resizableProps?.isResizable || false;
   const increment = resizableProps?.increment || 5;
   const shiftIncrement = resizableProps?.shiftIncrement || 25;
-  const resizeButtonAriaLabel = resizableProps?.resizeButtonAriaLabel || `Resize ${content}`;
+  const resizeButtonAriaLabel = resizableProps?.resizeButtonAriaLabel;
   const onResize = resizableProps?.onResize || undefined;
   const screenReaderText = resizableProps?.screenReaderText || `Column ${width.toFixed(0)} pixels`;
 
@@ -66,6 +66,11 @@ export const DataViewTh: FC<DataViewThProps> = ({
   const dragOffset = useRef(0);
   const isResizing = useRef(false);
   const isInView = useRef(true);
+
+  if (isResizable && !resizeButtonAriaLabel) {
+    // eslint-disable-next-line no-console
+    console.warn('DataViewTh: Missing resizeButtonAriaLabel. An aria label must be passed to each resizable column to provide a context specific label for its resize button.');
+  }
 
   useEffect(() => {
     if (!isResizable) {
@@ -255,7 +260,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
   };
 
   return (
-    <Th {...thProps} {...restProps} style={width > 0 ? { minWidth: width } : undefined} ref={thRef}>
+    <Th {...thProps} {...props} style={width > 0 ? { minWidth: width } : undefined} ref={thRef}>
       {content}
       {isResizable && (
         <Button
