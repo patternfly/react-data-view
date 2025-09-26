@@ -142,11 +142,6 @@ export const ResizableColumnsExample: FunctionComponent = () => {
     },
     {
       cell: 'Last commit',
-      resizableProps: {
-        isResizable: true,
-        onResize,
-        resizeButtonAriaLabel: 'Resize last commit column'
-      },
       props: { sort: { sortBy: {}, columnIndex: 4 }, id: 'last-commit' }
     }
   ];
