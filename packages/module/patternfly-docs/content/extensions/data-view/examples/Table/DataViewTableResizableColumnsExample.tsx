@@ -1,9 +1,5 @@
 import { FunctionComponent, useState } from 'react';
-import {
-  DataViewTable,
-  DataViewTr,
-  DataViewTh
-} from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
+import { DataViewTable, DataViewTr, DataViewTh } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
 import { Button } from '@patternfly/react-core';
 import { ActionsColumn } from '@patternfly/react-table';
 
@@ -105,50 +101,54 @@ const rows: DataViewTr[] = repositories.map(({ id, name, branches, prs, workspac
 const ouiaId = 'TableExample';
 
 export const ResizableColumnsExample: FunctionComponent = () => {
-  const [ screenReaderText, setScreenReaderText ] = useState('');
-
-  const onResize = (_e, width) => {
+  const onResize = (
+    _e: React.MouseEvent | MouseEvent | React.KeyboardEvent | KeyboardEvent | TouchEvent,
+    id: string | number | undefined,
+    width: number
+  ) => {
     // eslint-disable-next-line no-console
-    console.log('resized width: ', width.toFixed(0));
-    setScreenReaderText(`Column ${width.toFixed(0)} pixels`);
+    console.log(`resized column id: ${id} width to: ${width.toFixed(0)}px`);
   };
 
   const columns: DataViewTh[] = [
     null,
     'Repositories',
     {
-      cell: 'col',
+      cell: 'Branches',
       resizableProps: {
         isResizable: true,
         onResize,
-        screenReaderText
-      }
+        resizeButtonAriaLabel: 'Resize repositories column'
+      },
+      props: { id: 'repositories' }
     },
     {
       cell: 'Pull requests',
       resizableProps: {
         isResizable: true,
         onResize,
-        screenReaderText
+        resizeButtonAriaLabel: 'Resize pull requests column'
       },
-      props: { info: { tooltip: 'More information' } }
+      props: { info: { tooltip: 'More information' }, id: 'pull-requests' }
     },
     {
       cell: 'This is a really long title',
       resizableProps: {
         isResizable: true,
         onResize,
-        screenReaderText
+        resizeButtonAriaLabel: 'Resize this is a really long title column'
       },
-      props: { info: { tooltip: 'More information' } }
+      props: { info: { tooltip: 'More information' }, id: 'this-is-a-really-long-title' }
     },
-    { cell: 'Last commit',
+    {
+      cell: 'Last commit',
       resizableProps: {
         isResizable: true,
         onResize,
-        screenReaderText
+        resizeButtonAriaLabel: 'Resize last commit column'
       },
-      props: { sort: { sortBy: {}, columnIndex: 4 } } }
+      props: { sort: { sortBy: {}, columnIndex: 4 }, id: 'last-commit' }
+    }
   ];
 
   return <DataViewTable isResizable aria-label="Repositories table" ouiaId={ouiaId} columns={columns} rows={rows} />;

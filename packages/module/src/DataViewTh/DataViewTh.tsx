@@ -37,9 +37,10 @@ const useStyles = createUseStyles({
 export interface DataViewThResizableProps {
   /** Whether the column is resizable */
   isResizable?: boolean;
-  /** Callback after the column is resized */
+  /** Callback after the column is resized. Returns the triggering event, the column id passed in via cell props, and the new width of the column. */
   onResize?: (
     event: ReactMouseEvent | MouseEvent | ReactKeyboardEvent | KeyboardEvent | TouchEvent,
+    id: string | number | undefined,
     width: number
   ) => void;
   /** Width of the column */
@@ -76,6 +77,8 @@ export const DataViewTh: FC<DataViewThProps> = ({
   const thRef = useRef<HTMLTableCellElement>(null);
 
   const [ width, setWidth ] = useState(resizableProps?.width ? resizableProps.width : 0);
+  // Tracks the current column width for the onResize callback, because the width state is not updated until after the resize is complete
+  const trackedWidth = useRef(0);
   const classes = useStyles();
 
   const isResizable = resizableProps?.isResizable || false;
@@ -200,6 +203,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
     }
 
     thRef.current?.style.setProperty('min-width', newSize + 'px');
+    trackedWidth.current = newSize;
     setWidth(newSize);
   };
 
@@ -212,7 +216,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
     dragOffset.current = 0;
 
     // Call the onResize callback with the new width
-    onResize && onResize(e, width);
+    onResize && onResize(e, thProps?.id, trackedWidth.current);
 
     // Handle scroll into view when column drag button is moved off screen
     if (resizeButtonRef.current && !isInView.current) {
@@ -233,7 +237,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
     dragOffset.current = 0;
 
     // Call the onResize callback with the new width
-    onResize && onResize(e, width);
+    onResize && onResize(e, thProps?.id, trackedWidth.current);
 
     document.removeEventListener('touchmove', callbackTouchMove);
     document.removeEventListener('touchend', callbackTouchEnd);
@@ -281,7 +285,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
 
     thRef.current?.style.setProperty('min-width', newSize + 'px');
     setWidth(newSize);
-    onResize && onResize(e, newSize);
+    onResize && onResize(e, thProps?.id, newSize);
   };
 
   return (
