@@ -63,10 +63,13 @@ If you want to have all expandable nodes open on initial load pass the `expandAl
 To allow a column to resize, add `isResizable` to the `DataViewTable` element, and pass `resizableProps` to each applicable header cell. The `resizableProps` object consists of the following fields:
 
 - `isResizable` - indicates that the column is resizable
+- `resizeButtonAriaLabel` - an accesible name for the resizable column's resize button. This must be passed in if the column is resizable.
 - `onResize` - a callback that will return the source event and the new width of the column
 - `width` - a default width value for a column
 - `minWidth` - the minimum width a column may shrink to
 - `increment` - how many pixels the column will move left or right for keyboard navigation
+- `shiftIncrement` - how many pixels the column will move left or right while shift is held for keyboard navigation
+- `screenReaderText` - text that will be announced when a column is resized
 
 ```js file="./DataViewTableResizableColumnsExample.tsx"
 
