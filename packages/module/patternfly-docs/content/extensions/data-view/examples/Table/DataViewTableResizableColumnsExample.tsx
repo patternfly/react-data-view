@@ -124,9 +124,31 @@ export const ResizableColumnsExample: FunctionComponent = () => {
         screenReaderText
       }
     },
-    'Pull requests',
-    { cell: 'Workspaces', props: { info: { tooltip: 'More information' } } },
-    { cell: 'Last commit', props: { sort: { sortBy: {}, columnIndex: 4 } } }
+    {
+      cell: 'Pull requests',
+      resizableProps: {
+        isResizable: true,
+        onResize,
+        screenReaderText
+      },
+      props: { info: { tooltip: 'More information' } }
+    },
+    {
+      cell: 'This is a really long title',
+      resizableProps: {
+        isResizable: true,
+        onResize,
+        screenReaderText
+      },
+      props: { info: { tooltip: 'More information' } }
+    },
+    { cell: 'Last commit',
+      resizableProps: {
+        isResizable: true,
+        onResize,
+        screenReaderText
+      },
+      props: { sort: { sortBy: {}, columnIndex: 4 } } }
   ];
 
   return <DataViewTable isResizable aria-label="Repositories table" ouiaId={ouiaId} columns={columns} rows={rows} />;

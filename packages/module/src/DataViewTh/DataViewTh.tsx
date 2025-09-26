@@ -11,6 +11,29 @@ import {
 } from 'react';
 import { Th, ThProps } from '@patternfly/react-table';
 import { Button, getLanguageDirection } from '@patternfly/react-core';
+import { createUseStyles } from 'react-jss';
+
+import tableCellPaddingBlockEnd from '@patternfly/react-tokens/dist/esm/c_table_cell_PaddingBlockEnd';
+import tableCellPaddingInlineEnd from '@patternfly/react-tokens/dist/esm/c_table_cell_PaddingInlineEnd';
+import globalFontSizeBodyDefault from '@patternfly/react-tokens/dist/esm/t_global_font_size_body_default';
+
+const ResizeIcon = () => (
+  <svg className="pf-v6-svg" viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="true" role="img" width="1em" height="1em">
+    <path fillRule="evenodd" d="M52.7,529.8l190.5,161.9c18.6,15.9,50.5,4.7,50.5-17.8v-324c0-22.4-31.8-33.6-50.5-17.8L52.7,494.2c-11.5,9.8-11.5,25.8,0,35.6ZM480.8,12.9h62.4v998.3h-62.4V12.9ZM971.3,529.8l-190.5,161.9c-18.6,15.9-50.5,4.7-50.5-17.8v-324c0-22.4,31.8-33.6,50.5-17.8l190.5,161.9c11.5,9.8,11.5,25.8,0,35.6Z"/>
+  </svg>
+);
+
+const useStyles = createUseStyles({
+  dataViewResizeableTh: {
+    [tableCellPaddingInlineEnd.name]: `calc(${globalFontSizeBodyDefault.var} * 2)`
+  },
+  dataViewResizableButton: {
+    position: 'absolute',
+    insetInlineEnd: `calc(${globalFontSizeBodyDefault.var} / 2)`,
+    insetBlockEnd: tableCellPaddingBlockEnd.var,
+    cursor: 'grab'
+  },
+});
 export interface DataViewThResizableProps {
   /** Whether the column is resizable */
   isResizable?: boolean;
@@ -53,6 +76,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
   const thRef = useRef<HTMLTableCellElement>(null);
 
   const [ width, setWidth ] = useState(resizableProps?.width ? resizableProps.width : 0);
+  const classes = useStyles();
 
   const isResizable = resizableProps?.isResizable || false;
   const increment = resizableProps?.increment || 5;
@@ -60,6 +84,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
   const resizeButtonAriaLabel = resizableProps?.resizeButtonAriaLabel;
   const onResize = resizableProps?.onResize || undefined;
   const screenReaderText = resizableProps?.screenReaderText || `Column ${width.toFixed(0)} pixels`;
+  const dataViewThClassName = isResizable ? classes.dataViewResizeableTh : undefined;
 
   const resizeButtonRef = useRef<HTMLButtonElement>(null);
   const setInitialVals = useRef(true);
@@ -260,20 +285,22 @@ export const DataViewTh: FC<DataViewThProps> = ({
   };
 
   return (
-    <Th {...thProps} {...props} style={width > 0 ? { minWidth: width } : undefined} ref={thRef}>
-      {content}
+    <Th {...thProps} {...props} style={width > 0 ? { minWidth: width } : undefined} ref={thRef} modifier="truncate" className={dataViewThClassName}>
+      <span className="pf-v6-c-table__text">
+        {content}
+      </span>
       {isResizable && (
         <Button
           ref={resizeButtonRef}
           variant="plain"
+          hasNoPadding
+          icon={<ResizeIcon />}
           onMouseDown={handleMousedown}
           onKeyDown={handleKeys}
           onTouchStart={handleTouchStart}
-          style={{ float: 'inline-end' }}
           aria-label={resizeButtonAriaLabel}
-        >
-          test
-        </Button>
+          className={classes.dataViewResizableButton}
+        />
       )}
       {isResizable && (
         <div aria-live="polite" className="pf-v6-screen-reader">

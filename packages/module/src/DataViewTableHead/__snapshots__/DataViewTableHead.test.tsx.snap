@@ -20,44 +20,64 @@ exports[`DataViewTableHead component should render correctly 1`] = `
         data-ouia-safe="true"
       >
         <th
-          class="pf-v6-c-table__th"
+          class="pf-v6-c-table__th pf-m-truncate"
           data-ouia-component-id="HeaderExample-th-0"
           scope="col"
           tabindex="-1"
         >
-          Repositories
+          <span
+            class="pf-v6-c-table__text"
+          >
+            Repositories
+          </span>
         </th>
         <th
-          class="pf-v6-c-table__th"
+          class="pf-v6-c-table__th pf-m-truncate"
           data-ouia-component-id="HeaderExample-th-1"
           scope="col"
           tabindex="-1"
         >
-          Branches
+          <span
+            class="pf-v6-c-table__text"
+          >
+            Branches
+          </span>
         </th>
         <th
-          class="pf-v6-c-table__th"
+          class="pf-v6-c-table__th pf-m-truncate"
           data-ouia-component-id="HeaderExample-th-2"
           scope="col"
           tabindex="-1"
         >
-          Pull requests
+          <span
+            class="pf-v6-c-table__text"
+          >
+            Pull requests
+          </span>
         </th>
         <th
-          class="pf-v6-c-table__th"
+          class="pf-v6-c-table__th pf-m-truncate"
           data-ouia-component-id="HeaderExample-th-3"
           scope="col"
           tabindex="-1"
         >
-          Workspaces
+          <span
+            class="pf-v6-c-table__text"
+          >
+            Workspaces
+          </span>
         </th>
         <th
-          class="pf-v6-c-table__th"
+          class="pf-v6-c-table__th pf-m-truncate"
           data-ouia-component-id="HeaderExample-th-4"
           scope="col"
           tabindex="-1"
         >
-          Last commit
+          <span
+            class="pf-v6-c-table__text"
+          >
+            Last commit
+          </span>
         </th>
       </tr>
     </thead>
@@ -104,44 +124,64 @@ exports[`DataViewTableHead component should render selection column when selecti
               </span>
             </th>
             <th
-              class="pf-v6-c-table__th"
+              class="pf-v6-c-table__th pf-m-truncate"
               data-ouia-component-id="HeaderExample-th-0"
               scope="col"
               tabindex="-1"
             >
-              Repositories
+              <span
+                class="pf-v6-c-table__text"
+              >
+                Repositories
+              </span>
             </th>
             <th
-              class="pf-v6-c-table__th"
+              class="pf-v6-c-table__th pf-m-truncate"
               data-ouia-component-id="HeaderExample-th-1"
               scope="col"
               tabindex="-1"
             >
-              Branches
+              <span
+                class="pf-v6-c-table__text"
+              >
+                Branches
+              </span>
             </th>
             <th
-              class="pf-v6-c-table__th"
+              class="pf-v6-c-table__th pf-m-truncate"
               data-ouia-component-id="HeaderExample-th-2"
               scope="col"
               tabindex="-1"
             >
-              Pull requests
+              <span
+                class="pf-v6-c-table__text"
+              >
+                Pull requests
+              </span>
             </th>
             <th
-              class="pf-v6-c-table__th"
+              class="pf-v6-c-table__th pf-m-truncate"
               data-ouia-component-id="HeaderExample-th-3"
               scope="col"
               tabindex="-1"
             >
-              Workspaces
+              <span
+                class="pf-v6-c-table__text"
+              >
+                Workspaces
+              </span>
             </th>
             <th
-              class="pf-v6-c-table__th"
+              class="pf-v6-c-table__th pf-m-truncate"
               data-ouia-component-id="HeaderExample-th-4"
               scope="col"
               tabindex="-1"
             >
-              Last commit
+              <span
+                class="pf-v6-c-table__text"
+              >
+                Last commit
+              </span>
             </th>
           </tr>
         </thead>
@@ -179,44 +219,64 @@ exports[`DataViewTableHead component should render the tree table correctly when
             data-ouia-safe="true"
           >
             <th
-              class="pf-v6-c-table__th"
+              class="pf-v6-c-table__th pf-m-truncate"
               data-ouia-component-id="HeaderExample-th-0"
               scope="col"
               tabindex="-1"
             >
-              Repositories
+              <span
+                class="pf-v6-c-table__text"
+              >
+                Repositories
+              </span>
             </th>
             <th
-              class="pf-v6-c-table__th"
+              class="pf-v6-c-table__th pf-m-truncate"
               data-ouia-component-id="HeaderExample-th-1"
               scope="col"
               tabindex="-1"
             >
-              Branches
+              <span
+                class="pf-v6-c-table__text"
+              >
+                Branches
+              </span>
             </th>
             <th
-              class="pf-v6-c-table__th"
+              class="pf-v6-c-table__th pf-m-truncate"
               data-ouia-component-id="HeaderExample-th-2"
               scope="col"
               tabindex="-1"
             >
-              Pull requests
+              <span
+                class="pf-v6-c-table__text"
+              >
+                Pull requests
+              </span>
             </th>
             <th
-              class="pf-v6-c-table__th"
+              class="pf-v6-c-table__th pf-m-truncate"
               data-ouia-component-id="HeaderExample-th-3"
               scope="col"
               tabindex="-1"
             >
-              Workspaces
+              <span
+                class="pf-v6-c-table__text"
+              >
+                Workspaces
+              </span>
             </th>
             <th
-              class="pf-v6-c-table__th"
+              class="pf-v6-c-table__th pf-m-truncate"
               data-ouia-component-id="HeaderExample-th-4"
               scope="col"
               tabindex="-1"
             >
-              Last commit
+              <span
+                class="pf-v6-c-table__text"
+              >
+                Last commit
+              </span>
             </th>
           </tr>
         </thead>
