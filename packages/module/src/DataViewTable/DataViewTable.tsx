@@ -10,7 +10,7 @@ export type DataViewTh =
   | {
       /** Table head cell node */
       cell: ReactNode;
-      /** Whether the column is resizable */
+      /** Additional props for a resizable column */
       resizableProps?: DataViewThResizableProps;
       /** Props passed to Th */
       props?: ThProps;
