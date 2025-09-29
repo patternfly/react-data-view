@@ -333,7 +333,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
       className={dataViewThClassName}
       {...(isResizable && { additionalContent: resizableContent })}
     >
-      <span className="pf-v6-c-table__text">{content}</span>
+      {content}
     </Th>
   );
 };
