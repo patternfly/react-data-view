@@ -106,7 +106,6 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                     class="pf-v6-c-pagination__nav-control pf-m-first"
                   >
                     <button
-                      aria-disabled="false"
                       aria-label="Go to first page"
                       class="pf-v6-c-button pf-m-plain"
                       data-action="first"
@@ -139,7 +138,6 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                     class="pf-v6-c-pagination__nav-control"
                   >
                     <button
-                      aria-disabled="false"
                       aria-label="Go to previous page"
                       class="pf-v6-c-button pf-m-plain"
                       data-action="previous"
@@ -191,7 +189,6 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                     class="pf-v6-c-pagination__nav-control"
                   >
                     <button
-                      aria-disabled="false"
                       aria-label="Go to next page"
                       class="pf-v6-c-button pf-m-plain"
                       data-action="next"
@@ -223,7 +220,6 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                     class="pf-v6-c-pagination__nav-control pf-m-last"
                   >
                     <button
-                      aria-disabled="false"
                       aria-label="Go to last page"
                       class="pf-v6-c-button pf-m-plain"
                       data-action="last"
@@ -270,7 +266,6 @@ exports[`DataViewToolbar component should render correctly 1`] = `
               class="pf-v6-c-toolbar__item"
             >
               <button
-                aria-disabled="false"
                 class="pf-v6-c-button pf-m-link pf-m-inline"
                 data-ouia-component-id="DataViewToolbar-clear-all-filters"
                 data-ouia-component-type="PF6/Button"
@@ -391,7 +386,6 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                   class="pf-v6-c-pagination__nav-control pf-m-first"
                 >
                   <button
-                    aria-disabled="false"
                     aria-label="Go to first page"
                     class="pf-v6-c-button pf-m-plain"
                     data-action="first"
@@ -424,7 +418,6 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                   class="pf-v6-c-pagination__nav-control"
                 >
                   <button
-                    aria-disabled="false"
                     aria-label="Go to previous page"
                     class="pf-v6-c-button pf-m-plain"
                     data-action="previous"
@@ -476,7 +469,6 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                   class="pf-v6-c-pagination__nav-control"
                 >
                   <button
-                    aria-disabled="false"
                     aria-label="Go to next page"
                     class="pf-v6-c-button pf-m-plain"
                     data-action="next"
@@ -508,7 +500,6 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                   class="pf-v6-c-pagination__nav-control pf-m-last"
                 >
                   <button
-                    aria-disabled="false"
                     aria-label="Go to last page"
                     class="pf-v6-c-button pf-m-plain"
                     data-action="last"
@@ -555,7 +546,6 @@ exports[`DataViewToolbar component should render correctly 1`] = `
             class="pf-v6-c-toolbar__item"
           >
             <button
-              aria-disabled="false"
               class="pf-v6-c-button pf-m-link pf-m-inline"
               data-ouia-component-id="DataViewToolbar-clear-all-filters"
               data-ouia-component-type="PF6/Button"

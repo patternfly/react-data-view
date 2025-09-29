@@ -26,7 +26,6 @@ exports[`DataViewFilters component should render correctly 1`] = `
               class="pf-v6-c-toolbar__toggle"
             >
               <button
-                aria-disabled="false"
                 aria-haspopup="false"
                 aria-label="Show Filters"
                 class="pf-v6-c-button pf-m-plain"
@@ -173,7 +172,6 @@ exports[`DataViewFilters component should render correctly 1`] = `
           class="pf-v6-c-toolbar__item"
         >
           <button
-            aria-disabled="false"
             class="pf-v6-c-button pf-m-link pf-m-inline"
             data-ouia-component-id="DataViewToolbar-clear-all-filters"
             data-ouia-component-type="PF6/Button"

@@ -34,11 +34,7 @@ exports[`DataViewTableTree component should render the tree table correctly 1`] 
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Repositories
-              </span>
+              Repositories
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -46,11 +42,7 @@ exports[`DataViewTableTree component should render the tree table correctly 1`] 
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Branches
-              </span>
+              Branches
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -58,11 +50,7 @@ exports[`DataViewTableTree component should render the tree table correctly 1`] 
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Pull requests
-              </span>
+              Pull requests
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -70,11 +58,7 @@ exports[`DataViewTableTree component should render the tree table correctly 1`] 
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Workspaces
-              </span>
+              Workspaces
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -82,11 +66,7 @@ exports[`DataViewTableTree component should render the tree table correctly 1`] 
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Last commit
-              </span>
+              Last commit
             </th>
           </tr>
         </thead>
@@ -116,7 +96,6 @@ exports[`DataViewTableTree component should render the tree table correctly 1`] 
                   class="pf-v6-c-table__toggle"
                 >
                   <button
-                    aria-disabled="false"
                     aria-expanded="false"
                     aria-label="Expand row 0"
                     class="pf-v6-c-button pf-m-plain"
@@ -202,7 +181,6 @@ exports[`DataViewTableTree component should render the tree table correctly 1`] 
                   class="pf-v6-c-table__tree-view-details-toggle"
                 >
                   <button
-                    aria-disabled="false"
                     aria-expanded="false"
                     aria-label="Show row details"
                     class="pf-v6-c-button pf-m-plain"
@@ -338,7 +316,6 @@ exports[`DataViewTableTree component should render the tree table correctly 1`] 
                   class="pf-v6-c-table__tree-view-details-toggle"
                 >
                   <button
-                    aria-disabled="false"
                     aria-expanded="false"
                     aria-label="Show row details"
                     class="pf-v6-c-button pf-m-plain"
@@ -474,7 +451,6 @@ exports[`DataViewTableTree component should render the tree table correctly 1`] 
                   class="pf-v6-c-table__tree-view-details-toggle"
                 >
                   <button
-                    aria-disabled="false"
                     aria-expanded="false"
                     aria-label="Show row details"
                     class="pf-v6-c-button pf-m-plain"
@@ -560,7 +536,6 @@ exports[`DataViewTableTree component should render the tree table correctly 1`] 
                   class="pf-v6-c-table__toggle"
                 >
                   <button
-                    aria-disabled="false"
                     aria-expanded="false"
                     aria-label="Expand row 3"
                     class="pf-v6-c-button pf-m-plain"
@@ -646,7 +621,6 @@ exports[`DataViewTableTree component should render the tree table correctly 1`] 
                   class="pf-v6-c-table__tree-view-details-toggle"
                 >
                   <button
-                    aria-disabled="false"
                     aria-expanded="false"
                     aria-label="Show row details"
                     class="pf-v6-c-button pf-m-plain"
@@ -782,7 +756,6 @@ exports[`DataViewTableTree component should render the tree table correctly 1`] 
                   class="pf-v6-c-table__tree-view-details-toggle"
                 >
                   <button
-                    aria-disabled="false"
                     aria-expanded="false"
                     aria-label="Show row details"
                     class="pf-v6-c-button pf-m-plain"
@@ -917,7 +890,6 @@ exports[`DataViewTableTree component should render the tree table correctly 1`] 
                   class="pf-v6-c-table__tree-view-details-toggle"
                 >
                   <button
-                    aria-disabled="false"
                     aria-expanded="false"
                     aria-label="Show row details"
                     class="pf-v6-c-button pf-m-plain"
@@ -1022,11 +994,7 @@ exports[`DataViewTableTree component should render tree table with a loading sta
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Repositories
-              </span>
+              Repositories
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -1034,11 +1002,7 @@ exports[`DataViewTableTree component should render tree table with a loading sta
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Branches
-              </span>
+              Branches
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -1046,11 +1010,7 @@ exports[`DataViewTableTree component should render tree table with a loading sta
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Pull requests
-              </span>
+              Pull requests
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -1058,11 +1018,7 @@ exports[`DataViewTableTree component should render tree table with a loading sta
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Workspaces
-              </span>
+              Workspaces
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -1070,11 +1026,7 @@ exports[`DataViewTableTree component should render tree table with a loading sta
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Last commit
-              </span>
+              Last commit
             </th>
           </tr>
         </thead>
@@ -1119,11 +1071,7 @@ exports[`DataViewTableTree component should render tree table with all expandabl
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Repositories
-              </span>
+              Repositories
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -1131,11 +1079,7 @@ exports[`DataViewTableTree component should render tree table with all expandabl
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Branches
-              </span>
+              Branches
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -1143,11 +1087,7 @@ exports[`DataViewTableTree component should render tree table with all expandabl
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Pull requests
-              </span>
+              Pull requests
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -1155,11 +1095,7 @@ exports[`DataViewTableTree component should render tree table with all expandabl
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Workspaces
-              </span>
+              Workspaces
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -1167,11 +1103,7 @@ exports[`DataViewTableTree component should render tree table with all expandabl
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Last commit
-              </span>
+              Last commit
             </th>
           </tr>
         </thead>
@@ -1201,7 +1133,6 @@ exports[`DataViewTableTree component should render tree table with all expandabl
                   class="pf-v6-c-table__toggle"
                 >
                   <button
-                    aria-disabled="false"
                     aria-expanded="true"
                     aria-label="Collapse row 0"
                     class="pf-v6-c-button pf-m-plain pf-m-expanded"
@@ -1287,7 +1218,6 @@ exports[`DataViewTableTree component should render tree table with all expandabl
                   class="pf-v6-c-table__tree-view-details-toggle"
                 >
                   <button
-                    aria-disabled="false"
                     aria-expanded="false"
                     aria-label="Show row details"
                     class="pf-v6-c-button pf-m-plain"
@@ -1422,7 +1352,6 @@ exports[`DataViewTableTree component should render tree table with all expandabl
                   class="pf-v6-c-table__tree-view-details-toggle"
                 >
                   <button
-                    aria-disabled="false"
                     aria-expanded="false"
                     aria-label="Show row details"
                     class="pf-v6-c-button pf-m-plain"
@@ -1557,7 +1486,6 @@ exports[`DataViewTableTree component should render tree table with all expandabl
                   class="pf-v6-c-table__tree-view-details-toggle"
                 >
                   <button
-                    aria-disabled="false"
                     aria-expanded="false"
                     aria-label="Show row details"
                     class="pf-v6-c-button pf-m-plain"
@@ -1643,7 +1571,6 @@ exports[`DataViewTableTree component should render tree table with all expandabl
                   class="pf-v6-c-table__toggle"
                 >
                   <button
-                    aria-disabled="false"
                     aria-expanded="true"
                     aria-label="Collapse row 3"
                     class="pf-v6-c-button pf-m-plain pf-m-expanded"
@@ -1729,7 +1656,6 @@ exports[`DataViewTableTree component should render tree table with all expandabl
                   class="pf-v6-c-table__tree-view-details-toggle"
                 >
                   <button
-                    aria-disabled="false"
                     aria-expanded="false"
                     aria-label="Show row details"
                     class="pf-v6-c-button pf-m-plain"
@@ -1864,7 +1790,6 @@ exports[`DataViewTableTree component should render tree table with all expandabl
                   class="pf-v6-c-table__tree-view-details-toggle"
                 >
                   <button
-                    aria-disabled="false"
                     aria-expanded="false"
                     aria-label="Show row details"
                     class="pf-v6-c-button pf-m-plain"
@@ -1999,7 +1924,6 @@ exports[`DataViewTableTree component should render tree table with all expandabl
                   class="pf-v6-c-table__tree-view-details-toggle"
                 >
                   <button
-                    aria-disabled="false"
                     aria-expanded="false"
                     aria-label="Show row details"
                     class="pf-v6-c-button pf-m-plain"
@@ -2104,11 +2028,7 @@ exports[`DataViewTableTree component should render tree table with an empty stat
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Repositories
-              </span>
+              Repositories
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -2116,11 +2036,7 @@ exports[`DataViewTableTree component should render tree table with an empty stat
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Branches
-              </span>
+              Branches
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -2128,11 +2044,7 @@ exports[`DataViewTableTree component should render tree table with an empty stat
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Pull requests
-              </span>
+              Pull requests
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -2140,11 +2052,7 @@ exports[`DataViewTableTree component should render tree table with an empty stat
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Workspaces
-              </span>
+              Workspaces
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -2152,11 +2060,7 @@ exports[`DataViewTableTree component should render tree table with an empty stat
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Last commit
-              </span>
+              Last commit
             </th>
           </tr>
         </thead>
@@ -2201,11 +2105,7 @@ exports[`DataViewTableTree component should render tree table with an error stat
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Repositories
-              </span>
+              Repositories
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -2213,11 +2113,7 @@ exports[`DataViewTableTree component should render tree table with an error stat
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Branches
-              </span>
+              Branches
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -2225,11 +2121,7 @@ exports[`DataViewTableTree component should render tree table with an error stat
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Pull requests
-              </span>
+              Pull requests
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -2237,11 +2129,7 @@ exports[`DataViewTableTree component should render tree table with an error stat
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Workspaces
-              </span>
+              Workspaces
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -2249,11 +2137,7 @@ exports[`DataViewTableTree component should render tree table with an error stat
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Last commit
-              </span>
+              Last commit
             </th>
           </tr>
         </thead>

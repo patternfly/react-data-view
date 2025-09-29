@@ -26,11 +26,7 @@ exports[`DataViewTable component should render correctly 1`] = `
           scope="col"
           tabindex="-1"
         >
-          <span
-            class="pf-v6-c-table__text"
-          >
-            Repositories
-          </span>
+          Repositories
         </th>
         <th
           class="pf-v6-c-table__th pf-m-truncate"
@@ -38,11 +34,7 @@ exports[`DataViewTable component should render correctly 1`] = `
           scope="col"
           tabindex="-1"
         >
-          <span
-            class="pf-v6-c-table__text"
-          >
-            Branches
-          </span>
+          Branches
         </th>
         <th
           class="pf-v6-c-table__th pf-m-truncate"
@@ -50,11 +42,7 @@ exports[`DataViewTable component should render correctly 1`] = `
           scope="col"
           tabindex="-1"
         >
-          <span
-            class="pf-v6-c-table__text"
-          >
-            Pull requests
-          </span>
+          Pull requests
         </th>
         <th
           class="pf-v6-c-table__th pf-m-truncate"
@@ -62,11 +50,7 @@ exports[`DataViewTable component should render correctly 1`] = `
           scope="col"
           tabindex="-1"
         >
-          <span
-            class="pf-v6-c-table__text"
-          >
-            Workspaces
-          </span>
+          Workspaces
         </th>
         <th
           class="pf-v6-c-table__th pf-m-truncate"
@@ -74,11 +58,7 @@ exports[`DataViewTable component should render correctly 1`] = `
           scope="col"
           tabindex="-1"
         >
-          <span
-            class="pf-v6-c-table__text"
-          >
-            Last commit
-          </span>
+          Last commit
         </th>
       </tr>
     </thead>
@@ -377,11 +357,7 @@ exports[`DataViewTable component should render with a loading state 1`] = `
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Repositories
-              </span>
+              Repositories
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -389,11 +365,7 @@ exports[`DataViewTable component should render with a loading state 1`] = `
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Branches
-              </span>
+              Branches
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -401,11 +373,7 @@ exports[`DataViewTable component should render with a loading state 1`] = `
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Pull requests
-              </span>
+              Pull requests
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -413,11 +381,7 @@ exports[`DataViewTable component should render with a loading state 1`] = `
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Workspaces
-              </span>
+              Workspaces
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -425,11 +389,7 @@ exports[`DataViewTable component should render with a loading state 1`] = `
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Last commit
-              </span>
+              Last commit
             </th>
           </tr>
         </thead>
@@ -474,11 +434,7 @@ exports[`DataViewTable component should render with an empty state 1`] = `
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Repositories
-              </span>
+              Repositories
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -486,11 +442,7 @@ exports[`DataViewTable component should render with an empty state 1`] = `
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Branches
-              </span>
+              Branches
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -498,11 +450,7 @@ exports[`DataViewTable component should render with an empty state 1`] = `
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Pull requests
-              </span>
+              Pull requests
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -510,11 +458,7 @@ exports[`DataViewTable component should render with an empty state 1`] = `
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Workspaces
-              </span>
+              Workspaces
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -522,11 +466,7 @@ exports[`DataViewTable component should render with an empty state 1`] = `
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Last commit
-              </span>
+              Last commit
             </th>
           </tr>
         </thead>
@@ -571,11 +511,7 @@ exports[`DataViewTable component should render with an error state 1`] = `
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Repositories
-              </span>
+              Repositories
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -583,11 +519,7 @@ exports[`DataViewTable component should render with an error state 1`] = `
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Branches
-              </span>
+              Branches
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -595,11 +527,7 @@ exports[`DataViewTable component should render with an error state 1`] = `
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Pull requests
-              </span>
+              Pull requests
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -607,11 +535,7 @@ exports[`DataViewTable component should render with an error state 1`] = `
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Workspaces
-              </span>
+              Workspaces
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -619,11 +543,7 @@ exports[`DataViewTable component should render with an error state 1`] = `
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Last commit
-              </span>
+              Last commit
             </th>
           </tr>
         </thead>

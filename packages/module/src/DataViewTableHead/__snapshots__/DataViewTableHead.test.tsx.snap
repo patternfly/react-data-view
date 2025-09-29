@@ -25,11 +25,7 @@ exports[`DataViewTableHead component should render correctly 1`] = `
           scope="col"
           tabindex="-1"
         >
-          <span
-            class="pf-v6-c-table__text"
-          >
-            Repositories
-          </span>
+          Repositories
         </th>
         <th
           class="pf-v6-c-table__th pf-m-truncate"
@@ -37,11 +33,7 @@ exports[`DataViewTableHead component should render correctly 1`] = `
           scope="col"
           tabindex="-1"
         >
-          <span
-            class="pf-v6-c-table__text"
-          >
-            Branches
-          </span>
+          Branches
         </th>
         <th
           class="pf-v6-c-table__th pf-m-truncate"
@@ -49,11 +41,7 @@ exports[`DataViewTableHead component should render correctly 1`] = `
           scope="col"
           tabindex="-1"
         >
-          <span
-            class="pf-v6-c-table__text"
-          >
-            Pull requests
-          </span>
+          Pull requests
         </th>
         <th
           class="pf-v6-c-table__th pf-m-truncate"
@@ -61,11 +49,7 @@ exports[`DataViewTableHead component should render correctly 1`] = `
           scope="col"
           tabindex="-1"
         >
-          <span
-            class="pf-v6-c-table__text"
-          >
-            Workspaces
-          </span>
+          Workspaces
         </th>
         <th
           class="pf-v6-c-table__th pf-m-truncate"
@@ -73,11 +57,7 @@ exports[`DataViewTableHead component should render correctly 1`] = `
           scope="col"
           tabindex="-1"
         >
-          <span
-            class="pf-v6-c-table__text"
-          >
-            Last commit
-          </span>
+          Last commit
         </th>
       </tr>
     </thead>
@@ -129,11 +109,7 @@ exports[`DataViewTableHead component should render selection column when selecti
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Repositories
-              </span>
+              Repositories
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -141,11 +117,7 @@ exports[`DataViewTableHead component should render selection column when selecti
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Branches
-              </span>
+              Branches
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -153,11 +125,7 @@ exports[`DataViewTableHead component should render selection column when selecti
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Pull requests
-              </span>
+              Pull requests
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -165,11 +133,7 @@ exports[`DataViewTableHead component should render selection column when selecti
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Workspaces
-              </span>
+              Workspaces
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -177,11 +141,7 @@ exports[`DataViewTableHead component should render selection column when selecti
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Last commit
-              </span>
+              Last commit
             </th>
           </tr>
         </thead>
@@ -224,11 +184,7 @@ exports[`DataViewTableHead component should render the tree table correctly when
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Repositories
-              </span>
+              Repositories
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -236,11 +192,7 @@ exports[`DataViewTableHead component should render the tree table correctly when
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Branches
-              </span>
+              Branches
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -248,11 +200,7 @@ exports[`DataViewTableHead component should render the tree table correctly when
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Pull requests
-              </span>
+              Pull requests
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -260,11 +208,7 @@ exports[`DataViewTableHead component should render the tree table correctly when
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Workspaces
-              </span>
+              Workspaces
             </th>
             <th
               class="pf-v6-c-table__th pf-m-truncate"
@@ -272,11 +216,7 @@ exports[`DataViewTableHead component should render the tree table correctly when
               scope="col"
               tabindex="-1"
             >
-              <span
-                class="pf-v6-c-table__text"
-              >
-                Last commit
-              </span>
+              Last commit
             </th>
           </tr>
         </thead>
