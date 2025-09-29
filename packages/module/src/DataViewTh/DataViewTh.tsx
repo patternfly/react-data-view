@@ -31,7 +31,10 @@ const useStyles = createUseStyles({
     position: 'absolute',
     insetInlineEnd: `calc(${globalFontSizeBodyDefault.var} / 2)`,
     insetBlockEnd: tableCellPaddingBlockEnd.var,
-    cursor: 'grab'
+    cursor: 'grab',
+    '&:active': {
+      cursor: 'grabbing',
+    },
   },
 });
 export interface DataViewThResizableProps {
