@@ -52,7 +52,7 @@
     "@typescript-eslint/unified-signatures": "error",
     "@typescript-eslint/no-var-requires": "off",
     "arrow-body-style": "error",
-    "array-bracket-spacing": ["error", "always"],
+    "array-bracket-spacing": "off",
     "camelcase": [
       "error",
       {

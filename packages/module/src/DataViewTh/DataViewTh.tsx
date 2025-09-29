@@ -7,7 +7,8 @@ import {
   ReactNode,
   useCallback,
   useRef,
-  useEffect
+  useEffect,
+  Fragment
 } from 'react';
 import { Th, ThProps } from '@patternfly/react-table';
 import { Button, getLanguageDirection } from '@patternfly/react-core';
@@ -90,7 +91,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
 }: DataViewThProps) => {
   const thRef = useRef<HTMLTableCellElement>(null);
 
-  const [ width, setWidth ] = useState(resizableProps?.width ? resizableProps.width : 0);
+  const [width, setWidth] = useState(resizableProps?.width ? resizableProps.width : 0);
   // Tracks the current column width for the onResize callback, because the width state is not updated until after the resize is complete
   const trackedWidth = useRef(0);
   const classes = useStyles();
@@ -123,7 +124,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
 
     const observed = resizeButtonRef.current;
     const observer = new IntersectionObserver(
-      ([ entry ]) => {
+      ([entry]) => {
         isInView.current = entry.isIntersecting;
       },
       { threshold: 0.3 }
@@ -145,7 +146,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
       setWidth(thRef.current?.getBoundingClientRect().width || 0);
       setInitialVals.current = false;
     }
-  }, [ isResizable, hasResizableColumns, setInitialVals ]);
+  }, [isResizable, hasResizableColumns, setInitialVals]);
 
   const setDragOffset = (e: ReactMouseEvent | ReactTouchEvent) => {
     const isRTL = getLanguageDirection(thRef.current as HTMLElement) === 'rtl';
@@ -305,7 +306,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
   };
 
   const resizableContent = (
-    <>
+    <Fragment>
       <div aria-live="polite" className="pf-v6-screen-reader">
         {screenReaderText}
       </div>
@@ -320,7 +321,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
         aria-label={resizeButtonAriaLabel}
         className={classes.dataViewResizableButton}
       />
-    </>
+    </Fragment>
   );
 
   return (
