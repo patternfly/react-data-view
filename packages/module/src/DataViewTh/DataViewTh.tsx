@@ -18,8 +18,19 @@ import tableCellPaddingInlineEnd from '@patternfly/react-tokens/dist/esm/c_table
 import globalFontSizeBodyDefault from '@patternfly/react-tokens/dist/esm/t_global_font_size_body_default';
 
 const ResizeIcon = () => (
-  <svg className="pf-v6-svg" viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="true" role="img" width="1em" height="1em">
-    <path fillRule="evenodd" d="M52.7,529.8l190.5,161.9c18.6,15.9,50.5,4.7,50.5-17.8v-324c0-22.4-31.8-33.6-50.5-17.8L52.7,494.2c-11.5,9.8-11.5,25.8,0,35.6ZM480.8,12.9h62.4v998.3h-62.4V12.9ZM971.3,529.8l-190.5,161.9c-18.6,15.9-50.5,4.7-50.5-17.8v-324c0-22.4,31.8-33.6,50.5-17.8l190.5,161.9c11.5,9.8,11.5,25.8,0,35.6Z"/>
+  <svg
+    className="pf-v6-svg"
+    viewBox="0 0 1024 1024"
+    fill="currentColor"
+    aria-hidden="true"
+    role="img"
+    width="1em"
+    height="1em"
+  >
+    <path
+      fillRule="evenodd"
+      d="M52.7,529.8l190.5,161.9c18.6,15.9,50.5,4.7,50.5-17.8v-324c0-22.4-31.8-33.6-50.5-17.8L52.7,494.2c-11.5,9.8-11.5,25.8,0,35.6ZM480.8,12.9h62.4v998.3h-62.4V12.9ZM971.3,529.8l-190.5,161.9c-18.6,15.9-50.5,4.7-50.5-17.8v-324c0-22.4,31.8-33.6,50.5-17.8l190.5,161.9c11.5,9.8,11.5,25.8,0,35.6Z"
+    />
   </svg>
 );
 
@@ -33,9 +44,9 @@ const useStyles = createUseStyles({
     insetBlockEnd: tableCellPaddingBlockEnd.var,
     cursor: 'grab',
     '&:active': {
-      cursor: 'grabbing',
-    },
-  },
+      cursor: 'grabbing'
+    }
+  }
 });
 export interface DataViewThResizableProps {
   /** Whether the column is resizable */
@@ -100,7 +111,9 @@ export const DataViewTh: FC<DataViewThProps> = ({
 
   if (isResizable && !resizeButtonAriaLabel) {
     // eslint-disable-next-line no-console
-    console.warn('DataViewTh: Missing resizeButtonAriaLabel. An aria label must be passed to each resizable column to provide a context specific label for its resize button.');
+    console.warn(
+      'DataViewTh: Missing resizeButtonAriaLabel. An aria label must be passed to each resizable column to provide a context specific label for its resize button.'
+    );
   }
 
   useEffect(() => {
@@ -291,29 +304,36 @@ export const DataViewTh: FC<DataViewThProps> = ({
     onResize && onResize(e, thProps?.id, newSize);
   };
 
+  const resizableContent = (
+    <>
+      <div aria-live="polite" className="pf-v6-screen-reader">
+        {screenReaderText}
+      </div>
+      <Button
+        ref={resizeButtonRef}
+        variant="plain"
+        hasNoPadding
+        icon={<ResizeIcon />}
+        onMouseDown={handleMousedown}
+        onKeyDown={handleKeys}
+        onTouchStart={handleTouchStart}
+        aria-label={resizeButtonAriaLabel}
+        className={classes.dataViewResizableButton}
+      />
+    </>
+  );
+
   return (
-    <Th {...thProps} {...props} style={width > 0 ? { minWidth: width } : undefined} ref={thRef} modifier="truncate" className={dataViewThClassName}>
-      <span className="pf-v6-c-table__text">
-        {content}
-      </span>
-      {isResizable && (
-        <Button
-          ref={resizeButtonRef}
-          variant="plain"
-          hasNoPadding
-          icon={<ResizeIcon />}
-          onMouseDown={handleMousedown}
-          onKeyDown={handleKeys}
-          onTouchStart={handleTouchStart}
-          aria-label={resizeButtonAriaLabel}
-          className={classes.dataViewResizableButton}
-        />
-      )}
-      {isResizable && (
-        <div aria-live="polite" className="pf-v6-screen-reader">
-          {screenReaderText}
-        </div>
-      )}
+    <Th
+      {...thProps}
+      {...props}
+      style={width > 0 ? { minWidth: width } : undefined}
+      ref={thRef}
+      modifier="truncate"
+      className={dataViewThClassName}
+      {...(isResizable && { additionalContent: resizableContent })}
+    >
+      <span className="pf-v6-c-table__text">{content}</span>
     </Th>
   );
 };
