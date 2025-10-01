@@ -47,7 +47,7 @@
     "@patternfly/patternfly": "6.4.0-prerelease.1",
     "@patternfly/react-code-editor": "6.4.0-prerelease.1",
     "@patternfly/patternfly-a11y": "^5.1.0",
-    "@types/react": "^18.3.23",
+    "@types/react": "^18.3.25",
     "@types/react-dom": "^18.3.7",
     "@types/react-router-dom": "^5.3.3",
     "react": "^18.3.1",
