@@ -23,6 +23,8 @@ export interface DataViewTableBasicProps extends Omit<TableProps, 'onSelect' | '
   bodyStates?: Partial<Record<DataViewState | string, React.ReactNode>>
   /** Custom OUIA ID */
   ouiaId?: string;
+  /** @hide Indicates if the table is resizable */
+  hasResizableColumns?: boolean;
 }
 
 export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
@@ -31,6 +33,7 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
   ouiaId = 'DataViewTableBasic',
   headStates,
   bodyStates,
+  hasResizableColumns,
   ...props
 }: DataViewTableBasicProps) => {
   const { selection, activeState, isSelectable } = useInternalContext();
@@ -74,7 +77,7 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
 
   return (
     <Table aria-label="Data table" ouiaId={ouiaId} {...props}>
-      { activeHeadState || <DataViewTableHead columns={columns} ouiaId={ouiaId} /> }
+      { activeHeadState || <DataViewTableHead columns={columns} ouiaId={ouiaId} hasResizableColumns={hasResizableColumns} /> }
       { activeBodyState || <Tbody>{renderedRows}</Tbody> }
     </Table>
   );

@@ -11,8 +11,15 @@ global.MutationObserver = class {
   observe(element, initObject) {}
 };
 
+global.IntersectionObserver = class {
+  constructor(callback, options) {}
+  disconnect() {}
+  observe(element) {}
+  unobserve(element) {}
+};
+
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
-  useLayoutEffect: jest.requireActual('react').useEffect,
+  useLayoutEffect: jest.requireActual('react').useEffect
 }));
 Element.prototype.scrollTo = () => {};

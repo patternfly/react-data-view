@@ -63,7 +63,6 @@ exports[`DataViewTextFilter component should render correctly 1`] = `
                 class="pf-v6-c-text-input-group__utilities"
               >
                 <button
-                  aria-disabled="false"
                   aria-label="Reset"
                   class="pf-v6-c-button pf-m-plain"
                   data-ouia-component-id="OUIA-Generated-Button-plain-2"
@@ -141,7 +140,6 @@ exports[`DataViewTextFilter component should render correctly 1`] = `
                       class="pf-v6-c-label__actions"
                     >
                       <button
-                        aria-disabled="false"
                         aria-label="Close initial value"
                         class="pf-v6-c-button pf-m-plain pf-m-no-padding"
                         data-ouia-component-id="OUIA-Generated-Button-plain-3"
@@ -182,7 +180,6 @@ exports[`DataViewTextFilter component should render correctly 1`] = `
           class="pf-v6-c-toolbar__item"
         >
           <button
-            aria-disabled="false"
             class="pf-v6-c-button pf-m-link pf-m-inline"
             data-ouia-component-id="DataViewToolbar-clear-all-filters"
             data-ouia-component-type="PF6/Button"

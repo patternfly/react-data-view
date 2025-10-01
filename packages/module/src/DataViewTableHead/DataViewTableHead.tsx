@@ -1,12 +1,8 @@
 import { FC, useMemo } from 'react';
-import {
-  Th,
-  Thead,
-  TheadProps,
-  Tr
-} from '@patternfly/react-table';
+import { Th, Thead, TheadProps, Tr } from '@patternfly/react-table';
 import { useInternalContext } from '../InternalContext';
 import { DataViewTh, isDataViewThObject } from '../DataViewTable';
+import { DataViewTh as DataViewThElement } from '../DataViewTh/DataViewTh';
 
 /** extends TheadProps */
 export interface DataViewTableHeadProps extends TheadProps {
@@ -16,37 +12,42 @@ export interface DataViewTableHeadProps extends TheadProps {
   columns: DataViewTh[];
   /** Custom OUIA ID */
   ouiaId?: string;
+  /** @hide Indicates whether table is resizable */
+  hasResizableColumns?: boolean;
 }
 
 export const DataViewTableHead: FC<DataViewTableHeadProps> = ({
   isTreeTable = false,
   columns,
   ouiaId = 'DataViewTableHead',
+  hasResizableColumns,
   ...props
 }: DataViewTableHeadProps) => {
   const { selection } = useInternalContext();
   const { onSelect, isSelected } = selection ?? {};
 
-  const cells = useMemo(() => [
-    onSelect && isSelected && !isTreeTable ? (
-      <Th key="row-select" screenReaderText='Data selection table head cell' />
-    ) : null,
-    ...columns.map((column, index) => (
-      <Th
-        key={index}
-        {...(isDataViewThObject(column) && (column?.props ?? {}))}
-        data-ouia-component-id={`${ouiaId}-th-${index}`}
-      >
-        {isDataViewThObject(column) ? column.cell : column}
-      </Th>
-    )
-    ) ], [ columns, ouiaId, onSelect, isSelected, isTreeTable ]);
+  const cells = useMemo(
+    () => [
+      onSelect && isSelected && !isTreeTable ? (
+        <Th key="row-select" screenReaderText="Data selection table head cell" />
+      ) : null,
+      ...columns.map((column, index) => (
+        <DataViewThElement
+          key={index}
+          content={isDataViewThObject(column) ? column.cell : column}
+          resizableProps={isDataViewThObject(column) ? column.resizableProps : undefined}
+          data-ouia-component-id={`${ouiaId}-th-${index}`}
+          thProps={isDataViewThObject(column) ? (column?.props ?? {}) : {}}
+          hasResizableColumns={hasResizableColumns}
+        />
+      ))
+    ],
+    [ columns, ouiaId, onSelect, isSelected, isTreeTable, hasResizableColumns ]
+  );
 
   return (
     <Thead data-ouia-component-id={`${ouiaId}-thead`} {...props}>
-      <Tr ouiaId={`${ouiaId}-tr-head`}>
-        {cells}
-      </Tr>
+      <Tr ouiaId={`${ouiaId}-tr-head`}>{cells}</Tr>
     </Thead>
   );
 };
