@@ -34,7 +34,7 @@
     "@patternfly/react-component-groups": "^6.1.0",
     "@patternfly/react-core": "6.4.0-prerelease.2",
     "@patternfly/react-icons": "6.4.0-prerelease.1",
-    "@patternfly/react-table": "6.4.0-prerelease.2",
+    "@patternfly/react-table": "6.4.0-prerelease.3",
     "clsx": "^2.1.1",
     "react-jss": "^10.10.0"
   },
