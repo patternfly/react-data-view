@@ -32,9 +32,9 @@
   },
   "dependencies": {
     "@patternfly/react-component-groups": "^6.1.0",
-    "@patternfly/react-core": "6.4.0-prerelease.2",
-    "@patternfly/react-icons": "6.4.0-prerelease.1",
-    "@patternfly/react-table": "6.4.0-prerelease.2",
+    "@patternfly/react-core": "^6.4.0",
+    "@patternfly/react-icons": "^6.4.0",
+    "@patternfly/react-table": "^6.4.0",
     "clsx": "^2.1.1",
     "react-jss": "^10.10.0"
   },
@@ -44,8 +44,8 @@
   },
   "devDependencies": {
     "@patternfly/documentation-framework": "^6.24.2",
-    "@patternfly/patternfly": "6.4.0-prerelease.1",
-    "@patternfly/react-code-editor": "6.4.0-prerelease.1",
+    "@patternfly/patternfly": "^6.4.0",
+    "@patternfly/react-code-editor": "^6.4.0",
     "@patternfly/patternfly-a11y": "^5.1.0",
     "@types/react": "^18.3.23",
     "@types/react-dom": "^18.3.7",
