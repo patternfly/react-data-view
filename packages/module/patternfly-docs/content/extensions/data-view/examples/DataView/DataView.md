@@ -30,7 +30,7 @@ The **data view** extension enables you to display datasets in organized layouts
 
 ### Layout
 
-A data view should contain a header, the data representation, and a footer. These parts are organized in a [stack layout](/layouts/stack).
+A data view should contain a header, the data representation, and a footer. These parts are organized in a [stack layout](/foundations-and-styles/layouts/stack).
 
 The data view toolbars and sub-components that display the data (like a card view or table) are always passed as `children` to the `<DataView>` component.
 
