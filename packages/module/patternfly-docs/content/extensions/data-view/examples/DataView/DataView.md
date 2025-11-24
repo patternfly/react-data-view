@@ -22,11 +22,13 @@ import { DataViewCheckboxFilter } from '@patternfly/react-data-view/dist/dynamic
 
 **Note:** Data view lives in its own package [`@patternfly/react-data-view`](https://www.npmjs.com/package/@patternfly/react-data-view)
 
-If you notice a bug, or if you have a suggestion for improving the data view extension or its documentation, please file an issue in the [react-data-view](https://github.com/patternfly/react-data-view/issues) repository. Before doing so, please make sure there is not already a pre-existing issue.
-
----
-
 The **data view** extension enables you to display datasets in organized layouts, with data representations and interactive toolbars for actions like selection and pagination.
+
+--- 
+
+## How to structure and implement the data view
+
+The **data view** extension provides a modular architecture that lets you efficiently create consistent data views, either by using predefined sub-components and hooks or by defining your own custom implementations.
 
 ### Layout
 
@@ -61,3 +63,7 @@ This example uses the `<DataViewEventsProvider>` to display details about a sele
 ```js file="./EventsExample.tsx"
 
 ```
+
+---
+
+If you notice a bug, or if you have a suggestion for improving the data view extension or its documentation, please file an issue in the [react-data-view](https://github.com/patternfly/react-data-view/issues) repository. Before doing so, please make sure there is not already a pre-existing issue.
