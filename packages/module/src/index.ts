@@ -7,6 +7,9 @@ export * from './Hooks';
 export { default as DataViewToolbar } from './DataViewToolbar';
 export * from './DataViewToolbar';
 
+export { default as DataViewTh } from './DataViewTh';
+export * from './DataViewTh';
+
 export { default as DataViewTextFilter } from './DataViewTextFilter';
 export * from './DataViewTextFilter';
 
@@ -21,6 +24,9 @@ export * from './DataViewTableBasic';
 
 export { default as DataViewTable } from './DataViewTable';
 export * from './DataViewTable';
+
+export { default as DataViewFilters } from './DataViewFilters';
+export * from './DataViewFilters';
 
 export { default as DataViewEventsContext } from './DataViewEventsContext';
 export * from './DataViewEventsContext';
