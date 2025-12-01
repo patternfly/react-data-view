@@ -56,7 +56,6 @@ jobs:
           key: ${{ runner.os }}-puppeteer-${{ hashFiles('package-lock.json') }}
       - name: Install Chrome for Puppeteer
         run: npx puppeteer browsers install chrome
-        if: steps.puppeteer-cache.outputs.cache-hit != 'true'
       - run: npm run serve:docs & npm run test:a11y
         name: a11y tests
       - run: node .github/upload-preview.js packages/module/coverage

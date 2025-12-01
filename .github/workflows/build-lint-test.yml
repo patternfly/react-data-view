@@ -152,7 +152,6 @@ jobs:
           key: ${{ runner.os }}-dist-14-${{ secrets.CACHE_VERSION }}-${{ hashFiles('package-lock.json', 'package.json', 'packages/*/*', '!packages/*/dist', '!packages/*/node_modules') }}
       - name: Build dist
         run: npm run build
-        if: steps.dist.outputs.cache-hit != 'true'
       - name: Build docs
         run: npm run build:docs
       - uses: actions/cache@v4
