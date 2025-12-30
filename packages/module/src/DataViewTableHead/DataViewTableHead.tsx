@@ -14,6 +14,8 @@ export interface DataViewTableHeadProps extends TheadProps {
   ouiaId?: string;
   /** @hide Indicates whether table is resizable */
   hasResizableColumns?: boolean;
+  /** Indicates whether table rows are draggable */
+  isDraggable?: boolean;
 }
 
 export const DataViewTableHead: FC<DataViewTableHeadProps> = ({
@@ -21,6 +23,7 @@ export const DataViewTableHead: FC<DataViewTableHeadProps> = ({
   columns,
   ouiaId = 'DataViewTableHead',
   hasResizableColumns,
+  isDraggable = false,
   ...props
 }: DataViewTableHeadProps) => {
   const { selection } = useInternalContext();
@@ -30,6 +33,9 @@ export const DataViewTableHead: FC<DataViewTableHeadProps> = ({
     () => [
       onSelect && isSelected && !isTreeTable ? (
         <Th key="row-select" screenReaderText="Data selection table head cell" />
+      ) : null,
+      isDraggable ? (
+        <Th key="draggable" screenReaderText="Draggable row handle" />
       ) : null,
       ...columns.map((column, index) => (
         <DataViewThElement
@@ -42,7 +48,7 @@ export const DataViewTableHead: FC<DataViewTableHeadProps> = ({
         />
       ))
     ],
-    [ columns, ouiaId, onSelect, isSelected, isTreeTable, hasResizableColumns ]
+    [ columns, ouiaId, onSelect, isSelected, isTreeTable, hasResizableColumns, isDraggable ]
   );
 
   return (
