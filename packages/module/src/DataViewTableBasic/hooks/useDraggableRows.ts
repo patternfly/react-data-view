@@ -1,9 +1,10 @@
 import { useState, useRef, useMemo } from 'react';
 import { TbodyProps, TrProps } from '@patternfly/react-table';
 import styles from '@patternfly/react-styles/css/components/Table/table';
+import { DataViewTr } from '../../DataViewTable';
 
 export interface UseDraggableRowsProps {
-  rows: any[];
+  rows: DataViewTr[];
   tableRef: React.RefObject<HTMLTableElement>;
   isDraggable?: boolean;
 }
@@ -24,8 +25,7 @@ export interface UseDraggableRowsReturn {
 
 export const useDraggableRows = ({
   rows,
-  tableRef,
-  isDraggable = true
+  tableRef
 }: UseDraggableRowsProps): UseDraggableRowsReturn => {
   const rowIds = useMemo(() => rows.map((_, index) => `row-${index}`), [rows]);
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null);
@@ -48,7 +48,9 @@ export const useDraggableRows = ({
 
   const move = (order: string[]) => {
     const tableNode = tableRef.current;
-    if (!tableNode) return;
+    if (!tableNode) {
+      return;
+    }
 
     // Get all tbody elements (each tbody wraps one row)
     const tbodyNodes = Array.from(tableNode.querySelectorAll('tbody'));
@@ -75,7 +77,9 @@ export const useDraggableRows = ({
   };
 
   const isValidDrop = (evt: React.DragEvent<HTMLTableSectionElement | HTMLTableRowElement>): boolean => {
-    if (!tableRef.current) return false;
+    if (!tableRef.current) {
+      return false;
+    }
     const tableRect = tableRef.current.getBoundingClientRect();
     return (
       evt.clientX > tableRect.x &&
@@ -165,7 +169,7 @@ export const useDraggableRows = ({
   };
 
   const onDropTbody: TbodyProps['onDrop'] = (evt) => {
-    onDrop(evt as any);
+    onDrop(evt as unknown as React.DragEvent<HTMLTableRowElement>);
   };
 
   const onDragEnd: TrProps['onDragEnd'] = (evt) => {

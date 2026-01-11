@@ -17,8 +17,8 @@ import { DataViewState } from '../DataView/DataView';
 import { useDraggableRows } from './hooks';
 
 export interface ExpandableContent {
-  row_id: number;
-  column_id: number;
+  rowId: number;
+  columnId: number;
   content: React.ReactNode;
 }
 
@@ -78,7 +78,7 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
     onDropTbody,
     onDragOver,
     onDragLeave
-  } = useDraggableRows({ rows, tableRef, isDraggable });
+  } = useDraggableRows({ rows, tableRef });
 
   const renderedRows = useMemo(() => rows.map((row, rowIndex) => {
     const rowIsObject = isDataViewTrObject(row);
@@ -88,11 +88,11 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
     // Get the first cell to extract the row ID
     const rowData = rowIsObject ? row.row : row;
     const firstCell = rowData[0];
-    const rowId = isDataViewTdObject(firstCell) ? (firstCell as any).id : undefined;
+    const rowId = isDataViewTdObject(firstCell) ? (firstCell as { id?: number }).id : undefined;
 
     // Find all expandable contents for this row
     const rowExpandableContents = isExpandable ? expandedRows?.filter(
-      (content) => content.row_id === rowId
+      (content) => content.rowId === rowId
     ) : [];
 
     return (
@@ -124,7 +124,7 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
           {(rowIsObject ? row.row : row).map((cell, colIndex) => {
             const cellIsObject = isDataViewTdObject(cell);
             const cellExpandableContent = isExpandable ? expandedRows?.find(
-              (content) => content.row_id === rowId && content.column_id === colIndex
+              (content) => content.rowId === rowId && content.columnId === colIndex
             ) : undefined;
             return (
               <Td
@@ -155,8 +155,8 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
           })}
         </Tr>
         {rowExpandableContents?.map((expandableContent) => (
-          <Tr key={`expand-${rowIndex}-${expandableContent.column_id}`} isExpanded={isRowExpanded && expandedColIndex === expandableContent.column_id}>
-            <Td colSpan={rowData.length + (isSelectable ? 1 : 0) + (isDraggable ? 1 : 0)} data-expanded-column-index={expandableContent.column_id}>
+          <Tr key={`expand-${rowIndex}-${expandableContent.columnId}`} isExpanded={isRowExpanded && expandedColIndex === expandableContent.columnId}>
+            <Td colSpan={rowData.length + (isSelectable ? 1 : 0) + (isDraggable ? 1 : 0)} data-expanded-column-index={expandableContent.columnId}>
               <ExpandableRowContent>
                 {expandableContent.content}
               </ExpandableRowContent>
@@ -165,11 +165,10 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
         ))}
       </Tbody>
     );
-  }), [ rows, isSelectable, isSelected, isSelectDisabled, onSelect, ouiaId, expandedRowsState, expandedColumnIndex, expandedRows, rowIds, isDraggable, onDragOver, onDropTbody, onDragLeave, onDragEnd, onDragStart ]);
+  }), [ rows, isSelectable, isSelected, isSelectDisabled, onSelect, ouiaId, expandedRowsState, expandedColumnIndex, expandedRows, rowIds, isDraggable, onDragOver, onDropTbody, onDragLeave, onDragEnd, onDragStart, isExpandable, onDrop ]);
 
-  if(isSticky)
-  {
-    return(
+  if (isSticky) {
+    return (
       <OuterScrollContainer>
         <InnerScrollContainer>
           <Table ref={tableRef} aria-label="Data table" ouiaId={ouiaId} isExpandable={isExpandable} hasAnimations {...props} isStickyHeader >
@@ -178,15 +177,15 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
           </Table>
         </InnerScrollContainer>
       </OuterScrollContainer>
-    )
+    );
+  } else {
+    return (
+      <Table ref={tableRef} aria-label="Data table" ouiaId={ouiaId} isExpandable={isExpandable} hasAnimations {...props}>
+        { activeHeadState || <DataViewTableHead columns={columns} ouiaId={ouiaId} hasResizableColumns={hasResizableColumns} isDraggable={isDraggable} /> }
+        { activeBodyState || renderedRows }
+      </Table>
+    );
   }
-  else
-  return (
-    <Table ref={tableRef} aria-label="Data table" ouiaId={ouiaId} isExpandable={isExpandable} hasAnimations {...props}>
-      { activeHeadState || <DataViewTableHead columns={columns} ouiaId={ouiaId} hasResizableColumns={hasResizableColumns} isDraggable={isDraggable} /> }
-      { activeBodyState || renderedRows }
-    </Table>
-  );
 };
 
 export default DataViewTableBasic;
