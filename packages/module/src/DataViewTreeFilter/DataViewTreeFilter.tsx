@@ -16,6 +16,64 @@ const useStyles = createUseStyles({
   }
 })
 
+// Generic helper to collect items from tree based on predicate
+const collectTreeItems = (
+  items: TreeViewDataItem[],
+  predicate: (item: TreeViewDataItem) => boolean,
+  leafOnly = false
+): TreeViewDataItem[] => {
+  const collected: TreeViewDataItem[] = [];
+
+  const collect = (item: TreeViewDataItem) => {
+    const isLeaf = !item.children || item.children.length === 0;
+
+    if (predicate(item) && (!leafOnly || isLeaf)) {
+      collected.push(item);
+    }
+
+    item.children?.forEach(child => collect(child));
+  };
+
+  items.forEach(item => collect(item));
+  return collected;
+};
+
+// Helper function to get all checked items (not just leaf nodes)
+const getAllCheckedItems = (items: TreeViewDataItem[]): TreeViewDataItem[] =>
+  collectTreeItems(items, item => item.checkProps?.checked === true, false);
+
+// Get all checked leaf items (returns array of names)
+const getAllCheckedLeafItems = (items: TreeViewDataItem[]): string[] =>
+  collectTreeItems(
+    items,
+    item => item.checkProps?.checked === true,
+    true
+  ).map(item => String(item.name));
+
+// Helper function to expand all nodes in the tree
+const expandAllNodes = (items: TreeViewDataItem[]): TreeViewDataItem[] =>
+  items.map(item => ({
+    ...item,
+    defaultExpanded: true,
+    children: item.children ? expandAllNodes(item.children) : undefined
+  }));
+
+// Helper function to set pre-selected items
+const setPreSelectedItems = (items: TreeViewDataItem[], selectedIds: string[]): TreeViewDataItem[] =>
+  items.map(item => {
+    const isSelected = selectedIds.includes(String(item.id));
+    const hasSelectedChildren = item.children?.some(child => selectedIds.includes(String(child.id))) ?? false;
+
+    return {
+      ...item,
+      checkProps: item.checkProps ? {
+        ...item.checkProps,
+        checked: isSelected || hasSelectedChildren
+      } : undefined,
+      children: item.children ? setPreSelectedItems(item.children, selectedIds) : undefined
+    };
+  });
+
 export interface DataViewTreeFilterProps {
   /** Unique key for the filter attribute */
   filterId: string;
@@ -58,62 +116,11 @@ export const DataViewTreeFilter: FC<DataViewTreeFilterProps> = ({
   const isInitialMount = useRef(true);
   const hasCalledInitialOnChange = useRef(false);
 
-  // Helper function to expand all nodes in the tree
-  const expandAllNodes = (items: TreeViewDataItem[]): TreeViewDataItem[] => {
-    return items.map(item => ({
-      ...item,
-      defaultExpanded: true,
-      children: item.children ? expandAllNodes(item.children) : undefined
-    }));
-  };
-
-  // Helper function to set pre-selected items
-  const setPreSelectedItems = (items: TreeViewDataItem[], selectedIds: string[]): TreeViewDataItem[] => {
-    return items.map(item => {
-      const isSelected = selectedIds.includes(String(item.id));
-      const hasSelectedChildren = item.children?.some(child => selectedIds.includes(String(child.id))) ?? false;
-
-      return {
-        ...item,
-        checkProps: item.checkProps ? {
-          ...item.checkProps,
-          checked: isSelected || hasSelectedChildren
-        } : undefined,
-        children: item.children ? setPreSelectedItems(item.children, selectedIds) : undefined
-      };
-    });
-  };
-
-  // Generic helper to collect items from tree based on predicate
-  const collectTreeItems = (
-    items: TreeViewDataItem[],
-    predicate: (item: TreeViewDataItem) => boolean,
-    leafOnly = false
-  ): TreeViewDataItem[] => {
-    const collected: TreeViewDataItem[] = [];
-
-    const collect = (item: TreeViewDataItem) => {
-      const isLeaf = !item.children || item.children.length === 0;
-
-      if (predicate(item) && (!leafOnly || isLeaf)) {
-        collected.push(item);
-      }
-
-      item.children?.forEach(child => collect(child));
-    };
-
-    items.forEach(item => collect(item));
-    return collected;
-  };
-
-  // Helper function to get all checked items (not just leaf nodes)
-  const getAllCheckedItems = (items: TreeViewDataItem[]): TreeViewDataItem[] => {
-    return collectTreeItems(items, item => item.checkProps?.checked === true, false);
-  };
-
   // Initialize tree data with defaultExpanded and defaultSelected (only on first mount)
   useEffect(() => {
-    if (!items) return;
+    if (!items) {
+      return;
+    }
 
     let initializedData = [...items];
 
@@ -160,21 +167,28 @@ export const DataViewTreeFilter: FC<DataViewTreeFilterProps> = ({
 
   // Sync tree checkboxes when value prop changes (when clearAllFilters is called)
   useEffect(() => {
-    if (value.length === 0 && treeData.length > 0) {
-      const currentCheckedItems = getAllCheckedLeafItems(treeData);
+    if (value.length === 0) {
+      setTreeData(currentTreeData => {
+        if (currentTreeData.length === 0) {
+          return currentTreeData;
+        }
 
-      // Only update if there are checked items that need to be unchecked
-      if (currentCheckedItems.length > 0) {
-        const uncheckRecursive = (items: TreeViewDataItem[]): TreeViewDataItem[] => {
-          return items.map(item => ({
-            ...item,
-            checkProps: item.checkProps ? { ...item.checkProps, checked: false } : undefined,
-            children: item.children ? uncheckRecursive(item.children) : undefined
-          }));
-        };
+        const currentCheckedItems = getAllCheckedLeafItems(currentTreeData);
 
-        setTreeData(uncheckRecursive(treeData));
-      }
+        // Only update if there are checked items that need to be unchecked
+        if (currentCheckedItems.length > 0) {
+          const uncheckRecursive = (items: TreeViewDataItem[]): TreeViewDataItem[] =>
+            items.map(item => ({
+              ...item,
+              checkProps: item.checkProps ? { ...item.checkProps, checked: false } : undefined,
+              children: item.children ? uncheckRecursive(item.children) : undefined
+            }));
+
+          return uncheckRecursive(currentTreeData);
+        }
+
+        return currentTreeData;
+      });
     }
   }, [value]);
 
@@ -202,7 +216,9 @@ export const DataViewTreeFilter: FC<DataViewTreeFilterProps> = ({
       }
       if (item.children) {
         const found = findItemByName(item.children, name);
-        if (found) return found;
+        if (found) {
+          return found;
+        }
       }
     }
     return null;
@@ -216,31 +232,32 @@ export const DataViewTreeFilter: FC<DataViewTreeFilterProps> = ({
       }
       if (item.children) {
         const found = findParentById(item.children, childId);
-        if (found) return found;
+        if (found) {
+          return found;
+        }
       }
     }
     return null;
   };
 
-  // Get all checked leaf items (returns array of names)
-  const getAllCheckedLeafItems = (items: TreeViewDataItem[]): string[] => {
-    return collectTreeItems(
-      items,
-      item => item.checkProps?.checked === true,
-      true
-    ).map(item => String(item.name));
-  };
-
   // Update parent checkbox states based on children (recursive)
   const onCheckParentHandle = (childId: string): void => {
     const parent = findParentById(treeData, childId);
-    if (!parent) return;
+    if (!parent) {
+      return;
+    }
 
     if (parent.checkProps) {
       const allChildrenChecked = areAllChildrenChecked(parent);
       const someChildrenChecked = areSomeChildrenChecked(parent);
 
-      parent.checkProps.checked = allChildrenChecked ? true : someChildrenChecked ? null : false;
+      if (allChildrenChecked) {
+        parent.checkProps.checked = true;
+      } else if (someChildrenChecked) {
+        parent.checkProps.checked = null;
+      } else {
+        parent.checkProps.checked = false;
+      }
     }
 
     if (parent.id) {
@@ -281,7 +298,9 @@ export const DataViewTreeFilter: FC<DataViewTreeFilterProps> = ({
   // Clear a specific filter by name (when label chip is removed)
   const onFilterSelectorClear = (itemName: string) => {
     const treeViewItem = findItemByName(treeData, itemName);
-    if (!treeViewItem) return;
+    if (!treeViewItem) {
+      return;
+    }
 
     onCheckHandle(treeViewItem, false);
     if (treeViewItem.id) {
@@ -291,13 +310,12 @@ export const DataViewTreeFilter: FC<DataViewTreeFilterProps> = ({
 
   // Uncheck all items in the tree
   const uncheckAllItems = () => {
-    const uncheckRecursive = (items: TreeViewDataItem[]): TreeViewDataItem[] => {
-      return items.map(item => ({
+    const uncheckRecursive = (items: TreeViewDataItem[]): TreeViewDataItem[] =>
+      items.map(item => ({
         ...item,
         checkProps: item.checkProps ? { ...item.checkProps, checked: false } : undefined,
         children: item.children ? uncheckRecursive(item.children) : undefined
       }));
-    };
 
     const updatedTreeData = uncheckRecursive(treeData);
     setTreeData(updatedTreeData);
@@ -329,19 +347,19 @@ export const DataViewTreeFilter: FC<DataViewTreeFilterProps> = ({
 
   return (
     <ToolbarFilter
-        key={filterId}
-        data-ouia-component-id={ouiaId}
-        labels={value.map(item => ({ key: item, node: item }))}
-        deleteLabel={(_, label) => {
-          const labelKey = typeof label === 'string' ? label : label.key;
-          onChange?.(undefined, value.filter(item => item !== labelKey));
-          onFilterSelectorClear(labelKey);
-        }}
-        deleteLabelGroup={uncheckAllItems}
-        categoryName={title}
-        showToolbarItem={showToolbarItem}>
-        {dropdown}
-      </ToolbarFilter>
+      key={filterId}
+      data-ouia-component-id={ouiaId}
+      labels={value.map(item => ({ key: item, node: item }))}
+      deleteLabel={(_, label) => {
+        const labelKey = typeof label === 'string' ? label : label.key;
+        onChange?.(undefined, value.filter(item => item !== labelKey));
+        onFilterSelectorClear(labelKey);
+      }}
+      deleteLabelGroup={uncheckAllItems}
+      categoryName={title}
+      showToolbarItem={showToolbarItem}>
+      {dropdown}
+    </ToolbarFilter>
   )
 }
 

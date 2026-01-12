@@ -41,18 +41,6 @@ const repositories: Repository[] = [
   { name: 'Server-009', workspace: 'Testing Workspace', tags: ['test', 'backend'], os: 'Fedora 38', lastSeen: '4 hours ago' }
 ];
 
-const treeOptions: TreeViewDataItem[] = [
-  {
-    name: 'Production Workspace',
-    id: 'workspace-prod',
-    checkProps: { 'aria-label': 'prod-workspace-check', checked: false }
-  },
-  {
-    name: 'Testing Workspace',
-    id: 'workspace-test',
-    checkProps: { 'aria-label': 'test-workspace-check', checked: false }
-  }
-];
 
 const osOptions: TreeViewDataItem[] = [
   {
@@ -231,9 +219,6 @@ const MyTable: React.FunctionComponent = () => {
               title="Operating System"
               items={osOptions}
               defaultExpanded={true}
-              onSelect={(selectedItems: TreeViewDataItem[]) => {
-                console.log('Selected OS items:', selectedItems);
-              }}
             />
             <DataViewTreeFilter
               filterId="tags"
@@ -241,9 +226,6 @@ const MyTable: React.FunctionComponent = () => {
               items={tagOptions}
               defaultExpanded={false}
               defaultSelected={['tag-web', 'tag-api']}
-              onSelect={(selectedItems: TreeViewDataItem[]) => {
-                console.log('Selected tag items:', selectedItems);
-              }}
             />
           </DataViewFilters>
         }
