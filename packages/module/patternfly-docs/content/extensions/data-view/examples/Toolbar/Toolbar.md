@@ -90,7 +90,7 @@ This example uses the URL to persist the pagination state.
 ## Selection
 To allow users to select data records inside the data view, add selection support that displays a row's selection state.
 
-The data view toolbar can display a bulk selection component by using the predefined [component group extension bulk select](/extensions/component-groups/bulk-select) component.
+The data view toolbar can display a bulk selection component by using the predefined [component group extension bulk select](/component-groups/controls/bulk-select) component.
 
 ### Selection state
 
