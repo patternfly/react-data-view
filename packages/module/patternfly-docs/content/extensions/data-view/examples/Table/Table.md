@@ -161,7 +161,7 @@ To indicate that data is loading, you can display a loading state.
 
 The loading state will be displayed when the data view `activeState` value is `loading`.
 
-You can create your loading state by passing either the [component groups extension's skeleton table](/extensions/component-groups/skeleton-table) or a customized [PatternFly empty state](/components/empty-state) to the `loading` key of `headStates` or `bodyStates`.
+You can create your loading state by passing either the [component groups extension's skeleton table](/component-groups/status-and-state-indicators/skeleton-table) or a customized [PatternFly empty state](/components/empty-state) to the `loading` key of `headStates` or `bodyStates`.
 
 ```js file="./DataViewTableLoadingExample.tsx"
 
