@@ -44,7 +44,7 @@ You can further customize toolbar interactions by referring to the additional do
 ```
 
 ## Toolbar actions
-To support additional user needs, you can pass relevant actions to the toolbar via `actions`. Add standard PatternFly actions (like buttons) or choose predefined [responsive actions](/extensions/component-groups/responsive-actions) which ensure the responsive behavior of multiple actions in 1 toolbar.
+To support additional user needs, you can pass relevant actions to the toolbar via `actions`. Add standard PatternFly actions (like buttons) or choose predefined [responsive actions](/component-groups/controls/responsive-actions) which ensure the responsive behavior of multiple actions in 1 toolbar.
 
 ### Actions example
 
