@@ -62,7 +62,7 @@ export const DataViewFilters = <T extends object>({
 
   useEffect(() => {
     filterItems.length > 0 && setActiveAttributeMenu(filterItems[0].title);
-  }, [ filterItems ]);
+  }, [ filterItems.length ]);
 
   const handleClickOutside = (event: MouseEvent) => 
     isAttributeMenuOpen &&

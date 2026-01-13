@@ -4,6 +4,9 @@ export { default as InternalContext } from './InternalContext';
 export * from './InternalContext';
 export * from './Hooks';
 
+export { default as DataViewTreeFilter } from './DataViewTreeFilter';
+export * from './DataViewTreeFilter';
+
 export { default as DataViewToolbar } from './DataViewToolbar';
 export * from './DataViewToolbar';
 
