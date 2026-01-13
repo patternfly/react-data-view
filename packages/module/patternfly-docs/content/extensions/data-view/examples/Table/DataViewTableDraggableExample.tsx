@@ -40,7 +40,6 @@ const rowActions = [
   }
 ];
 
-// you can also pass props to Tr by returning { row: DataViewTd[], props: TrProps } }
 const rows: DataViewTr[] = repositories.map(({ id, name, branches, prs, workspaces, lastCommit }) => [
   { id, cell: workspaces, props: { favorites: { isFavorited: true } } },
   { cell: <Button href='#' variant='link' isInline>{name}</Button> },
@@ -53,15 +52,21 @@ const rows: DataViewTr[] = repositories.map(({ id, name, branches, prs, workspac
 
 const columns: DataViewTh[] = [
   null,
-  'Repositories', 
-  { cell: <>Branches<ExclamationCircleIcon className='pf-v6-u-ml-sm' color="var(--pf-t--global--color--status--danger--default)"/></> }, 
-  'Pull requests', 
-  { cell: 'Workspaces', props: { info: { tooltip: 'More information' } } }, 
+  'Repositories',
+  { cell: <>Branches<ExclamationCircleIcon className='pf-v6-u-ml-sm' color="var(--pf-t--global--color--status--danger--default)"/></> },
+  'Pull requests',
+  { cell: 'Workspaces', props: { info: { tooltip: 'More information' } } },
   { cell: 'Last commit', props: { sort: { sortBy: {}, columnIndex: 4 } } },
 ];
 
-const ouiaId = 'TableExample';
+const ouiaId = 'TableDraggableExample';
 
-export const BasicExample: FunctionComponent = () => (
-  <DataViewTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={rows} isExpandable={true}/>
+export const DraggableExample: FunctionComponent = () => (
+  <DataViewTable
+    aria-label='Draggable repositories table'
+    ouiaId={ouiaId}
+    columns={columns}
+    rows={rows}
+    isDraggable
+  />
 );

@@ -1,8 +1,10 @@
 import { FC, ReactNode } from 'react';
 import { TdProps, ThProps, TrProps, InnerScrollContainer } from '@patternfly/react-table';
 import { DataViewTableTree, DataViewTableTreeProps } from '../DataViewTableTree';
-import { DataViewTableBasic, DataViewTableBasicProps } from '../DataViewTableBasic';
+import { DataViewTableBasic, DataViewTableBasicProps, ExpandableContent } from '../DataViewTableBasic';
 import { DataViewThResizableProps } from '../DataViewTh/DataViewTh';
+
+export type { ExpandableContent };
 
 // Table head typings
 export type DataViewTh =
