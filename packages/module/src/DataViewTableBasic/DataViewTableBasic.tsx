@@ -40,9 +40,9 @@ export interface DataViewTableBasicProps extends Omit<TableProps, 'onSelect' | '
   hasResizableColumns?: boolean;
   /** Toggles expandable */
   isExpandable?: boolean;
-  /** Toogles sticky colums and headder */
+  /** Toggles sticky columns and header */
   isSticky?: boolean;
-  /** Toogles draggable rows */
+  /** Toggles draggable rows */
   isDraggable?: boolean;
 }
 

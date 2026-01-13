@@ -67,9 +67,9 @@ The `ExpandableContent` interface is defined as:
 ```typescript
 interface ExpandableContent {
   /** The ID of the row containing the expandable cell (must match the id property in the row data) */
-  row_id: number;
+  rowId: number;
   /** The column index (0-based) that should be expandable */
-  column_id: number;
+  columnId: number;
   /** The content to display when the cell is expanded */
   content: ReactNode;
 }
