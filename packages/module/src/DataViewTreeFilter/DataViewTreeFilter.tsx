@@ -74,6 +74,14 @@ const setPreSelectedItems = (items: TreeViewDataItem[], selectedIds: string[]): 
     };
   });
 
+// Helper function to uncheck all items recursively
+const uncheckRecursive = (items: TreeViewDataItem[]): TreeViewDataItem[] =>
+  items.map(item => ({
+    ...item,
+    checkProps: item.checkProps ? { ...item.checkProps, checked: false } : undefined,
+    children: item.children ? uncheckRecursive(item.children) : undefined
+  }));
+
 export interface DataViewTreeFilterProps {
   /** Unique key for the filter attribute */
   filterId: string;
@@ -177,13 +185,6 @@ export const DataViewTreeFilter: FC<DataViewTreeFilterProps> = ({
 
         // Only update if there are checked items that need to be unchecked
         if (currentCheckedItems.length > 0) {
-          const uncheckRecursive = (items: TreeViewDataItem[]): TreeViewDataItem[] =>
-            items.map(item => ({
-              ...item,
-              checkProps: item.checkProps ? { ...item.checkProps, checked: false } : undefined,
-              children: item.children ? uncheckRecursive(item.children) : undefined
-            }));
-
           return uncheckRecursive(currentTreeData);
         }
 
@@ -310,13 +311,6 @@ export const DataViewTreeFilter: FC<DataViewTreeFilterProps> = ({
 
   // Uncheck all items in the tree
   const uncheckAllItems = () => {
-    const uncheckRecursive = (items: TreeViewDataItem[]): TreeViewDataItem[] =>
-      items.map(item => ({
-        ...item,
-        checkProps: item.checkProps ? { ...item.checkProps, checked: false } : undefined,
-        children: item.children ? uncheckRecursive(item.children) : undefined
-      }));
-
     const updatedTreeData = uncheckRecursive(treeData);
     setTreeData(updatedTreeData);
     onChange?.(undefined, []);
