@@ -9,12 +9,10 @@ import {
   Td,
   Tr,
 } from '@patternfly/react-table';
-import { GripVerticalIcon } from '@patternfly/react-icons';
 import { useInternalContext } from '../InternalContext';
 import { DataViewTableHead } from '../DataViewTableHead';
 import { DataViewTh, DataViewTr, isDataViewTdObject, isDataViewTrObject } from '../DataViewTable';
 import { DataViewState } from '../DataView/DataView';
-import { useDraggableRows } from './hooks';
 
 export interface ExpandableContent {
   rowId: number;
@@ -42,8 +40,6 @@ export interface DataViewTableBasicProps extends Omit<TableProps, 'onSelect' | '
   isExpandable?: boolean;
   /** Toggles sticky columns and header */
   isSticky?: boolean;
-  /** Toggles draggable rows */
-  isDraggable?: boolean;
 }
 
 export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
@@ -56,7 +52,6 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
   hasResizableColumns,
   isExpandable = false,
   isSticky = false,
-  isDraggable = false,
   ...props
 }: DataViewTableBasicProps) => {
   const { selection, activeState, isSelectable } = useInternalContext();
@@ -70,15 +65,7 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
 
   const tableRef = useRef<HTMLTableElement>(null);
 
-  const {
-    rowIds,
-    onDragStart,
-    onDragEnd,
-    onDrop,
-    onDropTbody,
-    onDragOver,
-    onDragLeave
-  } = useDraggableRows({ rows, tableRef });
+  const needsSeparateTbody = isExpandable;
 
   const renderedRows = useMemo(() => rows.map((row, rowIndex) => {
     const rowIsObject = isDataViewTrObject(row);
@@ -95,85 +82,84 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
       (content) => content.rowId === rowId
     ) : [];
 
-    return (
-      <Tbody key={rowIndex} isExpanded={isRowExpanded} onDragOver={onDragOver} onDrop={onDropTbody} onDragLeave={onDragLeave}>
-        <Tr id={rowIds[rowIndex]} ouiaId={`${ouiaId}-tr-${rowIndex}`} {...(rowIsObject && row?.props)} isContentExpanded={isRowExpanded} isControlRow draggable={isDraggable} onDrop={onDrop} onDragEnd={onDragEnd} onDragStart={onDragStart}>
-          {isSelectable && (
+    const rowContent = (
+      <Tr key={needsSeparateTbody ? undefined : rowIndex} ouiaId={`${ouiaId}-tr-${rowIndex}`} {...(rowIsObject && row?.props)} isContentExpanded={isRowExpanded} isControlRow>
+        {isSelectable && (
+          <Td
+            key={`select-${rowIndex}`}
+            select={{
+              rowIndex,
+              onSelect: (_event, isSelecting) => {
+                onSelect?.(isSelecting, rowIsObject ? row : [ row ]);
+              },
+              isSelected: isSelected?.(row) || false,
+              isDisabled: isSelectDisabled?.(row) || false,
+            }}
+          />
+        )}
+        {(rowIsObject ? row.row : row).map((cell, colIndex) => {
+          const cellIsObject = isDataViewTdObject(cell);
+          const cellExpandableContent = isExpandable ? expandedRows?.find(
+            (content) => content.rowId === rowId && content.columnId === colIndex
+          ) : undefined;
+          return (
             <Td
-              key={`select-${rowIndex}`}
-              select={{
-                rowIndex,
-                onSelect: (_event, isSelecting) => {
-                  onSelect?.(isSelecting, rowIsObject ? row : [ row ]);
-                },
-                isSelected: isSelected?.(row) || false,
-                isDisabled: isSelectDisabled?.(row) || false,
-              }}
-            />
-          )}
-          {isDraggable && (
-            <Td
-              key={`drag-${rowIndex}`}
-              draggableRow={{
-                id: `draggable-row-${rowIds[rowIndex]}`
-              }}
+              key={colIndex}
+              {...(cellIsObject && (cell?.props ?? {}))}
+              {...(cellExpandableContent != null && {
+                compoundExpand: {
+                  isExpanded: isRowExpanded && expandedColIndex === colIndex,
+                  expandId: `expandable-${rowIndex}`,
+                  onToggle: () => {
+                    setExpandedRowsState(prev => {
+                      const isSameColumn = expandedColIndex === colIndex;
+                      const wasExpanded = prev[rowIndex];
+                      return { ...prev, [rowIndex]: isSameColumn ? !wasExpanded : true };
+                    });
+                    setExpandedColumnIndex(prev => ({ ...prev, [rowIndex]: colIndex }));
+                  },
+                  rowIndex,
+                  columnIndex: colIndex
+                }
+              })}
+              data-ouia-component-id={`${ouiaId}-td-${rowIndex}-${colIndex}`}
             >
-              <GripVerticalIcon />
+              {cellIsObject ? cell.cell : cell}
             </Td>
-          )}
-          {(rowIsObject ? row.row : row).map((cell, colIndex) => {
-            const cellIsObject = isDataViewTdObject(cell);
-            const cellExpandableContent = isExpandable ? expandedRows?.find(
-              (content) => content.rowId === rowId && content.columnId === colIndex
-            ) : undefined;
-            return (
-              <Td
-                key={colIndex}
-                {...(cellIsObject && (cell?.props ?? {}))}
-                {...(cellExpandableContent != null && {
-                  compoundExpand: {
-                    isExpanded: isRowExpanded && expandedColIndex === colIndex,
-                    expandId: `expandable-${rowIndex}`,
-                    onToggle: () => {
-                      console.log(`toggled compound expand for row ${rowIndex}, column ${colIndex}`); // eslint-disable-line no-console
-                      setExpandedRowsState(prev => {
-                        const isSameColumn = expandedColIndex === colIndex;
-                        const wasExpanded = prev[rowIndex];
-                        return { ...prev, [rowIndex]: isSameColumn ? !wasExpanded : true };
-                      });
-                      setExpandedColumnIndex(prev => ({ ...prev, [rowIndex]: colIndex }));
-                    },
-                    rowIndex,
-                    columnIndex: colIndex
-                  }
-                })}
-                data-ouia-component-id={`${ouiaId}-td-${rowIndex}-${colIndex}`}
-              >
-                {cellIsObject ? cell.cell : cell}
-              </Td>
-            );
-          })}
-        </Tr>
-        {rowExpandableContents?.map((expandableContent) => (
-          <Tr key={`expand-${rowIndex}-${expandableContent.columnId}`} isExpanded={isRowExpanded && expandedColIndex === expandableContent.columnId}>
-            <Td colSpan={rowData.length + (isSelectable ? 1 : 0) + (isDraggable ? 1 : 0)} data-expanded-column-index={expandableContent.columnId}>
-              <ExpandableRowContent>
-                {expandableContent.content}
-              </ExpandableRowContent>
-            </Td>
-          </Tr>
-        ))}
-      </Tbody>
+          );
+        })}
+      </Tr>
     );
-  }), [ rows, isSelectable, isSelected, isSelectDisabled, onSelect, ouiaId, expandedRowsState, expandedColumnIndex, expandedRows, rowIds, isDraggable, onDragOver, onDropTbody, onDragLeave, onDragEnd, onDragStart, isExpandable, onDrop ]);
+
+    if (needsSeparateTbody) {
+      return (
+        <Tbody key={rowIndex} isExpanded={isRowExpanded}>
+          {rowContent}
+          {rowExpandableContents?.map((expandableContent) => (
+            <Tr key={`expand-${rowIndex}-${expandableContent.columnId}`} isExpanded={isRowExpanded && expandedColIndex === expandableContent.columnId}>
+              <Td colSpan={rowData.length + (isSelectable ? 1 : 0)} data-expanded-column-index={expandableContent.columnId}>
+                <ExpandableRowContent>
+                  {expandableContent.content}
+                </ExpandableRowContent>
+              </Td>
+            </Tr>
+          ))}
+        </Tbody>
+      );
+    } else {
+      return rowContent;
+    }
+  }), [ rows, isSelectable, isSelected, isSelectDisabled, onSelect, ouiaId, expandedRowsState, expandedColumnIndex, expandedRows, isExpandable, needsSeparateTbody ]);
+
+  const bodyContent = activeBodyState || (needsSeparateTbody ? renderedRows : <Tbody>{renderedRows}</Tbody>);
 
   if (isSticky) {
     return (
       <OuterScrollContainer>
         <InnerScrollContainer>
           <Table ref={tableRef} aria-label="Data table" ouiaId={ouiaId} isExpandable={isExpandable} hasAnimations {...props} isStickyHeader >
-            { activeHeadState || <DataViewTableHead columns={columns} ouiaId={ouiaId} hasResizableColumns={hasResizableColumns} isDraggable={isDraggable} /> }
-            { activeBodyState || renderedRows }
+            { activeHeadState || <DataViewTableHead columns={columns} ouiaId={ouiaId} hasResizableColumns={hasResizableColumns} /> }
+            { bodyContent }
           </Table>
         </InnerScrollContainer>
       </OuterScrollContainer>
@@ -181,8 +167,8 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
   } else {
     return (
       <Table ref={tableRef} aria-label="Data table" ouiaId={ouiaId} isExpandable={isExpandable} hasAnimations {...props}>
-        { activeHeadState || <DataViewTableHead columns={columns} ouiaId={ouiaId} hasResizableColumns={hasResizableColumns} isDraggable={isDraggable} /> }
-        { activeBodyState || renderedRows }
+        { activeHeadState || <DataViewTableHead columns={columns} ouiaId={ouiaId} hasResizableColumns={hasResizableColumns} /> }
+        { bodyContent }
       </Table>
     );
   }

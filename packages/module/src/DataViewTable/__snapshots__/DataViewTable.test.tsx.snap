@@ -71,8 +71,6 @@ exports[`DataViewTable component should render a basic table correctly 1`] = `
         data-ouia-component-id="TableExample-tr-0"
         data-ouia-component-type="PF6/TableRow"
         data-ouia-safe="true"
-        draggable="false"
-        id="row-0"
       >
         <td
           class="pf-v6-c-table__td"
@@ -110,18 +108,11 @@ exports[`DataViewTable component should render a basic table correctly 1`] = `
           Timestamp one
         </td>
       </tr>
-    </tbody>
-    <tbody
-      class="pf-v6-c-table__tbody"
-      role="rowgroup"
-    >
       <tr
         class="pf-v6-c-table__tr pf-v6-c-table__control-row"
         data-ouia-component-id="TableExample-tr-1"
         data-ouia-component-type="PF6/TableRow"
         data-ouia-safe="true"
-        draggable="false"
-        id="row-1"
       >
         <td
           class="pf-v6-c-table__td"
@@ -159,18 +150,11 @@ exports[`DataViewTable component should render a basic table correctly 1`] = `
           Timestamp two
         </td>
       </tr>
-    </tbody>
-    <tbody
-      class="pf-v6-c-table__tbody"
-      role="rowgroup"
-    >
       <tr
         class="pf-v6-c-table__tr pf-v6-c-table__control-row"
         data-ouia-component-id="TableExample-tr-2"
         data-ouia-component-type="PF6/TableRow"
         data-ouia-safe="true"
-        draggable="false"
-        id="row-2"
       >
         <td
           class="pf-v6-c-table__td"
@@ -208,18 +192,11 @@ exports[`DataViewTable component should render a basic table correctly 1`] = `
           Timestamp three
         </td>
       </tr>
-    </tbody>
-    <tbody
-      class="pf-v6-c-table__tbody"
-      role="rowgroup"
-    >
       <tr
         class="pf-v6-c-table__tr pf-v6-c-table__control-row"
         data-ouia-component-id="TableExample-tr-3"
         data-ouia-component-type="PF6/TableRow"
         data-ouia-safe="true"
-        draggable="false"
-        id="row-3"
       >
         <td
           class="pf-v6-c-table__td"
@@ -257,18 +234,11 @@ exports[`DataViewTable component should render a basic table correctly 1`] = `
           Timestamp four
         </td>
       </tr>
-    </tbody>
-    <tbody
-      class="pf-v6-c-table__tbody"
-      role="rowgroup"
-    >
       <tr
         class="pf-v6-c-table__tr pf-v6-c-table__control-row"
         data-ouia-component-id="TableExample-tr-4"
         data-ouia-component-type="PF6/TableRow"
         data-ouia-safe="true"
-        draggable="false"
-        id="row-4"
       >
         <td
           class="pf-v6-c-table__td"
@@ -306,18 +276,11 @@ exports[`DataViewTable component should render a basic table correctly 1`] = `
           Timestamp five
         </td>
       </tr>
-    </tbody>
-    <tbody
-      class="pf-v6-c-table__tbody"
-      role="rowgroup"
-    >
       <tr
         class="pf-v6-c-table__tr pf-v6-c-table__control-row"
         data-ouia-component-id="TableExample-tr-5"
         data-ouia-component-type="PF6/TableRow"
         data-ouia-safe="true"
-        draggable="false"
-        id="row-5"
       >
         <td
           class="pf-v6-c-table__td"

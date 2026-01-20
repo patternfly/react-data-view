@@ -14,8 +14,8 @@ module.exports = {
   '/extensions/data-view/table/react': {
     id: "Table",
     title: "Data view table",
-    toc: [{"text":"Configuring rows and columns"},[{"text":"Table example"}],{"text":"Expandable rows"},[{"text":"Expandable rows example"}],{"text":"Sticky header and columns"},[{"text":"Sticky header and columns example"}],{"text":"Draggable rows"},[{"text":"Draggable rows example"},{"text":"Interactive example"},{"text":"Resizable columns"}],{"text":"Tree table"},[{"text":"Tree table example"}],{"text":"Sorting"},[{"text":"Sorting example"},{"text":"Sorting state"}],{"text":"States"},[{"text":"Empty"},{"text":"Error"},{"text":"Loading"}]],
-    examples: ["Table example","Expandable rows example","Sticky header and columns example","Draggable rows example","Interactive example","Resizable columns","Tree table example","Sorting example","Empty","Error","Loading"],
+    toc: [{"text":"Configuring rows and columns"},[{"text":"Table example"}],{"text":"Expandable rows"},[{"text":"Expandable rows example"}],{"text":"Sticky header and columns"},[{"text":"Sticky header and columns example"},{"text":"Interactive example"},{"text":"Resizable columns"}],{"text":"Tree table"},[{"text":"Tree table example"}],{"text":"Sorting"},[{"text":"Sorting example"},{"text":"Sorting state"}],{"text":"States"},[{"text":"Empty"},{"text":"Error"},{"text":"Loading"}]],
+    examples: ["Table example","Expandable rows example","Sticky header and columns example","Interactive example","Resizable columns","Tree table example","Sorting example","Empty","Error","Loading"],
     section: "extensions",
     subsection: "Data view",
     source: "react",

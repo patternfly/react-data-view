@@ -1,5 +1,6 @@
 import { FunctionComponent, useState } from 'react';
-import { DataViewTable, DataViewTr, DataViewTh, ExpandableContent } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
+import { DataViewTable, DataViewTr, DataViewTh } from '@patternfly/react-data-view/dist/dynamic/DataViewTable';
+import { ExpandableContent } from '@patternfly/react-data-view/dist/dynamic/DataViewTableBasic';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { Button, Toolbar, ToolbarContent, ToolbarItem, Switch } from '@patternfly/react-core';
 
@@ -75,7 +76,6 @@ const ouiaId = 'TableInteractiveExample';
 export const InteractiveExample: FunctionComponent = () => {
   const [isExpandable, setIsExpandable] = useState(true);
   const [isSticky, setIsSticky] = useState(true);
-  const [isDraggable, setIsDraggable] = useState(true);
 
   // Generate rows based on current settings
   const rows: DataViewTr[] = repositories.map(({ id, name, branches, prs, workspaces, lastCommit, contributors, stars, forks }) => [
@@ -130,15 +130,6 @@ export const InteractiveExample: FunctionComponent = () => {
               aria-label="Toggle sticky header and columns"
             />
           </ToolbarItem>
-          <ToolbarItem>
-            <Switch
-              id="draggable-switch"
-              label="Draggable rows"
-              isChecked={isDraggable}
-              onChange={(_event, checked) => setIsDraggable(checked)}
-              aria-label="Toggle draggable rows"
-            />
-          </ToolbarItem>
         </ToolbarContent>
       </Toolbar>
       <div style={{ height: '400px', overflow: 'auto' }}>
@@ -150,7 +141,6 @@ export const InteractiveExample: FunctionComponent = () => {
           expandedRows={isExpandable ? expandableContents : undefined}
           isExpandable={isExpandable}
           isSticky={isSticky}
-          isDraggable={isDraggable}
         />
       </div>
     </>

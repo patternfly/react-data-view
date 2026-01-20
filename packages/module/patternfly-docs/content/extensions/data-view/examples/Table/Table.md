@@ -111,27 +111,9 @@ When sticky headers and columns are enabled:
 
 ```
 
-## Draggable rows
-
-To enable drag-and-drop functionality for table rows, set the `isDraggable` prop to `true` on the `<DataViewTable>` component. This allows users to reorder rows by dragging them to a new position.
-
-When draggable rows are enabled:
-- A drag handle icon appears at the beginning of each row
-- Users can click and drag the handle or anywhere on the row to reorder rows
-- Visual feedback is provided during the drag operation with a ghost row effect
-- The new order is maintained after the drop
-
-The draggable functionality is built using the `useDraggableRows` hook internally, which manages the drag-and-drop state and DOM manipulation.
-
-### Draggable rows example
-
-```js file="./DataViewTableDraggableExample.tsx"
-
-```
-
 ### Interactive example
 - Interactive example show how the different composable options work together.
-- By toggling the toggles you can switch between them and observe the bahaviour
+- By toggling the toggles you can switch between them and observe the behaviour
 
 ```js file="./DataViewTableInteractiveExample.tsx"
 

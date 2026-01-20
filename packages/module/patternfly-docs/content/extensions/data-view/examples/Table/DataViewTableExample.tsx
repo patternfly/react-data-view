@@ -63,5 +63,5 @@ const columns: DataViewTh[] = [
 const ouiaId = 'TableExample';
 
 export const BasicExample: FunctionComponent = () => (
-  <DataViewTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={rows} isExpandable={true}/>
+  <DataViewTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={rows} />
 );
