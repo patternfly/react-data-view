@@ -218,7 +218,7 @@ const MyTable: React.FunctionComponent = () => {
               filterId="os"
               title="Operating System"
               items={osOptions}
-              defaultExpanded={true}
+              defaultExpanded={false}
             />
             <DataViewTreeFilter
               filterId="tags"

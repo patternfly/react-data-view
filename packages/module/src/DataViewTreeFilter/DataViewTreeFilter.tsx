@@ -156,22 +156,23 @@ export const DataViewTreeFilter: FC<DataViewTreeFilterProps> = ({
 
       // Only call if there are actually selected values
       if (selectedValues.length > 0) {
-        // Defer the callbacks to avoid updating parent during render
-        queueMicrotask(() => {
-          if (onChange) {
-            onChange(undefined, selectedValues);
-          }
+        // Calculate both values synchronously before calling callbacks
+        const selectedItems = getAllCheckedItems(treeData);
 
-          if (onSelect) {
-            const selectedItems = getAllCheckedItems(treeData);
-            onSelect(selectedItems);
-          }
-        });
+        // useEffect already runs after render, so this is safe
+        if (onChange) {
+          onChange(undefined, selectedValues);
+        }
+
+        if (onSelect) {
+          onSelect(selectedItems);
+        }
 
         hasCalledInitialOnChange.current = true;
       }
     }
-  }, [treeData]);
+  }, [treeData, onChange, onSelect, defaultSelected.length]);
+
 
   // Sync tree checkboxes when value prop changes (when clearAllFilters is called)
   useEffect(() => {
