@@ -4,7 +4,7 @@ exports[`DataViewTable component should render a basic table correctly 1`] = `
 <div>
   <table
     aria-label="Repositories table"
-    class="pf-v6-c-table pf-m-grid-md"
+    class="pf-v6-c-table pf-m-grid-md pf-m-animate-expand"
     data-ouia-component-id="TableExample"
     data-ouia-component-type="PF6/Table"
     data-ouia-safe="true"
@@ -67,7 +67,7 @@ exports[`DataViewTable component should render a basic table correctly 1`] = `
       role="rowgroup"
     >
       <tr
-        class="pf-v6-c-table__tr"
+        class="pf-v6-c-table__tr pf-v6-c-table__control-row"
         data-ouia-component-id="TableExample-tr-0"
         data-ouia-component-type="PF6/TableRow"
         data-ouia-safe="true"
@@ -109,7 +109,7 @@ exports[`DataViewTable component should render a basic table correctly 1`] = `
         </td>
       </tr>
       <tr
-        class="pf-v6-c-table__tr"
+        class="pf-v6-c-table__tr pf-v6-c-table__control-row"
         data-ouia-component-id="TableExample-tr-1"
         data-ouia-component-type="PF6/TableRow"
         data-ouia-safe="true"
@@ -151,7 +151,7 @@ exports[`DataViewTable component should render a basic table correctly 1`] = `
         </td>
       </tr>
       <tr
-        class="pf-v6-c-table__tr"
+        class="pf-v6-c-table__tr pf-v6-c-table__control-row"
         data-ouia-component-id="TableExample-tr-2"
         data-ouia-component-type="PF6/TableRow"
         data-ouia-safe="true"
@@ -193,7 +193,7 @@ exports[`DataViewTable component should render a basic table correctly 1`] = `
         </td>
       </tr>
       <tr
-        class="pf-v6-c-table__tr"
+        class="pf-v6-c-table__tr pf-v6-c-table__control-row"
         data-ouia-component-id="TableExample-tr-3"
         data-ouia-component-type="PF6/TableRow"
         data-ouia-safe="true"
@@ -235,7 +235,7 @@ exports[`DataViewTable component should render a basic table correctly 1`] = `
         </td>
       </tr>
       <tr
-        class="pf-v6-c-table__tr"
+        class="pf-v6-c-table__tr pf-v6-c-table__control-row"
         data-ouia-component-id="TableExample-tr-4"
         data-ouia-component-type="PF6/TableRow"
         data-ouia-safe="true"
@@ -277,7 +277,7 @@ exports[`DataViewTable component should render a basic table correctly 1`] = `
         </td>
       </tr>
       <tr
-        class="pf-v6-c-table__tr"
+        class="pf-v6-c-table__tr pf-v6-c-table__control-row"
         data-ouia-component-id="TableExample-tr-5"
         data-ouia-component-type="PF6/TableRow"
         data-ouia-safe="true"

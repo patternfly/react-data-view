@@ -58,6 +58,67 @@ If you want to have all expandable nodes open on initial load pass the `expandAl
 
 ```
 
+## Expandable rows
+
+To add expandable content to table cells, pass an array of `ExpandableContent` objects to the `expandedRows` prop of the `<DataViewTable>` component. Each expandable content object defines which cell can be expanded and what content to display when expanded.
+
+The `ExpandableContent` interface is defined as:
+
+```typescript
+interface ExpandableContent {
+  /** The ID of the row containing the expandable cell (must match the id property in the row data) */
+  rowId: number;
+  /** The column index (0-based) that should be expandable */
+  columnId: number;
+  /** The content to display when the cell is expanded */
+  content: ReactNode;
+}
+```
+
+When a cell has expandable content:
+- A compound expand toggle button appears in the cell
+- Clicking the toggle expands the row to show the additional content below
+- Only one expanded cell is shown per row at a time
+- Clicking another expandable cell in the same row switches the expanded content
+
+### Expandable rows example
+
+```js file="./DataViewTableExpandableExample.tsx"
+
+```
+
+## Sticky header and columns
+
+To enable sticky headers and columns, set the `isSticky` prop to `true` on the `<DataViewTable>` component. This keeps the table header and designated columns visible when scrolling.
+
+To make specific columns sticky, add the `isStickyColumn` property to the column's `props` in the column definition:
+
+```typescript
+const columns: DataViewTh[] = [
+  { cell: 'Column Name', props: { isStickyColumn: true } }
+];
+```
+
+When sticky headers and columns are enabled:
+- The table header remains visible when scrolling vertically
+- Columns marked with `isStickyColumn: true` remain visible when scrolling horizontally
+- The table is wrapped in `OuterScrollContainer` and `InnerScrollContainer` components to enable sticky behavior
+- Sticky columns can have additional styling like borders using `hasRightBorder` or `hasLeftBorder` props
+
+### Sticky header and columns example
+
+```js file="./DataViewTableStickyExample.tsx"
+
+```
+
+### Interactive example
+- Interactive example show how the different composable options work together.
+- By toggling the toggles you can switch between them and observe the behaviour
+
+```js file="./DataViewTableInteractiveExample.tsx"
+
+```
+
 ### Resizable columns
 
 To allow a column to resize, add `isResizable` to the `DataViewTable` element, and pass `resizableProps` to each applicable header cell. The `resizableProps` object consists of the following fields:
