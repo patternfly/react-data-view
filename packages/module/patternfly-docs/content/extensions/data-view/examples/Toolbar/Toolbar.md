@@ -12,7 +12,7 @@ source: react
 # If you use typescript, the name of the interface to display props for
 # These are found through the sourceProps function provided in patternfly-docs.source.js
 sortValue: 2
-propComponents: ['DataViewToolbar', 'DataViewFilters', 'DataViewTextFilter', 'DataViewCheckboxFilter']
+propComponents: ['DataViewToolbar', 'DataViewFilters', 'DataViewTextFilter', 'DataViewCheckboxFilter', 'DataViewTreeFilter']
 sourceLink: https://github.com/patternfly/react-data-view/blob/main/packages/module/patternfly-docs/content/extensions/data-view/examples/Toolbar/Toolbar.md
 ---
 import { useMemo, useState, useEffect } from 'react';
@@ -26,6 +26,7 @@ import { DataViewTable } from '@patternfly/react-data-view/dist/dynamic/DataView
 import { DataViewFilters } from '@patternfly/react-data-view/dist/dynamic/DataViewFilters';
 import { DataViewTextFilter } from '@patternfly/react-data-view/dist/dynamic/DataViewTextFilter';
 import { DataViewCheckboxFilter } from '@patternfly/react-data-view/dist/dynamic/DataViewCheckboxFilter';
+import { DataViewTreeFilter } from '@patternfly/react-data-view/dist/dynamic/DataViewTreeFilter';
 
 The **data view toolbar** component renders a default opinionated data view toolbar above or below the data section. 
 
@@ -143,6 +144,12 @@ This example demonstrates the setup and usage of filters within the data view. I
 
 ```
 
+### Tree filter example
+This example demonstrates the usage of a tree filter with hierarchical data. The tree filter allows users to select items from a nested structure, making it ideal for categorized or grouped filtering options.
+
+```js file="./TreeFilterExample.tsx"
+
+```
 
 ## All/selected data switch
 All/selected data switch allows users to toggle between displaying the entire table (All) and only the rows they have selected (Selected). If the user deselects the last selected row, the filter automatically switches back to All, displaying all table rows again. Until at least one row is selected, a tooltip with guidance is displayed, and the Selected button does not perform any action. The Selected button is intentionally not disabled for accessibility reasons but instead has `aria-disabled` set.
