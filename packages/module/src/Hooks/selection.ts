@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 
-export interface UseDataViewSelectionProps {
+export interface UseDataViewSelectionProps<T = any> {
   /** Function to compare items when checking if item is selected */
-  matchOption: (item: any, another: any) => boolean;
+  matchOption: (item: T, another: T) => boolean;
   /** Array of initially selected entries */
-  initialSelected?: (any)[];
+  initialSelected?: (T)[];
 }
 
-export const useDataViewSelection = (props?: UseDataViewSelectionProps) => {
-  const [ selected, setSelected ] = useState<any[]>(props?.initialSelected ?? []);
+export const useDataViewSelection = <T = any>(props?: UseDataViewSelectionProps<T>) => {
+  const [ selected, setSelected ] = useState<T[]>(props?.initialSelected ?? []);
   const matchOption = props?.matchOption ? props.matchOption : (option, another) => (option === another);
 
-  const onSelect = (isSelecting: boolean, items?: any[] | any) => {
+  const onSelect = (isSelecting: boolean, items?: T[] | T) => {
     isSelecting && items ?
       setSelected(prev => {
         const newSelectedItems = [ ...prev ];
@@ -22,9 +22,9 @@ export const useDataViewSelection = (props?: UseDataViewSelectionProps) => {
       : setSelected(items ? prev => prev.filter(prevSelected => !(Array.isArray(items) ? items : [ items ]).some(item => matchOption(item, prevSelected))) : []);
   };
   
-  const isSelected = (item: any): boolean => Boolean(selected.find(selected => matchOption(selected, item)));
+  const isSelected = (item: T): boolean => Boolean(selected.find(selected => matchOption(selected, item)));
 
-  const setSelectedItems = (items: any[]) => {
+  const setSelectedItems = (items: T[]) => {
     setSelected(items);
   };
 
