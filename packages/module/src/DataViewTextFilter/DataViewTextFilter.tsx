@@ -17,6 +17,8 @@ export interface DataViewTextFilterProps extends SearchInputProps {
   trimValue?: boolean;
   /** Custom OUIA ID */
   ouiaId?: string;
+  /** Enable keyboard shortcut (/) to focus the filter. Defaults to true. */
+  enableShortcut?: boolean;
 }
 
 export const DataViewTextFilter: FC<DataViewTextFilterProps> = ({
@@ -28,9 +30,14 @@ export const DataViewTextFilter: FC<DataViewTextFilterProps> = ({
   showToolbarItem,
   trimValue = true,
   ouiaId = 'DataViewTextFilter',
+  enableShortcut = true,
   ...props
 }: DataViewTextFilterProps) => {
   useEffect(() => {
+    if (!enableShortcut) {
+      return;
+    }
+
     const handleKeyDown = (event: KeyboardEvent) => {
       // Only handle "/" key when not typing in an input, textarea, or contenteditable element
       if (event.key === '/' && !event.ctrlKey && !event.metaKey && !event.altKey) {
@@ -55,7 +62,7 @@ export const DataViewTextFilter: FC<DataViewTextFilterProps> = ({
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [showToolbarItem, filterId]);
+  }, [showToolbarItem, filterId, enableShortcut]);
 
   return (
     <ToolbarFilter

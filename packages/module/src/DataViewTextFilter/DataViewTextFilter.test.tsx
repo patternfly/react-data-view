@@ -1,4 +1,4 @@
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import DataViewTextFilter, { DataViewTextFilterProps } from './DataViewTextFilter';
 import DataViewToolbar from '../DataViewToolbar';
@@ -23,7 +23,7 @@ describe('DataViewTextFilter component', () => {
   });
 
   it('should focus the search input when "/" key is pressed and filter is visible', () => {
-    const { container } = render(<DataViewToolbar
+    render(<DataViewToolbar
       filters={ 
         <DataViewTextFilter {...defaultProps} showToolbarItem={true} />
       }
@@ -46,7 +46,7 @@ describe('DataViewTextFilter component', () => {
   });
 
   it('should not focus the search input when "/" key is pressed if filter is not visible', () => {
-    const { container } = render(<DataViewToolbar
+    render(<DataViewToolbar
       filters={ 
         <DataViewTextFilter {...defaultProps} showToolbarItem={false} />
       }
@@ -81,7 +81,6 @@ describe('DataViewTextFilter component', () => {
     );
     
     const otherInput = container.querySelector('[data-testid="other-input"]') as HTMLInputElement;
-    const searchInput = document.getElementById('test-filter') as HTMLInputElement;
     
     // Focus the other input first
     otherInput.focus();
@@ -103,5 +102,51 @@ describe('DataViewTextFilter component', () => {
     
     // The search input should not be focused since we're already in an input field
     expect(document.activeElement).toBe(otherInput);
+  });
+
+  it('should not focus the search input when enableShortcut is false', () => {
+    render(<DataViewToolbar
+      filters={ 
+        <DataViewTextFilter {...defaultProps} showToolbarItem={true} enableShortcut={false} />
+      }
+    />);
+    
+    const input = document.getElementById('test-filter') as HTMLInputElement;
+    expect(input).toBeInTheDocument();
+    
+    // Simulate pressing "/" key
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '/',
+      code: 'Slash',
+      bubbles: true,
+      cancelable: true,
+    });
+    window.dispatchEvent(keyEvent);
+    
+    // The input should not be focused since the shortcut is disabled
+    expect(document.activeElement).not.toBe(input);
+  });
+
+  it('should focus the search input when enableShortcut is true (default)', () => {
+    render(<DataViewToolbar
+      filters={ 
+        <DataViewTextFilter {...defaultProps} showToolbarItem={true} />
+      }
+    />);
+    
+    const input = document.getElementById('test-filter') as HTMLInputElement;
+    expect(input).toBeInTheDocument();
+    
+    // Simulate pressing "/" key
+    const keyEvent = new KeyboardEvent('keydown', {
+      key: '/',
+      code: 'Slash',
+      bubbles: true,
+      cancelable: true,
+    });
+    window.dispatchEvent(keyEvent);
+    
+    // The input should be focused since the shortcut is enabled by default
+    expect(document.activeElement).toBe(input);
   });
 });
