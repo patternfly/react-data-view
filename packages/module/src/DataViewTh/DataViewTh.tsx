@@ -338,7 +338,7 @@ export const DataViewTh: FC<DataViewThProps> = ({
       {...thProps}
       {...props}
       ref={thRef}
-      style={width > 0 ? { minWidth: width, ...thProps?.style } : thProps?.style}
+      style={width > 0 ? { ...thProps?.style, minWidth: width } : thProps?.style}
       className={classNames.length > 0 ? classNames.join(' ') : undefined}
       {...(isResizable && { additionalContent: resizableContent })}
     >
