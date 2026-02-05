@@ -58,13 +58,13 @@ export interface DataViewThResizableProps {
     id: string | number | undefined,
     width: number
   ) => void;
-  /** Width of the column */
+  /** Starting width in pixels of the column */
   width?: number;
-  /** Minimum width of the column */
+  /** Minimum resize width in pixels of the column */
   minWidth?: number;
-  /** Increment for keyboard navigation */
+  /** Increment in pixels for keyboard navigation */
   increment?: number;
-  /** Increment for keyboard navigation while shift is held */
+  /** Increment in pixels for keyboard navigation while shift is held */
   shiftIncrement?: number;
   /** Provides an accessible name for the resizable column via a human readable string. */
   resizeButtonAriaLabel?: string;
@@ -324,14 +324,22 @@ export const DataViewTh: FC<DataViewThProps> = ({
     </Fragment>
   );
 
+  const classNames: string[] = [];
+  if (thProps?.className) {
+    classNames.push(thProps.className);
+  }
+  if (dataViewThClassName) {
+    classNames.push(dataViewThClassName);
+  }
+
   return (
     <Th
+      modifier="truncate"
       {...thProps}
       {...props}
-      style={width > 0 ? { minWidth: width } : undefined}
       ref={thRef}
-      modifier="truncate"
-      className={dataViewThClassName}
+      style={width > 0 ? { ...thProps?.style, minWidth: width } : thProps?.style}
+      className={classNames.length > 0 ? classNames.join(' ') : undefined}
       {...(isResizable && { additionalContent: resizableContent })}
     >
       {content}
