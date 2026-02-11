@@ -44,7 +44,7 @@ const MyTable: React.FunctionComponent = () => {
     <DataView>
       <DataViewToolbar ouiaId='DataViewHeader' pagination={<Pagination perPageOptions={perPageOptions} itemCount={repositories.length} {...pagination} />} />
       <DataViewTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={pageRows} />
-      <DataViewToolbar ouiaId='DataViewFooter' pagination={<Pagination isCompact perPageOptions={perPageOptions} itemCount={repositories.length} {...pagination} />} />
+      <DataViewToolbar ouiaId='DataViewFooter' pagination={<Pagination isCompact variant="bottom" perPageOptions={perPageOptions} itemCount={repositories.length} {...pagination} />} />
     </DataView>
   );
 };

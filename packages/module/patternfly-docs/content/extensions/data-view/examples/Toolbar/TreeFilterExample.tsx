@@ -234,7 +234,7 @@ const MyTable: React.FunctionComponent = () => {
       <DataViewToolbar
         ouiaId="TreeFilterExampleFooter"
         pagination={
-          <Pagination isCompact perPageOptions={perPageOptions} itemCount={filteredData.length} {...pagination} />
+          <Pagination isCompact variant="bottom" perPageOptions={perPageOptions} itemCount={filteredData.length} {...pagination} />
         }
       />
     </DataView>

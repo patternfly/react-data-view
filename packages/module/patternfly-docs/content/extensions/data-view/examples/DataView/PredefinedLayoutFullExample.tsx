@@ -244,7 +244,8 @@ const RepositoriesTable: FunctionComponent<RepositoriesTableProps> = ({ selected
         ouiaId='LayoutExampleFooter'
         pagination={
           <Pagination 
-            isCompact  
+            isCompact
+            variant="bottom"
             perPageOptions={perPageOptions} 
             itemCount={repositories.length} 
             {...pagination} 

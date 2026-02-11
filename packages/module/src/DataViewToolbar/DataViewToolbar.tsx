@@ -1,5 +1,6 @@
 import { FC, PropsWithChildren, useRef } from 'react';
 import { Button, Toolbar, ToolbarContent, ToolbarItem, ToolbarItemVariant, ToolbarProps } from '@patternfly/react-core';
+import { createUseStyles } from 'react-jss';
 
 /** extends ToolbarProps */
 export interface DataViewToolbarProps extends Omit<PropsWithChildren<ToolbarProps>, 'ref'> {
@@ -21,7 +22,19 @@ export interface DataViewToolbarProps extends Omit<PropsWithChildren<ToolbarProp
   customLabelGroupContent?: React.ReactNode;
 }
 
+const useStyles = createUseStyles({
+  dataViewToolbarPagination: {
+    flexBasis: '100%',
+    width: '100%'
+  },
+  dataViewToolbarPaginationWrapper: {
+    flexBasis: '100%',
+    width: '100%'
+  }
+});
+
 export const DataViewToolbar: FC<DataViewToolbarProps> = ({ className, ouiaId = 'DataViewToolbar', bulkSelect, actions, toggleGroup, pagination, filters, customLabelGroupContent, clearAllFilters, children, ...props }: DataViewToolbarProps) => {
+  const classes = useStyles();
   const defaultClearFilters = useRef(
     <ToolbarItem>
       <Button ouiaId={`${ouiaId}-clear-all-filters`} variant="link" onClick={clearAllFilters} isInline>
@@ -53,8 +66,10 @@ export const DataViewToolbar: FC<DataViewToolbarProps> = ({ className, ouiaId = 
           </ToolbarItem>
         )}
         {pagination && (
-          <ToolbarItem variant={ToolbarItemVariant.pagination} data-ouia-component-id={`${ouiaId}-pagination`}>
-            {pagination}
+          <ToolbarItem variant={ToolbarItemVariant.pagination} data-ouia-component-id={`${ouiaId}-pagination`} className={classes.dataViewToolbarPagination}>
+            <div className={classes.dataViewToolbarPaginationWrapper}>
+              {pagination}
+            </div>
           </ToolbarItem>
         )}
         {children}
