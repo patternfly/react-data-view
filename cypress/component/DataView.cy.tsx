@@ -57,7 +57,7 @@ describe('DataView', () => {
           } 
         />
         <DataViewTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={rows} />
-        <DataViewToolbar ouiaId="DataViewFooter" pagination={<Pagination isCompact {...PAGINATION} />} />
+        <DataViewToolbar ouiaId="DataViewFooter" pagination={<Pagination isCompact variant="bottom" {...PAGINATION} />} />
       </DataView>
     );
     cy.get('[data-ouia-component-id="DataViewToolbar-pagination"]').should('exist');
