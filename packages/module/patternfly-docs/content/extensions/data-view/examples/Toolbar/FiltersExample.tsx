@@ -89,7 +89,8 @@ const MyTable: React.FunctionComponent = () => {
         ouiaId='LayoutExampleFooter'
         pagination={
           <Pagination 
-            isCompact  
+            isCompact
+            variant="bottom"
             perPageOptions={perPageOptions} 
             itemCount={filteredData.length} 
             {...pagination} 
