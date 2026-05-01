@@ -23,6 +23,30 @@ const rows = repositories.map(item => Object.values(item));
 
 const columns = [ 'Repositories', 'Branches', 'Pull requests', 'Workspaces', 'Last commit' ];
 
+const stickyColumns = [
+  { cell: 'Repositories', props: { isStickyColumn: true, hasRightBorder: true } },
+  'Branches',
+  'Pull requests',
+  'Workspaces',
+  'Last commit',
+];
+
+const stickyRows = [
+  { name: 'Repository one', branches: 'Branch one', prs: 'Pull request one', workspaces: 'Workspace one', lastCommit: 'Timestamp one' },
+].map(item => [
+  { cell: item.name, props: { isStickyColumn: true, hasRightBorder: true } },
+  item.branches,
+  item.prs,
+  item.workspaces,
+  item.lastCommit,
+]);
+
+const selection = {
+  onSelect: () => undefined,
+  isSelected: () => false,
+  isSelectDisabled: () => false,
+};
+
 describe('DataViewTableBasic', () => {
 
   it('renders a basic data view table', () => {
@@ -100,6 +124,25 @@ describe('DataViewTableBasic', () => {
 
     cy.get('[data-ouia-component-id="data-tr-loading"]').should('be.visible');
     cy.get('[data-ouia-component-id="data-tr-loading"]').contains('Data is loading');
+  });
+
+  it('applies sticky column styling to the selection and first data column when isSticky and the first column is sticky', () => {
+    const ouiaId = 'data-sticky-select';
+
+    cy.mount(
+      <DataView selection={selection}>
+        <DataViewTableBasic
+          aria-label="Sticky selectable table"
+          ouiaId={ouiaId}
+          columns={stickyColumns}
+          rows={stickyRows}
+          isSticky
+        />
+      </DataView>
+    );
+
+    cy.get('thead tr th.pf-v6-c-table__sticky-cell').should('have.length', 2);
+    cy.get('tbody tr').first().find('td.pf-v6-c-table__sticky-cell').should('have.length', 2);
   });
 
 });

@@ -152,8 +152,8 @@ When adding/making changes to a component, always make sure your code is tested:
 
 ## Testing and Linting
 - run `npm run test` to run the unit tests
-- run `cypress:run:ci:cp` to run component tests
-- run `cypress:run:ci:e2e` to run E2E tests
+- run `npm run cypress:run:ci:cp` to run component tests
+- run `npm run cypress:run:ci:e2e` to run E2E tests
 - run `npm run lint` to run the linter
 
 ## A11y testing
