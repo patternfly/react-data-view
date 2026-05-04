@@ -78,7 +78,7 @@ const MyTable: React.FunctionComponent = () => {
         }
         filters={ 
           <DataViewFilters onChange={(_e, values) => onSetFilters(values)} values={filters}>
-            <DataViewTextFilter filterId="name" title='Name' placeholder='Filter by name' />
+            <DataViewTextFilter filterId="name" title='Name' chipTitle='Repo' placeholder='Filter by name' />
             <DataViewTextFilter filterId="branch" title='Branch' placeholder='Filter by branch' />
             <DataViewCheckboxFilter filterId="workspace" title='Workspace' placeholder='Filter by workspace' options={filterOptions} />
           </DataViewFilters>
