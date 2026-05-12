@@ -87,6 +87,17 @@ describe('DataViewTreeFilter component', () => {
     );
     expect(container).toMatchSnapshot();
   });
+
+  it('should use chipTitle for the filter chip category when provided', () => {
+    render(
+      <DataViewToolbar
+        filters={<DataViewTreeFilter {...defaultProps} chipTitle="Short name" />}
+      />
+    );
+    expect(screen.getByText('Short name')).toBeInTheDocument();
+    expect(screen.getByText('Test Tree Filter')).toBeInTheDocument();
+  });
+
   describe('defaultExpanded', () => {
     it('should have expanded items by default', async () => {
       render(

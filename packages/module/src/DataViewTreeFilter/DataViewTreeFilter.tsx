@@ -89,6 +89,8 @@ export interface DataViewTreeFilterProps {
   value?: string[];
   /** Filter title displayed in the toolbar */
   title: string;
+  /** Label for the applied filter chip / category; defaults to title */
+  chipTitle?: string;
   /** Callback for when the selection changes */
   onChange?: (event?: React.MouseEvent, values?: string[]) => void;
   /** Controls visibility of the filter in the toolbar */
@@ -108,6 +110,7 @@ export interface DataViewTreeFilterProps {
 export const DataViewTreeFilter: FC<DataViewTreeFilterProps> = ({
   filterId,
   title,
+  chipTitle,
   value = [],
   onChange,
   showToolbarItem,
@@ -117,6 +120,7 @@ export const DataViewTreeFilter: FC<DataViewTreeFilterProps> = ({
   onSelect,
   defaultSelected = []
 }: DataViewTreeFilterProps) => {
+  const categoryName = chipTitle ?? title;
   const classes = useStyles();
   const [isOpen, setIsOpen] = useState(false);
   const [treeData, setTreeData] = useState<TreeViewDataItem[]>(items || []);
@@ -351,7 +355,7 @@ export const DataViewTreeFilter: FC<DataViewTreeFilterProps> = ({
         onFilterSelectorClear(labelKey);
       }}
       deleteLabelGroup={uncheckAllItems}
-      categoryName={title}
+      categoryName={categoryName}
       showToolbarItem={showToolbarItem}>
       {dropdown}
     </ToolbarFilter>

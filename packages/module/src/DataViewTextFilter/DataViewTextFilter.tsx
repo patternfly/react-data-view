@@ -9,6 +9,8 @@ export interface DataViewTextFilterProps extends SearchInputProps {
   value?: string;
   /** Filter title displayed in the toolbar */
   title: string;
+  /** Label for the applied filter chip / category; defaults to title */
+  chipTitle?: string;
   /** Callback for when the input value changes */
   onChange?: (event: React.FormEvent<HTMLInputElement> | undefined, value: string) => void;
   /** Controls visibility of the filter in the toolbar */
@@ -24,6 +26,7 @@ export interface DataViewTextFilterProps extends SearchInputProps {
 export const DataViewTextFilter: FC<DataViewTextFilterProps> = ({
   filterId,
   title,
+  chipTitle,
   value = '',
   onChange,
   onClear = () => onChange?.(undefined, ''),
@@ -33,6 +36,8 @@ export const DataViewTextFilter: FC<DataViewTextFilterProps> = ({
   enableShortcut = true,
   ...props
 }: DataViewTextFilterProps) => {
+  const categoryName = chipTitle ?? title;
+
   useEffect(() => {
     if (!enableShortcut) {
       return;
@@ -68,9 +73,9 @@ export const DataViewTextFilter: FC<DataViewTextFilterProps> = ({
     <ToolbarFilter
       key={ouiaId}
       data-ouia-component-id={ouiaId}
-      labels={value.length > 0 ? [ { key: title, node: value } ] : []}
+      labels={value.length > 0 ? [ { key: categoryName, node: value } ] : []}
       deleteLabel={() => onChange?.(undefined, '')}
-      categoryName={title}
+      categoryName={categoryName}
       showToolbarItem={showToolbarItem}
     >
       <SearchInput

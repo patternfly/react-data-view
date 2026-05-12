@@ -32,6 +32,8 @@ export interface DataViewCheckboxFilterProps extends Omit<MenuProps, 'onSelect' 
   value?: string[];
   /** Filter title displayed in the toolbar */
   title: string;
+  /** Label for the applied filter chip / category; defaults to title */
+  chipTitle?: string;
   /** Placeholder text of the menu */
   placeholder?: string;
   /** Filter options displayed */
@@ -51,6 +53,7 @@ export interface DataViewCheckboxFilterProps extends Omit<MenuProps, 'onSelect' 
 export const DataViewCheckboxFilter: FC<DataViewCheckboxFilterProps> = ({
   filterId,
   title,
+  chipTitle,
   value = [],
   onChange,
   placeholder,
@@ -65,6 +68,7 @@ export const DataViewCheckboxFilter: FC<DataViewCheckboxFilterProps> = ({
   const toggleRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const categoryName = chipTitle ?? title;
 
   const normalizeOptions = useMemo(
     () =>
@@ -120,7 +124,7 @@ export const DataViewCheckboxFilter: FC<DataViewCheckboxFilterProps> = ({
       deleteLabel={(_, label) =>
         onChange?.(undefined, value.filter(item => item !== (isToolbarLabel(label) ? label.key : label)))
       }
-      categoryName={title}
+      categoryName={categoryName}
       showToolbarItem={showToolbarItem}
     >
       <Popper

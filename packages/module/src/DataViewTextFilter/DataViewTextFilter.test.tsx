@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import DataViewTextFilter, { DataViewTextFilterProps } from './DataViewTextFilter';
 import DataViewToolbar from '../DataViewToolbar';
@@ -20,6 +20,16 @@ describe('DataViewTextFilter component', () => {
       }
     />);
     expect(container).toMatchSnapshot();
+  });
+
+  it('should use chipTitle for the filter chip category when provided', () => {
+    render(<DataViewToolbar
+      filters={
+        <DataViewTextFilter {...defaultProps} chipTitle="Short name" />
+      }
+    />);
+    expect(screen.getByText('Short name')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Filter by Test Filter')).toBeInTheDocument();
   });
 
   it('should focus the search input when "/" key is pressed and filter is visible', () => {
