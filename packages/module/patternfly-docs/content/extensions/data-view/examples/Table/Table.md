@@ -19,7 +19,8 @@ propComponents:
     'DataViewTrTree',
     'DataViewTrObject',
     'DataViewTh',
-    'DataViewThResizableProps'
+    'DataViewThResizableProps',
+    'DataViewTableHead'
   ]
 sourceLink: https://github.com/patternfly/react-data-view/blob/main/packages/module/patternfly-docs/content/extensions/data-view/examples/Table/Table.md
 ---
@@ -104,6 +105,8 @@ When sticky headers and columns are enabled:
 - Columns marked with `isStickyColumn: true` remain visible when scrolling horizontally
 - The table is wrapped in `OuterScrollContainer` and `InnerScrollContainer` components to enable sticky behavior
 - Sticky columns can have additional styling like borders using `hasRightBorder` or `hasLeftBorder` props
+
+When **row selection** is enabled (via the `DataView` `selection` prop) and the first column in the `columns` array is a sticky column (`isStickyColumn: true` in that column’s `props`), the row-selection checkbox column is included in the same sticky group as that first data column. The first data column’s `stickyLeftOffset` is aligned so it sits to the right of the selection column. This requires the first **defined** column in `columns` to be the sticky one; a leading `null` placeholder in `columns` is not treated as a sticky first column for this behavior.
 
 ### Sticky header and columns example
 

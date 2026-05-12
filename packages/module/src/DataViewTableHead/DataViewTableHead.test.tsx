@@ -1,10 +1,19 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { Table } from '@patternfly/react-table';
 import { DataViewTableHead } from './DataViewTableHead';
 import { DataViewSelection } from '../InternalContext';
 import { DataView } from '../DataView';
+import { DataViewTh } from '../DataViewTable';
 
 const columns = [ 'Repositories', 'Branches', 'Pull requests', 'Workspaces', 'Last commit' ];
+
+const stickyFirstColumn: DataViewTh[] = [
+  { cell: 'Repositories', props: { isStickyColumn: true, hasRightBorder: true } },
+  'Branches',
+  'Pull requests',
+  'Workspaces',
+  'Last commit',
+];
 
 const ouiaId = 'HeaderExample';
 
@@ -44,6 +53,22 @@ describe('DataViewTableHead component', () => {
       </DataView>
     );
     expect(container).toMatchSnapshot();
+  });
+
+  test('applies sticky classes to selection and first column when isSticky and first column is sticky', () => {
+    render(
+      <DataView selection={mockSelection}>
+        <Table>
+          <DataViewTableHead columns={stickyFirstColumn} ouiaId={ouiaId} isSticky />
+        </Table>
+      </DataView>
+    );
+
+    const selectionTh = screen.getByText('Data selection table head cell').closest('th');
+    expect(selectionTh?.classList.contains('pf-v6-c-table__sticky-cell')).toBe(true);
+
+    const repositoriesTh = screen.getByRole('columnheader', { name: 'Repositories' });
+    expect(repositoriesTh.classList.contains('pf-v6-c-table__sticky-cell')).toBe(true);
   });
 });
 

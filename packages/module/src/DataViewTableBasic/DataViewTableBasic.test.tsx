@@ -1,7 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { DataView } from '../DataView';
+import { DataViewSelection } from '../InternalContext';
 import { DataViewTableBasic, ExpandableContent } from './DataViewTableBasic';
+import { DataViewTh } from '../DataViewTable';
 
 interface Repository {
   id: number;
@@ -30,6 +32,20 @@ const rows = repositories.map(({ id, name, branches, prs, workspaces, lastCommit
 ]);
 
 const columns = [ 'Repositories', 'Branches', 'Pull requests', 'Workspaces', 'Last commit' ];
+
+const stickyColumns: DataViewTh[] = [
+  { cell: 'Repositories', props: { isStickyColumn: true, hasRightBorder: true } },
+  'Branches',
+  'Pull requests',
+  'Workspaces',
+  'Last commit',
+];
+
+const mockSelection: DataViewSelection = {
+  onSelect: jest.fn(),
+  isSelected: jest.fn(() => false),
+  isSelectDisabled: jest.fn(() => false),
+};
 
 const expandableContents: ExpandableContent[] = [
   { rowId: 1, columnId: 1, content: <div>Branch details for Repository one</div> },
@@ -70,6 +86,33 @@ describe('DataViewTable component', () => {
       </DataView>
     );
     expect(container).toMatchSnapshot();
+  });
+
+  test('applies sticky classes to selection and first data cells when isSticky and first column is sticky', () => {
+    const stickyRows = repositories.map(({ id, name, branches, prs, workspaces, lastCommit }) => [
+      { id, cell: name, props: { isStickyColumn: true, hasRightBorder: true } },
+      branches,
+      prs,
+      workspaces,
+      lastCommit,
+    ]);
+
+    const { container } = render(
+      <DataView selection={mockSelection}>
+        <DataViewTableBasic
+          aria-label='Repositories table'
+          ouiaId={ouiaId}
+          columns={stickyColumns}
+          rows={stickyRows}
+          isSticky
+        />
+      </DataView>
+    );
+
+    const firstBodyRow = container.querySelector('tbody tr');
+    const bodyCells = firstBodyRow?.querySelectorAll('td');
+    expect(bodyCells?.[0]?.classList.contains('pf-v6-c-table__sticky-cell')).toBe(true);
+    expect(bodyCells?.[1]?.classList.contains('pf-v6-c-table__sticky-cell')).toBe(true);
   });
 
   test('when isExpandable cell should be clickable and expandable', async () => {

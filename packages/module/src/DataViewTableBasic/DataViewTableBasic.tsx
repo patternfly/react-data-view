@@ -12,6 +12,11 @@ import {
 import { useInternalContext } from '../InternalContext';
 import { DataViewTableHead } from '../DataViewTableHead';
 import { DataViewTh, DataViewTr, isDataViewTdObject, isDataViewTrObject } from '../DataViewTable';
+import {
+  mergeFirstStickyDataColumnProps,
+  shouldIncludeStickySelectionColumn,
+  stickySelectionCellProps,
+} from '../DataViewTable/stickySelectionColumn';
 import { DataViewState } from '../DataView/DataView';
 
 export interface ExpandableContent {
@@ -57,6 +62,11 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
   const { selection, activeState, isSelectable } = useInternalContext();
   const { onSelect, isSelected, isSelectDisabled } = selection ?? {};
 
+  const includeStickySelection = useMemo(
+    () => shouldIncludeStickySelectionColumn(columns, isSelectable, isSticky),
+    [ columns, isSelectable, isSticky ]
+  );
+
   const activeHeadState = useMemo(() => activeState ? headStates?.[activeState] : undefined, [ activeState, headStates ]);
   const activeBodyState = useMemo(() => activeState ? bodyStates?.[activeState] : undefined, [ activeState, bodyStates ]);
 
@@ -87,6 +97,7 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
         {isSelectable && (
           <Td
             key={`select-${rowIndex}`}
+            {...(includeStickySelection ? stickySelectionCellProps : {})}
             select={{
               rowIndex,
               onSelect: (_event, isSelecting) => {
@@ -102,10 +113,13 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
           const cellExpandableContent = isExpandable ? expandedRows?.find(
             (content) => content.rowId === rowId && content.columnId === colIndex
           ) : undefined;
+          const baseTdProps = cellIsObject ? (cell?.props ?? {}) : {};
+          const tdProps =
+            colIndex === 0 ? mergeFirstStickyDataColumnProps(baseTdProps, includeStickySelection) : baseTdProps;
           return (
             <Td
               key={colIndex}
-              {...(cellIsObject && (cell?.props ?? {}))}
+              {...tdProps}
               {...(cellExpandableContent != null && {
                 compoundExpand: {
                   isExpanded: isRowExpanded && expandedColIndex === colIndex,
@@ -149,7 +163,20 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
     } else {
       return rowContent;
     }
-  }), [ rows, isSelectable, isSelected, isSelectDisabled, onSelect, ouiaId, expandedRowsState, expandedColumnIndex, expandedRows, isExpandable, needsSeparateTbody ]);
+  }), [
+    rows,
+    isSelectable,
+    isSelected,
+    isSelectDisabled,
+    onSelect,
+    ouiaId,
+    expandedRowsState,
+    expandedColumnIndex,
+    expandedRows,
+    isExpandable,
+    needsSeparateTbody,
+    includeStickySelection,
+  ]);
 
   const bodyContent = activeBodyState || (needsSeparateTbody ? renderedRows : <Tbody>{renderedRows}</Tbody>);
 
@@ -158,7 +185,7 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
       <OuterScrollContainer>
         <InnerScrollContainer>
           <Table ref={tableRef} aria-label="Data table" ouiaId={ouiaId} isExpandable={isExpandable} hasAnimations {...props} isStickyHeader >
-            { activeHeadState || <DataViewTableHead columns={columns} ouiaId={ouiaId} hasResizableColumns={hasResizableColumns} /> }
+            { activeHeadState || <DataViewTableHead columns={columns} ouiaId={ouiaId} hasResizableColumns={hasResizableColumns} isSticky={isSticky} /> }
             { bodyContent }
           </Table>
         </InnerScrollContainer>
@@ -167,7 +194,7 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
   } else {
     return (
       <Table ref={tableRef} aria-label="Data table" ouiaId={ouiaId} isExpandable={isExpandable} hasAnimations {...props}>
-        { activeHeadState || <DataViewTableHead columns={columns} ouiaId={ouiaId} hasResizableColumns={hasResizableColumns} /> }
+        { activeHeadState || <DataViewTableHead columns={columns} ouiaId={ouiaId} hasResizableColumns={hasResizableColumns} isSticky={isSticky} /> }
         { bodyContent }
       </Table>
     );
