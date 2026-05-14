@@ -74,8 +74,10 @@ export const DataViewFilters = <T extends object>({
   }, [ defaultActiveFilter, filterItems ]);
 
   useEffect(() => {
-    setActiveAttributeMenu(getDefaultTitle());
-  }, [ filterItems, getDefaultTitle ]);
+    if (!activeAttributeMenu || !filterItems.some(item => item.title === activeAttributeMenu)) {
+      setActiveAttributeMenu(getDefaultTitle());
+    }
+  }, [ filterItems, getDefaultTitle ]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (values && Object.values(values).every(v => v === '' || v === undefined || (Array.isArray(v) && v.length === 0))) {
