@@ -35,6 +35,16 @@ const expandableContents: ExpandableContent[] = [
   { rowId: 1, columnId: 1, content: <div>Branch details for Repository one</div> },
 ];
 
+// Rows using DataViewTrObject format with `id` for indexBy tests
+const objectRows = repositories.map(({ id, name, branches, prs, workspaces, lastCommit }) => ({
+  row: [ name, branches, prs, workspaces, lastCommit ],
+  id: String(id),
+}));
+
+const objectExpandableContents: ExpandableContent[] = [
+  { rowId: '1', columnId: 1, content: <div>Branch details for Repository one</div> },
+];
+
 const ouiaId = 'TableExample';
 
 describe('DataViewTable component', () => {
@@ -100,6 +110,64 @@ describe('DataViewTable component', () => {
     await user.click(branchExpandButton!);
 
     // After clicking, the expandable content should be visible
+    const branchContent = screen.getByText('Branch details for Repository one');
+    expect(branchContent.closest('tr')?.classList.contains('pf-m-expanded')).toBeTruthy();
+  });
+
+  test('should render correctly with indexBy prop', () => {
+    const { container } = render(
+      <DataViewTableBasic aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={objectRows} indexBy="id" />
+    );
+    expect(container.querySelectorAll('tr').length).toBeGreaterThan(0);
+  });
+
+  test('when isExpandable with indexBy, expand button uses row id as key', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <DataViewTableBasic
+        aria-label='Repositories table'
+        ouiaId={ouiaId}
+        columns={columns}
+        rows={objectRows}
+        isExpandable={true}
+        expandedRows={objectExpandableContents}
+        indexBy="id"
+      />
+    );
+
+    // The expandId should use the row's id value ("1") instead of the array index (0)
+    const branchExpandButton = document.getElementById('expandable-1-0-1');
+    expect(branchExpandButton).toBeTruthy();
+
+    // Click the expand button
+    await user.click(branchExpandButton!);
+
+    // After clicking, the expandable content should be visible
+    const branchContent = screen.getByText('Branch details for Repository one');
+    expect(branchContent.closest('tr')?.classList.contains('pf-m-expanded')).toBeTruthy();
+  });
+
+  test('without indexBy, expansion state uses array index (default behavior)', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <DataViewTableBasic
+        aria-label='Repositories table'
+        ouiaId={ouiaId}
+        columns={columns}
+        rows={rows}
+        isExpandable={true}
+        expandedRows={expandableContents}
+      />
+    );
+
+    // Without indexBy, expandId should use the array index (0)
+    const branchExpandButton = document.getElementById('expandable-0-0-1');
+    expect(branchExpandButton).toBeTruthy();
+
+    await user.click(branchExpandButton!);
+
     const branchContent = screen.getByText('Branch details for Repository one');
     expect(branchContent.closest('tr')?.classList.contains('pf-m-expanded')).toBeTruthy();
   });
