@@ -16,7 +16,7 @@ import { DataViewState } from '../DataView/DataView';
 
 export interface ExpandableContent {
   rowId: string | number;
-  columnId: number;
+  columnId?: number;
   content: React.ReactNode;
 }
 
@@ -69,6 +69,7 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
   const tableRef = useRef<HTMLTableElement>(null);
 
   const needsSeparateTbody = isExpandable;
+  const isCompoundExpandable = isExpandable && !!expandedRows?.length && expandedRows.every((row) => row.columnId !== undefined);
 
   const renderedRows = useMemo(() => rows.map((row, rowIndex) => {
     const rowIsObject = isDataViewTrObject(row);
@@ -86,10 +87,11 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
     const firstCell = rowData[0];
     const rowId = isDataViewTdObject(firstCell) ? (firstCell as { id?: string | number }).id : undefined;
 
+    const matchesRow = (content: ExpandableContent) =>
+      indexBy ? String(content.rowId) === String(rowKey) : content.rowId === rowId;
+
     // Find all expandable contents for this row
-    const rowExpandableContents = isExpandable ? expandedRows?.filter(
-      (content) => indexBy ? String(content.rowId) === String(rowKey) : content.rowId === rowId
-    ) : [];
+    const rowExpandableContents = isExpandable ? expandedRows?.filter(matchesRow) : [];
 
     const rowContent = (
       <Tr key={needsSeparateTbody ? undefined : rowIndex} ouiaId={`${ouiaId}-tr-${rowIndex}`} {...(rowIsObject && row?.props)} isContentExpanded={isRowExpanded} isControlRow>
@@ -106,11 +108,23 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
             }}
           />
         )}
+        {isExpandable && !isCompoundExpandable && (
+          rowExpandableContents?.length
+            ? <Td
+              expand={{
+                isExpanded: isRowExpanded,
+                rowIndex,
+                expandId: `expandable-${rowKey}`,
+                onToggle: () => setExpandedRowsState(prev => ({ ...prev, [rowKey]: !prev[rowKey] })),
+              }}
+            />
+            : <Td />
+        )}
         {(rowIsObject ? row.row : row).map((cell, colIndex) => {
           const cellIsObject = isDataViewTdObject(cell);
-          const cellExpandableContent = isExpandable ? expandedRows?.find(
-            (content) => (indexBy ? String(content.rowId) === String(rowKey) : content.rowId === rowId) && content.columnId === colIndex
-          ) : undefined;
+          const cellExpandableContent = isCompoundExpandable
+            ? expandedRows?.find((entry) => matchesRow(entry) && entry.columnId === colIndex)
+            : undefined;
           return (
             <Td
               key={colIndex}
@@ -144,10 +158,10 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
       return (
         <Tbody key={rowIndex} isExpanded={isRowExpanded}>
           {rowContent}
-          {rowExpandableContents?.map((expandableContent) => (
-            <Tr key={`expand-${rowIndex}-${expandableContent.columnId}`} isExpanded={isRowExpanded && expandedColIndex === expandableContent.columnId}>
-              <Td colSpan={rowData.length + (isSelectable ? 1 : 0)} data-expanded-column-index={expandableContent.columnId}>
-                <ExpandableRowContent>
+          {rowExpandableContents?.map((expandableContent, expandIndex) => (
+            <Tr key={`expand-${rowKey}${expandableContent.columnId !== undefined ? `-${expandableContent.columnId}` : `-${expandIndex}`}`} isExpanded={isCompoundExpandable ? isRowExpanded && expandedColIndex === expandableContent.columnId : isRowExpanded}>
+              <Td colSpan={rowData.length + (isSelectable ? 1 : 0) + (!isCompoundExpandable ? 1 : 0)} data-expanded-column-index={expandableContent.columnId}>
+                <ExpandableRowContent hasNoBackground={!isCompoundExpandable}>
                   {expandableContent.content}
                 </ExpandableRowContent>
               </Td>
@@ -158,7 +172,7 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
     } else {
       return rowContent;
     }
-  }), [ rows, isSelectable, isSelected, isSelectDisabled, onSelect, ouiaId, expandedRowsState, expandedColumnIndex, expandedRows, isExpandable, needsSeparateTbody, indexBy ]);
+  }), [ rows, isSelectable, isSelected, isSelectDisabled, onSelect, ouiaId, expandedRowsState, expandedColumnIndex, expandedRows, isExpandable, isCompoundExpandable, needsSeparateTbody, indexBy ]);
 
   const bodyContent = activeBodyState || (needsSeparateTbody ? renderedRows : <Tbody>{renderedRows}</Tbody>);
 
