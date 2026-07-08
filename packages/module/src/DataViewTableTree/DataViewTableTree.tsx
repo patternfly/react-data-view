@@ -71,6 +71,8 @@ export interface DataViewTableTreeProps extends Omit<TableProps, 'onSelect' | 'r
   expandAll?: boolean;
   /** Custom OUIA ID */
   ouiaId?: string;
+  /** Property name used as unique node identifier for expansion tracking. When provided, this property is used instead of `id` to key the expanded state. */
+  indexBy?: string;
 }
 
 export const DataViewTableTree: FC<DataViewTableTreeProps> = ({
@@ -83,6 +85,7 @@ export const DataViewTableTree: FC<DataViewTableTreeProps> = ({
   collapsedIcon = null,
   expandAll = false,
   ouiaId = 'DataViewTableTree',
+  indexBy,
   ...props
 }: DataViewTableTreeProps) => {
   const { selection, activeState } = useInternalContext();
@@ -90,26 +93,30 @@ export const DataViewTableTree: FC<DataViewTableTreeProps> = ({
   const [ expandedNodeIds, setExpandedNodeIds ] = useState<string[]>([]);
   const [ expandedDetailsNodeNames, setExpandedDetailsNodeIds ] = useState<string[]>([]);
 
+  /** Resolves the unique identifier for a tree node based on the `indexBy` prop or the default `id` field. */
+  const getNodeId = (node: DataViewTrTree): string =>
+    indexBy && indexBy in node ? String((node as unknown as Record<string, unknown>)[indexBy]) : node.id;
+
   // Helper function to collect all node IDs that have children (are expandable)
   const getExpandableNodeIds = (nodes: DataViewTrTree[]): string[] => {
     const expandableIds: string[] = [];
-    
+
     const traverse = (nodeList: DataViewTrTree[]) => {
       nodeList.forEach(node => {
         if (node.children && node.children.length > 0) {
-          expandableIds.push(node.id);
+          expandableIds.push(getNodeId(node));
           traverse(node.children);
         }
       });
     };
-    
+
     traverse(nodes);
     return expandableIds;
   };
 
   // Effect to handle expandAll behavior
   // Memoize the expandable IDs to avoid recalculating when rows object reference changes but structure is the same
-  const expandableIds = useMemo(() => getExpandableNodeIds(rows), [ rows ]);
+  const expandableIds = useMemo(() => getExpandableNodeIds(rows), [ rows, indexBy ]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Effect to handle expandAll behavior - only runs when IDs actually change
   useEffect(() => {
@@ -136,8 +143,9 @@ export const DataViewTableTree: FC<DataViewTableTreeProps> = ({
       if (!node) {
         return [];
       }
-      const isExpanded = expandedNodeIds.includes(node.id);
-      const isDetailsExpanded = expandedDetailsNodeNames.includes(node.id);
+      const nodeId = getNodeId(node);
+      const isExpanded = expandedNodeIds.includes(nodeId);
+      const isDetailsExpanded = expandedDetailsNodeNames.includes(nodeId);
       const isChecked = isSelected?.(node);
       let icon = leafIcon;
       if (node.children) {
@@ -147,13 +155,13 @@ export const DataViewTableTree: FC<DataViewTableTreeProps> = ({
       const treeRow: TdProps['treeRow'] = {
         onCollapse: () =>
           setExpandedNodeIds(prevExpanded => {
-            const otherExpandedNodeIds = prevExpanded.filter(id => id !== node.id);
-            return isExpanded ? otherExpandedNodeIds : [ ...otherExpandedNodeIds, node.id ];
+            const otherExpandedNodeIds = prevExpanded.filter(id => id !== nodeId);
+            return isExpanded ? otherExpandedNodeIds : [ ...otherExpandedNodeIds, nodeId ];
           }),
         onToggleRowDetails: () =>
           setExpandedDetailsNodeIds(prevDetailsExpanded => {
-            const otherDetailsExpandedNodeIds = prevDetailsExpanded.filter(id => id !== node.id);
-            return isDetailsExpanded ? otherDetailsExpandedNodeIds : [ ...otherDetailsExpandedNodeIds, node.id ];
+            const otherDetailsExpandedNodeIds = prevDetailsExpanded.filter(id => id !== nodeId);
+            return isDetailsExpanded ? otherDetailsExpandedNodeIds : [ ...otherDetailsExpandedNodeIds, nodeId ];
           }),
         onCheckChange: (isSelectDisabled?.(node) || !onSelect) ? undefined : (_event, isChecking) => onSelect?.(isChecking, getNodesAffectedBySelection(rows, node, isChecking, isSelected)),
         rowIndex,
@@ -165,7 +173,7 @@ export const DataViewTableTree: FC<DataViewTableTreeProps> = ({
           'aria-posinset': posinset,
           'aria-setsize': node.children?.length ?? 0,
           isChecked,
-          checkboxId: `checkbox_id_${node.id?.toLowerCase().replace(/\s+/g, '_')}`,
+          checkboxId: `checkbox_id_${nodeId?.toLowerCase().replace(/\s+/g, '_')}`,
           icon,
         },
       };
@@ -175,7 +183,7 @@ export const DataViewTableTree: FC<DataViewTableTreeProps> = ({
         : [];
 
       return [
-        <TreeRowWrapper key={node.id} row={{ props: treeRow.props }} ouiaId={`${ouiaId}-tr-${rowIndex}`}>
+        <TreeRowWrapper key={nodeId} row={{ props: treeRow.props }} ouiaId={`${ouiaId}-tr-${rowIndex}`}>
           {node.row.map((cell, colIndex) => {
             const cellIsObject = isDataViewTdObject(cell);
             return (
@@ -206,7 +214,8 @@ export const DataViewTableTree: FC<DataViewTableTreeProps> = ({
     isSelected,
     onSelect,
     isSelectDisabled,
-    ouiaId
+    ouiaId,
+    indexBy
   ]);
 
   return (

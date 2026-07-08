@@ -114,8 +114,28 @@ describe('DataViewTableTree component', () => {
     const { container } = render(
       <DataView activeState="loading">
         <DataViewTable isTreeTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} bodyStates={{ loading: "Data is loading" }} rows={[]} />
-      </DataView> 
+      </DataView>
     );
+    expect(container).toMatchSnapshot();
+  });
+
+  test('should render tree table with indexBy prop', () => {
+    const { container } = render(
+      <DataView selection={mockSelection}>
+        <DataViewTable isTreeTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} rows={rows} indexBy="id" leafIcon={<LeafIcon/>} expandedIcon={<FolderOpenIcon aria-hidden />} collapsedIcon={<FolderIcon aria-hidden />} />
+      </DataView>
+    );
+    expect(container.querySelectorAll('tr').length).toBeGreaterThan(0);
+  });
+
+  test('should render tree table with expandAll and indexBy', () => {
+    const { container } = render(
+      <DataView selection={mockSelection}>
+        <DataViewTable isTreeTable aria-label='Repositories table' ouiaId={ouiaId} columns={columns} expandAll rows={rows} indexBy="id" leafIcon={<LeafIcon/>} expandedIcon={<FolderOpenIcon aria-hidden />} collapsedIcon={<FolderIcon aria-hidden />} />
+      </DataView>
+    );
+    // With expandAll, all expandable rows should be rendered as expanded
+    expect(container.querySelectorAll('tr').length).toBeGreaterThan(0);
     expect(container).toMatchSnapshot();
   });
 });

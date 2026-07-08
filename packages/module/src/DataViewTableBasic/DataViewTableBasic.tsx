@@ -15,7 +15,7 @@ import { DataViewTh, DataViewTr, isDataViewTdObject, isDataViewTrObject } from '
 import { DataViewState } from '../DataView/DataView';
 
 export interface ExpandableContent {
-  rowId: number;
+  rowId: string | number;
   columnId: number;
   content: React.ReactNode;
 }
@@ -40,6 +40,8 @@ export interface DataViewTableBasicProps extends Omit<TableProps, 'onSelect' | '
   isExpandable?: boolean;
   /** Toggles sticky columns and header */
   isSticky?: boolean;
+  /** Property name used as unique row identifier for expansion tracking. When provided, expanded state follows the data through sort/filter/pagination instead of using the array index. Applicable when rows are objects with an identifying property (e.g., `id`). */
+  indexBy?: string;
 }
 
 export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
@@ -52,6 +54,7 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
   hasResizableColumns,
   isExpandable = false,
   isSticky = false,
+  indexBy,
   ...props
 }: DataViewTableBasicProps) => {
   const { selection, activeState, isSelectable } = useInternalContext();
@@ -60,8 +63,8 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
   const activeHeadState = useMemo(() => activeState ? headStates?.[activeState] : undefined, [ activeState, headStates ]);
   const activeBodyState = useMemo(() => activeState ? bodyStates?.[activeState] : undefined, [ activeState, bodyStates ]);
 
-  const [expandedRowsState, setExpandedRowsState] = useState<Record<number, boolean>>({})
-  const [expandedColumnIndex, setExpandedColumnIndex] = useState<Record<number, number>>({})
+  const [expandedRowsState, setExpandedRowsState] = useState<Record<string | number, boolean>>({})
+  const [expandedColumnIndex, setExpandedColumnIndex] = useState<Record<string | number, number>>({})
 
   const tableRef = useRef<HTMLTableElement>(null);
 
@@ -69,17 +72,23 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
 
   const renderedRows = useMemo(() => rows.map((row, rowIndex) => {
     const rowIsObject = isDataViewTrObject(row);
-    const isRowExpanded = expandedRowsState[rowIndex] || false;
-    const expandedColIndex = expandedColumnIndex[rowIndex];
 
-    // Get the first cell to extract the row ID
+    // Resolve the key used for expansion state tracking
+    const rowKey: string | number = indexBy && rowIsObject && indexBy in row
+      ? String((row as unknown as Record<string, unknown>)[indexBy])
+      : rowIndex;
+
+    const isRowExpanded = expandedRowsState[rowKey] || false;
+    const expandedColIndex = expandedColumnIndex[rowKey];
+
+    // Get the first cell to extract the row ID (used for expandable content matching when indexBy is not set)
     const rowData = rowIsObject ? row.row : row;
     const firstCell = rowData[0];
-    const rowId = isDataViewTdObject(firstCell) ? (firstCell as { id?: number }).id : undefined;
+    const rowId = isDataViewTdObject(firstCell) ? (firstCell as { id?: string | number }).id : undefined;
 
     // Find all expandable contents for this row
     const rowExpandableContents = isExpandable ? expandedRows?.filter(
-      (content) => content.rowId === rowId
+      (content) => indexBy ? String(content.rowId) === String(rowKey) : content.rowId === rowId
     ) : [];
 
     const rowContent = (
@@ -100,7 +109,7 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
         {(rowIsObject ? row.row : row).map((cell, colIndex) => {
           const cellIsObject = isDataViewTdObject(cell);
           const cellExpandableContent = isExpandable ? expandedRows?.find(
-            (content) => content.rowId === rowId && content.columnId === colIndex
+            (content) => (indexBy ? String(content.rowId) === String(rowKey) : content.rowId === rowId) && content.columnId === colIndex
           ) : undefined;
           return (
             <Td
@@ -109,14 +118,14 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
               {...(cellExpandableContent != null && {
                 compoundExpand: {
                   isExpanded: isRowExpanded && expandedColIndex === colIndex,
-                  expandId: `expandable-${rowIndex}`,
+                  expandId: `expandable-${rowKey}`,
                   onToggle: () => {
                     setExpandedRowsState(prev => {
                       const isSameColumn = expandedColIndex === colIndex;
-                      const wasExpanded = prev[rowIndex];
-                      return { ...prev, [rowIndex]: isSameColumn ? !wasExpanded : true };
+                      const wasExpanded = prev[rowKey];
+                      return { ...prev, [rowKey]: isSameColumn ? !wasExpanded : true };
                     });
-                    setExpandedColumnIndex(prev => ({ ...prev, [rowIndex]: colIndex }));
+                    setExpandedColumnIndex(prev => ({ ...prev, [rowKey]: colIndex }));
                   },
                   rowIndex,
                   columnIndex: colIndex
@@ -149,7 +158,7 @@ export const DataViewTableBasic: FC<DataViewTableBasicProps> = ({
     } else {
       return rowContent;
     }
-  }), [ rows, isSelectable, isSelected, isSelectDisabled, onSelect, ouiaId, expandedRowsState, expandedColumnIndex, expandedRows, isExpandable, needsSeparateTbody ]);
+  }), [ rows, isSelectable, isSelected, isSelectDisabled, onSelect, ouiaId, expandedRowsState, expandedColumnIndex, expandedRows, isExpandable, needsSeparateTbody, indexBy ]);
 
   const bodyContent = activeBodyState || (needsSeparateTbody ? renderedRows : <Tbody>{renderedRows}</Tbody>);
 
