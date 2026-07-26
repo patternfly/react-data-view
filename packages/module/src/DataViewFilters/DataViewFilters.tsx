@@ -43,7 +43,10 @@ export const DataViewFilters = <T extends object>({
   values,
   ...props
 }: DataViewFiltersProps<T>) => {
-  const [ activeAttributeMenu, setActiveAttributeMenu ] = useState<string>('');
+  const [ activeAttributeMenu, setActiveAttributeMenu ] = useState<string>(() => {
+    const firstFilter = Children.toArray(children).find(isValidElement);
+    return firstFilter ? String((firstFilter.props as { title?: string }).title ?? '') : '';
+  });
   const [ isAttributeMenuOpen, setIsAttributeMenuOpen ] = useState(false);
   const attributeToggleRef = useRef<HTMLButtonElement>(null);
   const attributeMenuRef = useRef<HTMLDivElement>(null);
@@ -80,6 +83,7 @@ export const DataViewFilters = <T extends object>({
   const attributeToggle = (
     <MenuToggle
       ref={attributeToggleRef}
+      aria-label="Filter by"
       onClick={() => setIsAttributeMenuOpen(!isAttributeMenuOpen)}
       isExpanded={isAttributeMenuOpen}
       icon={toggleIcon}
