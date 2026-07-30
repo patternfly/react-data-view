@@ -114,11 +114,11 @@ export const InteractiveExample: FunctionComponent = () => {
         <ToolbarContent>
           <ToolbarItem>
             <Switch
-              id="expandable-switch"
-              label="Expandable"
+              id="compound-expandable-switch"
+              label="Compound expandable"
               isChecked={isExpandable}
               onChange={(_event, checked) => setIsExpandable(checked)}
-              aria-label="Toggle expandable rows"
+              aria-label="Toggle compound expandable rows"
             />
           </ToolbarItem>
           <ToolbarItem>

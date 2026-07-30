@@ -58,32 +58,42 @@ If you want to have all expandable nodes open on initial load pass the `expandAl
 
 ```
 
-## Expandable rows
+## Adding expandable content to rows
 
-To add expandable content to table cells, pass an array of `ExpandableContent` objects to the `expandedRows` prop of the `<DataViewTable>` component. Each expandable content object defines which cell can be expanded and what content to display when expanded.
+To add expandable content to table rows, pass an array of `ExpandableContent` objects to the `expandedRows` prop of the `<DataViewTable>` component and set `isExpandable` to `true`.
 
 The `ExpandableContent` interface is defined as:
 
 ```typescript
 interface ExpandableContent {
-  /** The ID of the row containing the expandable cell (must match the id property in the row data) */
-  rowId: number;
-  /** The column index (0-based) that should be expandable */
-  columnId: number;
-  /** The content to display when the cell is expanded */
+  rowId: string | number;
+  columnId?: number;
   content: ReactNode;
 }
 ```
+The `columnId` property is optional. Omit it for [expandable rows](#expandable-rows-example), which add an expand toggle as the first column. Provide it on all entries for [compound expandable rows](#compound-expandable-rows), where individual cells act as expand toggles.
 
-When a cell has expandable content:
-- A compound expand toggle button appears in the cell
-- Clicking the toggle expands the row to show the additional content below
-- Only one expanded cell is shown per row at a time
-- Clicking another expandable cell in the same row switches the expanded content
+## Expandable rows
+
+To make a parent/child row pair expandable, omit `columnId` from the expandable content entries:
+- A toggle is added as the first column (no column header)
+- Rows without matching expandable content display an empty toggle cell
 
 ### Expandable rows example
 
 ```js file="./DataViewTableExpandableExample.tsx"
+
+```
+
+## Compound expandable rows
+
+To make a parent/child row pair compound expandable, provide `columnId` on all expandable content entries:
+- Individual cells with expandable content act as expand toggles
+- Only one cell can be expanded per row at a time
+
+### Compound expandable rows example
+
+```js file="./DataViewTableCompoundExpandableExample.tsx"
 
 ```
 
@@ -112,8 +122,8 @@ When sticky headers and columns are enabled:
 ```
 
 ### Interactive example
-- Interactive example show how the different composable options work together.
-- By toggling the toggles you can switch between them and observe the behaviour
+- This interactive example shows how the different composable options work together
+- By toggling the toggles, you can switch between them and observe the behaviour
 
 ```js file="./DataViewTableInteractiveExample.tsx"
 

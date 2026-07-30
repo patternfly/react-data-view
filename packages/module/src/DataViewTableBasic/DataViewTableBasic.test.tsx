@@ -45,6 +45,19 @@ const objectExpandableContents: ExpandableContent[] = [
   { rowId: '1', columnId: 1, content: <div>Branch details for Repository one</div> },
 ];
 
+const standardExpandableContents: ExpandableContent[] = [
+  { rowId: 1, content: <div>Details for Repository one</div> },
+];
+
+const objectStandardExpandableContents: ExpandableContent[] = [
+  { rowId: '1', content: <div>Details for Repository one</div> },
+];
+
+// Only row 3 has content, other rows get an empty toggle cell
+const partialStandardExpandableContents: ExpandableContent[] = [
+  { rowId: 3, content: <div>Details for Repository three</div> },
+];
+
 const ouiaId = 'TableExample';
 
 describe('DataViewTable component', () => {
@@ -82,7 +95,7 @@ describe('DataViewTable component', () => {
     expect(container).toMatchSnapshot();
   });
 
-  test('when isExpandable cell should be clickable and expandable', async () => {
+  test('compound expandable rows: cell should be clickable and expandable', async () => {
     const user = userEvent.setup();
 
     render(
@@ -121,7 +134,7 @@ describe('DataViewTable component', () => {
     expect(container.querySelectorAll('tr').length).toBeGreaterThan(0);
   });
 
-  test('when isExpandable with indexBy, expand button uses row id as key', async () => {
+  test('compound expandable rows with indexBy: expand button uses row id as key', async () => {
     const user = userEvent.setup();
 
     render(
@@ -170,5 +183,91 @@ describe('DataViewTable component', () => {
 
     const branchContent = screen.getByText('Branch details for Repository one');
     expect(branchContent.closest('tr')?.classList.contains('pf-m-expanded')).toBeTruthy();
+  });
+
+  test('traditional expandable rows: dedicated toggle column expands row', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <DataViewTableBasic
+        aria-label='Repositories table'
+        ouiaId={ouiaId}
+        columns={columns}
+        rows={rows}
+        isExpandable={true}
+        expandedRows={standardExpandableContents}
+      />
+    );
+
+    // The expand toggle is in a dedicated column before the data cells
+    const expandButton = screen.getByRole('button', { name: 'Details' });
+
+    // The toggle cell should be before the first data cell
+    const firstDataCell = document.querySelector('[data-ouia-component-id="TableExample-td-0-0"]')!;
+    expect(firstDataCell.previousElementSibling).toBe(expandButton.closest('td'));
+
+    // Initially collapsed
+    const expandableContent = screen.getByText('Details for Repository one');
+    expect(expandableContent.closest('tr')?.classList.contains('pf-m-expanded')).toBeFalsy();
+
+    // Click the expand toggle
+    await user.click(expandButton);
+
+    // After clicking, the expandable content should be visible
+    expect(expandableContent.closest('tr')?.classList.contains('pf-m-expanded')).toBeTruthy();
+
+    // Click again to collapse
+    await user.click(expandButton);
+    expect(expandableContent.closest('tr')?.classList.contains('pf-m-expanded')).toBeFalsy();
+  });
+
+  test('traditional expandable rows with indexBy: expand uses row id as key', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <DataViewTableBasic
+        aria-label='Repositories table'
+        ouiaId={ouiaId}
+        columns={columns}
+        rows={objectRows}
+        isExpandable={true}
+        expandedRows={objectStandardExpandableContents}
+        indexBy="id"
+      />
+    );
+
+    // The expandId should use the row's id value ("1") instead of the array index (0)
+    const expandButton = document.querySelector('[id^="expandable-1"]');
+    expect(expandButton).toBeTruthy();
+
+    // Click the expand button
+    await user.click(expandButton!);
+
+    // After clicking, the expandable content should be visible
+    const expandableContent = screen.getByText('Details for Repository one');
+    expect(expandableContent.closest('tr')?.classList.contains('pf-m-expanded')).toBeTruthy();
+  });
+
+  test('traditional expandable rows: rows without expandable content render empty toggle cell', () => {
+    render(
+      <DataViewTableBasic
+        aria-label='Repositories table'
+        ouiaId={ouiaId}
+        columns={columns}
+        rows={rows}
+        isExpandable={true}
+        expandedRows={partialStandardExpandableContents}
+      />
+    );
+
+    // Row 1 (rowId=1) has no expandable content — toggle cell should be empty (no button)
+    const firstRowToggleCell = document.querySelector('[data-ouia-component-id="TableExample-td-0-0"]')!.previousElementSibling as HTMLElement;
+    expect(firstRowToggleCell.tagName).toBe('TD');
+    expect(firstRowToggleCell.querySelector('button')).toBeNull();
+
+    // Row 3 (rowId=3) has expandable content — toggle cell should have a button
+    const thirdRowToggleCell = document.querySelector('[data-ouia-component-id="TableExample-td-2-0"]')!.previousElementSibling as HTMLElement;
+    expect(thirdRowToggleCell.tagName).toBe('TD');
+    expect(thirdRowToggleCell.querySelector('button')).toBeTruthy();
   });
 });
