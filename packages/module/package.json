@@ -1,6 +1,6 @@
 {
   "name": "@patternfly/react-data-view",
-  "version": "6.3.0-prerelease.3",
+  "version": "6.7.0-prerelease.0",
   "description": "Data view used for Red Hat projects.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
