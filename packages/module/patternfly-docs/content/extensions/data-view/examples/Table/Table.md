@@ -114,10 +114,19 @@ When sticky headers and columns are enabled:
 - Columns marked with `isStickyColumn: true` remain visible when scrolling horizontally
 - The table is wrapped in `OuterScrollContainer` and `InnerScrollContainer` components to enable sticky behavior
 - Sticky columns can have additional styling like borders using `hasRightBorder` or `hasLeftBorder` props
+- When selection is enabled (via `<DataView selection={...}>`), the selection checkbox column automatically becomes sticky when the first data column has `isStickyColumn: true`. The selection column is properly offset to appear to the left of the sticky data column.
 
 ### Sticky header and columns example
 
 ```js file="./DataViewTableStickyExample.tsx"
+
+```
+
+### Sticky selection column example
+
+This example demonstrates how the selection checkbox column automatically becomes sticky when the first data column has `isStickyColumn: true`. The selection column is positioned at the left edge with proper offset handling.
+
+```js file="./DataViewTableStickySelectionExample.tsx"
 
 ```
 
