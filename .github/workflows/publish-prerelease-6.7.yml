@@ -17,7 +17,16 @@ jobs:
         with:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
+      - uses: actions/cache@v4
+        id: npm-cache
+        with:
+          path: |
+            node_modules
+            **/node_modules
+            ~/.cache/Cypress
+          key: ${{ runner.os }}-yarn-14-${{ secrets.CACHE_VERSION }}-${{ hashFiles('package-lock.json') }}
       - run: npm ci
+        if: steps.npm-cache.outputs.cache-hit != 'true'
       - run: npm run build
       - name: Publish package
         run: |
