@@ -98,7 +98,7 @@ describe('DataViewFilters', () => {
     cy.get('[aria-label="Close Main branch"]').should('have.length', 0);
   });
 
-  it('clears all filters using the clear-all button', () => {
+  it('clears all filters using the clear-all button and resets attribute to first', () => {
     cy.mount(<DataViewToolbarWithState />);
     cy.get('[data-ouia-component-id="DataViewFilters"] .pf-v6-c-menu-toggle').click();
     cy.contains('Name').click();
@@ -108,6 +108,8 @@ describe('DataViewFilters', () => {
     cy.contains('Branch').click();
     cy.get('input[placeholder="Filter by branch"]').type('Main branch');
 
+    cy.get('[data-ouia-component-id="DataViewFilters"]').should('contain.text', 'Branch');
     cy.get('[data-ouia-component-id="FiltersExampleHeader-clear-all-filters"]').should('exist').click();
+    cy.get('[data-ouia-component-id="DataViewFilters"]').should('contain.text', 'Name');
   });
 });

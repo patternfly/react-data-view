@@ -1,4 +1,4 @@
-import { Children, isValidElement, cloneElement, useMemo, useState, useRef, useEffect, ReactElement, ReactNode } from 'react';
+import { Children, isValidElement, cloneElement, useMemo, useCallback, useState, useRef, useEffect, ReactElement, ReactNode } from 'react';
 import {
   Menu, MenuContent, MenuItem, MenuList, MenuToggle, Popper, ToolbarGroup, ToolbarToggleGroup, ToolbarToggleGroupProps,
 } from '@patternfly/react-core';
@@ -31,6 +31,8 @@ export interface DataViewFiltersProps<T extends object> extends Omit<ToolbarTogg
   breakpoint?: ToolbarToggleGroupProps['breakpoint'];
   /** Custom OUIA ID */
   ouiaId?: string;
+  /** Optional filterId to use as the default active filter. Falls back to the first filter when not specified. The active filter resets to this value when all filter values are cleared. */
+  defaultActiveFilter?: string;
 };
 
 
@@ -41,6 +43,7 @@ export const DataViewFilters = <T extends object>({
   breakpoint = 'xl',
   onChange,
   values,
+  defaultActiveFilter,
   ...props
 }: DataViewFiltersProps<T>) => {
   const [ activeAttributeMenu, setActiveAttributeMenu ] = useState<string>('');
@@ -60,9 +63,27 @@ export const DataViewFilters = <T extends object>({
       isValidElement(child) ? { filterId: String((child.props as any).filterId), title: String((child.props as any).title) } : undefined
     ).filter((item): item is DataViewFilterIdentifiers => !!item), [ childrenHash ]);  // eslint-disable-line react-hooks/exhaustive-deps
 
+  const getDefaultTitle = useCallback(() => {
+    if (defaultActiveFilter) {
+      const match = filterItems.find(item => item.filterId === defaultActiveFilter);
+      if (match) {
+        return match.title;
+      }
+    }
+    return filterItems.length > 0 ? filterItems[0].title : '';
+  }, [ defaultActiveFilter, filterItems ]);
+
   useEffect(() => {
-    filterItems.length > 0 && setActiveAttributeMenu(filterItems[0].title);
-  }, [ filterItems ]);
+    if (!activeAttributeMenu || !filterItems.some(item => item.title === activeAttributeMenu)) {
+      setActiveAttributeMenu(getDefaultTitle());
+    }
+  }, [ filterItems, getDefaultTitle ]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (values && Object.values(values).every(v => v === '' || v === undefined || (Array.isArray(v) && v.length === 0))) {
+      setActiveAttributeMenu(getDefaultTitle());
+    }
+  }, [ values, getDefaultTitle ]);
 
   const handleClickOutside = (event: MouseEvent) => 
     isAttributeMenuOpen &&
