@@ -1,0 +1,32 @@
+name: publish 6.7 prerelease
+on:
+  workflow_dispatch:
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: prerelease-v6.7.0-prerelease.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm ci
+      - run: npm run build
+      - name: Publish package
+        run: |
+          test "$(node -p "require('./packages/module/package.json').version")" = "6.7.0-prerelease.0"
+          npm publish ./packages/module --tag=prerelease --access=public
+      - name: Create GitHub release
+        run: |
+          gh release create prerelease-v6.7.0-prerelease.0 \
+            --title "prerelease-v6.7.0-prerelease.0" \
+            --notes "6.7.0 prerelease." \
+            --prerelease \
+            --target "$(git rev-parse HEAD)"
