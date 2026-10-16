@@ -1,8 +1,14 @@
 name: promote
 on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing stable v6 release tag (for example, v6.7.0)'
+        required: true
+        type: string
   push:
     # Sequence of patterns matched against refs/tags
-    tags:        
+    tags:
       - v6.*
 jobs:
   build-and-promote:
@@ -11,20 +17,28 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
     steps:
+      - name: Validate release tag
+        run: |
+          if [[ ! "$RELEASE_TAG" =~ ^v6\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Expected a stable v6 release tag, got: $RELEASE_TAG"
+            exit 1
+          fi
       - uses: actions/checkout@v4
-      - name: Build for promotion
-        run: yarn install --frozen-lockfile && yarn build
+        with:
+          ref: refs/tags/${{ env.RELEASE_TAG }}
       - uses: actions/setup-node@v4
         with:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
-      - name: GitHub Tag Name example
-        run: |
-          echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
-          echo "Tag name from github.ref_name: ${{  github.ref_name }}"
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build for promotion
+        run: npm run build
       - name: Manual publish
         run: |
           cd packages/module
-          npm version ${{ github.ref_name }} --git-tag-version false
-          npm publish --tag=latest
+          npm version "${RELEASE_TAG#v}" --git-tag-version false
+          npm publish --tag=latest --access=public
