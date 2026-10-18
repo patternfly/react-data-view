@@ -33,6 +33,21 @@ export interface DataViewFiltersProps<T extends object> extends Omit<ToolbarTogg
   ouiaId?: string;
 };
 
+// A React element (for example a component passed as a filter option label) holds internal,
+// circular references via its owner fiber, so JSON.stringify throws "cyclic object value" when it
+// encounters one. Hashing children for change detection does not need an element's internals, so
+// replace any nested React element with a stable, serializable descriptor instead (#12536).
+const replaceReactElements = (_key: string, value: unknown): unknown => {
+  if (isValidElement(value)) {
+    const { type } = value;
+    const typeName =
+      typeof type === 'string'
+        ? type
+        : (type as { displayName?: string; name?: string }).displayName ?? (type as { displayName?: string; name?: string }).name ?? 'element';
+    return { type: typeName, key: value.key };
+  }
+  return value;
+};
 
 export const DataViewFilters = <T extends object>({
   children,
@@ -52,7 +67,8 @@ export const DataViewFilters = <T extends object>({
   const childrenHash = useMemo(() => JSON.stringify(
     Children.map(children, (child) =>
       isValidElement(child) ? { type: child.type, key: child.key, props: child.props } : child
-    )
+    ),
+    replaceReactElements
   ), [ children ]);
 
   const filterItems: DataViewFilterIdentifiers[] = useMemo(() => Children.toArray(children)
