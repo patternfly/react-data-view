@@ -1,4 +1,5 @@
 import { render, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import DataViewFilters from './DataViewFilters';
 import DataViewToolbar from '../DataViewToolbar';
 import DataViewTextFilter from '../DataViewTextFilter';
@@ -36,5 +37,20 @@ describe('DataViewFilters component', () => {
     input.focus();
     fireEvent.input(input, { target: { value: 'abc' } });
     expect(mockOnChange).toHaveBeenCalledWith('one', { one: 'abc' });
+  });
+
+  it('renders an accessible name on the filter category toggle (#680)', () => {
+    const { container } = render(
+      <DataViewToolbar
+        filters={
+          <DataViewFilters onChange={mockOnChange} values={{}}>
+            <DataViewTextFilter filterId="name" title="Name" />
+            <DataViewTextFilter filterId="label" title="Label" />
+          </DataViewFilters>
+        }
+      />
+    );
+    const categoryToggle = container.querySelector('.pf-v6-c-menu-toggle');
+    expect(categoryToggle).toHaveAccessibleName('Filter by');
   });
 });
