@@ -19,12 +19,13 @@ export const useDataViewFilters = <T extends object>({
   const getInitialFilters = useCallback((): T => isUrlSyncEnabled
     ? Object.keys(initialFilters).reduce((loadedFilters, key) => {
       const isArrayFilter = Array.isArray(initialFilters[key]);
-      const urlValue = isArrayFilter ? searchParams?.getAll(key) : searchParams?.get(key);
-
-      // eslint-disable-next-line no-nested-ternary
-      loadedFilters[key] = urlValue
-        ? (isArrayFilter && !Array.isArray(urlValue) ? [ urlValue ] : urlValue)
-        : initialFilters[key];
+      if (isArrayFilter) {
+        const urlValue = searchParams?.getAll(key) ?? [];
+        loadedFilters[key] = urlValue.length > 0 ? urlValue : initialFilters[key];
+      } else {
+        const urlValue = searchParams?.get(key);
+        loadedFilters[key] = urlValue ? urlValue : initialFilters[key];
+      }
 
       return loadedFilters;
     }, { ...initialFilters })
