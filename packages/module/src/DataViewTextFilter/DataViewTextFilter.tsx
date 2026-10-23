@@ -75,6 +75,7 @@ export const DataViewTextFilter: FC<DataViewTextFilterProps> = ({
       data-ouia-component-id={ouiaId}
       labels={value.length > 0 ? [ { key: categoryName, node: value } ] : []}
       deleteLabel={() => onChange?.(undefined, '')}
+      deleteLabelGroup={() => onChange?.(undefined, '')}
       categoryName={categoryName}
       showToolbarItem={showToolbarItem}
     >
