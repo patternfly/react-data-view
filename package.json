@@ -39,7 +39,7 @@
     "@babel/preset-react": "^7.29.7",
     "@babel/preset-typescript": "^7.29.7",
     "@octokit/rest": "^20.1.2",
-    "@patternfly/documentation-framework": "^6.28.10",
+    "@patternfly/documentation-framework": "^6.54.3",
     "@swc/core": "1.15.3",
     "@testing-library/dom": "^10.4.2",
     "@testing-library/jest-dom": "^6.9.1",
