@@ -10,7 +10,7 @@ exports[`DataViewToolbar component should render correctly 1`] = `
         data-ouia-component-id="DataViewToolbar"
         data-ouia-component-type="PF6/Toolbar"
         data-ouia-safe="true"
-        id="pf-random-id-0"
+        id="pf-random-id-:r0:"
       >
         <div
           class="pf-v6-c-toolbar__content"
@@ -27,7 +27,7 @@ exports[`DataViewToolbar component should render correctly 1`] = `
               >
                 <div
                   class="pf-v6-c-pagination"
-                  data-ouia-component-id="OUIA-Generated-Pagination-top-1"
+                  data-ouia-component-id="OUIA-Generated-Pagination-top-:r2:"
                   data-ouia-component-type="PF6/Pagination"
                   data-ouia-safe="true"
                   id="options-menu-top-pagination"
@@ -56,7 +56,7 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                       aria-expanded="false"
                       aria-haspopup="listbox"
                       class="pf-v6-c-menu-toggle pf-m-plain pf-m-text"
-                      data-ouia-component-id="OUIA-Generated-MenuToggle-plainText-1"
+                      data-ouia-component-id="OUIA-Generated-MenuToggle-plainText-:r4:"
                       data-ouia-component-type="PF6/MenuToggle"
                       data-ouia-safe="true"
                       id="options-menu-top-toggle"
@@ -90,11 +90,11 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                             fill="currentColor"
                             height="1em"
                             role="img"
-                            viewBox="0 0 320 512"
+                            viewBox="0 0 20 20"
                             width="1em"
                           >
                             <path
-                              d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+                              d="m17.65 8.76-6.674 5.72a1.496 1.496 0 0 1-.976.365c-.347 0-.694-.122-.978-.366l-6.673-5.72A1 1 0 0 1 3 7h14a1 1 0 0 1 .65 1.76Z"
                             />
                           </svg>
                         </span>
@@ -112,7 +112,7 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                         aria-label="Go to first page"
                         class="pf-v6-c-button pf-m-plain"
                         data-action="first"
-                        data-ouia-component-id="OUIA-Generated-Button-plain-1"
+                        data-ouia-component-id="OUIA-Generated-Button-plain-:r5:"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         disabled=""
@@ -127,11 +127,11 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                             fill="currentColor"
                             height="1em"
                             role="img"
-                            viewBox="0 0 448 512"
+                            viewBox="0 0 20 20"
                             width="1em"
                           >
                             <path
-                              d="M223.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L319.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L393.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34zm-192 34l136 136c9.4 9.4 24.6 9.4 33.9 0l22.6-22.6c9.4-9.4 9.4-24.6 0-33.9L127.9 256l96.4-96.4c9.4-9.4 9.4-24.6 0-33.9L201.7 103c-9.4-9.4-24.6-9.4-33.9 0l-136 136c-9.5 9.4-9.5 24.6-.1 34z"
+                              d="M10 19a.997.997 0 0 1-.707-.293l-7.647-7.646c-.283-.284-.439-.66-.439-1.061s.156-.777.44-1.06l7.646-7.647a1 1 0 1 1 1.414 1.414L3.414 10l7.293 7.293A1 1 0 0 1 10 19Zm8.707-.293a1 1 0 0 0 0-1.414L11.414 10l7.293-7.293a1 1 0 1 0-1.414-1.414L9.646 8.939c-.283.284-.439.66-.439 1.061s.156.777.44 1.06l7.646 7.647a.997.997 0 0 0 1.414 0Z"
                             />
                           </svg>
                         </span>
@@ -144,7 +144,7 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                         aria-label="Go to previous page"
                         class="pf-v6-c-button pf-m-plain"
                         data-action="previous"
-                        data-ouia-component-id="OUIA-Generated-Button-plain-2"
+                        data-ouia-component-id="OUIA-Generated-Button-plain-:r6:"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         disabled=""
@@ -159,11 +159,11 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                             fill="currentColor"
                             height="1em"
                             role="img"
-                            viewBox="0 0 256 512"
+                            viewBox="0 0 20 20"
                             width="1em"
                           >
                             <path
-                              d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"
+                              d="m6.41 10 7.29-7.29.02-.02c.38-.4.37-1.03-.02-1.41-.4-.38-1.03-.37-1.41.02L4.64 8.95a1.49 1.49 0 0 0 0 2.12l7.65 7.65c.19.19.44.29.71.29.27 0 .52-.11.71-.29a.996.996 0 0 0 0-1.41l-7.29-7.29Z"
                             />
                           </svg>
                         </span>
@@ -178,7 +178,7 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                         <input
                           aria-invalid="false"
                           aria-label="Current page"
-                          data-ouia-component-id="OUIA-Generated-TextInputBase-1"
+                          data-ouia-component-id="OUIA-Generated-TextInputBase-:r8:"
                           data-ouia-component-type="PF6/TextInput"
                           data-ouia-safe="true"
                           max="2"
@@ -195,7 +195,7 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                         aria-label="Go to next page"
                         class="pf-v6-c-button pf-m-plain"
                         data-action="next"
-                        data-ouia-component-id="OUIA-Generated-Button-plain-3"
+                        data-ouia-component-id="OUIA-Generated-Button-plain-:r9:"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         type="button"
@@ -209,11 +209,11 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                             fill="currentColor"
                             height="1em"
                             role="img"
-                            viewBox="0 0 256 512"
+                            viewBox="0 0 20 20"
                             width="1em"
                           >
                             <path
-                              d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"
+                              d="M14.35 8.94 6.71 1.29l-.02-.02c-.4-.38-1.03-.37-1.41.02-.38.4-.37 1.03.02 1.41l7.29 7.29-7.29 7.29a1.003 1.003 0 0 0 1.42 1.42l7.65-7.65c.59-.59.59-1.54 0-2.12Z"
                             />
                           </svg>
                         </span>
@@ -226,7 +226,7 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                         aria-label="Go to last page"
                         class="pf-v6-c-button pf-m-plain"
                         data-action="last"
-                        data-ouia-component-id="OUIA-Generated-Button-plain-4"
+                        data-ouia-component-id="OUIA-Generated-Button-plain-:ra:"
                         data-ouia-component-type="PF6/Button"
                         data-ouia-safe="true"
                         type="button"
@@ -240,11 +240,11 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                             fill="currentColor"
                             height="1em"
                             role="img"
-                            viewBox="0 0 448 512"
+                            viewBox="0 0 20 20"
                             width="1em"
                           >
                             <path
-                              d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34zm192-34l-136-136c-9.4-9.4-24.6-9.4-33.9 0l-22.6 22.6c-9.4 9.4-9.4 24.6 0 33.9l96.4 96.4-96.4 96.4c-9.4 9.4-9.4 24.6 0 33.9l22.6 22.6c9.4 9.4 24.6 9.4 33.9 0l136-136c9.4-9.2 9.4-24.4 0-33.8z"
+                              d="M10 19a1 1 0 0 1-.707-1.707L16.586 10 9.293 2.707a1 1 0 1 1 1.414-1.414l7.647 7.646c.283.284.439.66.439 1.061s-.156.777-.44 1.06l-7.646 7.647A.997.997 0 0 1 10 19Zm-7.293-.293 7.647-7.646c.283-.284.439-.66.439-1.061s-.156-.777-.44-1.06L2.708 1.292a1 1 0 1 0-1.414 1.414L8.586 10l-7.293 7.293a1 1 0 1 0 1.414 1.414Z"
                             />
                           </svg>
                         </span>
@@ -294,7 +294,7 @@ exports[`DataViewToolbar component should render correctly 1`] = `
       data-ouia-component-id="DataViewToolbar"
       data-ouia-component-type="PF6/Toolbar"
       data-ouia-safe="true"
-      id="pf-random-id-0"
+      id="pf-random-id-:r0:"
     >
       <div
         class="pf-v6-c-toolbar__content"
@@ -311,7 +311,7 @@ exports[`DataViewToolbar component should render correctly 1`] = `
             >
               <div
                 class="pf-v6-c-pagination"
-                data-ouia-component-id="OUIA-Generated-Pagination-top-1"
+                data-ouia-component-id="OUIA-Generated-Pagination-top-:r2:"
                 data-ouia-component-type="PF6/Pagination"
                 data-ouia-safe="true"
                 id="options-menu-top-pagination"
@@ -340,7 +340,7 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                     aria-expanded="false"
                     aria-haspopup="listbox"
                     class="pf-v6-c-menu-toggle pf-m-plain pf-m-text"
-                    data-ouia-component-id="OUIA-Generated-MenuToggle-plainText-1"
+                    data-ouia-component-id="OUIA-Generated-MenuToggle-plainText-:r4:"
                     data-ouia-component-type="PF6/MenuToggle"
                     data-ouia-safe="true"
                     id="options-menu-top-toggle"
@@ -374,11 +374,11 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                           fill="currentColor"
                           height="1em"
                           role="img"
-                          viewBox="0 0 320 512"
+                          viewBox="0 0 20 20"
                           width="1em"
                         >
                           <path
-                            d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+                            d="m17.65 8.76-6.674 5.72a1.496 1.496 0 0 1-.976.365c-.347 0-.694-.122-.978-.366l-6.673-5.72A1 1 0 0 1 3 7h14a1 1 0 0 1 .65 1.76Z"
                           />
                         </svg>
                       </span>
@@ -396,7 +396,7 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                       aria-label="Go to first page"
                       class="pf-v6-c-button pf-m-plain"
                       data-action="first"
-                      data-ouia-component-id="OUIA-Generated-Button-plain-1"
+                      data-ouia-component-id="OUIA-Generated-Button-plain-:r5:"
                       data-ouia-component-type="PF6/Button"
                       data-ouia-safe="true"
                       disabled=""
@@ -411,11 +411,11 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                           fill="currentColor"
                           height="1em"
                           role="img"
-                          viewBox="0 0 448 512"
+                          viewBox="0 0 20 20"
                           width="1em"
                         >
                           <path
-                            d="M223.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L319.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L393.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34zm-192 34l136 136c9.4 9.4 24.6 9.4 33.9 0l22.6-22.6c9.4-9.4 9.4-24.6 0-33.9L127.9 256l96.4-96.4c9.4-9.4 9.4-24.6 0-33.9L201.7 103c-9.4-9.4-24.6-9.4-33.9 0l-136 136c-9.5 9.4-9.5 24.6-.1 34z"
+                            d="M10 19a.997.997 0 0 1-.707-.293l-7.647-7.646c-.283-.284-.439-.66-.439-1.061s.156-.777.44-1.06l7.646-7.647a1 1 0 1 1 1.414 1.414L3.414 10l7.293 7.293A1 1 0 0 1 10 19Zm8.707-.293a1 1 0 0 0 0-1.414L11.414 10l7.293-7.293a1 1 0 1 0-1.414-1.414L9.646 8.939c-.283.284-.439.66-.439 1.061s.156.777.44 1.06l7.646 7.647a.997.997 0 0 0 1.414 0Z"
                           />
                         </svg>
                       </span>
@@ -428,7 +428,7 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                       aria-label="Go to previous page"
                       class="pf-v6-c-button pf-m-plain"
                       data-action="previous"
-                      data-ouia-component-id="OUIA-Generated-Button-plain-2"
+                      data-ouia-component-id="OUIA-Generated-Button-plain-:r6:"
                       data-ouia-component-type="PF6/Button"
                       data-ouia-safe="true"
                       disabled=""
@@ -443,11 +443,11 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                           fill="currentColor"
                           height="1em"
                           role="img"
-                          viewBox="0 0 256 512"
+                          viewBox="0 0 20 20"
                           width="1em"
                         >
                           <path
-                            d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"
+                            d="m6.41 10 7.29-7.29.02-.02c.38-.4.37-1.03-.02-1.41-.4-.38-1.03-.37-1.41.02L4.64 8.95a1.49 1.49 0 0 0 0 2.12l7.65 7.65c.19.19.44.29.71.29.27 0 .52-.11.71-.29a.996.996 0 0 0 0-1.41l-7.29-7.29Z"
                           />
                         </svg>
                       </span>
@@ -462,7 +462,7 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                       <input
                         aria-invalid="false"
                         aria-label="Current page"
-                        data-ouia-component-id="OUIA-Generated-TextInputBase-1"
+                        data-ouia-component-id="OUIA-Generated-TextInputBase-:r8:"
                         data-ouia-component-type="PF6/TextInput"
                         data-ouia-safe="true"
                         max="2"
@@ -479,7 +479,7 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                       aria-label="Go to next page"
                       class="pf-v6-c-button pf-m-plain"
                       data-action="next"
-                      data-ouia-component-id="OUIA-Generated-Button-plain-3"
+                      data-ouia-component-id="OUIA-Generated-Button-plain-:r9:"
                       data-ouia-component-type="PF6/Button"
                       data-ouia-safe="true"
                       type="button"
@@ -493,11 +493,11 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                           fill="currentColor"
                           height="1em"
                           role="img"
-                          viewBox="0 0 256 512"
+                          viewBox="0 0 20 20"
                           width="1em"
                         >
                           <path
-                            d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"
+                            d="M14.35 8.94 6.71 1.29l-.02-.02c-.4-.38-1.03-.37-1.41.02-.38.4-.37 1.03.02 1.41l7.29 7.29-7.29 7.29a1.003 1.003 0 0 0 1.42 1.42l7.65-7.65c.59-.59.59-1.54 0-2.12Z"
                           />
                         </svg>
                       </span>
@@ -510,7 +510,7 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                       aria-label="Go to last page"
                       class="pf-v6-c-button pf-m-plain"
                       data-action="last"
-                      data-ouia-component-id="OUIA-Generated-Button-plain-4"
+                      data-ouia-component-id="OUIA-Generated-Button-plain-:ra:"
                       data-ouia-component-type="PF6/Button"
                       data-ouia-safe="true"
                       type="button"
@@ -524,11 +524,11 @@ exports[`DataViewToolbar component should render correctly 1`] = `
                           fill="currentColor"
                           height="1em"
                           role="img"
-                          viewBox="0 0 448 512"
+                          viewBox="0 0 20 20"
                           width="1em"
                         >
                           <path
-                            d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34zm192-34l-136-136c-9.4-9.4-24.6-9.4-33.9 0l-22.6 22.6c-9.4 9.4-9.4 24.6 0 33.9l96.4 96.4-96.4 96.4c-9.4 9.4-9.4 24.6 0 33.9l22.6 22.6c9.4 9.4 24.6 9.4 33.9 0l136-136c9.4-9.2 9.4-24.4 0-33.8z"
+                            d="M10 19a1 1 0 0 1-.707-1.707L16.586 10 9.293 2.707a1 1 0 1 1 1.414-1.414l7.647 7.646c.283.284.439.66.439 1.061s-.156.777-.44 1.06l-7.646 7.647A.997.997 0 0 1 10 19Zm-7.293-.293 7.647-7.646c.283-.284.439-.66.439-1.061s-.156-.777-.44-1.06L2.708 1.292a1 1 0 1 0-1.414 1.414L8.586 10l-7.293 7.293a1 1 0 1 0 1.414 1.414Z"
                           />
                         </svg>
                       </span>

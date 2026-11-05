@@ -116,7 +116,7 @@ export const BasicExample: FunctionComponent = () => {
 
   return (
     <DataViewEventsProvider>
-      <Drawer isExpanded={Boolean(selectedRepo)} onExpand={() => drawerRef.current?.focus()} data-ouia-component-id="detail-drawer" >
+      <Drawer isExpanded={Boolean(selectedRepo)} onExpand={() => drawerRef.current?.focus()} ouiaId="detail-drawer">
         <DrawerContent
           panelContent={<RepositoryDetail selectedRepo={selectedRepo} setSelectedRepo={setSelectedRepo} />}
         >
