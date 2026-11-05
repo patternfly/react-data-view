@@ -31,10 +31,13 @@
     "tag": "prerelease"
   },
   "dependencies": {
-    "@patternfly/react-component-groups": "^6.1.0",
-    "@patternfly/react-core": "^6.4.0",
-    "@patternfly/react-icons": "^6.4.0",
-    "@patternfly/react-table": "^6.4.0",
+    "@patternfly/react-component-groups": "^6.7.0",
+    "@patternfly/react-core": "^6.7.0",
+    "@patternfly/react-drag-drop": "^6.7.0",
+    "@patternfly/react-icons": "^6.7.0",
+    "@patternfly/react-styles": "^6.7.0",
+    "@patternfly/react-table": "^6.7.0",
+    "@patternfly/react-tokens": "^6.7.0",
     "clsx": "^2.1.1",
     "react-jss": "^10.10.0"
   },
@@ -43,10 +46,10 @@
     "react-dom": "^17 || ^18 || ^19"
   },
   "devDependencies": {
-    "@patternfly/documentation-framework": "^6.28.10",
-    "@patternfly/patternfly": "^6.4.0",
+    "@patternfly/documentation-framework": "^6.54.1",
+    "@patternfly/patternfly": "^6.7.0",
     "@patternfly/patternfly-a11y": "^5.2.1",
-    "@patternfly/react-code-editor": "^6.4.0",
+    "@patternfly/react-code-editor": "^6.7.0",
     "@types/react": "^18.3.31",
     "@types/react-dom": "^18.3.7",
     "@types/react-router-dom": "^5.3.3",
