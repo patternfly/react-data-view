@@ -14,6 +14,8 @@ export interface DataViewTableHeadProps extends TheadProps {
   ouiaId?: string;
   /** @hide Indicates whether table is resizable */
   hasResizableColumns?: boolean;
+  /** Toggles sticky columns and header */
+  isSticky?: boolean;
 }
 
 export const DataViewTableHead: FC<DataViewTableHeadProps> = ({
@@ -21,28 +23,49 @@ export const DataViewTableHead: FC<DataViewTableHeadProps> = ({
   columns,
   ouiaId = 'DataViewTableHead',
   hasResizableColumns,
+  isSticky = false,
   ...props
 }: DataViewTableHeadProps) => {
   const { selection } = useInternalContext();
   const { onSelect, isSelected } = selection ?? {};
 
   const cells = useMemo(
-    () => [
-      onSelect && isSelected && !isTreeTable ? (
-        <Th key="row-select" screenReaderText="Data selection table head cell" />
-      ) : null,
-      ...columns.map((column, index) => (
-        <DataViewThElement
-          key={index}
-          content={isDataViewThObject(column) ? column.cell : column}
-          resizableProps={isDataViewThObject(column) ? column.resizableProps : undefined}
-          data-ouia-component-id={`${ouiaId}-th-${index}`}
-          thProps={isDataViewThObject(column) ? (column?.props ?? {}) : {}}
-          hasResizableColumns={hasResizableColumns}
-        />
-      ))
-    ],
-    [ columns, ouiaId, onSelect, isSelected, isTreeTable, hasResizableColumns ]
+    () => {
+      // Check if the first column has isStickyColumn
+      const firstColumnProps = isDataViewThObject(columns[0]) ? (columns[0]?.props ?? {}) : {};
+      const firstColumnIsSticky = firstColumnProps.isStickyColumn;
+
+      return [
+        onSelect && isSelected && !isTreeTable ? (
+          <Th
+            key="row-select"
+            screenReaderText="Data selection table head cell"
+            isStickyColumn={firstColumnIsSticky}
+            stickyMinWidth="45px"
+            stickyLeftOffset="0px"
+          />
+        ) : null,
+        ...columns.map((column, index) => {
+          const thProps = isDataViewThObject(column) ? (column?.props ?? {}) : {};
+          // If the first column is sticky and selection is enabled, offset it by the selection column width
+          const enhancedThProps = index === 0 && thProps.isStickyColumn && onSelect && isSelected
+            ? { ...thProps, stickyLeftOffset: '45px' }
+            : thProps;
+
+          return (
+            <DataViewThElement
+              key={index}
+              content={isDataViewThObject(column) ? column.cell : column}
+              resizableProps={isDataViewThObject(column) ? column.resizableProps : undefined}
+              data-ouia-component-id={`${ouiaId}-th-${index}`}
+              thProps={enhancedThProps}
+              hasResizableColumns={hasResizableColumns}
+            />
+          );
+        })
+      ];
+    },
+    [ columns, ouiaId, onSelect, isSelected, isTreeTable, hasResizableColumns, isSticky ]
   );
 
   return (
