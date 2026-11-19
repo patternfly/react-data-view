@@ -124,6 +124,7 @@ export const DataViewCheckboxFilter: FC<DataViewCheckboxFilterProps> = ({
       deleteLabel={(_, label) =>
         onChange?.(undefined, value.filter(item => item !== (isToolbarLabel(label) ? label.key : label)))
       }
+      deleteLabelGroup={() => onChange?.(undefined, [])}
       categoryName={categoryName}
       showToolbarItem={showToolbarItem}
     >

@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import DataViewTextFilter, { DataViewTextFilterProps } from './DataViewTextFilter';
 import DataViewToolbar from '../DataViewToolbar';
@@ -30,6 +30,19 @@ describe('DataViewTextFilter component', () => {
     />);
     expect(screen.getByText('Short name')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Filter by Test Filter')).toBeInTheDocument();
+  });
+
+  it('clears the value via the category group delete button (#646)', () => {
+    const onChange = jest.fn();
+    const { container } = render(<DataViewToolbar
+      filters={
+        <DataViewTextFilter {...defaultProps} value="abc" onChange={onChange} />
+      }
+    />);
+    const groupClose = container.querySelector('.pf-v6-c-label-group__close button');
+    expect(groupClose).toBeInTheDocument();
+    fireEvent.click(groupClose as HTMLElement);
+    expect(onChange).toHaveBeenCalledWith(undefined, '');
   });
 
   it('should focus the search input when "/" key is pressed and filter is visible', () => {
